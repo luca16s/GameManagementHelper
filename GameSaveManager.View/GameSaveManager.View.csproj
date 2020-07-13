@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="resources\account_black.png" />
+    <None Remove="resources\account_box-black-24dp.svg" />
+    <None Remove="resources\account_white.png" />
+    <None Remove="resources\actions\settings_black.png" />
+    <None Remove="resources\actions\settings_white.png" />
+    <None Remove="resources\backup_black.png" />
+    <None Remove="resources\backup_white.png" />
+    <None Remove="resources\baseline_account.png" />
+    <None Remove="resources\ds.jpg" />
+    <None Remove="resources\ds2.jpg" />
+    <None Remove="resources\ds3.jpg" />
+    <None Remove="resources\gameCover\ds.jpg" />
+    <None Remove="resources\gameCover\ds2.jpg" />
+    <None Remove="resources\gameCover\ds3.jpg" />
+    <None Remove="resources\game_black.png" />
+    <None Remove="resources\game_white.png" />
+    <None Remove="resources\settings_applications_black.png" />
+    <None Remove="resources\settings_applications_white.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\actions\account_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\account_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\backup_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\backup_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="resources\gameCover\ds.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\gameCover\ds2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\gameCover\ds3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\actions\game_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="resources\game_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
+    <ProjectReference Include="..\GameSaveManager.Infra\GameSaveManager.Infra.csproj" />
+    <Resource Include="resources\actions\game_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\actions\settings_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\settings_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
