@@ -6,60 +6,63 @@
         mc:Ignorable="d"
         Icon="resources/game_icon.png"
         SizeToContent="WidthAndHeight"
-        MinWidth="144">
+        MinWidth="144"
+        ResizeMode="CanMinimize"
+        Title="Game Save Manager">
     <Window.Resources>
         <Image x:Key="AccountBlack"
                Source="resources/actions/account_black.png"
-               Height="48"
-               Width="48"
+               Height="96"
+               Width="96"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"/>
         <Image x:Key="BackupBlack"
                Source="resources/actions/backup_black.png"
-               Height="48"
-               Width="48"
+               Height="96"
+               Width="96"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"/>
         <Image x:Key="GameBlack"
                Source="resources/actions/game_black.png"
-               Height="48"
-               Width="48"
+               Height="96"
+               Width="96"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"/>
         <Image x:Key="SettingsBlack"
                Source="resources/actions/settings_black.png"
-               Height="48"
-               Width="48"
+               Height="96"
+               Width="96"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"/>
         <Image x:Key="AccountWhite"
                Source="resources/actions/account_white.png"
-               Height="48"
-               Width="48"
+               Height="96"
+               Width="96"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"/>
         <Image x:Key="BackupWhite"
                Source="resources/actions/backup_white.png"
-               Height="48"
-               Width="48"
+               Height="96"
+               Width="96"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"/>
         <Image x:Key="GameWhite"
                Source="resources/actions/game_white.png"
-               Height="48" Width="48"
+               Height="96"
+               Width="96"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"/>
         <Image x:Key="SettingsWhite"
                Source="resources/actions/settings_white.png"
-               Height="48"
-               Width="48"
+               Height="96"
+               Width="96"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"/>
@@ -71,14 +74,14 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
+            <RowDefinition Height="96"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button
             Grid.Column="0"
             Grid.Row="0"
-            Width="48"
-            Height="48"
+            Width="96"
+            Height="96"
             Name="AccountButton"
             ToolTip="Botão para realizar Conexão com Google Drive."
             Click="AccountButton_ClickAsync">
@@ -87,8 +90,8 @@
         <Button
             Grid.Column="1"
             Grid.Row="0"
-            Width="48"
-            Height="48"
+            Width="96"
+            Height="96"
             Name="GamesButton"
             Click="OpenGamesListPage"
             ToolTip="Abre a lista de Jogos disponíveis.">
@@ -97,8 +100,8 @@
         <Button
             Grid.Column="2"
             Grid.Row="0"
-            Width="48"
-            Height="48"
+            Width="96"
+            Height="96"
             Name="SettingsButton"
             Click="OpenSettingsPage"
             ToolTip="Botão de Configurações.">
