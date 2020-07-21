@@ -1,8 +1,9 @@
-﻿using GameSaveManager.Windows.Windows;
-using GameSaveManager.WPF.Helper;
-using GameSaveManager.WPF.Windows;
+﻿using GameSaveManager.DropboxIntegration;
+using GameSaveManager.View.Helper;
+using GameSaveManager.View.Windows;
+using GameSaveManager.Windows.Windows;
 
-using System.Configuration;
+using System;
 using System.Windows;
 
 namespace GameSaveManager.Windows
@@ -17,21 +18,32 @@ namespace GameSaveManager.Windows
             InitializeComponent();
         }
 
-        private void AccountButton_Click(object sender, RoutedEventArgs e)
+        private async void AccountButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            if (!Helper.IsWindowOpen<AccountWindow>())
-                new AccountWindow().Show();
+            var dropbox = new DropboxConnection(Environment.GetEnvironmentVariable("token"));
+            //await dropbox.ConnectAsync();
+            var get = await dropbox.Client.Users.GetCurrentAccountAsync().ConfigureAwait(true);
+            var userInfo = DropboxConnection.GetAccountInfo(get.Name.DisplayName, get.Email);
+
+            View.Properties.Settings.Default.SettingsKey = get.Email;
+            View.Properties.Settings.Default.Name = get.Name.DisplayName;
+            View.Properties.Settings.Default.Email = get.Email;
+            View.Properties.Settings.Default.Save();
+
+            MessageBox.Show(View.Properties.Settings.Default.Name);
+
+            var a = await dropbox.CreateFolder("/Dark Souls 3").ConfigureAwait(true);
         }
 
         private void OpenGamesListPage(object sender, RoutedEventArgs e)
         {
-            if (!Helper.IsWindowOpen<GamesWindow>())
+            if (!HelperMethods.IsWindowOpen<GamesWindow>())
                 new GamesWindow().Show();
         }
 
         private void OpenSettingsPage(object sender, RoutedEventArgs e)
         {
-            if (!Helper.IsWindowOpen<ConfigurationWindow>())
+            if (!HelperMethods.IsWindowOpen<ConfigurationWindow>())
                 new ConfigurationWindow().Show();
         }
     }

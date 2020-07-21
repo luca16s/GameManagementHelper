@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace GameSaveManager.WPF.Commands
+namespace GameSaveManager.View.Commands
 {
     public class RelayCommand<T> : ICommand
     {
         #region Fields
 
-        readonly Action<T> _execute = null;
-        readonly Predicate<T> _canExecute = null;
+        private readonly Action<T> _execute = null;
+        private readonly Predicate<T> _canExecute = null;
 
         #endregion
 
@@ -48,7 +48,7 @@ namespace GameSaveManager.WPF.Commands
         ///</returns>
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute((T)parameter);
+            return _canExecute == null || _canExecute((T)parameter);
         }
 
         ///<summary>

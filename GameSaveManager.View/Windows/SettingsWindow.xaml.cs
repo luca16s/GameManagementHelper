@@ -1,6 +1,4 @@
-﻿using GameSaveManager.Core.Interfaces;
-using GameSaveManager.Infra;
-using System.Windows;
+﻿using System.Windows;
 
 namespace GameSaveManager.Windows.Windows
 {

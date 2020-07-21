@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace GameSaveManager.WPF.ViewModel
+namespace GameSaveManager.View.ViewModel
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
