@@ -1,0 +1,109 @@
+﻿<Page x:Class="GameSaveManager.View.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:viewModel="clr-namespace:GameSaveManager.View.ViewModel"
+      xmlns:enumConverter="clr-namespace:GameSaveManager.View.Converter"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Configurações">
+    <Page.Resources>
+        <viewModel:SettingsWindowViewModel x:Key="settingsVM"/>
+        <Image x:Key="ClearBlack"
+               Source="../resources/actions/clear_all_black.png"
+               Height="48"
+               Width="48"
+               Stretch="UniformToFill"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+        <Image x:Key="ClearWhite"
+               Source="../resources/actions/clear_all_white.png"
+               Height="48"
+               Width="48"
+               Stretch="UniformToFill"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+        <Image x:Key="SaveBlack"
+               Source="../resources/actions/save_black.png"
+               Height="48"
+               Width="48"
+               Stretch="UniformToFill"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+        <Image x:Key="SaveWhite"
+               Source="../resources/actions/save_white.png"
+               Height="48"
+               Width="48"
+               Stretch="UniformToFill"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+    </Page.Resources>
+    <Grid DataContext="{Binding Source={StaticResource settingsVM}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel
+            Orientation="Vertical"
+            Grid.Row="0"
+            Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Serviço de nuvem:"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+                <ComboBox x:Name="comboListaNuvem"
+                          ItemsSource="{Binding Path=DriveServiceSelected, Converter={enumConverter:EnumToCollectionConverter}, Mode=OneTime}"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="Description"
+                          SelectedValue="{Binding Path=DriveServiceSelected}"
+                          Grid.Row="0"
+                          Grid.Column="1"/>
+                <CheckBox x:Name="ModoEscuro"
+                          Content="Ativar Modo Escuro"
+                          IsChecked="{Binding DarkMode}"
+                          Command="{Binding ChangeDarkMode}"
+                          ToolTip="Altera o esquema de cores para claro ou escuro."
+                          Grid.Row="2"
+                          Grid.Column="0">
+                    <CheckBox.CommandParameter>
+                        <Binding ElementName="ModoEscuro" Path="IsChecked"/>
+                    </CheckBox.CommandParameter>
+                </CheckBox>
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Orientation="Horizontal"
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Right">
+            <Button
+                x:Name="buttonClear"
+                Command="{Binding ClearCommand}"
+                Margin="0, 0, 2, 0">
+                <DynamicResource ResourceKey="ClearBlack"/>
+            </Button>
+            <Button
+                x:Name="buttonSave"
+                Command="{Binding SaveCommand}"
+                Margin="2, 0, 0, 0">
+                <DynamicResource ResourceKey="SaveBlack"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

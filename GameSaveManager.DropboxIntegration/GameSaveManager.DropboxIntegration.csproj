@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Dead Fish Studio</Authors>
     <Product>GameSaveManager</Product>
+    <AssemblyName>GameSaveManager.Dropbox</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

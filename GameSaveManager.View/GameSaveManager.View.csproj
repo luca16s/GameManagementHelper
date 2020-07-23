@@ -11,6 +11,7 @@
     <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Copyright />
+    <AssemblyName>GameSaveManager</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,6 +23,10 @@
     <None Remove="resources\account_black.png" />
     <None Remove="resources\account_box-black-24dp.svg" />
     <None Remove="resources\account_white.png" />
+    <None Remove="resources\actions\clear_all_black.png" />
+    <None Remove="resources\actions\clear_all_white.png" />
+    <None Remove="resources\actions\save_black.png" />
+    <None Remove="resources\actions\save_white.png" />
     <None Remove="resources\actions\settings_black.png" />
     <None Remove="resources\actions\settings_white.png" />
     <None Remove="resources\backup_black.png" />
@@ -60,6 +65,18 @@
     <Resource Include="resources\actions\backup_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resources\actions\clear_all_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\clear_all_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\save_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\save_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="resources\gameCover\ds.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -75,7 +92,7 @@
     <Content Include="resources\game_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

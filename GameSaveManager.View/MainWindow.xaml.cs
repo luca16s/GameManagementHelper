@@ -1,5 +1,7 @@
 ﻿using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Helper;
+using GameSaveManager.View.Pages;
+using GameSaveManager.View.Properties;
 using GameSaveManager.View.Windows;
 using GameSaveManager.Windows.Windows;
 
@@ -43,8 +45,7 @@ namespace GameSaveManager.Windows
 
         private void OpenSettingsPage(object sender, RoutedEventArgs e)
         {
-            if (!HelperMethods.IsWindowOpen<ConfigurationWindow>())
-                new ConfigurationWindow().Show();
+            MainFrame.Navigate(new SettingsPage());
         }
     }
 }

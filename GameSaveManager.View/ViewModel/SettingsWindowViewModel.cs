@@ -1,4 +1,6 @@
 ﻿using GameSaveManager.Core.Enums;
+using GameSaveManager.View.Commands;
+using GameSaveManager.View.Properties;
 
 using System.Windows.Input;
 
@@ -12,8 +14,8 @@ namespace GameSaveManager.View.ViewModel
         }
 
         public ICommand ChangeDarkMode { get; set; }
-        //public ICommand SaveCommand => new RelayCommand<SettingsModel>(o => Save());
-        //public ICommand ClearCommand => new RelayCommand<SettingsModel>(o => Clear());
+        public ICommand SaveCommand => new RelayCommand<Settings>(o => Save());
+        public ICommand ClearCommand => new RelayCommand<Settings>(o => Clear());
 
         private bool _DarkMode;
         public bool DarkMode
@@ -41,17 +43,43 @@ namespace GameSaveManager.View.ViewModel
             }
         }
 
-        //public void Save()
-        //{
-        //    ISettingsOperations operations = new SettingsPersistence();
-        //    var json = operations.GenereteSettingsJson(
-        //        new SettingsModel
-        //        {
-        //            DarkMode = DarkMode,
-        //            DriveSelected = (int)DriveServiceSelected
-        //        });
-        //    operations.SaveSettings(json);
-        //}
+        private string _Name;
+        public string Name 
+        {
+            get => _Name;
+            set
+            {
+                if (_Name == value) return;
+                
+                _Name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string _Email;
+        public string Email
+        {
+            get => _Email;
+            set
+            {
+                if (_Email == value) return;
+
+                _Email = value;
+                OnPropertyChanged(nameof(Email));
+            }
+        }
+
+        public void Save()
+        {
+            var settings = new Settings
+            {
+                DarkMode = DarkMode,
+                Email = Email,
+                Name = Name,
+            };
+
+            settings.Save();
+        }
 
         private void Clear()
         {

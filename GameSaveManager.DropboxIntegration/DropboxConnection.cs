@@ -27,13 +27,13 @@ namespace GameSaveManager.DropboxIntegration
 
         public async Task<bool> CheckFolderExistence(string folderName)
         {
-            var itemsList = await Client.Files.ListFolderAsync("").ConfigureAwait(true);
+            var itemsList = await Client.Files.ListFolderAsync(folderName).ConfigureAwait(true);
 
             bool hasFolder = CheckIfFolderExistsInList(folderName, itemsList);
 
             if (itemsList.HasMore)
             {
-                itemsList = await Client.Files.ListFolderContinueAsync("").ConfigureAwait(true);
+                itemsList = await Client.Files.ListFolderContinueAsync(folderName).ConfigureAwait(true);
                 hasFolder = CheckIfFolderExistsInList(folderName, itemsList);
             }
 
