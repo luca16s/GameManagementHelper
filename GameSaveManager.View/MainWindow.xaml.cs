@@ -1,9 +1,7 @@
 ﻿using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Helper;
 using GameSaveManager.View.Pages;
-using GameSaveManager.View.Properties;
 using GameSaveManager.View.Windows;
-using GameSaveManager.Windows.Windows;
 
 using System;
 using System.Windows;
