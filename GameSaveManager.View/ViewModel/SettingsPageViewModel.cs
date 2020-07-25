@@ -6,9 +6,9 @@ using System.Windows.Input;
 
 namespace GameSaveManager.View.ViewModel
 {
-    public class SettingsWindowViewModel : ViewModelBase
+    public class SettingsPageViewModel : ViewModelBase
     {
-        public SettingsWindowViewModel()
+        public SettingsPageViewModel()
         {
             //ChangeDarkMode = new ChangeDarkModeCommand();
         }

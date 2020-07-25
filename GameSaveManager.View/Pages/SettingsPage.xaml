@@ -6,10 +6,11 @@
       xmlns:viewModel="clr-namespace:GameSaveManager.View.ViewModel"
       xmlns:enumConverter="clr-namespace:GameSaveManager.View.Converter"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
       Title="Configurações">
     <Page.Resources>
-        <viewModel:SettingsWindowViewModel x:Key="settingsVM"/>
+        <viewModel:SettingsPageViewModel x:Key="settingsVM"/>
         <Image x:Key="ClearBlack"
                Source="../resources/actions/clear_all_black.png"
                Height="48"
@@ -79,7 +80,8 @@
                           DisplayMemberPath="Description"
                           SelectedValue="{Binding Path=DriveServiceSelected}"
                           Grid.Row="0"
-                          Grid.Column="1"/>
+                          Grid.Column="1"
+                          VerticalContentAlignment="Center"/>
                 <CheckBox x:Name="ModoEscuro"
                           Content="Ativar Modo Escuro"
                           IsChecked="{Binding DarkMode}"

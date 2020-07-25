@@ -12,7 +12,7 @@
         SizeToContent="WidthAndHeight"
         Icon="../resources/game_icon.png">
     <Window.Resources>
-        <viewModel:GameWindowViewModel x:Key="gameVM"/>
+        <viewModel:GamesPageViewModel x:Key="gameVM"/>
     </Window.Resources>
     <Grid DataContext="{Binding Source={StaticResource gameVM}}">
         <Grid.ColumnDefinitions>

@@ -37,8 +37,7 @@ namespace GameSaveManager.Windows
 
         private void OpenGamesListPage(object sender, RoutedEventArgs e)
         {
-            if (!HelperMethods.IsWindowOpen<GamesWindow>())
-                new GamesWindow().Show();
+            MainFrame.Navigate(new GamesPage());
         }
 
         private void OpenSettingsPage(object sender, RoutedEventArgs e)
