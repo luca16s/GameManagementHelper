@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameSaveManager.Core.Enums
+﻿namespace GameSaveManager.Core.Enums
 {
     public class ValueDescription
     {

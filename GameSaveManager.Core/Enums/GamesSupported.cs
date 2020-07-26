@@ -9,8 +9,8 @@ namespace GameSaveManager.Core.Enums
         [Description("Dark Souls")]
         DarkSouls,
         [Description("Dark Souls II")]
-        DarkSouls2,
+        DarkSoulsII,
         [Description("Dark Souls III")]
-        DarkSouls3,
+        DarkSoulsIII,
     }
 }

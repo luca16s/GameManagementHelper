@@ -1,16 +1,52 @@
 ﻿using GameSaveManager.Core.Enums;
+using GameSaveManager.Core.Interfaces;
+using GameSaveManager.DropboxIntegration;
+using GameSaveManager.View.Commands;
 
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GameSaveManager.View.ViewModel
 {
     public class GamesPageViewModel : ViewModelBase
     {
-        //public ICommand DownloadSaveCommand { get; set; }
-        //public ICommand UploadSaveCommand { get; set; }
+        private readonly ICloudOperations _CloudOperations;
+
+        public GamesPageViewModel()
+        {
+            _CloudOperations = new DropboxOperations(
+                new DropboxConnection("")
+                .Client
+                );
+        }
+
+        private ICommand _UploadSaveCommand;
+        public ICommand UploadSaveCommand
+        {
+            get
+            {
+                if (_UploadSaveCommand == null) _UploadSaveCommand = new RelayCommand<object>(async p => 
+                {
+                    await UploadSave().ConfigureAwait(true);
+                });
+                return _UploadSaveCommand;
+            }
+        }
+
+        private ICommand _DownloadSaveCommand;
+        public ICommand DownloadSaveCommand
+        {
+            get
+            {
+                if (_DownloadSaveCommand == null) _DownloadSaveCommand = new RelayCommand<object>(p => DownloadSave());
+                return _DownloadSaveCommand;
+            }
+        }
 
         private bool _IsButtonEnabled = false;
-        public bool IsButtonEnable 
+        public bool IsButtonEnable
         {
             get => _IsButtonEnabled;
             set
@@ -23,7 +59,7 @@ namespace GameSaveManager.View.ViewModel
         }
 
         private string _ImagePath;
-        public string ImagePath 
+        public string ImagePath
         {
             get => _ImagePath;
             set
@@ -50,14 +86,31 @@ namespace GameSaveManager.View.ViewModel
             }
         }
 
-        //private static bool EnableBackupButtons()
-        //{
-
-        //}
-
-        private static string SetGameImage(GamesSupported game)
+        private async Task<bool> UploadSave()
         {
-            return game.ToString();
+            var folderName = GamesSupported.ToString();
+
+            var enviromentPath = Path
+                .Combine(Environment
+                .GetFolderPath(Environment.SpecialFolder.ApplicationData), $"{folderName}");
+
+            var exists = await _CloudOperations.CheckFolderExistence(folderName).ConfigureAwait(true);
+
+            if (!exists) await _CloudOperations.CreateFolder(folderName).ConfigureAwait(true);
+
+            var result = await _CloudOperations.UploadSaveData(enviromentPath,
+                                                  $"/{folderName}",
+                                                  folderName)
+                                                  .ConfigureAwait(true);
+
+            return string.IsNullOrEmpty(result);
         }
+
+        private bool DownloadSave()
+        {
+            return _CloudOperations.DownloadSaveData();
+        }
+
+        private static string SetGameImage(GamesSupported game) => game.ToString();
     }
 }
