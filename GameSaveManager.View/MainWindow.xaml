@@ -92,7 +92,7 @@
             Height="96"
             Name="AccountButton"
             ToolTip="Botão para realizar Conexão com Google Drive."
-            Click="AccountButton_ClickAsync"
+            Click="AccountButton_Click"
             Style="{DynamicResource Round}"
             Margin="4, 0, 4, 0">
             <DynamicResource ResourceKey="AccountBlack"/>

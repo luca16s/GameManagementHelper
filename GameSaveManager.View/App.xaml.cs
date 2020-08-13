@@ -44,7 +44,7 @@ namespace GameSaveManager.Windows
             services
                 .AddScoped<ICloudOperations>(x =>
                 ActivatorUtilities.CreateInstance<DropboxOperations>(x,
-                new DropboxConnection("").Client));
+                new DropboxConnection().Client));
         }
 
         protected override async void OnStartup(StartupEventArgs e)

@@ -6,20 +6,20 @@ using GameSaveManager.View.Commands;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GameSaveManager.View.ViewModel
 {
     public class GamesPageViewModel : ViewModelBase
     {
+        private readonly DropboxConnection DropboxConnection;
         private readonly ICloudOperations _CloudOperations;
 
         public GamesPageViewModel()
         {
-            _CloudOperations = new DropboxOperations(
-                new DropboxConnection("")
-                .Client
-                );
+            DropboxConnection = (DropboxConnection)Application.Current.Properties["DropboxConnection"];
+            _CloudOperations = new DropboxOperations(DropboxConnection.Client);
         }
 
         private ICommand _UploadSaveCommand;
@@ -45,7 +45,7 @@ namespace GameSaveManager.View.ViewModel
             }
         }
 
-        private bool _IsButtonEnabled = false;
+        private bool _IsButtonEnabled;
         public bool IsButtonEnable
         {
             get => _IsButtonEnabled;

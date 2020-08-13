@@ -11,5 +11,11 @@
     <Setting Name="Email" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="AppKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2qtbccwlni9ubs9</Value>
+    </Setting>
+    <Setting Name="AppSecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)">q11prdgeqxillmj</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
