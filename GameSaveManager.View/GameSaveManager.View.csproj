@@ -20,7 +20,6 @@
     <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="appsettings.json" />
     <None Remove="index.html" />
     <None Remove="resources\account_black.png" />
     <None Remove="resources\account_box-black-24dp.svg" />
@@ -106,9 +105,6 @@
     <Resource Include="resources\actions\game_black.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Content Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="resources\game_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -117,6 +113,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.7" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7" />
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
     <ProjectReference Include="..\GameSaveManager.DropboxIntegration\GameSaveManager.DropboxIntegration.csproj" />

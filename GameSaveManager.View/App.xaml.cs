@@ -24,7 +24,6 @@ namespace GameSaveManager.Windows
                                 devEnvironmentVariable.ToLower(culture: CultureInfo.CurrentCulture) == "development";
 
             var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             if (isDevelopment)
             {
@@ -33,16 +32,7 @@ namespace GameSaveManager.Windows
 
             Configuration = builder.Build();
 
-            IServiceCollection services = new ServiceCollection();
-
-            services
-                .AddOptions()
-                .AddLogging()
-                .BuildServiceProvider();
-
-            var serviceProvider = services.BuildServiceProvider();
-
-            Application.Current.Properties["secrets"] = new Secrets
+            Current.Properties["secrets"] = new Secrets
             {
                 AppKey = Configuration.GetSection("AppKey").Value,
                 AppSecret = Configuration.GetSection("AppSecret").Value,
