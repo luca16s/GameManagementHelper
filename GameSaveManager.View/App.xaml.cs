@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using System;
+using System.Configuration;
+using System.Globalization;
 using System.Windows;
 
 namespace GameSaveManager.Windows
@@ -16,52 +18,39 @@ namespace GameSaveManager.Windows
     /// </summary>
     public partial class App : Application
     {
-        private readonly IHost _Host;
+        public static IConfigurationRoot Configuration { get; set; }
 
         public App()
         {
-            _Host = Host
-                .CreateDefaultBuilder()
-                .ConfigureAppConfiguration((context, builder) =>
-                {
-                    builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-                })
-                .ConfigureServices((context, services) =>
-                {
-                    ConfigureServices(context.Configuration, services);
-                })
-                .ConfigureLogging(logging =>
-                {
-                })
-                .Build();
-        }
+            var devEnvironmentVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
 
-        private static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
-        {
-            services.AddSingleton<MainWindow>();
-            services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
+            var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) ||
+                                devEnvironmentVariable.ToLower(culture: CultureInfo.CurrentCulture) == "development";
 
-            services
-                .AddScoped<ICloudOperations>(x =>
-                ActivatorUtilities.CreateInstance<DropboxOperations>(x,
-                new DropboxConnection().Client));
-        }
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-        protected override async void OnStartup(StartupEventArgs e)
-        {
-            await _Host.StartAsync().ConfigureAwait(true);
-
-            base.OnStartup(e);
-        }
-
-        protected override async void OnExit(ExitEventArgs e)
-        {
-            using (_Host)
+            if (isDevelopment)
             {
-                await _Host.StopAsync(TimeSpan.FromSeconds(5)).ConfigureAwait(true);
+                builder.AddUserSecrets<App>();
             }
 
-            base.OnExit(e);
+            Configuration = builder.Build();
+
+            IServiceCollection services = new ServiceCollection();
+
+            services
+                .AddOptions()
+                .AddLogging()
+                .BuildServiceProvider();
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            Application.Current.Properties["secrets"] = new Secrets
+            {
+                AppKey = Configuration.GetSection("AppKey").Value,
+                AppSecret = Configuration.GetSection("AppSecret").Value,
+            };
         }
     }
 }

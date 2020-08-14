@@ -1,7 +1,10 @@
 {
   "profiles": {
     "GameSaveManager.View": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "environmentVariables": {
+        "NETCORE_ENVIRONMENT": "development"
+      }
     }
   }
 }

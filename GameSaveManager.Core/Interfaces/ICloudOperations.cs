@@ -4,9 +4,9 @@ namespace GameSaveManager.Core.Interfaces
 {
     public interface ICloudOperations
     {
+        Task<bool> CreateFolder(string path);
+        Task<bool> CheckFolderExistence(string folderName);
         Task<string> UploadSaveData(string filePath, string folder, string fileName);
         bool DownloadSaveData();
-        Task<bool> CheckFolderExistence(string folderName);
-        Task<bool> CreateFolder(string path);
     }
 }

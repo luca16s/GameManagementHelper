@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -13,13 +13,12 @@
     <Copyright />
     <AssemblyName>GameSaveManager</AssemblyName>
     <StartupObject>GameSaveManager.Windows.App</StartupObject>
+    <UserSecretsId>f87442c4-b5be-4f35-ab54-cb01b6e866b1</UserSecretsId>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
     <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="appsettings.json" />
     <None Remove="index.html" />
@@ -67,7 +66,6 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -122,12 +120,10 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7" />
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
     <ProjectReference Include="..\GameSaveManager.DropboxIntegration\GameSaveManager.DropboxIntegration.csproj" />
-    <ProjectReference Include="..\GameSaveManager.Infra\GameSaveManager.Infra.csproj" />
     <Resource Include="resources\actions\game_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="resources\actions\settings_black.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -142,7 +138,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -155,19 +150,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
 </Project>

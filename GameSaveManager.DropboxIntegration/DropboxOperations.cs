@@ -65,7 +65,7 @@ namespace GameSaveManager.DropboxIntegration
             return string.IsNullOrEmpty(result.Metadata.Id);
         }
 
-        private bool CheckIfFolderExistsInList(string folderName, ListFolderResult itemsList)
+        private static bool CheckIfFolderExistsInList(string folderName, ListFolderResult itemsList)
         {
             foreach (var item in itemsList.Entries.Where(x => x.IsFolder))
             {

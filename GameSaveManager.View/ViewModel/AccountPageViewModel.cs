@@ -1,4 +1,8 @@
-﻿using GameSaveManager.DropboxIntegration;
+﻿using Dropbox.Api;
+
+using GameSaveManager.Core.Interfaces;
+using GameSaveManager.Core.Models;
+using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Commands;
 using GameSaveManager.View.Properties;
 
@@ -10,7 +14,8 @@ namespace GameSaveManager.View.ViewModel
 {
     public class AccountPageViewModel : ViewModelBase
     {
-        private readonly DropboxConnection DropboxConnection;
+        private readonly IConnection DropboxConnection;
+        private readonly Secrets Secrets;
 
         private ICommand _ConnectCommand;
         public ICommand ConnectCommand
@@ -28,18 +33,23 @@ namespace GameSaveManager.View.ViewModel
 
         public AccountPageViewModel()
         {
-            Application.Current.Properties["DropboxConnection"] = new DropboxConnection();
-            DropboxConnection = (DropboxConnection)Application.Current.Properties["DropboxConnection"];
+            DropboxConnection = new DropboxConnection();
+            Secrets = (Secrets)Application.Current.Properties["secrets"];
         }
 
         private async Task ConnectAsync()
         {
-            await DropboxConnection.ConnectAsync(appKey:"", appSecret:"").ConfigureAwait(true);
+            Application.Current.Properties["Client"] = await DropboxConnection
+                .ConnectAsync(appKey: Secrets.AppKey, appSecret: Secrets.AppSecret)
+                .ConfigureAwait(true) as DropboxClient;
         }
 
-        private async Task SetUserInformation()
+        private static async Task SetUserInformation()
         {
-            var user = await DropboxConnection.Client.Users.GetCurrentAccountAsync().ConfigureAwait(true);
+            var user = await ((DropboxClient)Application.Current.Properties["Client"])
+                .Users
+                .GetCurrentAccountAsync()
+                .ConfigureAwait(true);
 
             Settings.Default.Name = user.Name.DisplayName;
             Settings.Default.Email = user.Email;

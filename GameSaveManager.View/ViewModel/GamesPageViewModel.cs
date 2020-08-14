@@ -1,4 +1,6 @@
-﻿using GameSaveManager.Core.Enums;
+﻿using Dropbox.Api;
+
+using GameSaveManager.Core.Enums;
 using GameSaveManager.Core.Interfaces;
 using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Commands;
@@ -13,13 +15,12 @@ namespace GameSaveManager.View.ViewModel
 {
     public class GamesPageViewModel : ViewModelBase
     {
-        private readonly DropboxConnection DropboxConnection;
         private readonly ICloudOperations _CloudOperations;
 
         public GamesPageViewModel()
         {
-            DropboxConnection = (DropboxConnection)Application.Current.Properties["DropboxConnection"];
-            _CloudOperations = new DropboxOperations(DropboxConnection.Client);
+            var client = (DropboxClient)Application.Current.Properties["Client"];
+            _CloudOperations = new DropboxOperations(client);
         }
 
         private ICommand _UploadSaveCommand;

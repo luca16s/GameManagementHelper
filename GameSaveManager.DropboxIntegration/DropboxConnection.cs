@@ -1,27 +1,23 @@
 ﻿using Dropbox.Api;
-using Dropbox.Api.Files;
 
-using GameSaveManager.Core.Models;
+using GameSaveManager.Core.Interfaces;
 
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GameSaveManager.DropboxIntegration
 {
-    public class DropboxConnection
+    public class DropboxConnection : IConnection
     {
-        private readonly Uri RedirectUri = new Uri($"{AppSettings.LoopbackHost}authorize");
-        private readonly Uri JSRedirectUri = new Uri($"{AppSettings.LoopbackHost}token");
+        private readonly string LoopbackHost = @"http://127.0.0.1:52475/";
+        private readonly Uri RedirectUri   = new Uri(@$"http://127.0.0.1:52475/authorize");
+        private readonly Uri JSRedirectUri = new Uri(@$"http://127.0.0.1:52475/token");
 
-        public DropboxClient Client { get; private set; }
-
-        public async Task ConnectAsync(string appKey, string appSecret)
+        public async Task<object> ConnectAsync(string appKey, string appSecret)
         {
             DropboxCertHelper.InitializeCertPinning();
 
@@ -37,22 +33,7 @@ namespace GameSaveManager.DropboxIntegration
                 HttpClient = httpClient
             };
 
-            Client = new DropboxClient(accessToken, "", appKey, appSecret, config);
-        }
-
-        public async Task UploadGameSave(string filePath, string folder, string fileName)
-        {
-            using var stream = new MemoryStream(Encoding.UTF8.GetBytes(filePath));
-            using var streamBody = new MemoryStream(Encoding.UTF8.GetBytes(filePath));
-            var response = await Client
-                .Files
-                .UploadAsync($"{folder}/{fileName}", WriteMode.Overwrite.Instance, body: streamBody)
-                .ConfigureAwait(true);
-        }
-
-        public static void DownloadGameSave()
-        {
-
+            return new DropboxClient(accessToken, "", appKey, appSecret, config);
         }
 
         private async Task<string> GetAccessToken(string appkey)
@@ -63,7 +44,7 @@ namespace GameSaveManager.DropboxIntegration
                 var state = Guid.NewGuid().ToString("N");
                 var authorizeUri = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Token, appkey, RedirectUri, state: state);
                 using var http = new HttpListener();
-                http.Prefixes.Add(AppSettings.LoopbackHost);
+                http.Prefixes.Add(LoopbackHost);
 
                 http.Start();
 
