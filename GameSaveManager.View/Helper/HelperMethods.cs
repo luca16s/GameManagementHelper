@@ -38,9 +38,7 @@ namespace GameSaveManager.View.Helper
 
             return t.IsEnum
                 ? Enum.GetValues(t).Cast<Enum>().Select((e) => new ValueDescription() { Value = e, Description = e.Description() }).ToList()
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
                 : throw new ArgumentException($"{nameof(t)} must be an enum type");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
         }
     }
 }

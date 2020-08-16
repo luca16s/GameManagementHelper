@@ -6,10 +6,13 @@ namespace GameSaveManager.Core.Enums
     {
         [Description("Nenhum")]
         None,
+
         [Description("Dark Souls")]
         DarkSouls,
+
         [Description("Dark Souls II")]
         DarkSoulsII,
+
         [Description("Dark Souls III")]
         DarkSoulsIII,
     }

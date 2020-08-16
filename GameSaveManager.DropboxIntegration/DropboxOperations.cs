@@ -20,12 +20,28 @@ namespace GameSaveManager.DropboxIntegration
             Client = dropboxClient;
         }
 
-        public bool DownloadSaveData()
+        public async Task<bool> DownloadSaveData(string folderPath)
         {
-            throw new System.NotImplementedException();
+            var fileList = await ListFolderContent(folderPath).ConfigureAwait(true);
+
+            var fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile);
+
+            if (fileFound is null) return false;
+
+            using var result = await Client.Files.DownloadAsync($"{folderPath}/{fileFound.Name}").ConfigureAwait(true);
+
+            using (var stream = File.OpenWrite($"{Environment.CurrentDirectory}\\Ds.zip"))
+            {
+                var dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
+                stream.Write(dataToWrite, 0, dataToWrite.Length);
+            }
+
+            return true;
         }
 
-        public async Task<string> UploadSaveData(string filePath, string folder, string fileName)
+        public async Task<string> UploadSaveData(string filePath,
+                                                 string folder,
+                                                 string fileName)
         {
             fileName = $"{fileName}-{DateTime.Now:MM-dd-yyyy}.zip";
             string zipPath = $"{Environment.CurrentDirectory}\\{fileName}";
@@ -64,7 +80,8 @@ namespace GameSaveManager.DropboxIntegration
             return string.IsNullOrEmpty(result.Metadata.Id);
         }
 
-        private static bool CheckIfFolderExistsInList(string folderName, ListFolderResult itemsList)
+        private static bool CheckIfFolderExistsInList(string folderName,
+                                                      ListFolderResult itemsList)
         {
             foreach (var item in itemsList.Entries.Where(x => x.IsFolder))
             {
@@ -73,6 +90,11 @@ namespace GameSaveManager.DropboxIntegration
             }
 
             return false;
+        }
+
+        private async Task<ListFolderResult> ListFolderContent(string folderPath)
+        {
+            return await Client.Files.ListFolderAsync(folderPath).ConfigureAwait(true);
         }
     }
 }

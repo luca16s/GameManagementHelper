@@ -9,47 +9,47 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AccountPage">
     <Page.Resources>
-        <viewModel:AccountPageViewModel x:Key="accountVM"/>
+        <viewModel:AccountPageViewModel x:Key="accountVM" />
         <Image x:Key="Dropbox"
                Source="/resources/dropbox.png"
                Height="46"
                Width="191"
                Stretch="Uniform"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center"/>
+               HorizontalAlignment="Center" />
         <Image x:Key="Google"
                Source="/resources/btn_google_signin_dark_normal.png"
                Height="46"
                Width="191"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center"/>
-        <properties:Settings x:Key="Settings"/>
+               HorizontalAlignment="Center" />
+        <properties:Settings x:Key="Settings" />
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource accountVM}}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Content="Usuário: "
                Grid.Row="0"
-               Grid.Column="0"/>
+               Grid.Column="0" />
         <Label Content="E-Mail: "
                Grid.Row="1"
-               Grid.Column="0"/>
+               Grid.Column="0" />
         <Label Content="{Binding Source={StaticResource Settings}, Path=Default.Name}"
                Grid.Row="0"
                Grid.Column="1"
-               HorizontalAlignment="Stretch"/>
+               HorizontalAlignment="Stretch" />
         <Label Content="{Binding Source={StaticResource Settings}, Path=Default.Email}"
                Grid.Row="1"
                Grid.Column="1"
-               HorizontalAlignment="Stretch"/>
+               HorizontalAlignment="Stretch" />
         <Button x:Name="BtnConectar"
                 Grid.Row="2"
                 Grid.Column="0"
@@ -59,6 +59,6 @@
         <Button x:Name="BtnDesconectar"
                 Grid.Row="2"
                 Grid.Column="1"
-                Content="Desconectar"/>
+                Content="Desconectar" />
     </Grid>
 </Page>

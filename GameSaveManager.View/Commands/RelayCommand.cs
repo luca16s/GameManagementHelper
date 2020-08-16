@@ -7,10 +7,10 @@ namespace GameSaveManager.View.Commands
     {
         #region Fields
 
-        private readonly Action<T> _execute = null;
-        private readonly Predicate<T> _canExecute = null;
+        private readonly Action<T> _execute;
+        private readonly Predicate<T> _canExecute;
 
-        #endregion
+        #endregion Fields
 
         #region Constructors
 
@@ -35,7 +35,7 @@ namespace GameSaveManager.View.Commands
             _canExecute = canExecute;
         }
 
-        #endregion
+        #endregion Constructors
 
         #region ICommand Members
 
@@ -69,6 +69,6 @@ namespace GameSaveManager.View.Commands
             _execute((T)parameter);
         }
 
-        #endregion
+        #endregion ICommand Members
     }
 }

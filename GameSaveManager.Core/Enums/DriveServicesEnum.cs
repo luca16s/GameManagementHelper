@@ -6,8 +6,10 @@ namespace GameSaveManager.Core.Enums
     {
         [Description("Dropbox")]
         Dropbox,
+
         [Description("Google Drive")]
         GoogleDrive,
+
         [Description("OneDrive")]
         OneDrive
     }

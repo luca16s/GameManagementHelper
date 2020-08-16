@@ -5,40 +5,40 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:viewModel="clr-namespace:GameSaveManager.View.ViewModel"
       xmlns:enumConverter="clr-namespace:GameSaveManager.View.Converter"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
       Title="Configurações">
     <Page.Resources>
-        <viewModel:SettingsPageViewModel x:Key="settingsVM"/>
+        <viewModel:SettingsPageViewModel x:Key="settingsVM" />
         <Image x:Key="ClearBlack"
                Source="../resources/actions/clear_all_black.png"
                Height="48"
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center"/>
+               HorizontalAlignment="Center" />
         <Image x:Key="ClearWhite"
                Source="../resources/actions/clear_all_white.png"
                Height="48"
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center"/>
+               HorizontalAlignment="Center" />
         <Image x:Key="SaveBlack"
                Source="../resources/actions/save_black.png"
                Height="48"
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center"/>
+               HorizontalAlignment="Center" />
         <Image x:Key="SaveWhite"
                Source="../resources/actions/save_white.png"
                Height="48"
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center"/>
+               HorizontalAlignment="Center" />
         <Style TargetType="Button" x:Key="Round">
             <Style.Resources>
                 <Style TargetType="Border">
@@ -49,13 +49,13 @@
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource settingsVM}}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel
             Orientation="Vertical"
@@ -63,17 +63,17 @@
             Grid.Column="0">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="5"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Label Content="Serviço de nuvem:"
                            Grid.Row="0"
-                           Grid.Column="0"/>
+                           Grid.Column="0" />
                 <ComboBox x:Name="comboListaNuvem"
                           ItemsSource="{Binding Path=DriveServiceSelected, Converter={enumConverter:EnumToCollectionConverter}, Mode=OneTime}"
                           SelectedValuePath="Value"
@@ -81,7 +81,7 @@
                           SelectedValue="{Binding Path=DriveServiceSelected}"
                           Grid.Row="0"
                           Grid.Column="1"
-                          VerticalContentAlignment="Center"/>
+                          VerticalContentAlignment="Center" />
                 <CheckBox x:Name="ModoEscuro"
                           Content="Ativar Modo Escuro"
                           IsChecked="{Binding DarkMode}"
@@ -90,7 +90,7 @@
                           Grid.Row="2"
                           Grid.Column="0">
                     <CheckBox.CommandParameter>
-                        <Binding ElementName="ModoEscuro" Path="IsChecked"/>
+                        <Binding ElementName="ModoEscuro" Path="IsChecked" />
                     </CheckBox.CommandParameter>
                 </CheckBox>
             </Grid>
@@ -105,13 +105,13 @@
                     Command="{Binding ClearCommand}"
                     Margin="0, 0, 2, 0"
                     Style="{DynamicResource Round}">
-                <DynamicResource ResourceKey="ClearBlack"/>
+                <DynamicResource ResourceKey="ClearBlack" />
             </Button>
             <Button x:Name="buttonSave"
                     Command="{Binding SaveCommand}"
                     Margin="2, 0, 0, 0"
                     Style="{DynamicResource Round}">
-                <DynamicResource ResourceKey="SaveBlack"/>
+                <DynamicResource ResourceKey="SaveBlack" />
             </Button>
         </StackPanel>
     </Grid>

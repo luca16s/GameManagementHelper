@@ -2,11 +2,13 @@
 
 using GameSaveManager.Core.Enums;
 using GameSaveManager.Core.Interfaces;
+using GameSaveManager.Core.Models;
+using GameSaveManager.Core.Services;
 using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Commands;
+using GameSaveManager.View.Helper;
 
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -16,62 +18,56 @@ namespace GameSaveManager.View.ViewModel
     public class GamesPageViewModel : ViewModelBase
     {
         private readonly ICloudOperations _CloudOperations;
+        private GameInformation GameInformation;
 
         public GamesPageViewModel()
         {
-            var client = (DropboxClient)Application.Current.Properties["Client"];
-            _CloudOperations = new DropboxOperations(client);
+            using DropboxClient dropboxClient = (DropboxClient)Application.Current.Properties["Client"];
+            if (dropboxClient != null)
+            {
+                _CloudOperations = new DropboxOperations(dropboxClient);
+            }
         }
 
         private ICommand _UploadSaveCommand;
-        public ICommand UploadSaveCommand
-        {
-            get
-            {
-                if (_UploadSaveCommand == null) _UploadSaveCommand = new RelayCommand<object>(async p => 
-                {
-                    await UploadSave().ConfigureAwait(true);
-                });
-                return _UploadSaveCommand;
-            }
-        }
 
-        private ICommand _DownloadSaveCommand;
-        public ICommand DownloadSaveCommand
-        {
-            get
-            {
-                if (_DownloadSaveCommand == null) _DownloadSaveCommand = new RelayCommand<object>(p => DownloadSave());
-                return _DownloadSaveCommand;
-            }
-        }
+        public ICommand UploadSaveCommand => _UploadSaveCommand ??= new RelayCommand<object>(async _ => await UploadSave()
+        .ConfigureAwait(true));
 
-        private bool _IsButtonEnabled;
+        private ICommand downloadSaveCommand;
+
+        public ICommand DownloadSaveCommand => downloadSaveCommand ??= new RelayCommand<object>(async _ => await DownloadSave()
+        .ConfigureAwait(true));
+
+        private bool isButtonEnable;
+
         public bool IsButtonEnable
         {
-            get => _IsButtonEnabled;
+            get => isButtonEnable;
             set
             {
-                if (_IsButtonEnabled == value) return;
+                if (isButtonEnable == value) return;
 
-                _IsButtonEnabled = value;
+                isButtonEnable = value;
                 OnPropertyChanged(nameof(IsButtonEnable));
             }
         }
 
         private string _ImagePath;
+
         public string ImagePath
         {
             get => _ImagePath;
             set
             {
                 if (_ImagePath == value) return;
-                _ImagePath = $"../resources/gameCover/{value}.jpg";
+                _ImagePath = value;
                 OnPropertyChanged(nameof(ImagePath));
             }
         }
 
         private GamesSupported _GamesSupported;
+
         public GamesSupported GamesSupported
         {
             get => _GamesSupported;
@@ -80,7 +76,17 @@ namespace GameSaveManager.View.ViewModel
                 if (_GamesSupported == value) return;
 
                 _GamesSupported = value;
-                ImagePath = SetGameImage(value);
+                GameInformation = new GameInformation
+                {
+                    SaveName = $"{value}-{DateTime.Now:dd-MM-yyyy}",
+                    FilePath = "",
+                    CreationDate = DateTime.Now,
+                    FolderName = value.ToString(),
+                    GameName = value.Description(),
+                    GameCoverImagePath = value.ToString(),
+                };
+
+                ImagePath = GameInformation.GameCoverImagePath;
                 IsButtonEnable = value != GamesSupported.None;
 
                 OnPropertyChanged(nameof(GamesSupported));
@@ -89,29 +95,27 @@ namespace GameSaveManager.View.ViewModel
 
         private async Task<bool> UploadSave()
         {
-            var folderName = GamesSupported.ToString();
+            var enviromentPath = FileSystemServices.GetAppDataFolderPath(GameInformation.FolderName);
 
-            var enviromentPath = Path
-                .Combine(Environment
-                .GetFolderPath(Environment.SpecialFolder.ApplicationData), $"{folderName}");
+            if (_CloudOperations == null) return false;
 
-            var exists = await _CloudOperations.CheckFolderExistence(folderName).ConfigureAwait(true);
+            var exists = await _CloudOperations.CheckFolderExistence(GameInformation.FolderName).ConfigureAwait(true);
 
-            if (!exists) await _CloudOperations.CreateFolder(folderName).ConfigureAwait(true);
+            if (!exists) await _CloudOperations.CreateFolder(GameInformation.FolderName).ConfigureAwait(true);
 
             var result = await _CloudOperations.UploadSaveData(enviromentPath,
-                                                  $"/{folderName}",
-                                                  folderName)
+                                                  $"/{GameInformation.FolderName}",
+                                                  GameInformation.FolderName)
                                                   .ConfigureAwait(true);
 
             return string.IsNullOrEmpty(result);
         }
 
-        private bool DownloadSave()
+        private async Task<bool> DownloadSave()
         {
-            return _CloudOperations.DownloadSaveData();
-        }
+            var folderPath = $"/{GamesSupported}";
 
-        private static string SetGameImage(GamesSupported game) => game.ToString();
+            return await _CloudOperations.DownloadSaveData(folderPath).ConfigureAwait(true);
+        }
     }
 }

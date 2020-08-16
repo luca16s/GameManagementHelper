@@ -18,6 +18,7 @@ namespace GameSaveManager.View.ViewModel
         public ICommand ClearCommand => new RelayCommand<Settings>(o => Clear());
 
         private bool _DarkMode;
+
         public bool DarkMode
         {
             get => _DarkMode;
@@ -31,6 +32,7 @@ namespace GameSaveManager.View.ViewModel
         }
 
         private DriveServicesEnum _DriveServiceSelected;
+
         public DriveServicesEnum DriveServiceSelected
         {
             get => _DriveServiceSelected;
@@ -44,19 +46,21 @@ namespace GameSaveManager.View.ViewModel
         }
 
         private string _Name;
-        public string Name 
+
+        public string Name
         {
             get => _Name;
             set
             {
                 if (_Name == value) return;
-                
+
                 _Name = value;
                 OnPropertyChanged(nameof(Name));
             }
         }
 
         private string _Email;
+
         public string Email
         {
             get => _Email;

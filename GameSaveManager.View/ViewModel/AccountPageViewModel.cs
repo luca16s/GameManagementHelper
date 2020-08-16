@@ -18,6 +18,7 @@ namespace GameSaveManager.View.ViewModel
         private readonly Secrets Secrets;
 
         private ICommand _ConnectCommand;
+
         public ICommand ConnectCommand
         {
             get
