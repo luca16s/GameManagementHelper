@@ -78,7 +78,7 @@ namespace GameSaveManager.View.ViewModel
                 _GamesSupported = value;
                 GameInformation = new GameInformation
                 {
-                    SaveName = $"{value}-{DateTime.Now:dd-MM-yyyy}",
+                    SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}.zip",
                     FilePath = "",
                     CreationDate = DateTime.Now,
                     FolderName = value.ToString(),
@@ -95,18 +95,13 @@ namespace GameSaveManager.View.ViewModel
 
         private async Task<bool> UploadSave()
         {
-            var enviromentPath = FileSystemServices.GetAppDataFolderPath(GameInformation.FolderName);
-
             if (_CloudOperations == null) return false;
 
             var exists = await _CloudOperations.CheckFolderExistence(GameInformation.FolderName).ConfigureAwait(true);
 
             if (!exists) await _CloudOperations.CreateFolder(GameInformation.FolderName).ConfigureAwait(true);
 
-            var result = await _CloudOperations.UploadSaveData(enviromentPath,
-                                                  $"/{GameInformation.FolderName}",
-                                                  GameInformation.FolderName)
-                                                  .ConfigureAwait(true);
+            var result = await _CloudOperations.UploadSaveData(GameInformation).ConfigureAwait(true);
 
             return string.IsNullOrEmpty(result);
         }

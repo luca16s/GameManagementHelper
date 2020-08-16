@@ -2,7 +2,8 @@
 using Dropbox.Api.Files;
 
 using GameSaveManager.Core.Interfaces;
-
+using GameSaveManager.Core.Models;
+using GameSaveManager.Core.Services;
 using System;
 using System.IO;
 using System.IO.Compression;
@@ -39,19 +40,23 @@ namespace GameSaveManager.DropboxIntegration
             return true;
         }
 
-        public async Task<string> UploadSaveData(string filePath,
-                                                 string folder,
-                                                 string fileName)
+        public async Task<string> UploadSaveData(GameInformation gameInformation)
         {
-            fileName = $"{fileName}-{DateTime.Now:MM-dd-yyyy}.zip";
-            string zipPath = $"{Environment.CurrentDirectory}\\{fileName}";
+            if (gameInformation == null)
+            {
+                return string.Empty;
+            }
 
-            ZipFile.CreateFromDirectory(filePath, zipPath);
+            var enviromentPath = FileSystemServices.GetAppDataFolderPath(folderName: gameInformation.FolderName);
+
+            string zipPath = $"{Environment.CurrentDirectory}\\{gameInformation.SaveName}";
+
+            ZipFile.CreateFromDirectory(enviromentPath, zipPath);
 
             using var streamBody = new FileStream(zipPath, FileMode.Open, FileAccess.Read);
             var response = await Client
                 .Files
-                .UploadAsync($"{folder}/{fileName}", WriteMode.Add.Instance, body: streamBody)
+                .UploadAsync(gameInformation.OnlineDriveFolder + gameInformation.SaveName, WriteMode.Add.Instance, body: streamBody)
                 .ConfigureAwait(true);
 
             File.Delete(zipPath);

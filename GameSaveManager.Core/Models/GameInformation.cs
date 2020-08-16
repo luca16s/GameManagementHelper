@@ -8,11 +8,13 @@ namespace GameSaveManager.Core.Models
 
         public string FilePath { get; set; }
 
+        public string GameName { get; set; }
+
         public string FolderName { get; set; }
 
         public DateTime CreationDate { get; set; }
 
-        public string GameName { get; set; }
+        public string OnlineDriveFolder => $"/{FolderName}/";
 
         private string _GameCoverImagePath;
 
