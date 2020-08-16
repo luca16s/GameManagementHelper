@@ -58,29 +58,5 @@ namespace GameSaveManager.View.Properties {
                 this["Email"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2qtbccwlni9ubs9")]
-        public string AppKey {
-            get {
-                return ((string)(this["AppKey"]));
-            }
-            set {
-                this["AppKey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("q11prdgeqxillmj")]
-        public string AppSecret {
-            get {
-                return ((string)(this["AppSecret"]));
-            }
-            set {
-                this["AppSecret"] = value;
-            }
-        }
     }
 }

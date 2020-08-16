@@ -113,9 +113,9 @@ namespace GameSaveManager.View.ViewModel
 
         private async Task<bool> DownloadSave()
         {
-            var folderPath = $"/{GamesSupported}";
+            if (_CloudOperations == null) return false;
 
-            return await _CloudOperations.DownloadSaveData(folderPath).ConfigureAwait(true);
+            return await _CloudOperations.DownloadSaveData($"/{GameInformation.FolderName}").ConfigureAwait(true);
         }
     }
 }
