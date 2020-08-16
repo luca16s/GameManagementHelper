@@ -14,8 +14,8 @@ namespace GameSaveManager.DropboxIntegration
     public class DropboxConnection : IConnection
     {
         private readonly string LoopbackHost = "http://127.0.0.1:52475/";
-        private readonly Uri RedirectUri = new Uri("http://127.0.0.1:52475/authorize");
         private readonly Uri JSRedirectUri = new Uri("http://127.0.0.1:52475/token");
+        private readonly Uri RedirectUri = new Uri("http://127.0.0.1:52475/authorize");
 
         public async Task<object> ConnectAsync(string appKey, string appSecret)
         {

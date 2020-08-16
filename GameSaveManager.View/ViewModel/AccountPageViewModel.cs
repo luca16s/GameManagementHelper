@@ -19,18 +19,11 @@ namespace GameSaveManager.View.ViewModel
 
         private ICommand _ConnectCommand;
 
-        public ICommand ConnectCommand
-        {
-            get
-            {
-                if (_ConnectCommand == null) _ConnectCommand = new RelayCommand<object>(async p =>
-                {
-                    await ConnectAsync().ConfigureAwait(true);
-                    await SetUserInformation().ConfigureAwait(true);
-                });
-                return _ConnectCommand;
-            }
-        }
+        public ICommand ConnectCommand => _ConnectCommand ??= new RelayCommand<object>(async _ =>
+                                                        {
+                                                            await ConnectAsync().ConfigureAwait(true);
+                                                            await SetUserInformation().ConfigureAwait(true);
+                                                        });
 
         public AccountPageViewModel()
         {
