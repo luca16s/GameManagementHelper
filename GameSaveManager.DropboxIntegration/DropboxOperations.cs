@@ -21,17 +21,19 @@ namespace GameSaveManager.DropboxIntegration
             Client = dropboxClient;
         }
 
-        public async Task<bool> DownloadSaveData(string folderPath)
+        public async Task<bool> DownloadSaveData(GameInformation gameInformation)
         {
-            var fileList = await ListFolderContent(folderPath).ConfigureAwait(true);
+            if (gameInformation == null) return false;
+
+            var fileList = await ListFolderContent(gameInformation?.OnlineDriveFolder).ConfigureAwait(true);
 
             var fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile);
 
             if (fileFound is null) return false;
 
-            using var result = await Client.Files.DownloadAsync($"{folderPath}/{fileFound.Name}").ConfigureAwait(true);
+            using var result = await Client.Files.DownloadAsync(gameInformation?.OnlineDriveFolder + fileFound.Name).ConfigureAwait(true);
 
-            using (var stream = File.OpenWrite($"{Environment.CurrentDirectory}\\Ds.zip"))
+            using (var stream = File.OpenWrite($"{Environment.CurrentDirectory}\\{fileFound.Name}"))
             {
                 var dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
                 stream.Write(dataToWrite, 0, dataToWrite.Length);
@@ -42,10 +44,7 @@ namespace GameSaveManager.DropboxIntegration
 
         public async Task<string> UploadSaveData(GameInformation gameInformation)
         {
-            if (gameInformation == null)
-            {
-                return string.Empty;
-            }
+            if (gameInformation == null) return string.Empty;
 
             var enviromentPath = FileSystemServices.GetAppDataFolderPath(folderName: gameInformation.FolderName);
 

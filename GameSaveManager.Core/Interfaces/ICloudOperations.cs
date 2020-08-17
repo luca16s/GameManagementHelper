@@ -11,6 +11,6 @@ namespace GameSaveManager.Core.Interfaces
 
         Task<string> UploadSaveData(GameInformation gameInformation);
 
-        Task<bool> DownloadSaveData(string folder);
+        Task<bool> DownloadSaveData(GameInformation gameInformation);
     }
 }

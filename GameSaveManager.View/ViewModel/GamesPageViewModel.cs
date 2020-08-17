@@ -110,7 +110,7 @@ namespace GameSaveManager.View.ViewModel
         {
             if (_CloudOperations == null) return false;
 
-            return await _CloudOperations.DownloadSaveData($"/{GameInformation.FolderName}").ConfigureAwait(true);
+            return await _CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
         }
     }
 }
