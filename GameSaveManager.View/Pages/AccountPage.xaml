@@ -25,6 +25,13 @@
                VerticalAlignment="Center"
                HorizontalAlignment="Center" />
         <properties:Settings x:Key="Settings" />
+        <Style TargetType="Button" x:Key="Round">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5" />
+                </Style>
+            </Style.Resources>
+        </Style>
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource accountVM}}">
         <Grid.ColumnDefinitions>
@@ -54,11 +61,15 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Content="Conectar"
+                Style="{DynamicResource Round}"
+                Margin="0, 0, 4, 0"
                 Command="{Binding Path=ConnectCommand}">
         </Button>
         <Button x:Name="BtnDesconectar"
                 Grid.Row="2"
                 Grid.Column="1"
-                Content="Desconectar" />
+                Content="Desconectar"
+                Margin="4, 0, 0, 0"
+                Style="{DynamicResource Round}" />
     </Grid>
 </Page>
