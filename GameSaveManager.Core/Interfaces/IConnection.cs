@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using GameSaveManager.Core.Models;
+
+using System.Threading.Tasks;
 
 namespace GameSaveManager.Core.Interfaces
 {
     public interface IConnection
     {
-        Task<object> ConnectAsync(string appKey, string appSecret);
+        Task<object> ConnectAsync(Secrets secrets);
     }
 }

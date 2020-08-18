@@ -24,17 +24,19 @@ namespace GameSaveManager.Windows
 
             var builder = new ConfigurationBuilder();
 
-            if (isDevelopment)
-            {
-                builder.AddUserSecrets<App>();
-            }
+            if (isDevelopment) builder.AddUserSecrets<App>();
 
             Configuration = builder.Build();
 
-            Current.Properties["secrets"] = new Secrets
+            var connectionType = Environment.GetEnvironmentVariable("DROPBOX_CONNECTION_TYPE");
+            var isFastConnectionEnable = string.IsNullOrEmpty(connectionType) ||
+                                connectionType.ToLower(culture: CultureInfo.CurrentCulture) == "fast";
+
+            Current.Properties["SECRETS"] = new Secrets
             {
-                AppKey = Configuration.GetSection("AppKey").Value,
-                AppSecret = Configuration.GetSection("AppSecret").Value,
+                AppKey = Configuration.GetSection(nameof(Secrets.AppKey)).Value,
+                AppSecret = Configuration.GetSection(nameof(Secrets.AppSecret)).Value,
+                AppToken = isFastConnectionEnable ? Configuration.GetSection(nameof(Secrets.AppToken)).Value : string.Empty,
             };
         }
     }

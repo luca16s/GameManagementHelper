@@ -1,6 +1,7 @@
 ﻿using Dropbox.Api;
 
 using GameSaveManager.Core.Interfaces;
+using GameSaveManager.Core.Models;
 
 using System;
 using System.Diagnostics;
@@ -17,11 +18,13 @@ namespace GameSaveManager.DropboxIntegration
         private readonly Uri JSRedirectUri = new Uri("http://127.0.0.1:52475/token");
         private readonly Uri RedirectUri = new Uri("http://127.0.0.1:52475/authorize");
 
-        public async Task<object> ConnectAsync(string appKey, string appSecret)
+        public async Task<object> ConnectAsync(Secrets secrets)
         {
+            if (secrets == null) return default;
+
             DropboxCertHelper.InitializeCertPinning();
 
-            var accessToken = await GetAccessToken(appKey).ConfigureAwait(true);
+            var accessToken = secrets.AppToken ?? await GetAccessToken(secrets.AppKey).ConfigureAwait(true);
 
             var httpClient = new HttpClient
             {
@@ -33,7 +36,7 @@ namespace GameSaveManager.DropboxIntegration
                 HttpClient = httpClient
             };
 
-            return new DropboxClient(accessToken, "", appKey, appSecret, config);
+            return new DropboxClient(accessToken, "", secrets.AppKey, secrets.AppSecret, config);
         }
 
         private async Task<string> GetAccessToken(string appkey)

@@ -1,4 +1,5 @@
 ﻿using GameSaveManager.Core.Models;
+
 using System.Threading.Tasks;
 
 namespace GameSaveManager.Core.Interfaces
@@ -9,7 +10,7 @@ namespace GameSaveManager.Core.Interfaces
 
         Task<bool> CheckFolderExistence(string folderName);
 
-        Task<string> UploadSaveData(GameInformation gameInformation);
+        Task<bool> UploadSaveData(GameInformation gameInformation);
 
         Task<bool> DownloadSaveData(GameInformation gameInformation);
     }

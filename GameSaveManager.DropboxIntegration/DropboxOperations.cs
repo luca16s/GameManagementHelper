@@ -4,9 +4,9 @@ using Dropbox.Api.Files;
 using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
 using GameSaveManager.Core.Services;
+
 using System;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,25 +42,26 @@ namespace GameSaveManager.DropboxIntegration
             return true;
         }
 
-        public async Task<string> UploadSaveData(GameInformation gameInformation)
+        public async Task<bool> UploadSaveData(GameInformation gameInformation)
         {
-            if (gameInformation == null) return string.Empty;
+            if (gameInformation == null) return false;
 
-            var enviromentPath = FileSystemServices.GetAppDataFolderPath(folderName: gameInformation.FolderName);
+            try
+            {
+                using var zipStream = FileSystemServices.GenerateZipFile(gameInformation);
 
-            string zipPath = $"{Environment.CurrentDirectory}\\{gameInformation.SaveName}";
+                var response = await Client
+                    .Files
+                    .UploadAsync(gameInformation.OnlineDriveFolder + gameInformation.SaveName, WriteMode.Add.Instance, body: zipStream)
+                    .ConfigureAwait(true);
 
-            ZipFile.CreateFromDirectory(enviromentPath, zipPath);
-
-            using var streamBody = new FileStream(zipPath, FileMode.Open, FileAccess.Read);
-            var response = await Client
-                .Files
-                .UploadAsync(gameInformation.OnlineDriveFolder + gameInformation.SaveName, WriteMode.Add.Instance, body: streamBody)
-                .ConfigureAwait(true);
-
-            File.Delete(zipPath);
-
-            return response.ContentHash;
+                return string.IsNullOrEmpty(response.ContentHash);
+            }
+            finally
+            {
+                if (FileSystemServices.CheckFileExistence(gameInformation.ZipTempFolder))
+                    FileSystemServices.DeleteZipFile(gameInformation);
+            }
         }
 
         public async Task<bool> CheckFolderExistence(string folderName)

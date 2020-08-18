@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace GameSaveManager.Core.Models
 {
@@ -15,6 +16,8 @@ namespace GameSaveManager.Core.Models
         public DateTime CreationDate { get; set; }
 
         public string OnlineDriveFolder => $"/{FolderName}/";
+
+        public string ZipTempFolder => Path.GetTempPath() + SaveName;
 
         private string _GameCoverImagePath;
 
