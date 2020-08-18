@@ -6,42 +6,45 @@ using System.IO.Compression;
 
 namespace GameSaveManager.Core.Services
 {
-    public static class FileSystemServices
+    public class FileSystemServices
     {
-        private static string GetGameFolderLocationAppData(string folderName) => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), $"{folderName}");
+        private readonly GameInformation GameInformation;
 
-        public static FileStream GenerateZipFile(GameInformation gameInformation)
-        {
-            if (gameInformation == null) return null;
-
-            var folder = GetGameFolderLocationAppData(folderName: gameInformation.FolderName);
-
-            ZipFile.CreateFromDirectory(folder, gameInformation.ZipTempFolder);
-
-            return new FileStream(gameInformation.ZipTempFolder, FileMode.Open, FileAccess.Read);
-        }
-
-        public static bool CheckFileExistence(string zipTempFolder)
-        {
-            return File.Exists(zipTempFolder);
-        }
-
-        public static bool DeleteZipFile(GameInformation gameInformation)
-        {
-            if (gameInformation == null) return false;
-
-            File.Delete(gameInformation.ZipTempFolder);
-
-            return CheckFileExistence(gameInformation.ZipTempFolder);
-        }
-
-        public static void ExtractZipFile(GameInformation gameInformation)
+        public FileSystemServices(GameInformation gameInformation)
         {
             if (gameInformation == null) return;
 
-            var folder = GetGameFolderLocationAppData(folderName: gameInformation.FolderName);
+            GameInformation = gameInformation;
+        }
 
-            ZipFile.ExtractToDirectory(gameInformation.ZipTempFolder, folder);
+        private string GetGameFolderLocationAppData() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), GameInformation.FolderName);
+
+        public FileStream GenerateZipFile()
+        {
+            var folder = GetGameFolderLocationAppData();
+
+            ZipFile.CreateFromDirectory(folder, GameInformation.ZipTempFolder);
+
+            return new FileStream(GameInformation.ZipTempFolder, FileMode.Open, FileAccess.Read);
+        }
+
+        public bool CheckFileExistence()
+        {
+            return File.Exists(GameInformation.ZipTempFolder);
+        }
+
+        public bool DeleteZipFile()
+        {
+            File.Delete(GameInformation.ZipTempFolder);
+
+            return CheckFileExistence();
+        }
+
+        public void ExtractZipFile()
+        {
+            var folder = GetGameFolderLocationAppData();
+
+            ZipFile.ExtractToDirectory(GameInformation.ZipTempFolder, folder);
         }
     }
 }

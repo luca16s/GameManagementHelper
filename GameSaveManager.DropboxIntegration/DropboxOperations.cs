@@ -46,9 +46,11 @@ namespace GameSaveManager.DropboxIntegration
         {
             if (gameInformation == null) return false;
 
+            var fileSystemService = new FileSystemServices(gameInformation);
+
             try
             {
-                using var zipStream = FileSystemServices.GenerateZipFile(gameInformation);
+                using var zipStream = fileSystemService.GenerateZipFile();
 
                 var response = await Client
                     .Files
@@ -59,8 +61,8 @@ namespace GameSaveManager.DropboxIntegration
             }
             finally
             {
-                if (FileSystemServices.CheckFileExistence(gameInformation.ZipTempFolder))
-                    FileSystemServices.DeleteZipFile(gameInformation);
+                if (fileSystemService.CheckFileExistence())
+                    fileSystemService.DeleteZipFile();
             }
         }
 
