@@ -25,20 +25,22 @@ namespace GameSaveManager.View.ViewModel
                                                             await SetUserInformation().ConfigureAwait(true);
                                                         });
 
+        private DropboxClient DropboxClient { get; set; }
+
         public AccountPageViewModel()
         {
             DropboxConnection = new DropboxConnection();
             Secrets = (Secrets)Application.Current.Properties["SECRETS"];
         }
 
-        private async Task ConnectAsync()
-        {
-            Application.Current.Properties["CLIENT"] = await DropboxConnection.ConnectAsync(Secrets).ConfigureAwait(true) as DropboxClient;
-        }
+        private async Task ConnectAsync() => Application
+                .Current
+                .Properties["CLIENT"] = DropboxClient = (DropboxClient)await DropboxConnection
+                    .ConnectAsync(Secrets).ConfigureAwait(true);
 
-        private static async Task SetUserInformation()
+        private async Task SetUserInformation()
         {
-            var user = await ((DropboxClient)Application.Current.Properties["CLIENT"])
+            var user = await DropboxClient
                 .Users
                 .GetCurrentAccountAsync()
                 .ConfigureAwait(true);
