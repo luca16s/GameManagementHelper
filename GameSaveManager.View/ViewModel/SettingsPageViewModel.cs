@@ -8,28 +8,8 @@ namespace GameSaveManager.View.ViewModel
 {
     public class SettingsPageViewModel : ViewModelBase
     {
-        public SettingsPageViewModel()
-        {
-            //ChangeDarkMode = new ChangeDarkModeCommand();
-        }
-
-        public ICommand ChangeDarkMode { get; set; }
-        public ICommand SaveCommand => new RelayCommand<Settings>(o => Save());
-        public ICommand ClearCommand => new RelayCommand<Settings>(o => Clear());
-
-        private bool _DarkMode;
-
-        public bool DarkMode
-        {
-            get => _DarkMode;
-            set
-            {
-                if (_DarkMode == value) return;
-
-                _DarkMode = value;
-                OnPropertyChanged(nameof(DarkMode));
-            }
-        }
+        public ICommand SaveCommand => new RelayCommand<Settings>(_ => Save());
+        public ICommand ClearCommand => new RelayCommand<Settings>(_ => Clear());
 
         private DriveServicesEnum _DriveServiceSelected;
 
@@ -75,20 +55,11 @@ namespace GameSaveManager.View.ViewModel
 
         public void Save()
         {
-            var settings = new Settings
-            {
-                DarkMode = DarkMode,
-                Email = Email,
-                Name = Name,
-            };
-
-            settings.Save();
         }
 
         private void Clear()
         {
             DriveServiceSelected = DriveServicesEnum.GoogleDrive;
-            DarkMode = false;
         }
     }
 }

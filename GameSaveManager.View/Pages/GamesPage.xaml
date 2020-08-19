@@ -5,40 +5,48 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:viewModel="clr-namespace:GameSaveManager.View.ViewModel"
       xmlns:enumConverter="clr-namespace:GameSaveManager.View.Converter"
+      xmlns:properties="clr-namespace:GameSaveManager.View.Properties"
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
       Title="Games">
     <Page.Resources>
+        <properties:Settings x:Key="Settings" />
         <viewModel:GamesPageViewModel x:Key="gamesVM" />
-        <Image x:Key="DownloadBlack"
-               Source="../resources/actions/download_black.png"
+        <Image x:Key="DownloadIcon"
                Height="48"
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center" />
-        <Image x:Key="DownloadWhite"
-               Source="../resources/actions/download_white.png"
+               HorizontalAlignment="Center" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="../resources/actions/download_black.png"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                            <Setter Property="Source" Value="../resources/actions/download_white.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image x:Key="UploadIcon"
                Height="48"
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center" />
-        <Image x:Key="UploadBlack"
-               Source="../resources/actions/upload_black.png"
-               Height="48"
-               Width="48"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center" />
-        <Image x:Key="UploadWhite"
-               Source="../resources/actions/upload_white.png"
-               Height="48"
-               Width="48"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center" />
+               HorizontalAlignment="Center" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="../resources/actions/upload_black.png"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                            <Setter Property="Source" Value="../resources/actions/upload_white.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource gamesVM}}">
         <Grid.RowDefinitions>
@@ -72,14 +80,14 @@
                 Margin="0, 0, 2.5, 0"
                 Command="{Binding Path=UploadSaveCommand}"
                 IsEnabled="{Binding Path=IsButtonEnable}">
-            <DynamicResource ResourceKey="UploadBlack" />
+            <DynamicResource ResourceKey="UploadIcon" />
         </Button>
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Margin="2.5, 0, 0, 0"
                 Command="{Binding Path=DownloadSaveCommand}"
                 IsEnabled="{Binding Path=IsButtonEnable}">
-            <DynamicResource ResourceKey="DownloadBlack" />
+            <DynamicResource ResourceKey="DownloadIcon" />
         </Button>
     </Grid>
 </Page>
