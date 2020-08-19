@@ -9,19 +9,28 @@
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="Configurações">
+      Title="Configurações"
+      Style="{DynamicResource FundoPagina}">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
         <viewModel:SettingsPageViewModel x:Key="settingsVM" />
+        <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
+            <Setter Property="Background" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Background" Value="#202020" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Image x:Key="ClearIcon"
                Height="48"
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center" >
+               HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/clear_all_black.png"/>
+                    <Setter Property="Source" Value="../resources/actions/clear_all_black.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
                             <Setter Property="Source" Value="../resources/actions/clear_all_white.png" />
@@ -35,10 +44,10 @@
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center" >
+               HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/save_black.png"/>
+                    <Setter Property="Source" Value="../resources/actions/save_black.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
                             <Setter Property="Source" Value="../resources/actions/save_white.png" />

@@ -9,19 +9,28 @@
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="Games">
+      Title="Games"
+      Style="{DynamicResource FundoPagina}">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
         <viewModel:GamesPageViewModel x:Key="gamesVM" />
+        <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
+            <Setter Property="Background" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Background" Value="#202020" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Image x:Key="DownloadIcon"
                Height="48"
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center" >
+               HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/download_black.png"/>
+                    <Setter Property="Source" Value="../resources/actions/download_black.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
                             <Setter Property="Source" Value="../resources/actions/download_white.png" />
@@ -35,10 +44,10 @@
                Width="48"
                Stretch="UniformToFill"
                VerticalAlignment="Center"
-               HorizontalAlignment="Center" >
+               HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/upload_black.png"/>
+                    <Setter Property="Source" Value="../resources/actions/upload_black.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
                             <Setter Property="Source" Value="../resources/actions/upload_white.png" />

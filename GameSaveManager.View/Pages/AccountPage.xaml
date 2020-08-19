@@ -7,10 +7,19 @@
       xmlns:viewModel="clr-namespace:GameSaveManager.View.ViewModel"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AccountPage">
+      Title="AccountPage"
+      Style="{DynamicResource FundoPagina}">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
         <viewModel:AccountPageViewModel x:Key="accountVM" />
+        <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
+            <Setter Property="Background" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Background" Value="#202020" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Image x:Key="Dropbox"
                Source="/resources/dropbox.png"
                Height="46"
@@ -65,6 +74,6 @@
                 Width="80"
                 Style="{DynamicResource Round}"
                 Command="{Binding Path=ConnectCommand}">
-            </Button>
+        </Button>
     </Grid>
 </Page>
