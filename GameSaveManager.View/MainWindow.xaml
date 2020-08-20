@@ -14,10 +14,10 @@
     <Window.Resources>
         <properties:Settings x:Key="Settings" />
         <Style x:Key="FundoJanela" TargetType="{x:Type Window}">
-            <Setter Property="Background" Value="#ffffff" />
+            <Setter Property="Background" Value="#121212" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                    <Setter Property="Background" Value="#202020" />
+                    <Setter Property="Background" Value="#ffffff" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -29,10 +29,10 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="resources/actions/account_black.png" />
+                    <Setter Property="Source" Value="resources/actions/account_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="resources/actions/account_white.png" />
+                            <Setter Property="Source" Value="resources/actions/account_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -46,10 +46,10 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="resources/actions/backup_black.png" />
+                    <Setter Property="Source" Value="resources/actions/backup_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="resources/actions/backup_white.png" />
+                            <Setter Property="Source" Value="resources/actions/backup_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -63,10 +63,10 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="resources/actions/game_black.png" />
+                    <Setter Property="Source" Value="resources/actions/game_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="resources/actions/game_white.png" />
+                            <Setter Property="Source" Value="resources/actions/game_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -80,10 +80,10 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="resources/actions/settings_black.png" />
+                    <Setter Property="Source" Value="resources/actions/settings_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="resources/actions/settings_white.png" />
+                            <Setter Property="Source" Value="resources/actions/settings_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -110,6 +110,9 @@
                     <Setter Property="Fill"
                             TargetName="buttonBackground"
                             Value="lightblue" />
+                    <Setter Property="Opacity"
+                            TargetName="buttonBackground"
+                            Value="0.2" />
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="false">
                     <Setter Property="Fill"

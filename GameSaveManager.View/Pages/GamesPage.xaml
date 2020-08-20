@@ -15,10 +15,10 @@
         <properties:Settings x:Key="Settings" />
         <viewModel:GamesPageViewModel x:Key="gamesVM" />
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
-            <Setter Property="Background" Value="#ffffff" />
+            <Setter Property="Background" Value="#121212" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                    <Setter Property="Background" Value="#202020" />
+                    <Setter Property="Background" Value="#ffffff" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -30,10 +30,10 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/download_black.png" />
+                    <Setter Property="Source" Value="../resources/actions/download_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/download_white.png" />
+                            <Setter Property="Source" Value="../resources/actions/download_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -47,10 +47,10 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/upload_black.png" />
+                    <Setter Property="Source" Value="../resources/actions/upload_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/upload_white.png" />
+                            <Setter Property="Source" Value="../resources/actions/upload_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -75,6 +75,9 @@
                     <Setter Property="Fill"
                             TargetName="buttonBackground"
                             Value="lightblue" />
+                    <Setter Property="Opacity"
+                            TargetName="buttonBackground"
+                            Value="0.2" />
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="false">
                     <Setter Property="Fill"

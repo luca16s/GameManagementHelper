@@ -15,10 +15,10 @@
         <properties:Settings x:Key="Settings" />
         <viewModel:SettingsPageViewModel x:Key="settingsVM" />
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
-            <Setter Property="Background" Value="#ffffff" />
+            <Setter Property="Background" Value="#121212" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                    <Setter Property="Background" Value="#202020" />
+                    <Setter Property="Background" Value="#ffffff" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -30,10 +30,10 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/clear_all_black.png" />
+                    <Setter Property="Source" Value="../resources/actions/clear_all_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/clear_all_white.png" />
+                            <Setter Property="Source" Value="../resources/actions/clear_all_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -47,10 +47,10 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/save_black.png" />
+                    <Setter Property="Source" Value="../resources/actions/save_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/save_white.png" />
+                            <Setter Property="Source" Value="../resources/actions/save_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -75,6 +75,9 @@
                     <Setter Property="Fill"
                             TargetName="buttonBackground"
                             Value="lightblue" />
+                    <Setter Property="Opacity"
+                            TargetName="buttonBackground"
+                            Value="0.2" />
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="false">
                     <Setter Property="Fill"
@@ -83,6 +86,22 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <Style x:Key="Fonte" TargetType="Label">
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Foreground" Value="#121212" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CheckboxStyle" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Foreground" Value="#121212" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource settingsVM}}">
         <Grid.ColumnDefinitions>
@@ -109,8 +128,9 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Label Content="Serviço de nuvem:"
-                           Grid.Row="0"
-                           Grid.Column="0" />
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{DynamicResource Fonte}" />
                 <ComboBox x:Name="comboListaNuvem"
                           ItemsSource="{Binding Path=DriveServiceSelected, Converter={enumConverter:EnumToCollectionConverter}, Mode=OneTime}"
                           IsEnabled="False"
@@ -121,12 +141,12 @@
                           Grid.Column="1"
                           VerticalContentAlignment="Center" />
                 <CheckBox x:Name="ModoEscuro"
-                          Content="Ativar Modo Escuro"
+                          Content="Modo Escuro"
                           IsChecked="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}"
                           ToolTip="Altera o esquema de cores para claro ou escuro."
                           Grid.Row="2"
-                          Grid.Column="0">
-                </CheckBox>
+                          Grid.Column="0"
+                          Style="{DynamicResource CheckboxStyle}" />
             </Grid>
         </StackPanel>
         <StackPanel
