@@ -57,7 +57,7 @@
             </Image.Style>
         </Image>
         <Style x:Key="ButtonDesign" TargetType="Button">
-            <Setter Property="Margin" Value="2, 0, 2, 0"/>
+            <Setter Property="Margin" Value="2, 0, 2, 0" />
         </Style>
         <ControlTemplate x:Key="DefaultButton" TargetType="Button">
             <Grid>
@@ -66,20 +66,20 @@
                            Stroke="{TemplateBinding Foreground}"
                            StrokeThickness="0"
                            RadiusX="5"
-                           RadiusY="5"/>
+                           RadiusY="5" />
                 <ContentPresenter HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"/>
+                                  VerticalAlignment="Center" />
             </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="true">
                     <Setter Property="Fill"
                             TargetName="buttonBackground"
-                            Value="lightblue"/>
+                            Value="lightblue" />
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="false">
                     <Setter Property="Fill"
                             TargetName="buttonBackground"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
