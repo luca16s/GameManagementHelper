@@ -113,6 +113,7 @@
                            Grid.Column="0" />
                 <ComboBox x:Name="comboListaNuvem"
                           ItemsSource="{Binding Path=DriveServiceSelected, Converter={enumConverter:EnumToCollectionConverter}, Mode=OneTime}"
+                          IsEnabled="False"
                           SelectedValuePath="Value"
                           DisplayMemberPath="Description"
                           SelectedValue="{Binding Path=DriveServiceSelected}"
