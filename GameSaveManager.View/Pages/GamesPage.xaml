@@ -66,6 +66,30 @@
                 </Style>
             </Style.Resources>
         </Style>
+        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
+            <Grid>
+                <Rectangle x:Name="buttonBackground"
+                           Fill="{TemplateBinding Background}"
+                           Stroke="{TemplateBinding Foreground}"
+                           StrokeThickness="0"
+                           RadiusX="5"
+                           RadiusY="5"/>
+                <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="lightblue"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="false">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="Transparent"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource gamesVM}}">
         <Grid.RowDefinitions>
@@ -98,14 +122,16 @@
                 Grid.Row="2"
                 Margin="0, 0, 2.5, 0"
                 Command="{Binding Path=UploadSaveCommand}"
-                IsEnabled="{Binding Path=IsButtonEnable}">
+                IsEnabled="{Binding Path=IsButtonEnable}"
+                Template="{StaticResource DefaultButton}">
             <DynamicResource ResourceKey="UploadIcon" />
         </Button>
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Margin="2.5, 0, 0, 0"
                 Command="{Binding Path=DownloadSaveCommand}"
-                IsEnabled="{Binding Path=IsButtonEnable}">
+                IsEnabled="{Binding Path=IsButtonEnable}"
+                Template="{StaticResource DefaultButton}">
             <DynamicResource ResourceKey="DownloadIcon" />
         </Button>
     </Grid>
