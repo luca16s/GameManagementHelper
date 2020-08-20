@@ -20,20 +20,20 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/login_black.png" />
+                    <Setter Property="Source" Value="../resources/actions/login_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/login_white.png" />
+                            <Setter Property="Source" Value="../resources/actions/login_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Image.Style>
         </Image>
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
-            <Setter Property="Background" Value="#ffffff" />
+            <Setter Property="Background" Value="#121212" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                    <Setter Property="Background" Value="#202020" />
+                    <Setter Property="Background" Value="#ffffff" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -67,6 +67,9 @@
                     <Setter Property="Fill"
                             TargetName="buttonBackground"
                             Value="lightblue" />
+                    <Setter Property="Opacity"
+                            TargetName="buttonBackground"
+                            Value="0.2" />
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="false">
                     <Setter Property="Fill"
@@ -78,6 +81,14 @@
         <Style x:Key="ButtonDesign" TargetType="Button">
             <Setter Property="Width" Value="80" />
             <Setter Property="Margin" Value="0, 0, 4, 0" />
+        </Style>
+        <Style x:Key="Fonte" TargetType="Label">
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Foreground" Value="#121212" />
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource accountVM}}">
@@ -94,16 +105,20 @@
         </Grid.RowDefinitions>
         <Label Content="Usuário: "
                Grid.Row="0"
-               Grid.Column="0" />
+               Grid.Column="0"
+               Style="{DynamicResource Fonte}" />
         <Label Content="E-Mail: "
                Grid.Row="1"
-               Grid.Column="0" />
+               Grid.Column="0"
+               Style="{DynamicResource Fonte}" />
         <Label Content="{Binding Source={StaticResource Settings}, Path=Default.Name}"
                Grid.Row="0"
-               Grid.Column="1" />
+               Grid.Column="1"
+               Style="{DynamicResource Fonte}" />
         <Label Content="{Binding Source={StaticResource Settings}, Path=Default.Email}"
                Grid.Row="1"
-               Grid.Column="1" />
+               Grid.Column="1"
+               Style="{DynamicResource Fonte}" />
         <Button x:Name="BtnConectar"
                 Grid.Row="2"
                 Grid.Column="4"
