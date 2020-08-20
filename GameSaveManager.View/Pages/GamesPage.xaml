@@ -56,6 +56,16 @@
                 </Style>
             </Image.Style>
         </Image>
+        <Style x:Key="ButtonDesign" TargetType="Button">
+            <Setter Property="Margin" Value="2, 0, 2, 0"/>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5" />
+                </Style>
+            </Style.Resources>
+        </Style>
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource gamesVM}}">
         <Grid.RowDefinitions>

@@ -34,10 +34,14 @@
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center" />
-        <Style TargetType="Button" x:Key="Round">
+        <Style x:Key="ButtonDesign" TargetType="Button">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Margin" Value="0, 0, 4, 0"/>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
             <Style.Resources>
                 <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10" />
+                    <Setter Property="CornerRadius" Value="5" />
                 </Style>
             </Style.Resources>
         </Style>
@@ -68,11 +72,9 @@
                Grid.Column="1" />
         <Button x:Name="BtnConectar"
                 Content="Conectar"
-                Margin="0, 0, 4, 0"
                 Grid.Row="2"
                 Grid.Column="4"
-                Width="80"
-                Style="{DynamicResource Round}"
+                Style="{DynamicResource ButtonDesign}"
                 Command="{Binding Path=ConnectCommand}">
         </Button>
     </Grid>
