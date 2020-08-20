@@ -59,7 +59,7 @@ namespace GameSaveManager.View.ViewModel
 
         private void Clear()
         {
-            DriveServiceSelected = DriveServicesEnum.GoogleDrive;
+            DriveServiceSelected = DriveServicesEnum.Dropbox;
         }
     }
 }
