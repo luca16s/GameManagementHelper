@@ -21,23 +21,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="ButtonDesign" TargetType="Button">
-            <Setter Property="Width" Value="96" />
-            <Setter Property="Height" Value="96" />
-            <Setter Property="Margin" Value="4, 4, 4, 0" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5" />
-                </Style>
-            </Style.Resources>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="Transparent" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
         <Image x:Key="AccountIcon"
                Height="96"
                Width="96"
@@ -106,6 +89,35 @@
                 </Style>
             </Image.Style>
         </Image>
+        <Style x:Key="ButtonDesign" TargetType="Button">
+            <Setter Property="Width" Value="96" />
+            <Setter Property="Height" Value="96" />
+            <Setter Property="Margin" Value="4, 4, 4, 0" />
+        </Style>
+        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
+            <Grid>
+                <Rectangle x:Name="buttonBackground"
+                           Fill="{TemplateBinding Background}"
+                           Stroke="{TemplateBinding Foreground}"
+                           StrokeThickness="0"
+                           RadiusX="5"
+                           RadiusY="5"/>
+                <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="lightblue"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="false">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="Transparent"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -124,6 +136,7 @@
             Name="AccountButton"
             ToolTip="Botão para realizar Conexão com serviço de Armazenamento Online."
             Click="AccountButton_Click"
+            Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
             <DynamicResource ResourceKey="AccountIcon" />
         </Button>
@@ -133,6 +146,7 @@
             Name="GamesButton"
             Click="OpenGamesListPage"
             ToolTip="Abre a lista de Jogos disponíveis."
+            Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
             <DynamicResource ResourceKey="GamesIcon" />
         </Button>
@@ -142,6 +156,7 @@
             Name="SettingsButton"
             Click="OpenSettingsPage"
             ToolTip="Botão de Configurações."
+            Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
             <DynamicResource ResourceKey="SettingsIcon" />
         </Button>

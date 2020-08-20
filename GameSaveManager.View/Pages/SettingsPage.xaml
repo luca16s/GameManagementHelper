@@ -58,14 +58,31 @@
         </Image>
         <Style x:Key="ButtonDesign" TargetType="Button">
             <Setter Property="Margin" Value="2, 0, 2, 0"/>
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5" />
-                </Style>
-            </Style.Resources>
         </Style>
+        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
+            <Grid>
+                <Rectangle x:Name="buttonBackground"
+                           Fill="{TemplateBinding Background}"
+                           Stroke="{TemplateBinding Foreground}"
+                           StrokeThickness="0"
+                           RadiusX="5"
+                           RadiusY="5"/>
+                <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="lightblue"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="false">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="Transparent"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource settingsVM}}">
         <Grid.ColumnDefinitions>
@@ -119,12 +136,14 @@
             HorizontalAlignment="Right">
             <Button x:Name="buttonClear"
                     Command="{Binding ClearCommand}"
-                    Style="{DynamicResource ButtonDesign}">
+                    Style="{DynamicResource ButtonDesign}"
+                    Template="{StaticResource DefaultButton}">
                 <DynamicResource ResourceKey="ClearIcon" />
             </Button>
             <Button x:Name="buttonSave"
                     Command="{Binding SaveCommand}"
-                    Style="{DynamicResource ButtonDesign}">
+                    Style="{DynamicResource ButtonDesign}"
+                    Template="{StaticResource DefaultButton}">
                 <DynamicResource ResourceKey="SaveIcon" />
             </Button>
         </StackPanel>

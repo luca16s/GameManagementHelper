@@ -58,13 +58,6 @@
         </Image>
         <Style x:Key="ButtonDesign" TargetType="Button">
             <Setter Property="Margin" Value="2, 0, 2, 0"/>
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5" />
-                </Style>
-            </Style.Resources>
         </Style>
         <ControlTemplate x:Key="DefaultButton" TargetType="Button">
             <Grid>
@@ -123,7 +116,8 @@
                 Margin="0, 0, 2.5, 0"
                 Command="{Binding Path=UploadSaveCommand}"
                 IsEnabled="{Binding Path=IsButtonEnable}"
-                Template="{StaticResource DefaultButton}">
+                Template="{StaticResource DefaultButton}"
+                Style="{StaticResource ButtonDesign}">
             <DynamicResource ResourceKey="UploadIcon" />
         </Button>
         <Button Grid.Column="1"
@@ -131,7 +125,8 @@
                 Margin="2.5, 0, 0, 0"
                 Command="{Binding Path=DownloadSaveCommand}"
                 IsEnabled="{Binding Path=IsButtonEnable}"
-                Template="{StaticResource DefaultButton}">
+                Template="{StaticResource DefaultButton}"
+                Style="{StaticResource ButtonDesign}">
             <DynamicResource ResourceKey="DownloadIcon" />
         </Button>
     </Grid>

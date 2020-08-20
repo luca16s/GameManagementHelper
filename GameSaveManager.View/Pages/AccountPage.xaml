@@ -12,6 +12,23 @@
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
         <viewModel:AccountPageViewModel x:Key="accountVM" />
+        <Image x:Key="LoginIcon"
+               Height="48"
+               Width="48"
+               Stretch="UniformToFill"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="../resources/actions/login_black.png" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                            <Setter Property="Source" Value="../resources/actions/login_white.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
             <Setter Property="Background" Value="#ffffff" />
             <Style.Triggers>
@@ -34,16 +51,33 @@
                Stretch="UniformToFill"
                VerticalAlignment="Center"
                HorizontalAlignment="Center" />
+        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
+            <Grid>
+                <Rectangle x:Name="buttonBackground"
+                           Fill="{TemplateBinding Background}"
+                           Stroke="{TemplateBinding Foreground}"
+                           StrokeThickness="0"
+                           RadiusX="5"
+                           RadiusY="5"/>
+                <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="lightblue"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="false">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="Transparent"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
         <Style x:Key="ButtonDesign" TargetType="Button">
             <Setter Property="Width" Value="80"/>
             <Setter Property="Margin" Value="0, 0, 4, 0"/>
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5" />
-                </Style>
-            </Style.Resources>
         </Style>
     </Page.Resources>
     <Grid DataContext="{Binding Source={StaticResource accountVM}}">
@@ -71,11 +105,12 @@
                Grid.Row="1"
                Grid.Column="1" />
         <Button x:Name="BtnConectar"
-                Content="Conectar"
                 Grid.Row="2"
                 Grid.Column="4"
+                Template="{StaticResource DefaultButton}"
                 Style="{DynamicResource ButtonDesign}"
                 Command="{Binding Path=ConnectCommand}">
+            <DynamicResource ResourceKey="LoginIcon" />
         </Button>
     </Grid>
 </Page>
