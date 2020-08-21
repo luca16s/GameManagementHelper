@@ -25,6 +25,20 @@ namespace GameSaveManager.View.ViewModel
             }
         }
 
+        private BackupSaveType _backupSaveType;
+
+        public BackupSaveType BackupSaveType
+        {
+            get => _backupSaveType;
+            set
+            {
+                if (_backupSaveType == value) return;
+
+                _backupSaveType = value;
+                OnPropertyChanged(nameof(BackupSaveType));
+            }
+        }
+
         private string _Name;
 
         public string Name

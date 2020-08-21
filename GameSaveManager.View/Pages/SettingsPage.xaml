@@ -126,10 +126,19 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="5" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label Content="Serviço de nuvem:"
-                       Grid.Row="0"
+                <CheckBox x:Name="ModoEscuro"
+                          Content="Modo Escuro"
+                          IsChecked="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}"
+                          ToolTip="Altera o esquema de cores para claro ou escuro."
+                          Grid.Row="0"
+                          Grid.Column="0"
+                          Style="{DynamicResource CheckboxStyle}" />
+                <Label Grid.Row="2"
                        Grid.Column="0"
+                       Content="Serviço de nuvem:"
                        Style="{DynamicResource Fonte}" />
                 <ComboBox x:Name="comboListaNuvem"
                           ItemsSource="{Binding Path=DriveServiceSelected, Converter={enumConverter:EnumToCollectionConverter}, Mode=OneTime}"
@@ -137,16 +146,22 @@
                           SelectedValuePath="Value"
                           DisplayMemberPath="Description"
                           SelectedValue="{Binding Path=DriveServiceSelected}"
-                          Grid.Row="0"
+                          Grid.Row="2"
                           Grid.Column="1"
                           VerticalContentAlignment="Center" />
-                <CheckBox x:Name="ModoEscuro"
-                          Content="Modo Escuro"
-                          IsChecked="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}"
-                          ToolTip="Altera o esquema de cores para claro ou escuro."
-                          Grid.Row="2"
-                          Grid.Column="0"
-                          Style="{DynamicResource CheckboxStyle}" />
+                <Label Grid.Row="4"
+                       Grid.Column="0"
+                       Content="Tipo de Arquivo:"
+                       Style="{DynamicResource Fonte}" />
+                <ComboBox Grid.Row="4"
+                          Grid.Column="1"
+                          x:Name="comboTipoBackup"
+                          ItemsSource="{Binding Path=BackupSaveType, Converter={enumConverter:EnumToCollectionConverter}, Mode=OneTime}"
+                          IsEnabled="True"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="Description"
+                          SelectedValue="{Binding Path=BackupSaveType}"
+                          VerticalContentAlignment="Center" />
             </Grid>
         </StackPanel>
         <StackPanel

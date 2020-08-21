@@ -13,6 +13,8 @@ namespace GameSaveManager.Core.Models
 
         public string FolderName { get; set; }
 
+        public string FileExtension { get; set; }
+
         public DateTime CreationDate { get; set; }
 
         public string OnlineDriveFolder => $"/{FolderName}/";
