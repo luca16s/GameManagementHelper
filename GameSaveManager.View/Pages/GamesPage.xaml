@@ -3,7 +3,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:viewModel="clr-namespace:GameSaveManager.View.ViewModel"
       xmlns:enumConverter="clr-namespace:GameSaveManager.View.Converter"
       xmlns:properties="clr-namespace:GameSaveManager.View.Properties"
       mc:Ignorable="d"
@@ -13,7 +12,6 @@
       Style="{DynamicResource FundoPagina}">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
-        <!--<viewModel:GamesPageViewModel x:Key="gamesVM" />-->
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
             <Setter Property="Background" Value="#121212" />
             <Style.Triggers>

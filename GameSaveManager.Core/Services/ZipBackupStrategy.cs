@@ -19,5 +19,14 @@ namespace GameSaveManager.Core.Services
 
             return new FileStream(gameInformation.ZipTempFolder, FileMode.Open, FileAccess.Read);
         }
+
+        public void PrepareBackup(GameInformation gameInformation)
+        {
+            if (gameInformation == null) return;
+
+            var folder = FileSystemUtils.GetGameFolderLocationAppData(gameInformation.FolderName);
+
+            ZipFile.ExtractToDirectory(gameInformation.ZipTempFolder, folder);
+        }
     }
 }

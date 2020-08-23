@@ -3,6 +3,7 @@ using Dropbox.Api.Files;
 
 using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
+using GameSaveManager.Core.Utils;
 
 using System;
 using System.IO;
@@ -60,8 +61,8 @@ namespace GameSaveManager.DropboxIntegration
             }
             finally
             {
-                //if (fileSystemService.CheckFileExistence())
-                //    fileSystemService.DeleteZipFile();
+                if (FileSystemUtils.CheckFileExistence(gameInformation.ZipTempFolder + gameInformation.SaveName))
+                    FileSystemUtils.DeleteZipFile(gameInformation.ZipTempFolder + gameInformation.SaveName);
             }
         }
 

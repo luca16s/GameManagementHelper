@@ -39,10 +39,10 @@ namespace GameSaveManager.View.Helper
             return type.IsEnum
                 ? Enum.GetValues(type).Cast<Enum>().Select((e)
                 => new ValueDescription()
-                   {
-                       Value = e,
-                       Description = e.Description()
-                   }).ToList()
+                {
+                    Value = e,
+                    Description = e.Description()
+                }).ToList()
                 : throw new ArgumentException($"{nameof(type)} must be an enum type");
         }
     }
