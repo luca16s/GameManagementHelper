@@ -5,14 +5,8 @@ namespace GameSaveManager.View.Commands
 {
     public class RelayCommand<T> : ICommand
     {
-        #region Fields
-
         private readonly Action<T> _execute;
         private readonly Predicate<T> _canExecute;
-
-        #endregion Fields
-
-        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of <see cref="DelegateCommand{T}"/>.
@@ -31,13 +25,9 @@ namespace GameSaveManager.View.Commands
         /// <param name="canExecute">The execution status logic.</param>
         public RelayCommand(Action<T> execute, Predicate<T> canExecute)
         {
-            _execute = execute ?? throw new ArgumentNullException("execute");
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
-
-        #endregion Constructors
-
-        #region ICommand Members
 
         ///<summary>
         ///Defines the method that determines whether the command can execute in its current state.
@@ -68,7 +58,5 @@ namespace GameSaveManager.View.Commands
         {
             _execute((T)parameter);
         }
-
-        #endregion ICommand Members
     }
 }

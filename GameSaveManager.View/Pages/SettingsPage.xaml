@@ -13,7 +13,6 @@
       Style="{DynamicResource FundoPagina}">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
-        <viewModel:SettingsPageViewModel x:Key="settingsVM" />
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
             <Setter Property="Background" Value="#121212" />
             <Style.Triggers>
@@ -103,7 +102,7 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid DataContext="{Binding Source={StaticResource settingsVM}}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />

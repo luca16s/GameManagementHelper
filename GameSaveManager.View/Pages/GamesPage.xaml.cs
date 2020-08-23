@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using GameSaveManager.View.ViewModel;
+
+using System.Windows.Controls;
 
 namespace GameSaveManager.View.Pages
 {
@@ -10,6 +12,7 @@ namespace GameSaveManager.View.Pages
         public GamesPage()
         {
             InitializeComponent();
+            DataContext = new GamesPageViewModel();
         }
     }
 }

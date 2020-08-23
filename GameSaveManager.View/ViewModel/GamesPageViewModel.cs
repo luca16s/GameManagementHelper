@@ -3,6 +3,7 @@
 using GameSaveManager.Core.Enums;
 using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
+using GameSaveManager.Core.Services;
 using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Commands;
 using GameSaveManager.View.Helper;
@@ -17,6 +18,20 @@ namespace GameSaveManager.View.ViewModel
     public class GamesPageViewModel : ViewModelBase
     {
         private readonly ICloudOperations _CloudOperations;
+
+        private RelayCommand<GamesPageViewModel> _UploadCommand;
+        private RelayCommand<GamesPageViewModel> _DownloadCommand;
+        private bool CanUpload => GamesSupported != GamesSupported.None;
+        private bool CanDownload => GamesSupported != GamesSupported.None;
+
+        public ICommand UploadCommand
+            => _UploadCommand
+            ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave().ConfigureAwait(true), _ => CanUpload);
+
+        public ICommand DownloadCommand
+            => _DownloadCommand
+            ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanDownload);
+
         private GameInformation GameInformation;
 
         public GamesPageViewModel()
@@ -24,31 +39,7 @@ namespace GameSaveManager.View.ViewModel
             using DropboxClient dropboxClient = (DropboxClient)Application.Current.Properties["CLIENT"];
             if (dropboxClient != null)
             {
-                _CloudOperations = new DropboxOperations(dropboxClient);
-            }
-        }
-
-        private ICommand _UploadSaveCommand;
-
-        public ICommand UploadSaveCommand => _UploadSaveCommand ??= new RelayCommand<object>(async _ => await UploadSave()
-        .ConfigureAwait(true));
-
-        private ICommand downloadSaveCommand;
-
-        public ICommand DownloadSaveCommand => downloadSaveCommand ??= new RelayCommand<object>(async _ => await DownloadSave()
-        .ConfigureAwait(true));
-
-        private bool isButtonEnable;
-
-        public bool IsButtonEnable
-        {
-            get => isButtonEnable;
-            set
-            {
-                if (isButtonEnable == value) return;
-
-                isButtonEnable = value;
-                OnPropertyChanged(nameof(IsButtonEnable));
+                _CloudOperations = new DropboxOperations(new ZipBackupStrategy(), dropboxClient);
             }
         }
 
@@ -77,7 +68,7 @@ namespace GameSaveManager.View.ViewModel
                 _GamesSupported = value;
                 GameInformation = new GameInformation
                 {
-                    SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}.zip",
+                    SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}",
                     FilePath = "",
                     CreationDate = DateTime.Now,
                     FolderName = value.ToString(),
@@ -86,7 +77,6 @@ namespace GameSaveManager.View.ViewModel
                 };
 
                 ImagePath = GameInformation.GameCoverImagePath;
-                IsButtonEnable = value != GamesSupported.None;
 
                 OnPropertyChanged(nameof(GamesSupported));
             }

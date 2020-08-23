@@ -13,7 +13,7 @@
       Style="{DynamicResource FundoPagina}">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
-        <viewModel:GamesPageViewModel x:Key="gamesVM" />
+        <!--<viewModel:GamesPageViewModel x:Key="gamesVM" />-->
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
             <Setter Property="Background" Value="#121212" />
             <Style.Triggers>
@@ -87,7 +87,7 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Page.Resources>
-    <Grid DataContext="{Binding Source={StaticResource gamesVM}}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -117,8 +117,7 @@
         <Button Grid.Column="0"
                 Grid.Row="2"
                 Margin="0, 0, 2.5, 0"
-                Command="{Binding Path=UploadSaveCommand}"
-                IsEnabled="{Binding Path=IsButtonEnable}"
+                Command="{Binding Path=UploadCommand}"
                 Template="{StaticResource DefaultButton}"
                 Style="{StaticResource ButtonDesign}">
             <DynamicResource ResourceKey="UploadIcon" />
@@ -126,8 +125,7 @@
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Margin="2.5, 0, 0, 0"
-                Command="{Binding Path=DownloadSaveCommand}"
-                IsEnabled="{Binding Path=IsButtonEnable}"
+                Command="{Binding Path=DownloadCommand}"
                 Template="{StaticResource DefaultButton}"
                 Style="{StaticResource ButtonDesign}">
             <DynamicResource ResourceKey="DownloadIcon" />

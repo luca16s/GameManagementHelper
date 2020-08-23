@@ -3,7 +3,6 @@ using Dropbox.Api.Files;
 
 using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
-using GameSaveManager.Core.Services;
 
 using System;
 using System.IO;
@@ -15,9 +14,11 @@ namespace GameSaveManager.DropboxIntegration
     public class DropboxOperations : ICloudOperations
     {
         private readonly DropboxClient Client;
+        private readonly IBackupStrategy BackupStrategy;
 
-        public DropboxOperations(DropboxClient dropboxClient)
+        public DropboxOperations(IBackupStrategy backupStrategy, DropboxClient dropboxClient)
         {
+            BackupStrategy = backupStrategy;
             Client = dropboxClient;
         }
 
@@ -46,23 +47,21 @@ namespace GameSaveManager.DropboxIntegration
         {
             if (gameInformation == null) return false;
 
-            var fileSystemService = new FileSystemServices(gameInformation);
-
             try
             {
-                using var zipStream = fileSystemService.GenerateZipFile();
+                using var fileStream = BackupStrategy.GenerateBackup(gameInformation);
 
                 var response = await Client
                     .Files
-                    .UploadAsync(gameInformation.OnlineDriveFolder + gameInformation.SaveName, WriteMode.Add.Instance, body: zipStream)
+                    .UploadAsync(gameInformation.OnlineDriveFolder + gameInformation.SaveName, WriteMode.Add.Instance, body: fileStream)
                     .ConfigureAwait(true);
 
                 return string.IsNullOrEmpty(response.ContentHash);
             }
             finally
             {
-                if (fileSystemService.CheckFileExistence())
-                    fileSystemService.DeleteZipFile();
+                //if (fileSystemService.CheckFileExistence())
+                //    fileSystemService.DeleteZipFile();
             }
         }
 

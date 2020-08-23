@@ -19,6 +19,11 @@ namespace GameSaveManager.Core.Services
 
         private string GetGameFolderLocationAppData() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), GameInformation.FolderName);
 
+        public bool CheckFileExistence()
+        {
+            return File.Exists(GameInformation.ZipTempFolder);
+        }
+
         public FileStream GenerateZipFile()
         {
             var folder = GetGameFolderLocationAppData();
@@ -26,11 +31,6 @@ namespace GameSaveManager.Core.Services
             ZipFile.CreateFromDirectory(folder, GameInformation.ZipTempFolder);
 
             return new FileStream(GameInformation.ZipTempFolder, FileMode.Open, FileAccess.Read);
-        }
-
-        public bool CheckFileExistence()
-        {
-            return File.Exists(GameInformation.ZipTempFolder);
         }
 
         public bool DeleteZipFile()
@@ -45,6 +45,11 @@ namespace GameSaveManager.Core.Services
             var folder = GetGameFolderLocationAppData();
 
             ZipFile.ExtractToDirectory(GameInformation.ZipTempFolder, folder);
+        }
+
+        public void CreateBackupFile()
+        {
+            File.Copy(GameInformation.SaveName, GameInformation.ZipTempFolder);
         }
     }
 }
