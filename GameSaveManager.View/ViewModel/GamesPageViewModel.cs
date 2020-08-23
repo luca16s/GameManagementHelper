@@ -3,7 +3,6 @@
 using GameSaveManager.Core.Enums;
 using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
-using GameSaveManager.Core.Services;
 using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Commands;
 using GameSaveManager.View.Helper;
@@ -34,12 +33,12 @@ namespace GameSaveManager.View.ViewModel
 
         private GameInformation GameInformation;
 
-        public GamesPageViewModel()
+        public GamesPageViewModel(IBackupStrategy backupStrategy)
         {
             using DropboxClient dropboxClient = (DropboxClient)Application.Current.Properties["CLIENT"];
             if (dropboxClient != null)
             {
-                _CloudOperations = new DropboxOperations(new ZipBackupStrategy(), dropboxClient);
+                _CloudOperations = new DropboxOperations(backupStrategy, dropboxClient);
             }
         }
 
@@ -68,7 +67,7 @@ namespace GameSaveManager.View.ViewModel
                 _GamesSupported = value;
                 GameInformation = new GameInformation
                 {
-                    SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}",
+                    SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}.zip",
                     FilePath = "",
                     CreationDate = DateTime.Now,
                     FolderName = value.ToString(),

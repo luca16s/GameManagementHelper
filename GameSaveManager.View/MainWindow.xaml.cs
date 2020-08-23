@@ -1,4 +1,5 @@
-﻿using GameSaveManager.View.Pages;
+﻿using GameSaveManager.Core.Interfaces;
+using GameSaveManager.View.Pages;
 
 using System.Windows;
 
@@ -9,9 +10,12 @@ namespace GameSaveManager.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly IBackupStrategy BackupStrategy;
+
+        public MainWindow(IBackupStrategy backupStrategy)
         {
             InitializeComponent();
+            BackupStrategy = backupStrategy;
         }
 
         private void AccountButton_Click(object sender, RoutedEventArgs e)
@@ -21,7 +25,7 @@ namespace GameSaveManager.Windows
 
         private void OpenGamesListPage(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new GamesPage());
+            MainFrame.Navigate(new GamesPage(BackupStrategy));
         }
 
         private void OpenSettingsPage(object sender, RoutedEventArgs e)

@@ -4,10 +4,10 @@ namespace GameSaveManager.Core.Enums
 {
     public enum BackupSaveType
     {
-        [Description(".bak")]
+        [Description("bak")]
         BakFile,
 
-        [Description(".zip")]
+        [Description("zip")]
         ZipFile,
     }
 }
