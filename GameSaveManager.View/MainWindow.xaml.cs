@@ -10,27 +10,32 @@ namespace GameSaveManager.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IBackupStrategy BackupStrategy;
+        private readonly AccountPage AccountPage;
+        private readonly GamesPage GamesPage;
+        private readonly SettingsPage SettingsPage;
 
-        public MainWindow(IBackupStrategy backupStrategy)
+        public MainWindow(AccountPage accountPage, GamesPage gamesPage, SettingsPage settingsPage)
         {
             InitializeComponent();
-            BackupStrategy = backupStrategy;
+
+            AccountPage = accountPage;
+            GamesPage = gamesPage;
+            SettingsPage = settingsPage;
         }
 
         private void AccountButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new AccountPage());
+            MainFrame.Navigate(AccountPage);
         }
 
         private void OpenGamesListPage(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new GamesPage(BackupStrategy));
+            MainFrame.Navigate(GamesPage);
         }
 
         private void OpenSettingsPage(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new SettingsPage());
+            MainFrame.Navigate(SettingsPage);
         }
     }
 }

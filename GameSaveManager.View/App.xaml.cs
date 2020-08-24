@@ -1,6 +1,8 @@
 ﻿using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
 using GameSaveManager.Core.Services;
+using GameSaveManager.View.Pages;
+using GameSaveManager.View.ViewModel;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -60,6 +62,10 @@ namespace GameSaveManager.Windows
         private static void ConfigureServices(ServiceCollection servicesCollection)
         {
             servicesCollection.AddTransient(typeof(MainWindow));
+            servicesCollection.AddTransient(typeof(AccountPage));
+            servicesCollection.AddTransient(typeof(GamesPage));
+            servicesCollection.AddTransient(typeof(SettingsPage));
+            servicesCollection.AddTransient(typeof(SettingsPageViewModel));
             servicesCollection.AddTransient<IBackupStrategy, ZipBackupStrategy>();
         }
     }

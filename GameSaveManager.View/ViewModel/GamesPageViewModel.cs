@@ -16,7 +16,10 @@ namespace GameSaveManager.View.ViewModel
 {
     public class GamesPageViewModel : ViewModelBase
     {
-        private readonly ICloudOperations _CloudOperations;
+        private readonly IBackupStrategy BackupStrategy;
+
+        private ICloudOperations _CloudOperations;
+        private ICloudOperations CloudOperations => _CloudOperations ??= GetConnectionClient();
 
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;
@@ -35,11 +38,7 @@ namespace GameSaveManager.View.ViewModel
 
         public GamesPageViewModel(IBackupStrategy backupStrategy)
         {
-            using DropboxClient dropboxClient = (DropboxClient)Application.Current.Properties["CLIENT"];
-            if (dropboxClient != null)
-            {
-                _CloudOperations = new DropboxOperations(backupStrategy, dropboxClient);
-            }
+            BackupStrategy = backupStrategy;
         }
 
         private string _ImagePath;
@@ -81,22 +80,31 @@ namespace GameSaveManager.View.ViewModel
             }
         }
 
+        private ICloudOperations GetConnectionClient()
+        {
+            using var DriveConnectionClient = (DropboxClient)Application.Current.Properties["CLIENT"];
+
+            if (DriveConnectionClient != null) return new DropboxOperations(BackupStrategy, DriveConnectionClient);
+
+            return null;
+        }
+
         private async Task<bool> UploadSave()
         {
-            if (_CloudOperations == null) return false;
+            if (CloudOperations == null) return false;
 
-            var exists = await _CloudOperations.CheckFolderExistence(GameInformation.FolderName).ConfigureAwait(true);
+            var exists = await CloudOperations.CheckFolderExistence(GameInformation.FolderName).ConfigureAwait(true);
 
-            if (!exists) await _CloudOperations.CreateFolder(GameInformation.FolderName).ConfigureAwait(true);
+            if (!exists) await CloudOperations.CreateFolder(GameInformation.FolderName).ConfigureAwait(true);
 
-            return await _CloudOperations.UploadSaveData(GameInformation).ConfigureAwait(true);
+            return await CloudOperations.UploadSaveData(GameInformation).ConfigureAwait(true);
         }
 
         private async Task<bool> DownloadSave()
         {
-            if (_CloudOperations == null) return false;
+            if (CloudOperations == null) return false;
 
-            return await _CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
+            return await CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
         }
     }
 }
