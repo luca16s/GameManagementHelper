@@ -24,21 +24,26 @@ namespace GameSaveManager.View.Helper
                 return null;
 
             var attributes = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-            if (attributes.Any())
-                return (attributes.First() as DescriptionAttribute).Description;
+            if (attributes.Length > 0)
+                return (attributes?.First() as DescriptionAttribute)?.Description;
 
             TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
             return ti.ToTitleCase(ti.ToLower(str: value.ToString().Replace("_", " ", StringComparison.InvariantCultureIgnoreCase)));
         }
 
-        public static IEnumerable<ValueDescription> GetAllValuesAndDescriptions(Type t)
+        public static IEnumerable<ValueDescription> GetAllValuesAndDescriptions(Type type)
         {
-            if (t is null)
+            if (type is null)
                 return null;
 
-            return t.IsEnum
-                ? Enum.GetValues(t).Cast<Enum>().Select((e) => new ValueDescription() { Value = e, Description = e.Description() }).ToList()
-                : throw new ArgumentException($"{nameof(t)} must be an enum type");
+            return type.IsEnum
+                ? Enum.GetValues(type).Cast<Enum>().Select((e)
+                => new ValueDescription()
+                {
+                    Value = e,
+                    Description = e.Description()
+                }).ToList()
+                : throw new ArgumentException($"{nameof(type)} must be an enum type");
         }
     }
 }

@@ -1,9 +1,16 @@
-﻿using GameSaveManager.Core.Models;
+﻿using GameSaveManager.Core.Interfaces;
+using GameSaveManager.Core.Models;
+using GameSaveManager.Core.Services;
+using GameSaveManager.View.Pages;
+using GameSaveManager.View.ViewModel;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 using System;
 using System.Globalization;
+using System.IO;
+using System.Text;
 using System.Windows;
 
 namespace GameSaveManager.Windows
@@ -13,24 +20,27 @@ namespace GameSaveManager.Windows
     /// </summary>
     public partial class App : Application
     {
-        public static IConfigurationRoot Configuration { get; set; }
+        public IConfigurationRoot Configuration { get; set; }
+        public IServiceProvider ServiceProvider { get; set; }
 
-        public App()
+        protected override void OnStartup(StartupEventArgs e)
         {
             var devEnvironmentVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
 
             var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) ||
                                 devEnvironmentVariable.ToLower(culture: CultureInfo.CurrentCulture) == "development";
 
-            var builder = new ConfigurationBuilder();
+            var connectionType = Environment.GetEnvironmentVariable("DROPBOX_CONNECTION_TYPE");
+            var isFastConnectionEnable = string.IsNullOrEmpty(connectionType) ||
+                                connectionType.ToLower(culture: CultureInfo.CurrentCulture) == "fast";
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", true, true);
 
             if (isDevelopment) builder.AddUserSecrets<App>();
 
             Configuration = builder.Build();
-
-            var connectionType = Environment.GetEnvironmentVariable("DROPBOX_CONNECTION_TYPE");
-            var isFastConnectionEnable = string.IsNullOrEmpty(connectionType) ||
-                                connectionType.ToLower(culture: CultureInfo.CurrentCulture) == "fast";
 
             Current.Properties["SECRETS"] = new Secrets
             {
@@ -38,6 +48,27 @@ namespace GameSaveManager.Windows
                 AppSecret = Configuration.GetSection(nameof(Secrets.AppSecret)).Value,
                 AppToken = isFastConnectionEnable ? Configuration.GetSection(nameof(Secrets.AppToken)).Value : string.Empty,
             };
+
+            var servicesCollection = new ServiceCollection();
+            ConfigureServices(servicesCollection);
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            ServiceProvider = servicesCollection.BuildServiceProvider();
+
+            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
+        }
+
+        private static void ConfigureServices(ServiceCollection servicesCollection)
+        {
+            servicesCollection.AddTransient(typeof(GamesPage));
+            servicesCollection.AddTransient(typeof(MainWindow));
+            servicesCollection.AddTransient(typeof(AccountPage));
+            servicesCollection.AddTransient(typeof(SettingsPage));
+            servicesCollection.AddTransient(typeof(GamesPageViewModel));
+            servicesCollection.AddTransient(typeof(AccountPageViewModel));
+            servicesCollection.AddTransient(typeof(SettingsPageViewModel));
+            servicesCollection.AddTransient<IFactory<IBackupStrategy>, BackupFactory>();
         }
     }
 }

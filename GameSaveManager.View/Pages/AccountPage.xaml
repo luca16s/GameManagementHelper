@@ -4,14 +4,12 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:properties="clr-namespace:GameSaveManager.View.Properties"
-      xmlns:viewModel="clr-namespace:GameSaveManager.View.ViewModel"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AccountPage"
       Style="{DynamicResource FundoPagina}">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
-        <viewModel:AccountPageViewModel x:Key="accountVM" />
         <Image x:Key="LoginIcon"
                Height="48"
                Width="48"
@@ -37,20 +35,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Image x:Key="Dropbox"
-               Source="/resources/dropbox.png"
-               Height="46"
-               Width="191"
-               Stretch="Uniform"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center" />
-        <Image x:Key="Google"
-               Source="/resources/btn_google_signin_dark_normal.png"
-               Height="46"
-               Width="191"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center" />
         <ControlTemplate x:Key="DefaultButton" TargetType="Button">
             <Grid>
                 <Rectangle x:Name="buttonBackground"
@@ -91,7 +75,7 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <Grid DataContext="{Binding Source={StaticResource accountVM}}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />

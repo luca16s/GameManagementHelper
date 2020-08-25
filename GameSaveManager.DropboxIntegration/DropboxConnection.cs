@@ -5,7 +5,6 @@ using GameSaveManager.Core.Models;
 
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -24,7 +23,9 @@ namespace GameSaveManager.DropboxIntegration
 
             DropboxCertHelper.InitializeCertPinning();
 
-            var accessToken = secrets.AppToken ?? await GetAccessToken(secrets.AppKey).ConfigureAwait(true);
+            var accessToken = string.IsNullOrWhiteSpace(secrets.AppToken)
+                                    ? await GetAccessToken(secrets.AppKey).ConfigureAwait(true)
+                                    : secrets.AppToken;
 
             var httpClient = new HttpClient
             {
@@ -41,80 +42,65 @@ namespace GameSaveManager.DropboxIntegration
 
         private async Task<string> GetAccessToken(string appkey)
         {
-            string accessToken;
-            try
+            var state = Guid.NewGuid().ToString("N");
+            var authorizeUri = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Token, appkey, RedirectUri, state: state);
+            using var httpListener = new HttpListener();
+            httpListener.Prefixes.Add(LoopbackHost);
+
+            httpListener.Start();
+
+            ProcessStartInfo psi = new ProcessStartInfo
             {
-                var state = Guid.NewGuid().ToString("N");
-                var authorizeUri = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Token, appkey, RedirectUri, state: state);
-                using var http = new HttpListener();
-                http.Prefixes.Add(LoopbackHost);
+                FileName = authorizeUri.ToString(),
+                UseShellExecute = true
+            };
+            Process.Start(psi);
 
-                http.Start();
+            await HandleOAuth2Redirect(httpListener).ConfigureAwait(true);
 
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = authorizeUri.ToString(),
-                    UseShellExecute = true
-                };
-                Process.Start(psi);
+            var result = await HandleJSRedirect(httpListener).ConfigureAwait(true);
 
-                await HandleOAuth2Redirect(http).ConfigureAwait(true);
-
-                var result = await HandleJSRedirect(http).ConfigureAwait(true);
-
-                if (result.State != state)
-                {
-                    return null;
-                }
-
-                accessToken = result.AccessToken;
-                var uid = result.Uid;
-            }
-            catch (Exception)
+            if (result.State != state)
             {
                 return null;
             }
 
-            return accessToken;
+            return result.AccessToken;
         }
 
         private async Task HandleOAuth2Redirect(HttpListener http)
         {
             var context = await http.GetContextAsync().ConfigureAwait(true);
 
-            // We only care about request to RedirectUri endpoint.
             while (context.Request.Url.AbsolutePath != RedirectUri.AbsolutePath)
             {
                 context = await http.GetContextAsync().ConfigureAwait(true);
             }
 
-            context.Response.ContentType = "text/html";
+            const string responseString = "<html><body onload='redirect()'>Por favor retorne para o App.</body></html><script type='text/javascript'> function redirect(){ document.location.href ='/token?url_with_fragment='+encodeURIComponent(document.location.href); close();}</script>";
 
-            // Respond with a page which runs JS and sends URL fragment as query string
-            // to TokenRedirectUri.
-            using (var file = File.OpenRead("index.html"))
-            {
-                file.CopyTo(context.Response.OutputStream);
-            }
+            var buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+            context.Response.ContentLength64 = buffer.Length;
+
+            await context.Response.OutputStream.WriteAsync(buffer.AsMemory(0, buffer.Length)).ConfigureAwait(true);
 
             context.Response.OutputStream.Close();
         }
 
-        private async Task<OAuth2Response> HandleJSRedirect(HttpListener http)
+        private async Task<OAuth2Response> HandleJSRedirect(HttpListener httpListener)
         {
-            var context = await http.GetContextAsync().ConfigureAwait(true);
+            var context = await httpListener.GetContextAsync().ConfigureAwait(true);
 
-            // We only care about request to TokenRedirectUri endpoint.
             while (context.Request.Url.AbsolutePath != JSRedirectUri.AbsolutePath)
             {
-                context = await http.GetContextAsync().ConfigureAwait(true);
+                context = await httpListener.GetContextAsync().ConfigureAwait(true);
             }
 
             var redirectUri = new Uri(context.Request.QueryString["url_with_fragment"]);
 
-            var result = DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
+            httpListener.Stop();
 
-            return result;
+            return DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
         }
     }
 }

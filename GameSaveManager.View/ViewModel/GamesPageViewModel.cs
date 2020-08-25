@@ -16,40 +16,31 @@ namespace GameSaveManager.View.ViewModel
 {
     public class GamesPageViewModel : ViewModelBase
     {
-        private readonly ICloudOperations _CloudOperations;
+        private readonly IFactory<IBackupStrategy> BackupFactory;
+        private IBackupStrategy BackupStrategy;
+
+        private ICloudOperations _CloudOperations;
+        private ICloudOperations CloudOperations => _CloudOperations ??= GetConnectionClient();
+
+        private RelayCommand<GamesPageViewModel> _UploadCommand;
+        private RelayCommand<GamesPageViewModel> _DownloadCommand;
+
+        private bool CanUpload => GamesSupported != GamesSupported.None;
+        private bool CanDownload => GamesSupported != GamesSupported.None;
+
+        public ICommand UploadCommand
+            => _UploadCommand
+            ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave().ConfigureAwait(true), _ => CanUpload);
+
+        public ICommand DownloadCommand
+            => _DownloadCommand
+            ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanDownload);
+
         private GameInformation GameInformation;
 
-        public GamesPageViewModel()
+        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy)
         {
-            using DropboxClient dropboxClient = (DropboxClient)Application.Current.Properties["CLIENT"];
-            if (dropboxClient != null)
-            {
-                _CloudOperations = new DropboxOperations(dropboxClient);
-            }
-        }
-
-        private ICommand _UploadSaveCommand;
-
-        public ICommand UploadSaveCommand => _UploadSaveCommand ??= new RelayCommand<object>(async _ => await UploadSave()
-        .ConfigureAwait(true));
-
-        private ICommand downloadSaveCommand;
-
-        public ICommand DownloadSaveCommand => downloadSaveCommand ??= new RelayCommand<object>(async _ => await DownloadSave()
-        .ConfigureAwait(true));
-
-        private bool isButtonEnable;
-
-        public bool IsButtonEnable
-        {
-            get => isButtonEnable;
-            set
-            {
-                if (isButtonEnable == value) return;
-
-                isButtonEnable = value;
-                OnPropertyChanged(nameof(IsButtonEnable));
-            }
+            BackupFactory = backupStrategy;
         }
 
         private string _ImagePath;
@@ -75,39 +66,56 @@ namespace GameSaveManager.View.ViewModel
                 if (_GamesSupported == value) return;
 
                 _GamesSupported = value;
+
                 GameInformation = new GameInformation
                 {
-                    SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}.zip",
+                    SaveName = value.ToString(),
                     FilePath = "",
                     CreationDate = DateTime.Now,
                     FolderName = value.ToString(),
                     GameName = value.Description(),
                     GameCoverImagePath = value.ToString(),
+                    GameSaveExtension = "*.sl2",
                 };
 
                 ImagePath = GameInformation.GameCoverImagePath;
-                IsButtonEnable = value != GamesSupported.None;
 
                 OnPropertyChanged(nameof(GamesSupported));
             }
         }
 
+        private ICloudOperations GetConnectionClient()
+        {
+            using var DriveConnectionClient = (DropboxClient)Application.Current.Properties["CLIENT"];
+
+            var backupType = (BackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
+            BackupStrategy = BackupFactory.Create(backupType);
+
+            if (DriveConnectionClient != null) return new DropboxOperations(BackupStrategy, DriveConnectionClient);
+
+            return null;
+        }
+
         private async Task<bool> UploadSave()
         {
-            if (_CloudOperations == null) return false;
+            if (CloudOperations == null) return false;
 
-            var exists = await _CloudOperations.CheckFolderExistence(GameInformation.FolderName).ConfigureAwait(true);
+            GameInformation.BackupFileExtension = BackupStrategy.GetFileExtension();
 
-            if (!exists) await _CloudOperations.CreateFolder(GameInformation.FolderName).ConfigureAwait(true);
+            var exists = await CloudOperations.CheckFolderExistence(GameInformation.FolderName).ConfigureAwait(true);
 
-            return await _CloudOperations.UploadSaveData(GameInformation).ConfigureAwait(true);
+            if (!exists) await CloudOperations.CreateFolder(GameInformation.FolderName).ConfigureAwait(true);
+
+            return await CloudOperations.UploadSaveData(GameInformation).ConfigureAwait(true);
         }
 
         private async Task<bool> DownloadSave()
         {
-            if (_CloudOperations == null) return false;
+            if (CloudOperations == null) return false;
 
-            return await _CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
+            GameInformation.BackupFileExtension = BackupStrategy.GetFileExtension();
+
+            return await CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
         }
     }
 }

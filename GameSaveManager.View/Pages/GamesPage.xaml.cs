@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using GameSaveManager.Core.Interfaces;
+using GameSaveManager.View.ViewModel;
+
+using System.Windows.Controls;
 
 namespace GameSaveManager.View.Pages
 {
@@ -7,9 +10,10 @@ namespace GameSaveManager.View.Pages
     /// </summary>
     public partial class GamesPage : Page
     {
-        public GamesPage()
+        public GamesPage(IFactory<IBackupStrategy> backupStrategy)
         {
             InitializeComponent();
+            DataContext = new GamesPageViewModel(backupStrategy);
         }
     }
 }
