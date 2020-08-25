@@ -11,10 +11,10 @@ namespace GameSaveManager.Core.Models
             get => _SaveName;
             set
             {
-                if (!string.IsNullOrWhiteSpace(value) || value == _SaveName)
+                if (string.IsNullOrWhiteSpace(value) || value == _SaveName)
                     return;
 
-                _SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}{FileExtension}";
+                _SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}";
             }
         }
 
@@ -22,15 +22,17 @@ namespace GameSaveManager.Core.Models
 
         public string GameName { get; set; }
 
+        public string GameSaveExtension { get; set; }
+
         public string FolderName { get; set; }
 
-        public string FileExtension { get; set; }
+        public string BackupFileExtension { get; set; }
 
         public DateTime CreationDate { get; set; }
 
         public string OnlineDriveFolder => $"/{FolderName}/";
 
-        public string ZipTempFolder => Path.GetTempPath() + SaveName;
+        public string ZipTempFolder => Path.GetTempPath() + SaveName + BackupFileExtension;
 
         private string _GameCoverImagePath;
 

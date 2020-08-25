@@ -69,12 +69,13 @@ namespace GameSaveManager.View.ViewModel
 
                 GameInformation = new GameInformation
                 {
-                    SaveName = value.Description(),
+                    SaveName = value.ToString(),
                     FilePath = "",
                     CreationDate = DateTime.Now,
                     FolderName = value.ToString(),
                     GameName = value.Description(),
                     GameCoverImagePath = value.ToString(),
+                    GameSaveExtension = "*.sl2",
                 };
 
                 ImagePath = GameInformation.GameCoverImagePath;
@@ -99,7 +100,7 @@ namespace GameSaveManager.View.ViewModel
         {
             if (CloudOperations == null) return false;
 
-            GameInformation.FileExtension = BackupStrategy.GetFileExtension();
+            GameInformation.BackupFileExtension = BackupStrategy.GetFileExtension();
 
             var exists = await CloudOperations.CheckFolderExistence(GameInformation.FolderName).ConfigureAwait(true);
 
@@ -112,7 +113,7 @@ namespace GameSaveManager.View.ViewModel
         {
             if (CloudOperations == null) return false;
 
-            GameInformation.FileExtension = BackupStrategy.GetFileExtension();
+            GameInformation.BackupFileExtension = BackupStrategy.GetFileExtension();
 
             return await CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
         }

@@ -16,7 +16,13 @@ namespace GameSaveManager.Core.Services
 
             var folder = FileSystemUtils.GetGameFolderLocationAppData(gameInformation.FolderName);
 
-            File.Copy(folder, gameInformation.ZipTempFolder);
+            var filesPathList = Directory.GetFiles(folder, gameInformation.GameSaveExtension, SearchOption.AllDirectories);
+
+            for (int i = 0; i < filesPathList.Length; i++)
+            {
+                string path = filesPathList[i];
+                File.Copy(path, gameInformation.ZipTempFolder);
+            }
 
             return new FileStream(gameInformation.ZipTempFolder, FileMode.Open, FileAccess.Read);
         }
