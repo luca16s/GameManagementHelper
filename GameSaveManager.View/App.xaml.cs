@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -25,11 +26,6 @@ namespace GameSaveManager.Windows
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var devEnvironmentVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
-
-            var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) ||
-                                devEnvironmentVariable.ToLower(culture: CultureInfo.CurrentCulture) == "development";
-
             var connectionType = Environment.GetEnvironmentVariable("DROPBOX_CONNECTION_TYPE");
             var isFastConnectionEnable = string.IsNullOrEmpty(connectionType) ||
                                 connectionType.ToLower(culture: CultureInfo.CurrentCulture) == "fast";
@@ -38,7 +34,7 @@ namespace GameSaveManager.Windows
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", true, true);
 
-            if (isDevelopment) builder.AddUserSecrets<App>();
+            builder.AddUserSecrets<App>();
 
             Configuration = builder.Build();
 
@@ -46,7 +42,9 @@ namespace GameSaveManager.Windows
             {
                 AppKey = Configuration.GetSection(nameof(Secrets.AppKey)).Value,
                 AppSecret = Configuration.GetSection(nameof(Secrets.AppSecret)).Value,
-                AppToken = isFastConnectionEnable ? Configuration.GetSection(nameof(Secrets.AppToken)).Value : string.Empty,
+                AppToken = (Debugger.IsAttached && isFastConnectionEnable)
+                           ? Configuration.GetSection(nameof(Secrets.AppToken)).Value
+                           : string.Empty,
             };
 
             var servicesCollection = new ServiceCollection();

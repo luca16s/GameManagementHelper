@@ -3,8 +3,7 @@
     "GameSaveManager.View": {
       "commandName": "Project",
       "environmentVariables": {
-        "DROPBOX_CONNECTION_TYPE": "fast",
-        "NETCORE_ENVIRONMENT": "development"
+        "DROPBOX_CONNECTION_TYPE": "fast"
       }
     }
   }
