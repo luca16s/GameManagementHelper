@@ -6,6 +6,7 @@ namespace GameSaveManager.Core.Models
     public class GameInformation
     {
         private string _SaveName;
+
         public string SaveName
         {
             get => _SaveName + BackupFileExtension;

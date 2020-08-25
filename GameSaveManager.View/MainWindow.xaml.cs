@@ -1,5 +1,4 @@
-﻿using GameSaveManager.Core.Interfaces;
-using GameSaveManager.View.Pages;
+﻿using GameSaveManager.View.Pages;
 
 using System.Windows;
 
