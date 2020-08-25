@@ -19,8 +19,7 @@ namespace GameSaveManager.View.ViewModel
         private readonly IFactory<IBackupStrategy> BackupFactory;
         private IBackupStrategy BackupStrategy;
 
-        private ICloudOperations _CloudOperations;
-        private ICloudOperations CloudOperations => _CloudOperations ??= GetConnectionClient();
+        private ICloudOperations CloudOperations => GetConnectionClient();
 
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;

@@ -6,9 +6,10 @@ namespace GameSaveManager.Core.Models
     public class GameInformation
     {
         private string _SaveName;
+
         public string SaveName
         {
-            get => _SaveName;
+            get => _SaveName + BackupFileExtension;
             set
             {
                 if (string.IsNullOrWhiteSpace(value) || value == _SaveName)
