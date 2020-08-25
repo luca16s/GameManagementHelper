@@ -5,7 +5,18 @@ namespace GameSaveManager.Core.Models
 {
     public class GameInformation
     {
-        public string SaveName { get; set; }
+        private string _SaveName;
+        public string SaveName
+        {
+            get => _SaveName;
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value) || value == _SaveName)
+                    return;
+
+                _SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}{FileExtension}";
+            }
+        }
 
         public string FilePath { get; set; }
 

@@ -8,6 +8,8 @@ namespace GameSaveManager.Core.Services
 {
     public class BakBackupStrategy : IBackupStrategy
     {
+        public string GetFileExtension() => ".bak";
+
         public FileStream GenerateBackup(GameInformation gameInformation)
         {
             if (gameInformation == null) return null;

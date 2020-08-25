@@ -1,15 +1,15 @@
 ﻿using GameSaveManager.Core.Enums;
-using GameSaveManager.View.Commands;
-using GameSaveManager.View.Properties;
 
-using System.Windows.Input;
+using System.Windows;
 
 namespace GameSaveManager.View.ViewModel
 {
     public class SettingsPageViewModel : ViewModelBase
     {
-        public ICommand SaveCommand => new RelayCommand<Settings>(_ => Save());
-        public ICommand ClearCommand => new RelayCommand<Settings>(_ => Clear());
+        public SettingsPageViewModel()
+        {
+            Application.Current.Properties["BACKUP_TYPE"] = BackupSaveType;
+        }
 
         private DriveServicesEnum _DriveServiceSelected;
 
@@ -35,6 +35,7 @@ namespace GameSaveManager.View.ViewModel
                 if (_backupSaveType == value) return;
 
                 _backupSaveType = value;
+                Application.Current.Properties["BACKUP_TYPE"] = value;
                 OnPropertyChanged(nameof(BackupSaveType));
             }
         }
@@ -65,15 +66,6 @@ namespace GameSaveManager.View.ViewModel
                 _Email = value;
                 OnPropertyChanged(nameof(Email));
             }
-        }
-
-        public void Save()
-        {
-        }
-
-        private void Clear()
-        {
-            DriveServiceSelected = DriveServicesEnum.Dropbox;
         }
     }
 }

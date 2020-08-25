@@ -61,12 +61,14 @@ namespace GameSaveManager.Windows
 
         private static void ConfigureServices(ServiceCollection servicesCollection)
         {
+            servicesCollection.AddTransient(typeof(GamesPage));
             servicesCollection.AddTransient(typeof(MainWindow));
             servicesCollection.AddTransient(typeof(AccountPage));
-            servicesCollection.AddTransient(typeof(GamesPage));
             servicesCollection.AddTransient(typeof(SettingsPage));
+            servicesCollection.AddTransient(typeof(GamesPageViewModel));
+            servicesCollection.AddTransient(typeof(AccountPageViewModel));
             servicesCollection.AddTransient(typeof(SettingsPageViewModel));
-            servicesCollection.AddTransient<IBackupStrategy, ZipBackupStrategy>();
+            servicesCollection.AddTransient<IFactory<IBackupStrategy>, BackupFactory>();
         }
     }
 }

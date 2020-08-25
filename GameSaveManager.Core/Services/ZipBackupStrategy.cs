@@ -9,6 +9,8 @@ namespace GameSaveManager.Core.Services
 {
     public class ZipBackupStrategy : IBackupStrategy
     {
+        public string GetFileExtension() => ".zip";
+
         public FileStream GenerateBackup(GameInformation gameInformation)
         {
             if (gameInformation == null) return null;

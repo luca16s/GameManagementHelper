@@ -16,13 +16,15 @@ namespace GameSaveManager.View.ViewModel
 {
     public class GamesPageViewModel : ViewModelBase
     {
-        private readonly IBackupStrategy BackupStrategy;
+        private readonly IFactory<IBackupStrategy> BackupFactory;
+        private IBackupStrategy BackupStrategy;
 
         private ICloudOperations _CloudOperations;
         private ICloudOperations CloudOperations => _CloudOperations ??= GetConnectionClient();
 
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;
+
         private bool CanUpload => GamesSupported != GamesSupported.None;
         private bool CanDownload => GamesSupported != GamesSupported.None;
 
@@ -36,9 +38,9 @@ namespace GameSaveManager.View.ViewModel
 
         private GameInformation GameInformation;
 
-        public GamesPageViewModel(IBackupStrategy backupStrategy)
+        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy)
         {
-            BackupStrategy = backupStrategy;
+            BackupFactory = backupStrategy;
         }
 
         private string _ImagePath;
@@ -64,9 +66,10 @@ namespace GameSaveManager.View.ViewModel
                 if (_GamesSupported == value) return;
 
                 _GamesSupported = value;
+
                 GameInformation = new GameInformation
                 {
-                    SaveName = $"{value}-{DateTime.Now:MM-dd-yyyy}.zip",
+                    SaveName = value.Description(),
                     FilePath = "",
                     CreationDate = DateTime.Now,
                     FolderName = value.ToString(),
@@ -84,6 +87,9 @@ namespace GameSaveManager.View.ViewModel
         {
             using var DriveConnectionClient = (DropboxClient)Application.Current.Properties["CLIENT"];
 
+            var backupType = (BackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
+            BackupStrategy = BackupFactory.Create(backupType);
+
             if (DriveConnectionClient != null) return new DropboxOperations(BackupStrategy, DriveConnectionClient);
 
             return null;
@@ -92,6 +98,8 @@ namespace GameSaveManager.View.ViewModel
         private async Task<bool> UploadSave()
         {
             if (CloudOperations == null) return false;
+
+            GameInformation.FileExtension = BackupStrategy.GetFileExtension();
 
             var exists = await CloudOperations.CheckFolderExistence(GameInformation.FolderName).ConfigureAwait(true);
 
@@ -103,6 +111,8 @@ namespace GameSaveManager.View.ViewModel
         private async Task<bool> DownloadSave()
         {
             if (CloudOperations == null) return false;
+
+            GameInformation.FileExtension = BackupStrategy.GetFileExtension();
 
             return await CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
         }

@@ -35,20 +35,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Image x:Key="Dropbox"
-               Source="/resources/dropbox.png"
-               Height="46"
-               Width="191"
-               Stretch="Uniform"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center" />
-        <Image x:Key="Google"
-               Source="/resources/btn_google_signin_dark_normal.png"
-               Height="46"
-               Width="191"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center" />
         <ControlTemplate x:Key="DefaultButton" TargetType="Button">
             <Grid>
                 <Rectangle x:Name="buttonBackground"

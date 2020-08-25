@@ -10,7 +10,7 @@ namespace GameSaveManager.View.Pages
     /// </summary>
     public partial class GamesPage : Page
     {
-        public GamesPage(IBackupStrategy backupStrategy)
+        public GamesPage(IFactory<IBackupStrategy> backupStrategy)
         {
             InitializeComponent();
             DataContext = new GamesPageViewModel(backupStrategy);
