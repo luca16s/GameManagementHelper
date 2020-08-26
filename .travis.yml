@@ -2,8 +2,6 @@ os:
   - windows
 language: csharp
 solution: GameSaveManager.sln
-mono:
-  - latest
 dotnet: 3.1.401
 before_install:
   - cd .travis/
