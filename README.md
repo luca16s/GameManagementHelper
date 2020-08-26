@@ -23,11 +23,10 @@ Conectar com os seguintes serviços:
 Adicionar a possibilidade de se nomear os saves.
 
 <br/>
-----
 
 
-|Code Quality|
-|------------|
-|[![CodeFactor](https://www.codefactor.io/repository/github/luca16s/gamesavemanager/badge)](https://www.codefactor.io/repository/github/luca16s/gamesavemanager)|
+|Code Quality|Build|
+|------------|-----|
+|[![CodeFactor](https://www.codefactor.io/repository/github/luca16s/gamesavemanager/badge)](https://www.codefactor.io/repository/github/luca16s/gamesavemanager)|[![Build Status](https://travis-ci.com/luca16s/GameSaveManager.svg?branch=master)](https://travis-ci.com/luca16s/GameSaveManager)|
 
 ----
