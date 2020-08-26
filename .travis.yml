@@ -1,0 +1,14 @@
+os:
+  - linux
+  - osx
+  - windows
+language: csharp
+solution: GameSaveManager.sln
+mono:
+  - latest
+dotnet: 3.1.7
+before_install:
+  - cd .travis/
+  - chmod +x build.sh
+script:
+  - sudo ./build.sh --quiet verify
