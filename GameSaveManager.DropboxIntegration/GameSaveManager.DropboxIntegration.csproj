@@ -5,6 +5,7 @@
     <Authors>Dead Fish Studio</Authors>
     <Product>GameSaveManager</Product>
     <AssemblyName>GameSaveManager.Dropbox</AssemblyName>
+    <NeutralLanguage>Portuguese (Brazil)</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
