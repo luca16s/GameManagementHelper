@@ -16,7 +16,7 @@ namespace GameSaveManager.Core.Services
 
             var folder = FileSystemUtils.GetGameFolderLocationAppData(gameInformation.FolderName);
 
-            var filesPathList = Directory.GetFiles(folder, gameInformation.GameSaveExtension, SearchOption.AllDirectories);
+            var filesPathList = Directory.GetFiles(folder, $"*{gameInformation.GameSaveExtension}", SearchOption.AllDirectories);
 
             for (int i = 0; i < filesPathList.Length; i++)
             {
@@ -31,7 +31,9 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return;
 
-            throw new System.NotImplementedException();
+            var saveName = gameInformation.GameSaveDefaultFolder + gameInformation.FolderName + gameInformation.GameSaveExtension;
+
+            File.Move(gameInformation.GameSaveDefaultFolder + gameInformation.SaveName, saveName);
         }
     }
 }

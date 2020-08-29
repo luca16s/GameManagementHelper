@@ -35,11 +35,13 @@ namespace GameSaveManager.DropboxIntegration
 
             using var result = await Client.Files.DownloadAsync(gameInformation?.OnlineDriveFolder + fileFound.Name).ConfigureAwait(true);
 
-            using (var stream = File.OpenWrite($"{Environment.CurrentDirectory}\\{fileFound.Name}"))
+            using (var stream = File.OpenWrite($"{gameInformation.GameSaveDefaultFolder}\\{fileFound.Name}"))
             {
                 var dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
                 stream.Write(dataToWrite, 0, dataToWrite.Length);
             }
+
+            BackupStrategy.PrepareBackup(gameInformation);
 
             return true;
         }

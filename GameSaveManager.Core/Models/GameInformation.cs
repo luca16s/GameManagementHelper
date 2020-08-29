@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GameSaveManager.Core.Utils;
+
+using System;
 using System.IO;
 
 namespace GameSaveManager.Core.Models
@@ -25,6 +27,8 @@ namespace GameSaveManager.Core.Models
 
         public string GameSaveExtension { get; set; }
 
+        public string GameSaveDefaultFolder => $"{FileSystemUtils.GetGameFolderLocationAppData(FolderName)}\\0110000106640ba7\\";
+
         public string FolderName { get; set; }
 
         public string BackupFileExtension { get; set; }
@@ -33,7 +37,7 @@ namespace GameSaveManager.Core.Models
 
         public string OnlineDriveFolder => $"/{FolderName}/";
 
-        public string ZipTempFolder => Path.GetTempPath() + SaveName + BackupFileExtension;
+        public string ZipTempFolder => Path.GetTempPath() + SaveName;
 
         private string _GameCoverImagePath;
 
@@ -42,7 +46,7 @@ namespace GameSaveManager.Core.Models
             get => _GameCoverImagePath;
             set
             {
-                if (value == null) return;
+                if (value == "") return;
                 _GameCoverImagePath = $"../resources/gameCover/{value}.jpg";
             }
         }

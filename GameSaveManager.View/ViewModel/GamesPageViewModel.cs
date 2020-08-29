@@ -7,7 +7,10 @@ using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Commands;
 using GameSaveManager.View.Helper;
 
+using Microsoft.Extensions.Options;
+
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -36,10 +39,15 @@ namespace GameSaveManager.View.ViewModel
             ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanDownload);
 
         private GameInformation GameInformation;
+        private List<GameInformationModel> GameInformationModel;
 
-        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy)
+        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy, IOptions<List<GameInformationModel>> options)
         {
+            if (options == null)
+                return;
+
             BackupFactory = backupStrategy;
+            GameInformationModel = options.Value;
         }
 
         private string _ImagePath;
@@ -74,7 +82,7 @@ namespace GameSaveManager.View.ViewModel
                     FolderName = value.ToString(),
                     GameName = value.Description(),
                     GameCoverImagePath = value.ToString(),
-                    GameSaveExtension = "*.sl2",
+                    GameSaveExtension = ".sl2",
                 };
 
                 ImagePath = GameInformation.GameCoverImagePath;

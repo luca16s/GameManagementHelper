@@ -1,0 +1,28 @@
+{
+  "gameinformationmodel": [
+    {
+      "coverName": "DarkSouls",
+      "defaultGameSaveFolder": "NBGI\\DarkSouls",
+      "defaultSaveName": "draks0005.sl2",
+      "developer": "FROM SOFTWARE",
+      "publisher": "BANDAI NAMCO",
+      "title": "Dark Souls"
+    },
+    {
+      "coverName": "DarkSoulsII",
+      "defaultGameSaveFolder": "DarkSoulsII\\0110000106640ba7",
+      "defaultSaveName": "DARKSII0000.sl2",
+      "developer": "FROM SOFTWARE",
+      "publisher": "BANDAI NAMCO",
+      "title": "Dark Souls II"
+    },
+    {
+      "coverName": "DarkSoulsIII",
+      "defaultGameSaveFolder": "DarkSoulsIII\\0110000106640ba7",
+      "defaultSaveName": "DS30000.sl2",
+      "developer": "FROM SOFTWARE",
+      "publisher": "BANDAI NAMCO",
+      "title": "Dark Souls III"
+    }
+  ]
+}
