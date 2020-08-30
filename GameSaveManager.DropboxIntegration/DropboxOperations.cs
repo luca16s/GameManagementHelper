@@ -23,19 +23,19 @@ namespace GameSaveManager.DropboxIntegration
             Client = dropboxClient;
         }
 
-        public async Task<bool> DownloadSaveData(GameInformation gameInformation)
+        public async Task<bool> DownloadSaveData(GameInformationModel gameInformation)
         {
             if (gameInformation == null) return false;
 
-            var fileList = await ListFolderContent(gameInformation?.OnlineDriveFolder).ConfigureAwait(true);
+            var fileList = await ListFolderContent(gameInformation.DefaultGameSaveFolder).ConfigureAwait(true);
 
             var fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile);
 
             if (fileFound is null) return false;
 
-            using var result = await Client.Files.DownloadAsync(gameInformation?.OnlineDriveFolder + fileFound.Name).ConfigureAwait(true);
+            using var result = await Client.Files.DownloadAsync(gameInformation.DefaultGameSaveFolder + fileFound.Name).ConfigureAwait(true);
 
-            using (var stream = File.OpenWrite($"{gameInformation.GameSaveDefaultFolder}\\{fileFound.Name}"))
+            using (var stream = File.OpenWrite($"{gameInformation.DefaultGameSaveFolder}\\{gameInformation.DefaultSaveName}"))
             {
                 var dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
                 stream.Write(dataToWrite, 0, dataToWrite.Length);
@@ -46,30 +46,35 @@ namespace GameSaveManager.DropboxIntegration
             return true;
         }
 
-        public async Task<bool> UploadSaveData(GameInformation gameInformation)
+        public async Task<bool> UploadSaveData(GameInformationModel gameInformation)
         {
             if (gameInformation == null) return false;
 
             try
             {
+                gameInformation.SaveBackupExtension = BackupStrategy.GetFileExtension();
+
                 using var fileStream = BackupStrategy.GenerateBackup(gameInformation);
 
                 var response = await Client
                     .Files
-                    .UploadAsync(gameInformation.OnlineDriveFolder + gameInformation.SaveName, WriteMode.Add.Instance, body: fileStream)
+                    .UploadAsync(gameInformation.OnlineSaveFolder + gameInformation.DefaultSaveName, WriteMode.Add.Instance, body: fileStream)
                     .ConfigureAwait(true);
 
                 return string.IsNullOrEmpty(response.ContentHash);
             }
             finally
             {
-                if (FileSystemUtils.CheckFileExistence(gameInformation.ZipTempFolder))
-                    FileSystemUtils.DeleteZipFile(gameInformation.ZipTempFolder);
+                if (FileSystemUtils.CheckFileExistence(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName()))
+                    FileSystemUtils.DeleteZipFile(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName());
             }
         }
 
         public async Task<bool> CheckFolderExistence(string folderName)
         {
+            if (string.IsNullOrWhiteSpace(folderName))
+                return false;
+
             var itemsList = await Client.Files.ListFolderAsync("").ConfigureAwait(true);
 
             bool hasFolder = CheckIfFolderExistsInList(folderName, itemsList);
@@ -85,7 +90,7 @@ namespace GameSaveManager.DropboxIntegration
 
         public async Task<bool> CreateFolder(string path)
         {
-            var result = await Client.Files.CreateFolderV2Async($"/{path}").ConfigureAwait(true);
+            var result = await Client.Files.CreateFolderV2Async(path?.TrimEnd('/')).ConfigureAwait(true);
             return string.IsNullOrEmpty(result.Metadata.Id);
         }
 
@@ -94,7 +99,7 @@ namespace GameSaveManager.DropboxIntegration
         {
             foreach (var item in itemsList.Entries.Where(x => x.IsFolder))
             {
-                if (string.Equals(item.Name, folderName, StringComparison.InvariantCultureIgnoreCase))
+                if (string.Equals(item.Name, folderName?.Trim('/'), StringComparison.InvariantCultureIgnoreCase))
                     return true;
             }
 

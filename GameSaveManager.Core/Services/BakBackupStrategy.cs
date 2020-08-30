@@ -3,6 +3,7 @@ using GameSaveManager.Core.Models;
 using GameSaveManager.Core.Utils;
 
 using System.IO;
+using System.Linq;
 
 namespace GameSaveManager.Core.Services
 {
@@ -10,30 +11,30 @@ namespace GameSaveManager.Core.Services
     {
         public string GetFileExtension() => ".bak";
 
-        public FileStream GenerateBackup(GameInformation gameInformation)
+        public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
             if (gameInformation == null) return null;
 
-            var folder = FileSystemUtils.GetGameFolderLocationAppData(gameInformation.FolderName);
+            var folder = FileSystemUtils.GetGameFolderLocationAppData(gameInformation.DefaultGameSaveFolder);
 
-            var filesPathList = Directory.GetFiles(folder, $"*{gameInformation.GameSaveExtension}", SearchOption.AllDirectories);
+            var filesPathList = Directory.GetFiles(folder, "*", SearchOption.AllDirectories);
 
             for (int i = 0; i < filesPathList.Length; i++)
             {
                 string path = filesPathList[i];
-                File.Copy(path, gameInformation.ZipTempFolder);
+                File.Copy(path, $"{FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName()}");
             }
 
-            return new FileStream(gameInformation.ZipTempFolder, FileMode.Open, FileAccess.Read);
+            return new FileStream(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName(), FileMode.Open, FileAccess.Read);
         }
 
-        public void PrepareBackup(GameInformation gameInformation)
+        public void PrepareBackup(GameInformationModel gameInformation)
         {
             if (gameInformation == null) return;
 
-            var saveName = gameInformation.GameSaveDefaultFolder + gameInformation.FolderName + gameInformation.GameSaveExtension;
+            var saveName = gameInformation.DefaultGameSaveFolder + gameInformation.DefaultSaveName + gameInformation.GameSaveExtension;
 
-            File.Move(gameInformation.GameSaveDefaultFolder + gameInformation.SaveName, saveName);
+            File.Move(gameInformation.DefaultGameSaveFolder + gameInformation.DefaultSaveName, saveName);
         }
     }
 }

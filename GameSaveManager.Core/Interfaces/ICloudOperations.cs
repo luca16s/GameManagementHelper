@@ -10,8 +10,8 @@ namespace GameSaveManager.Core.Interfaces
 
         Task<bool> CheckFolderExistence(string folderName);
 
-        Task<bool> UploadSaveData(GameInformation gameInformation);
+        Task<bool> UploadSaveData(GameInformationModel gameInformation);
 
-        Task<bool> DownloadSaveData(GameInformation gameInformation);
+        Task<bool> DownloadSaveData(GameInformationModel gameInformation);
     }
 }

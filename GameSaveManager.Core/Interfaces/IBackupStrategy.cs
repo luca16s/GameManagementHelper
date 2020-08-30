@@ -8,8 +8,8 @@ namespace GameSaveManager.Core.Interfaces
     {
         string GetFileExtension();
 
-        FileStream GenerateBackup(GameInformation gameInformation);
+        FileStream GenerateBackup(GameInformationModel gameInformation);
 
-        void PrepareBackup(GameInformation gameInformation);
+        void PrepareBackup(GameInformationModel gameInformation);
     }
 }

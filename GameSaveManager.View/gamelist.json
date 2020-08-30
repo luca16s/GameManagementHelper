@@ -1,28 +1,37 @@
 {
   "gameinformationmodel": [
     {
-      "coverName": "DarkSouls",
+      "coverPath": "../resources/gameCover/DarkSouls.jpg",
       "defaultGameSaveFolder": "NBGI\\DarkSouls",
       "defaultSaveName": "draks0005.sl2",
       "developer": "FROM SOFTWARE",
+      "name": "DarkSouls",
+      "onlineSaveFolder": "/DarkSouls/",
       "publisher": "BANDAI NAMCO",
+      "saveExtension": ".sl2",
       "title": "Dark Souls"
     },
     {
-      "coverName": "DarkSoulsII",
+      "coverPath": "../resources/gameCover/DarkSoulsII.jpg",
       "defaultGameSaveFolder": "DarkSoulsII\\0110000106640ba7",
       "defaultSaveName": "DARKSII0000.sl2",
       "developer": "FROM SOFTWARE",
+      "name": "DarkSoulsII",
       "publisher": "BANDAI NAMCO",
-      "title": "Dark Souls II"
+      "title": "Dark Souls II",
+      "onlineSaveFolder": "/DarkSoulsII/",
+      "saveExtension": ".sl2"
     },
     {
-      "coverName": "DarkSoulsIII",
+      "coverPath": "../resources/gameCover/DarkSoulsIII.jpg",
       "defaultGameSaveFolder": "DarkSoulsIII\\0110000106640ba7",
       "defaultSaveName": "DS30000.sl2",
       "developer": "FROM SOFTWARE",
+      "name": "DarkSoulsIII",
       "publisher": "BANDAI NAMCO",
-      "title": "Dark Souls III"
+      "title": "Dark Souls III",
+      "onlineSaveFolder": "/DarkSoulsIII/",
+      "saveExtension": ".sl2"
     }
   ]
 }
