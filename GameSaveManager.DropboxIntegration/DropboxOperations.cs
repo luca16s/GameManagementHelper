@@ -64,7 +64,7 @@ namespace GameSaveManager.DropboxIntegration
             finally
             {
                 if (FileSystemUtils.CheckFileExistence(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName()))
-                    FileSystemUtils.DeleteZipFile(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName());
+                    FileSystemUtils.DeleteCreatedFile(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName());
             }
         }
 

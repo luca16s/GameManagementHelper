@@ -7,15 +7,18 @@ namespace GameSaveManager.Core.Utils
     {
         public static string GetTempFolder() => Path.GetTempPath();
 
-        public static string GetGameFolderLocationAppData(string folderName) => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), folderName);
+        public static string GetDocumentsFolder() => Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        public static string GetGameFolderLocationAppData() => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         public static bool CheckFileExistence(string path) => File.Exists(path);
 
-        public static bool DeleteZipFile(string path)
+        public static bool DeleteCreatedFile(string path)
         {
-            File.Delete(path);
+            if (CheckFileExistence(path))
+                File.Delete(path);
 
-            return CheckFileExistence(path);
+            return CheckFileExistence(path) || DeleteCreatedFile(path);
         }
     }
 }
