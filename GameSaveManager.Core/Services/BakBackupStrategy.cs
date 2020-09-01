@@ -2,8 +2,8 @@
 using GameSaveManager.Core.Models;
 using GameSaveManager.Core.Utils;
 
+using System;
 using System.IO;
-using System.Linq;
 
 namespace GameSaveManager.Core.Services
 {
@@ -32,9 +32,7 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return;
 
-            var saveName = gameInformation.DefaultGameSaveFolder + gameInformation.DefaultSaveName + gameInformation.GameSaveExtension;
-
-            File.Move(gameInformation.DefaultGameSaveFolder + gameInformation.DefaultSaveName, saveName);
+            throw new NotImplementedException();
         }
     }
 }

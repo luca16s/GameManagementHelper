@@ -27,21 +27,19 @@ namespace GameSaveManager.DropboxIntegration
         {
             if (gameInformation == null) return false;
 
-            var fileList = await ListFolderContent(gameInformation.DefaultGameSaveFolder).ConfigureAwait(true);
+            var fileList = await ListFolderContent(gameInformation.OnlineSaveFolder.TrimEnd('/')).ConfigureAwait(true);
 
             var fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile);
 
             if (fileFound is null) return false;
 
-            using var result = await Client.Files.DownloadAsync(gameInformation.DefaultGameSaveFolder + fileFound.Name).ConfigureAwait(true);
+            using var result = await Client.Files.DownloadAsync(gameInformation.OnlineSaveFolder + fileFound.Name).ConfigureAwait(true);
 
-            using (var stream = File.OpenWrite($"{gameInformation.DefaultGameSaveFolder}\\{gameInformation.DefaultSaveName}"))
+            using (var stream = File.OpenWrite($"{FileSystemUtils.GetGameFolderLocationAppData(gameInformation.DefaultGameSaveFolder)}\\{gameInformation.DefaultSaveName}"))
             {
                 var dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
                 stream.Write(dataToWrite, 0, dataToWrite.Length);
             }
-
-            BackupStrategy.PrepareBackup(gameInformation);
 
             return true;
         }

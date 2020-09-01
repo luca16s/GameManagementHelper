@@ -5,7 +5,6 @@ using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
 using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Commands;
-using GameSaveManager.View.Helper;
 
 using Microsoft.Extensions.Options;
 

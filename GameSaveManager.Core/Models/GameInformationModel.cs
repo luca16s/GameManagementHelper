@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace GameSaveManager.Core.Models
+﻿namespace GameSaveManager.Core.Models
 {
     public class GameInformationModel
     {
