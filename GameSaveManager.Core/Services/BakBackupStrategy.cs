@@ -15,7 +15,7 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return null;
 
-            var folder = FileSystemUtils.GetGameFolderLocationAppData(gameInformation.DefaultGameSaveFolder);
+            var folder = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder;
 
             var filesPathList = Directory.GetFiles(folder, "*", SearchOption.AllDirectories);
 

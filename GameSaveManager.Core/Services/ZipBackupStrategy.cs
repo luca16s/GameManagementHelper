@@ -15,7 +15,7 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return null;
 
-            var folder = FileSystemUtils.GetGameFolderLocationAppData(gameInformation.DefaultGameSaveFolder);
+            var folder = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder;
 
             ZipFile.CreateFromDirectory(folder, FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName());
 
@@ -26,7 +26,7 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return;
 
-            var folder = FileSystemUtils.GetGameFolderLocationAppData(gameInformation.DefaultGameSaveFolder);
+            var folder = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder;
 
             ZipFile.ExtractToDirectory(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName(), folder);
         }
