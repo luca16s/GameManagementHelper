@@ -49,7 +49,7 @@ namespace GameSaveManager.DropboxIntegration
 
             httpListener.Start();
 
-            ProcessStartInfo psi = new ProcessStartInfo
+            var psi = new ProcessStartInfo
             {
                 FileName = authorizeUri.ToString(),
                 UseShellExecute = true
