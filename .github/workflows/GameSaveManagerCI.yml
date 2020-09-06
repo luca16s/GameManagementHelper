@@ -30,8 +30,8 @@ jobs:
       Solution_Path: GameSaveManager.sln
       #Test_Project_Path: MyWpfApp.Tests\MyWpfApp.Tests.csproj
       Wpf_Project_Path: GameSaveManager.View\GameSaveManager.View.csproj
-      Wap_Project_Directory: GameSaveManager.Package
-      Wap_Project_Name: GameSaveManager.Package.wapproj
+      Wap_Project_Directory: GameSaveManager
+      Wap_Project_Name: GameSaveManager.wapproj
 
     steps:
     - name: Checkout
