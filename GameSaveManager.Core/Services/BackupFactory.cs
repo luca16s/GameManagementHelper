@@ -2,7 +2,6 @@
 using GameSaveManager.Core.Interfaces;
 
 using System;
-using System.Resources;
 
 namespace GameSaveManager.Core.Services
 {
