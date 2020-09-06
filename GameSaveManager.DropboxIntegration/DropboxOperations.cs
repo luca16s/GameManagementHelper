@@ -29,7 +29,8 @@ namespace GameSaveManager.DropboxIntegration
 
             var fileList = await ListFolderContent(gameInformation.OnlineSaveFolder.TrimEnd('/')).ConfigureAwait(true);
 
-            var fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile);
+            var fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile
+                                                                 && save.Name.Equals(gameInformation.BuildSaveName(), StringComparison.InvariantCultureIgnoreCase));
 
             if (fileFound is null) return false;
 

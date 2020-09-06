@@ -31,7 +31,7 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return;
 
-            var folder = Path.Combine(FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder), gameInformation.RestoreSaveName());
+            var folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
             ZipFile.ExtractToDirectory(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), folder);
         }
