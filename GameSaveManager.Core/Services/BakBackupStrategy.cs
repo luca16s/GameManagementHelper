@@ -2,7 +2,6 @@
 using GameSaveManager.Core.Models;
 using GameSaveManager.Core.Utils;
 
-using System;
 using System.IO;
 
 namespace GameSaveManager.Core.Services
@@ -18,7 +17,7 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return null;
 
-            var folder = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder;
+            var folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
             var saveName = gameInformation.BuildSaveName();
 
@@ -27,19 +26,19 @@ namespace GameSaveManager.Core.Services
             for (var i = 0; i < filesPathList.Length; i++)
             {
                 var path = filesPathList[i];
-                File.Copy(path, $"{FileSystemUtils.GetTempFolder() + saveName}");
+                File.Copy(path, Path.Combine(FileSystemUtils.GetTempFolder(), saveName));
             }
 
-            return new FileStream(FileSystemUtils.GetTempFolder() + saveName, FileMode.Open, FileAccess.Read);
+            return new FileStream(Path.Combine(FileSystemUtils.GetTempFolder(), saveName), FileMode.Open, FileAccess.Read);
         }
 
         public void PrepareBackup(GameInformationModel gameInformation)
         {
             if (gameInformation == null) return;
 
-            var saveName = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder + "\\" + gameInformation.RestoreSaveName();
+            var saveName = Path.Combine(FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder), gameInformation.RestoreSaveName());
 
-            File.Move(FileSystemUtils.GetTempFolder() + gameInformation.BuildSaveName(), saveName);
+            File.Move(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), saveName);
         }
     }
 }

@@ -5,6 +5,15 @@ namespace GameSaveManager.Core.Utils
 {
     public static class FileSystemUtils
     {
+        public static string FindPath(string folder)
+        {
+            return Directory.Exists(Path.Combine(GetGameFolderLocationAppData(), folder))
+                ? Path.Combine(GetGameFolderLocationAppData(), folder)
+                : Directory.Exists(Path.Combine(GetDocumentsFolder(), folder))
+                    ? Path.Combine(GetDocumentsFolder(), folder)
+                    : null;
+        }
+
         public static string GetTempFolder()
         {
             return Path.GetTempPath();

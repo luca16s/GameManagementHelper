@@ -18,22 +18,22 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return null;
 
-            var folder = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder;
+            var folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
             var saveName = gameInformation.BuildSaveName();
 
-            ZipFile.CreateFromDirectory(folder, FileSystemUtils.GetTempFolder() + saveName);
+            ZipFile.CreateFromDirectory(folder, Path.Combine(FileSystemUtils.GetTempFolder(), saveName));
 
-            return new FileStream(FileSystemUtils.GetTempFolder() + saveName, FileMode.Open, FileAccess.Read);
+            return new FileStream(Path.Combine(FileSystemUtils.GetTempFolder(), saveName), FileMode.Open, FileAccess.Read);
         }
 
         public void PrepareBackup(GameInformationModel gameInformation)
         {
             if (gameInformation == null) return;
 
-            var folder = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder;
+            var folder = Path.Combine(FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder), gameInformation.RestoreSaveName());
 
-            ZipFile.ExtractToDirectory(FileSystemUtils.GetTempFolder() + gameInformation.BuildSaveName(), folder);
+            ZipFile.ExtractToDirectory(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), folder);
         }
     }
 }
