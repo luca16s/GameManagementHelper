@@ -15,6 +15,9 @@
     <StartupObject>GameSaveManager.Windows.App</StartupObject>
     <UserSecretsId>f87442c4-b5be-4f35-ab54-cb01b6e866b1</UserSecretsId>
     <NeutralLanguage>pt-BR</NeutralLanguage>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>DeadFishStudio.pfx</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
