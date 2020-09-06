@@ -13,7 +13,7 @@ namespace GameSaveManager.Core.Services
             {
                 BackupSaveType.BakFile => new BakBackupStrategy(),
                 BackupSaveType.ZipFile => new ZipBackupStrategy(),
-                _ => throw new ApplicationException(),
+                _ => throw new InvalidOperationException(Properties.Resources.ErrorSaveNotSupported),
             };
         }
     }

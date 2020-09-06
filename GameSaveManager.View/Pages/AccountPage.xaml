@@ -28,7 +28,7 @@
             </Image.Style>
         </Image>
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
-            <Setter Property="Background" Value="#121212" />
+            <Setter Property="Background" Value="#3F3F3F" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
                     <Setter Property="Background" Value="#ffffff" />
@@ -70,7 +70,7 @@
             <Setter Property="Foreground" Value="#ffffff" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                    <Setter Property="Foreground" Value="#121212" />
+                    <Setter Property="Foreground" Value="#3F3F3F" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>

@@ -6,6 +6,8 @@ using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Commands;
 using GameSaveManager.View.Properties;
 
+using Microsoft.Extensions.Options;
+
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -27,16 +29,22 @@ namespace GameSaveManager.View.ViewModel
 
         private DropboxClient DropboxClient { get; set; }
 
-        public AccountPageViewModel()
+        public AccountPageViewModel(IOptions<Secrets> options)
         {
+            if (options == null)
+                return;
+
             DropboxConnection = new DropboxConnection();
-            Secrets = (Secrets)Application.Current.Properties["SECRETS"];
+            Secrets = options.Value;
         }
 
-        private async Task ConnectAsync() => Application
+        private async Task ConnectAsync()
+        {
+            Application
                 .Current
                 .Properties["CLIENT"] = DropboxClient = (DropboxClient)await DropboxConnection
-                    .ConnectAsync(Secrets).ConfigureAwait(true);
+                .ConnectAsync(Secrets).ConfigureAwait(true);
+        }
 
         private async Task SetUserInformation()
         {

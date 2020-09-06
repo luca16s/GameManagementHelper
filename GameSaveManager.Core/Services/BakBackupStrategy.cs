@@ -8,30 +8,37 @@ namespace GameSaveManager.Core.Services
 {
     public class BakBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension() => ".bak";
+        public string GetFileExtension()
+        {
+            return ".bak";
+        }
 
-        public FileStream GenerateBackup(GameInformation gameInformation)
+        public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
             if (gameInformation == null) return null;
 
-            var folder = FileSystemUtils.GetGameFolderLocationAppData(gameInformation.FolderName);
+            var folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
-            var filesPathList = Directory.GetFiles(folder, gameInformation.GameSaveExtension, SearchOption.AllDirectories);
+            var saveName = gameInformation.BuildSaveName();
 
-            for (int i = 0; i < filesPathList.Length; i++)
+            var filesPathList = Directory.GetFiles(folder, "*", SearchOption.AllDirectories);
+
+            for (var i = 0; i < filesPathList.Length; i++)
             {
-                string path = filesPathList[i];
-                File.Copy(path, gameInformation.ZipTempFolder);
+                var path = filesPathList[i];
+                File.Copy(path, Path.Combine(FileSystemUtils.GetTempFolder(), saveName));
             }
 
-            return new FileStream(gameInformation.ZipTempFolder, FileMode.Open, FileAccess.Read);
+            return new FileStream(Path.Combine(FileSystemUtils.GetTempFolder(), saveName), FileMode.Open, FileAccess.Read);
         }
 
-        public void PrepareBackup(GameInformation gameInformation)
+        public void PrepareBackup(GameInformationModel gameInformation)
         {
             if (gameInformation == null) return;
 
-            throw new System.NotImplementedException();
+            var saveName = Path.Combine(FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder), gameInformation.RestoreSaveName());
+
+            File.Move(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), saveName);
         }
     }
 }

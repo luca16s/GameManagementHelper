@@ -14,7 +14,7 @@
     <Window.Resources>
         <properties:Settings x:Key="Settings" />
         <Style x:Key="FundoJanela" TargetType="{x:Type Window}">
-            <Setter Property="Background" Value="#121212" />
+            <Setter Property="Background" Value="#3F3F3F" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
                     <Setter Property="Background" Value="#ffffff" />

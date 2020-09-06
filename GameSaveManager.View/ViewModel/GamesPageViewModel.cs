@@ -5,9 +5,11 @@ using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
 using GameSaveManager.DropboxIntegration;
 using GameSaveManager.View.Commands;
-using GameSaveManager.View.Helper;
+
+using Microsoft.Extensions.Options;
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -35,11 +37,16 @@ namespace GameSaveManager.View.ViewModel
             => _DownloadCommand
             ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanDownload);
 
-        private GameInformation GameInformation;
+        private GameInformationModel GameInformation;
+        private readonly List<GameInformationModel> GameInformationList;
 
-        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy)
+        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy, IOptions<List<GameInformationModel>> options)
         {
+            if (options == null)
+                return;
+
             BackupFactory = backupStrategy;
+            GameInformationList = options.Value;
         }
 
         private string _ImagePath;
@@ -66,18 +73,8 @@ namespace GameSaveManager.View.ViewModel
 
                 _GamesSupported = value;
 
-                GameInformation = new GameInformation
-                {
-                    SaveName = value.ToString(),
-                    FilePath = "",
-                    CreationDate = DateTime.Now,
-                    FolderName = value.ToString(),
-                    GameName = value.Description(),
-                    GameCoverImagePath = value.ToString(),
-                    GameSaveExtension = "*.sl2",
-                };
-
-                ImagePath = GameInformation.GameCoverImagePath;
+                GameInformation = GameInformationList.Find(game => string.Equals(value.ToString(), game.Name, StringComparison.InvariantCultureIgnoreCase));
+                ImagePath = GameInformation?.CoverPath;
 
                 OnPropertyChanged(nameof(GamesSupported));
             }
@@ -99,11 +96,11 @@ namespace GameSaveManager.View.ViewModel
         {
             if (CloudOperations == null) return false;
 
-            GameInformation.BackupFileExtension = BackupStrategy.GetFileExtension();
+            GameInformation.SaveBackupExtension = BackupStrategy.GetFileExtension();
 
-            var exists = await CloudOperations.CheckFolderExistence(GameInformation.FolderName).ConfigureAwait(true);
+            var exists = await CloudOperations.CheckFolderExistence(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
 
-            if (!exists) await CloudOperations.CreateFolder(GameInformation.FolderName).ConfigureAwait(true);
+            if (!exists) await CloudOperations.CreateFolder(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
 
             return await CloudOperations.UploadSaveData(GameInformation).ConfigureAwait(true);
         }
@@ -112,7 +109,7 @@ namespace GameSaveManager.View.ViewModel
         {
             if (CloudOperations == null) return false;
 
-            GameInformation.BackupFileExtension = BackupStrategy.GetFileExtension();
+            GameInformation.SaveBackupExtension = BackupStrategy.GetFileExtension();
 
             return await CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
         }

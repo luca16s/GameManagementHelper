@@ -14,12 +14,14 @@
     <AssemblyName>GameSaveManager</AssemblyName>
     <StartupObject>GameSaveManager.Windows.App</StartupObject>
     <UserSecretsId>f87442c4-b5be-4f35-ab54-cb01b6e866b1</UserSecretsId>
+    <NeutralLanguage>pt-BR</NeutralLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
     <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="gamelist.json" />
     <None Remove="resources\account_black.png" />
     <None Remove="resources\account_box-black-24dp.svg" />
     <None Remove="resources\account_white.png" />
@@ -117,6 +119,9 @@
     <Resource Include="resources\actions\game_black.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Content Include="gamelist.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\game_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

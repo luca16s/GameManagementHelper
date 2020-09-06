@@ -27,7 +27,7 @@ namespace GameSaveManager.View.Helper
             if (attributes.Length > 0)
                 return (attributes?.First() as DescriptionAttribute)?.Description;
 
-            TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+            var ti = CultureInfo.CurrentCulture.TextInfo;
             return ti.ToTitleCase(ti.ToLower(str: value.ToString().Replace("_", " ", StringComparison.InvariantCultureIgnoreCase)));
         }
 

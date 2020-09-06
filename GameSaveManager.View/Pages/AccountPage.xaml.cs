@@ -1,4 +1,7 @@
-﻿using GameSaveManager.View.ViewModel;
+﻿using GameSaveManager.Core.Models;
+using GameSaveManager.View.ViewModel;
+
+using Microsoft.Extensions.Options;
 
 using System.Windows.Controls;
 
@@ -9,10 +12,10 @@ namespace GameSaveManager.View.Pages
     /// </summary>
     public partial class AccountPage : Page
     {
-        public AccountPage()
+        public AccountPage(IOptions<Secrets> options)
         {
             InitializeComponent();
-            DataContext = new AccountPageViewModel();
+            DataContext = new AccountPageViewModel(options);
         }
     }
 }
