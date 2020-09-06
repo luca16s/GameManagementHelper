@@ -34,9 +34,9 @@ namespace GameSaveManager.DropboxIntegration
 
             if (fileFound is null) return false;
 
-            using var result = await Client.Files.DownloadAsync(gameInformation.OnlineSaveFolder + fileFound.Name).ConfigureAwait(true);
+            using var result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
 
-            using (var stream = File.OpenWrite(FileSystemUtils.GetTempFolder() + fileFound.Name))
+            using (var stream = File.OpenWrite(Path.Combine(FileSystemUtils.GetTempFolder(), fileFound.Name)))
             {
                 var dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
                 stream.Write(dataToWrite, 0, dataToWrite.Length);
@@ -59,15 +59,15 @@ namespace GameSaveManager.DropboxIntegration
 
                 var response = await Client
                     .Files
-                    .UploadAsync(gameInformation.OnlineSaveFolder + gameInformation.BuildSaveName(), WriteMode.Add.Instance, body: fileStream)
+                    .UploadAsync(Path.Combine(gameInformation.OnlineSaveFolder, gameInformation.BuildSaveName()), WriteMode.Add.Instance, body: fileStream)
                     .ConfigureAwait(true);
 
                 return string.IsNullOrEmpty(response.ContentHash);
             }
             finally
             {
-                if (FileSystemUtils.CheckFileExistence(FileSystemUtils.GetTempFolder() + gameInformation.BuildSaveName()))
-                    FileSystemUtils.DeleteCreatedFile(FileSystemUtils.GetTempFolder() + gameInformation.BuildSaveName());
+                if (FileSystemUtils.CheckFileExistence(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName())))
+                    FileSystemUtils.DeleteCreatedFile(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()));
             }
         }
 

@@ -18,13 +18,13 @@
         public string BuildSaveName(string saveName = null)
         {
             return !string.IsNullOrWhiteSpace(value: saveName)
-                ? saveName + SaveBackupExtension
-                : DefaultSaveName + SaveBackupExtension;
+                ? string.Concat(saveName, SaveBackupExtension)
+                : string.Concat(DefaultSaveName, SaveBackupExtension);
         }
 
         public string RestoreSaveName()
         {
-            return DefaultSaveName + DefaultSaveExtension;
+            return string.Concat(DefaultSaveName, DefaultSaveExtension);
         }
     }
 }
