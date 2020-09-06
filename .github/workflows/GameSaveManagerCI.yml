@@ -26,7 +26,7 @@ jobs:
 
     env:
       App_Packages_Directory: AppPackages
-      SigningCertificate: GitHubActionsDemo.pfx
+      SigningCertificate: "${{ secrets.Base64_Encoded_Pfx }}"
       Solution_Path: GameSaveManager.sln
       #Test_Project_Path: MyWpfApp.Tests\MyWpfApp.Tests.csproj
       Wpf_Project_Path: GameSaveManager.View\GameSaveManager.View.csproj
