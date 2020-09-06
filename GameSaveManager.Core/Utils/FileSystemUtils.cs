@@ -5,13 +5,25 @@ namespace GameSaveManager.Core.Utils
 {
     public static class FileSystemUtils
     {
-        public static string GetTempFolder() => Path.GetTempPath();
+        public static string GetTempFolder()
+        {
+            return Path.GetTempPath();
+        }
 
-        public static string GetDocumentsFolder() => Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string GetDocumentsFolder()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        }
 
-        public static string GetGameFolderLocationAppData() => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public static string GetGameFolderLocationAppData()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        }
 
-        public static bool CheckFileExistence(string path) => File.Exists(path);
+        public static bool CheckFileExistence(string path)
+        {
+            return File.Exists(path);
+        }
 
         public static bool DeleteCreatedFile(string path)
         {

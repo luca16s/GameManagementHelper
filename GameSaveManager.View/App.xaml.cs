@@ -69,6 +69,7 @@ namespace GameSaveManager.Windows
                            ? Configuration.GetSection(key: nameof(Secrets.AppToken)).Value
                            : string.Empty;
             });
+
             servicesCollection.Configure<List<GameInformationModel>>(gameInformation => Configuration
                 .GetSection(key: nameof(GameInformationModel)).Bind(gameInformation));
         }

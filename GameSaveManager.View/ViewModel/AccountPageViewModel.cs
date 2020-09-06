@@ -38,10 +38,13 @@ namespace GameSaveManager.View.ViewModel
             Secrets = options.Value;
         }
 
-        private async Task ConnectAsync() => Application
+        private async Task ConnectAsync()
+        {
+            Application
                 .Current
                 .Properties["CLIENT"] = DropboxClient = (DropboxClient)await DropboxConnection
-                    .ConnectAsync(Secrets).ConfigureAwait(true);
+                .ConnectAsync(Secrets).ConfigureAwait(true);
+        }
 
         private async Task SetUserInformation()
         {

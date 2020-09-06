@@ -9,7 +9,10 @@ namespace GameSaveManager.Core.Services
 {
     public class BakBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension() => ".bak";
+        public string GetFileExtension()
+        {
+            return ".bak";
+        }
 
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
@@ -17,15 +20,17 @@ namespace GameSaveManager.Core.Services
 
             var folder = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder;
 
+            var saveName = gameInformation.BuildSaveName();
+
             var filesPathList = Directory.GetFiles(folder, "*", SearchOption.AllDirectories);
 
-            for (int i = 0; i < filesPathList.Length; i++)
+            for (var i = 0; i < filesPathList.Length; i++)
             {
-                string path = filesPathList[i];
-                File.Copy(path, $"{FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName()}");
+                var path = filesPathList[i];
+                File.Copy(path, $"{FileSystemUtils.GetTempFolder() + saveName}");
             }
 
-            return new FileStream(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName(), FileMode.Open, FileAccess.Read);
+            return new FileStream(FileSystemUtils.GetTempFolder() + saveName, FileMode.Open, FileAccess.Read);
         }
 
         public void PrepareBackup(GameInformationModel gameInformation)

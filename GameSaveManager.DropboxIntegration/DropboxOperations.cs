@@ -35,7 +35,7 @@ namespace GameSaveManager.DropboxIntegration
 
             using var result = await Client.Files.DownloadAsync(gameInformation.OnlineSaveFolder + fileFound.Name).ConfigureAwait(true);
 
-            using (var stream = File.OpenWrite($"{FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder}\\{gameInformation.DefaultSaveName}"))
+            using (var stream = File.OpenWrite($"{FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder}\\{gameInformation.RestoreSaveName()}"))
             {
                 var dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
                 stream.Write(dataToWrite, 0, dataToWrite.Length);
@@ -56,15 +56,15 @@ namespace GameSaveManager.DropboxIntegration
 
                 var response = await Client
                     .Files
-                    .UploadAsync(gameInformation.OnlineSaveFolder + gameInformation.DefaultSaveName, WriteMode.Add.Instance, body: fileStream)
+                    .UploadAsync(gameInformation.OnlineSaveFolder + gameInformation.BuildSaveName(), WriteMode.Add.Instance, body: fileStream)
                     .ConfigureAwait(true);
 
                 return string.IsNullOrEmpty(response.ContentHash);
             }
             finally
             {
-                if (FileSystemUtils.CheckFileExistence(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName()))
-                    FileSystemUtils.DeleteCreatedFile(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName());
+                if (FileSystemUtils.CheckFileExistence(FileSystemUtils.GetTempFolder() + gameInformation.BuildSaveName()))
+                    FileSystemUtils.DeleteCreatedFile(FileSystemUtils.GetTempFolder() + gameInformation.BuildSaveName());
             }
         }
 
@@ -92,8 +92,7 @@ namespace GameSaveManager.DropboxIntegration
             return string.IsNullOrEmpty(result.Metadata.Id);
         }
 
-        private static bool CheckIfFolderExistsInList(string folderName,
-                                                      ListFolderResult itemsList)
+        private static bool CheckIfFolderExistsInList(string folderName, ListFolderResult itemsList)
         {
             foreach (var item in itemsList.Entries.Where(x => x.IsFolder))
             {

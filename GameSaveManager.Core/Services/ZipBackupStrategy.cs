@@ -9,7 +9,10 @@ namespace GameSaveManager.Core.Services
 {
     public class ZipBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension() => ".zip";
+        public string GetFileExtension()
+        {
+            return ".zip";
+        }
 
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
@@ -17,9 +20,11 @@ namespace GameSaveManager.Core.Services
 
             var folder = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder;
 
-            ZipFile.CreateFromDirectory(folder, FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName());
+            var saveName = gameInformation.BuildSaveName();
 
-            return new FileStream(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName(), FileMode.Open, FileAccess.Read);
+            ZipFile.CreateFromDirectory(folder, FileSystemUtils.GetTempFolder() + saveName);
+
+            return new FileStream(FileSystemUtils.GetTempFolder() + saveName, FileMode.Open, FileAccess.Read);
         }
 
         public void PrepareBackup(GameInformationModel gameInformation)
@@ -28,7 +33,7 @@ namespace GameSaveManager.Core.Services
 
             var folder = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder;
 
-            ZipFile.ExtractToDirectory(FileSystemUtils.GetTempFolder() + gameInformation.CreateSaveName(), folder);
+            ZipFile.ExtractToDirectory(FileSystemUtils.GetTempFolder() + gameInformation.BuildSaveName(), folder);
         }
     }
 }
