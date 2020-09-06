@@ -37,7 +37,9 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return;
 
-            throw new NotImplementedException();
+            var saveName = FileSystemUtils.GetGameFolderLocationAppData() + "\\" + gameInformation.DefaultGameSaveFolder + "\\" + gameInformation.RestoreSaveName();
+
+            File.Move(FileSystemUtils.GetTempFolder() + gameInformation.BuildSaveName(), saveName);
         }
     }
 }
