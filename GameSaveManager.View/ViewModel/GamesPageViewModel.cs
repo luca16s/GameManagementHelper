@@ -74,7 +74,7 @@ namespace GameSaveManager.View.ViewModel
                 _GamesSupported = value;
 
                 GameInformation = GameInformationList.Find(game => string.Equals(value.ToString(), game.Name, StringComparison.InvariantCultureIgnoreCase));
-                ImagePath = GameInformation.CoverPath;
+                ImagePath = GameInformation?.CoverPath;
 
                 OnPropertyChanged(nameof(GamesSupported));
             }
