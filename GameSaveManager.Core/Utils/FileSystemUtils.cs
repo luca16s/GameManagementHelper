@@ -15,8 +15,7 @@ namespace GameSaveManager.Core.Utils
 
         public static bool DeleteCreatedFile(string path)
         {
-            if (CheckFileExistence(path))
-                File.Delete(path);
+            if (CheckFileExistence(path)) File.Delete(path);
 
             return !CheckFileExistence(path) || DeleteCreatedFile(path);
         }
