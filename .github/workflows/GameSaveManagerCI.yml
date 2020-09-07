@@ -21,8 +21,8 @@ jobs:
       SigningCertificate: DeadFishStudio.pfx
       Solution_Name: GameSaveManager.sln
       Wpf_Project_Path: GameSaveManager.View/GameSaveManager.View.csproj
-      Wap_Project_Directory: GameSaveManagerInstaller/GameSaveManagerInstaller
-      Wap_Project_Path: GameSaveManagerInstaller/GameSaveManagerInstaller.wapproj
+      Wap_Project_Directory: GameaveManagerInstaller
+      Wap_Project_Path: GameSaveManagerInstaller.wapproj
 
     steps:
     - name: Checkout
@@ -45,7 +45,6 @@ jobs:
 
     - name: Update manifest version
       run: |
-        ls
         [xml]$manifest = get-content ".\$env:Wap_Project_Directory\Package.appxmanifest"
         $manifest.Package.Identity.Version = "$env:NBGV_SimpleVersion.0"
         $manifest.save(".\$env:Wap_Project_Directory\Package.appxmanifest")
