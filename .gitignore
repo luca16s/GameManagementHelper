@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 .vscode/launch.json
 .vscode/tasks.json
+/GameSaveManager.View/.vscode
