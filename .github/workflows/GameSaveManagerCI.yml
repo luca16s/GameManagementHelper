@@ -46,6 +46,8 @@ jobs:
     - name: Update manifest version
       run: |
         ls
+        cd $env:Wap_Project_Directory
+        ls
         [xml]$manifest = get-content ".\$env:Wap_Project_Directory\Package.appxmanifest"
         $manifest.Package.Identity.Version = "$env:NBGV_SimpleVersion.0"
         $manifest.save(".\$env:Wap_Project_Directory\Package.appxmanifest")
