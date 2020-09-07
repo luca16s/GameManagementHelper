@@ -45,9 +45,9 @@ jobs:
 
     - name: Update manifest version
       run: |
-        [xml]$manifest = get-content ".\$env:Wap_Project_Directory\Package.appxmanifest"
+        [xml]$manifest = get-content ".\$env:Wap_Project_Directory\GameSaveManagerInstaller.appxmanifest"
         $manifest.Package.Identity.Version = "$env:NBGV_SimpleVersion.0"
-        $manifest.save(".\$env:Wap_Project_Directory\Package.appxmanifest")
+        $manifest.save(".\$env:Wap_Project_Directory\GameSaveManagerInstaller.appxmanifest")
 
     - name: Restore the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
