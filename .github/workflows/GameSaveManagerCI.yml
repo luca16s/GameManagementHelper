@@ -82,7 +82,7 @@ jobs:
         BuildMode: SideloadOnly
         Configuration: Debug
         TargetPlatform: ${{ matrix.targetplatform }}
-    
+
     # Remove the .pfx
     - name: Remove the .pfx
       run: Remove-Item -path $certificatePath
