@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "GameSaveManagerInstaller", "GameSaveManagerInstaller\GameSaveManagerInstaller.wapproj", "{CECA29D9-F311-4E92-A7E7-F10F3109D089}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,36 @@ Global
 		{C397732E-9D13-412E-B108-A936E2EC386A}.Release|x64.Build.0 = Release|Any CPU
 		{C397732E-9D13-412E-B108-A936E2EC386A}.Release|x86.ActiveCfg = Release|Any CPU
 		{C397732E-9D13-412E-B108-A936E2EC386A}.Release|x86.Build.0 = Release|Any CPU
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|ARM.ActiveCfg = Debug|ARM
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|ARM.Build.0 = Debug|ARM
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|ARM.Deploy.0 = Debug|ARM
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|ARM64.Build.0 = Debug|ARM64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|x64.ActiveCfg = Debug|x64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|x64.Build.0 = Debug|x64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|x64.Deploy.0 = Debug|x64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|x86.ActiveCfg = Debug|x86
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|x86.Build.0 = Debug|x86
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Debug|x86.Deploy.0 = Debug|x86
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|ARM.ActiveCfg = Release|ARM
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|ARM.Build.0 = Release|ARM
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|ARM.Deploy.0 = Release|ARM
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|ARM64.ActiveCfg = Release|ARM64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|ARM64.Build.0 = Release|ARM64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|ARM64.Deploy.0 = Release|ARM64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|x64.ActiveCfg = Release|x64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|x64.Build.0 = Release|x64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|x64.Deploy.0 = Release|x64
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|x86.ActiveCfg = Release|x86
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|x86.Build.0 = Release|x86
+		{CECA29D9-F311-4E92-A7E7-F10F3109D089}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
