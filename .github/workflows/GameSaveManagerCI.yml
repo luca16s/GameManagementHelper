@@ -21,8 +21,8 @@ jobs:
       SigningCertificate: DeadFishStudio.pfx
       Solution_Name: GameSaveManager.sln
       Wpf_Project_Path: GameSaveManager.View/GameSaveManager.View.csproj
-      Wap_Project_Directory: GameSaveManagerInstaller/GameSaveManagerInstaller.Package
-      Wap_Project_Path: GameSaveManagerInstaller/GameSaveManagerInstaller.Package.wapproj
+      Wap_Project_Directory: GameSaveManagerInstaller/GameSaveManagerInstaller
+      Wap_Project_Path: GameSaveManagerInstaller/GameSaveManagerInstaller.wapproj
 
     steps:
     - name: Checkout
