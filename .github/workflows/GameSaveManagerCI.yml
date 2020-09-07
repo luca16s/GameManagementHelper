@@ -21,8 +21,8 @@ jobs:
       SigningCertificate: DeadFishStudio.pfx
       Solution_Name: GameSaveManager.sln
       Wpf_Project_Path: GameSaveManager.View/GameSaveManager.View.csproj
-      Wap_Project_Directory: GameSaveManager.Package
-      Wap_Project_Path: GameSaveManager.Package.wapproj
+      Wap_Project_Directory: GameSaveManager.View/GameSaveManager.Package
+      Wap_Project_Path: GameSaveManager.View/GameSaveManager.Package.wapproj
 
     steps:
     - name: Checkout
@@ -30,8 +30,8 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Use Nerdbank.GitVersioning to set version variables
-      uses: aarnott/nbgv@v0.3
+    - name: Nerdbank.GitVersioning
+      uses: dotnet/nbgv@v0.3.1
       with:
         setAllVars: true
 
