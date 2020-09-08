@@ -351,3 +351,4 @@ MigrationBackup/
 .vscode/launch.json
 .vscode/tasks.json
 /GameSaveManager.View/.vscode
+/GameSaveManager.DesktopApp/.vscode

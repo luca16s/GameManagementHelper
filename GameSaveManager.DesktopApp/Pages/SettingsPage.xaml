@@ -1,0 +1,183 @@
+﻿<Page x:Class="GameSaveManager.DesktopApp.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:enumConverter="clr-namespace:GameSaveManager.DesktopApp.Converter"
+      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="Configurações"
+      Style="{DynamicResource FundoPagina}">
+    <Page.Resources>
+        <properties:Settings x:Key="Settings" />
+        <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
+            <Setter Property="Background" Value="#3F3F3F" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Background" Value="#ffffff" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Image x:Key="ClearIcon"
+               Height="48"
+               Width="48"
+               Stretch="UniformToFill"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="../resources/actions/clear_all_white.png" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                            <Setter Property="Source" Value="../resources/actions/clear_all_black.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image x:Key="SaveIcon"
+               Height="48"
+               Width="48"
+               Stretch="UniformToFill"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="../resources/actions/save_white.png" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                            <Setter Property="Source" Value="../resources/actions/save_black.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Style x:Key="ButtonDesign" TargetType="Button">
+            <Setter Property="Margin" Value="2, 0, 2, 0" />
+        </Style>
+        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
+            <Grid>
+                <Rectangle x:Name="buttonBackground"
+                           Fill="{TemplateBinding Background}"
+                           Stroke="{TemplateBinding Foreground}"
+                           StrokeThickness="0"
+                           RadiusX="5"
+                           RadiusY="5" />
+                <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="lightblue" />
+                    <Setter Property="Opacity"
+                            TargetName="buttonBackground"
+                            Value="0.2" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="false">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="Transparent" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="Fonte" TargetType="Label">
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Foreground" Value="#3F3F3F" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CheckboxStyle" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Foreground" Value="#3F3F3F" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Orientation="Vertical"
+            Grid.Row="0"
+            Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <CheckBox x:Name="ModoEscuro"
+                          Content="Modo Escuro"
+                          IsChecked="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}"
+                          ToolTip="Altera o esquema de cores para claro ou escuro."
+                          Grid.Row="0"
+                          Grid.Column="0"
+                          Style="{DynamicResource CheckboxStyle}" />
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Content="Serviço de nuvem:"
+                       Style="{DynamicResource Fonte}" />
+                <ComboBox x:Name="comboListaNuvem"
+                          ItemsSource="{Binding Path=DriveServiceSelected, Converter={enumConverter:EnumToCollectionConverter}, Mode=OneTime}"
+                          IsEnabled="False"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="Description"
+                          SelectedValue="{Binding Path=DriveServiceSelected}"
+                          Grid.Row="2"
+                          Grid.Column="1"
+                          VerticalContentAlignment="Center" />
+                <Label Grid.Row="4"
+                       Grid.Column="0"
+                       Content="Tipo de Arquivo:"
+                       Style="{DynamicResource Fonte}" />
+                <ComboBox Grid.Row="4"
+                          Grid.Column="1"
+                          x:Name="comboTipoBackup"
+                          ItemsSource="{Binding Path=BackupSaveType, Converter={enumConverter:EnumToCollectionConverter}, Mode=OneTime}"
+                          IsEnabled="True"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="Description"
+                          SelectedValue="{Binding Path=BackupSaveType}"
+                          VerticalContentAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Orientation="Horizontal"
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Right">
+            <Button x:Name="buttonClear"
+                    Style="{DynamicResource ButtonDesign}"
+                    Template="{StaticResource DefaultButton}">
+                <DynamicResource ResourceKey="ClearIcon" />
+            </Button>
+            <Button x:Name="buttonSave"
+                    Style="{DynamicResource ButtonDesign}"
+                    Template="{StaticResource DefaultButton}">
+                <DynamicResource ResourceKey="SaveIcon" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

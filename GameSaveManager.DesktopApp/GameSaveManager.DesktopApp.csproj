@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Authors>Dead Fish Studio</Authors>
+    <Product>GameSaveManager</Product>
+    <ApplicationIcon>ico.ico</ApplicationIcon>
+    <PackageIcon>game_icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Copyright />
+    <AssemblyName>GameSaveManager</AssemblyName>
+    <StartupObject>GameSaveManager.Windows.App</StartupObject>
+    <UserSecretsId>f87442c4-b5be-4f35-ab54-cb01b6e866b1</UserSecretsId>
+    <NeutralLanguage>pt-BR</NeutralLanguage>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="gamelist.json" />
+    <None Remove="resources\account_black.png" />
+    <None Remove="resources\account_box-black-24dp.svg" />
+    <None Remove="resources\account_white.png" />
+    <None Remove="resources\actions\clear_all_black.png" />
+    <None Remove="resources\actions\clear_all_white.png" />
+    <None Remove="resources\actions\download_black.png" />
+    <None Remove="resources\actions\download_white.png" />
+    <None Remove="resources\actions\info_black.png" />
+    <None Remove="resources\actions\info_white.png" />
+    <None Remove="resources\actions\login_black.png" />
+    <None Remove="resources\actions\login_white.png" />
+    <None Remove="resources\actions\save_black.png" />
+    <None Remove="resources\actions\save_white.png" />
+    <None Remove="resources\actions\settings_black.png" />
+    <None Remove="resources\actions\settings_white.png" />
+    <None Remove="resources\actions\upload_black.png" />
+    <None Remove="resources\actions\upload_white.png" />
+    <None Remove="resources\backup_black.png" />
+    <None Remove="resources\backup_white.png" />
+    <None Remove="resources\baseline_account.png" />
+    <None Remove="resources\btn_google_signin_dark_disabled.png" />
+    <None Remove="resources\btn_google_signin_dark_disabled_web.png" />
+    <None Remove="resources\btn_google_signin_dark_focus.png" />
+    <None Remove="resources\btn_google_signin_dark_focus_web.png" />
+    <None Remove="resources\btn_google_signin_dark_normal.png" />
+    <None Remove="resources\btn_google_signin_dark_pressed.png" />
+    <None Remove="resources\btn_google_signin_dark_pressed_web.png" />
+    <None Remove="resources\dropbox.png" />
+    <None Remove="resources\ds.jpg" />
+    <None Remove="resources\ds2.jpg" />
+    <None Remove="resources\ds3.jpg" />
+    <None Remove="resources\gameCover\DarkSouls.jpg" />
+    <None Remove="resources\gameCover\DarkSoulsII.jpg" />
+    <None Remove="resources\gameCover\DarkSoulsIII.jpg" />
+    <None Remove="resources\game_black.png" />
+    <None Remove="resources\game_white.png" />
+    <None Remove="resources\google.png" />
+    <None Remove="resources\settings_applications_black.png" />
+    <None Remove="resources\settings_applications_white.png" />
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="resources\game_icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\actions\account_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\account_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\clear_all_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\clear_all_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\download_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\download_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\info_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\info_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\login_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\login_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\save_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\save_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\gameCover\DarkSouls.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\gameCover\DarkSoulsII.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\gameCover\DarkSoulsIII.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\game_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="gamelist.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\game_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7" />
+    <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
+    <ProjectReference Include="..\GameSaveManager.Dropbox\GameSaveManager.Dropbox.csproj" />
+    <Resource Include="resources\actions\game_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\actions\settings_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\settings_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\upload_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\upload_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>
