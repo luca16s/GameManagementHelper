@@ -32,7 +32,7 @@ namespace GameSaveManager.Windows
                                 connectionType.ToLower(culture: CultureInfo.CurrentCulture) == "fast";
 
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("gamelist.json", false, true);
 
             builder.AddUserSecrets<App>();
