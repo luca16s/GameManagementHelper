@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace GameSaveManager.DropboxIntegration
+namespace GameSaveManager.Dropbox
 {
     public class DropboxConnection : IConnection
     {

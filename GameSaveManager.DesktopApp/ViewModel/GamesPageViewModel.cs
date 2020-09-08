@@ -3,8 +3,8 @@
 using GameSaveManager.Core.Enums;
 using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
-using GameSaveManager.DropboxIntegration;
-using GameSaveManager.View.Commands;
+using GameSaveManager.DesktopApp.Commands;
+using GameSaveManager.Dropbox;
 
 using Microsoft.Extensions.Options;
 
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace GameSaveManager.View.ViewModel
+namespace GameSaveManager.DesktopApp.ViewModel
 {
     public class GamesPageViewModel : ViewModelBase
     {

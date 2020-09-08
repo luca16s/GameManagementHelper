@@ -1,8 +1,8 @@
 ﻿using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
 using GameSaveManager.Core.Services;
-using GameSaveManager.View.Pages;
-using GameSaveManager.View.ViewModel;
+using GameSaveManager.DesktopApp.Pages;
+using GameSaveManager.DesktopApp.ViewModel;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

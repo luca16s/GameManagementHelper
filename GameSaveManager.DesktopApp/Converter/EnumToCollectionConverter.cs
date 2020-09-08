@@ -1,5 +1,5 @@
 ﻿using GameSaveManager.Core.Enums;
-using GameSaveManager.View.Helper;
+using GameSaveManager.DesktopApp.Helper;
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace GameSaveManager.View.Converter
+namespace GameSaveManager.DesktopApp.Converter
 {
     [ValueConversion(typeof(Enum), typeof(IEnumerable<ValueDescription>))]
     public class EnumToCollectionConverter : MarkupExtension, IValueConverter

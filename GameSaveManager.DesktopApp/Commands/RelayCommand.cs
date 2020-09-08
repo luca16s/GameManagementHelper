@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace GameSaveManager.View.Commands
+namespace GameSaveManager.DesktopApp.Commands
 {
     public class RelayCommand<T> : ICommand
     {

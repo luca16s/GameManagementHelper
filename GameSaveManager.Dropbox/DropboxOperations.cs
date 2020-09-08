@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GameSaveManager.DropboxIntegration
+namespace GameSaveManager.Dropbox
 {
     public class DropboxOperations : ICloudOperations
     {

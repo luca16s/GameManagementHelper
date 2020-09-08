@@ -2,9 +2,9 @@
 
 using GameSaveManager.Core.Interfaces;
 using GameSaveManager.Core.Models;
-using GameSaveManager.DropboxIntegration;
-using GameSaveManager.View.Commands;
-using GameSaveManager.View.Properties;
+using GameSaveManager.DesktopApp.Commands;
+using GameSaveManager.DesktopApp.Properties;
+using GameSaveManager.Dropbox;
 
 using Microsoft.Extensions.Options;
 
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace GameSaveManager.View.ViewModel
+namespace GameSaveManager.DesktopApp.ViewModel
 {
     public class AccountPageViewModel : ViewModelBase
     {

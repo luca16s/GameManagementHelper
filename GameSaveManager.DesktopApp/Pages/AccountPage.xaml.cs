@@ -1,11 +1,11 @@
 ﻿using GameSaveManager.Core.Models;
-using GameSaveManager.View.ViewModel;
+using GameSaveManager.DesktopApp.ViewModel;
 
 using Microsoft.Extensions.Options;
 
 using System.Windows.Controls;
 
-namespace GameSaveManager.View.Pages
+namespace GameSaveManager.DesktopApp.Pages
 {
     /// <summary>
     /// Interaction logic for AccountPage.xaml

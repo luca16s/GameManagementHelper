@@ -134,6 +134,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7" />
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
     <ProjectReference Include="..\GameSaveManager.DropboxIntegration\GameSaveManager.DropboxIntegration.csproj" />
+    <ProjectReference Include="..\GameSaveManager.Dropbox\GameSaveManager.Dropbox.csproj" />
     <Resource Include="resources\actions\game_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

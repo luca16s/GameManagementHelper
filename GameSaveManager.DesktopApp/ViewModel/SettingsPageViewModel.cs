@@ -2,7 +2,7 @@
 
 using System.Windows;
 
-namespace GameSaveManager.View.ViewModel
+namespace GameSaveManager.DesktopApp.ViewModel
 {
     public class SettingsPageViewModel : ViewModelBase
     {

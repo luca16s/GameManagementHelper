@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 
-namespace GameSaveManager.View.Helper
+namespace GameSaveManager.DesktopApp.Helper
 {
     public static class HelperMethods
     {

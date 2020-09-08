@@ -1,4 +1,4 @@
-﻿using GameSaveManager.View.Pages;
+﻿using GameSaveManager.DesktopApp.Pages;
 
 using System.Windows;
 
