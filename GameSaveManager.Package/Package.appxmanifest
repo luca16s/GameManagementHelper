@@ -31,7 +31,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="GameSaveManager"
+        DisplayName="Game Save Manager"
         Description="Aplicativo para realizar o upload e download de saves de jogos que não possuam Auto Save na nuvem."
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
