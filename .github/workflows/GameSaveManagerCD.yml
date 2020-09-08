@@ -49,7 +49,7 @@ jobs:
     - name: Install .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '3.1.401'
+        dotnet-version: '3.1.302'
 
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.1
