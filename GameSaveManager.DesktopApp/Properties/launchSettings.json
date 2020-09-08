@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "GameSaveManager.View": {
+    "GameSaveManager.DesktopApp": {
       "commandName": "Project",
       "environmentVariables": {
         "DROPBOX_CONNECTION_TYPE": "fast"
