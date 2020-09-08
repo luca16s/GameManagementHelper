@@ -35,7 +35,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
-    packagesToPack: 'GameSaveManager.Package.wapproj'
+    packagesToPack: 'GameSaveManager.Package\GameSaveManager.Package.wapproj'
     includesymbols: true
     includesource: true
     versioningScheme: 'byPrereleaseNumber'
