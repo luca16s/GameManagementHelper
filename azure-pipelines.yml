@@ -24,7 +24,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'GameSaveManager.DesktopApp.csproj'
+    projects: 'GameSaveManager.DesktopApp\GameSaveManager.DesktopApp.csproj'
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
