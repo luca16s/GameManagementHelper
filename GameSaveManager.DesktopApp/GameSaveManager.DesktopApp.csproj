@@ -17,6 +17,9 @@
     <UserSecretsId>f87442c4-b5be-4f35-ab54-cb01b6e866b1</UserSecretsId>
     <NeutralLanguage>pt-BR</NeutralLanguage>
     <Nullable>disable</Nullable>
+    <PackageProjectUrl>https://luca16s.github.io/GameSaveManager/</PackageProjectUrl>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>DeadFishStudio.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
