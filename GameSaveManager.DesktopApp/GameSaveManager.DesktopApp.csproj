@@ -18,7 +18,7 @@
     <NeutralLanguage>pt-BR</NeutralLanguage>
     <Nullable>disable</Nullable>
     <PackageProjectUrl>https://luca16s.github.io/GameSaveManager/</PackageProjectUrl>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>DeadFishStudio.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
