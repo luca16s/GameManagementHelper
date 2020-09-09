@@ -29,7 +29,7 @@ jobs:
     env:
       App_Packages_Archive: AppPackages.zip
       App_Packages_Directory: AppPackages
-      SigningCertificate: DeadFishStudio.pfx
+      SigningCertificate: GameSaveManager.Package_TemporaryKey.pfx
       Solution_Path: GameSaveManager.sln
       Wpf_Project_Path: GameSaveManager.DesktopApp/GameSaveManager.DesktopApp.csproj
       Wap_Project_Directory: GameSaveManager.Package
