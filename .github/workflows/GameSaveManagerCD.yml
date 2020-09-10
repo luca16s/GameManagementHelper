@@ -1,4 +1,4 @@
-name:  GameSaveManagerCD
+name:  GameSaveManager-CD
 
 on:
   push:
