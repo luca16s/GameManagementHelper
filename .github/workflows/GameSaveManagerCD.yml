@@ -13,7 +13,7 @@ jobs:
 
       matrix:
         channel: Production
-        targetPlatform: x86
+        targetPlatform: [x86]
         include:
 
           - channel: Production

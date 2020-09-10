@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        targetplatform: x86
+        targetplatform: [x86]
 
     runs-on: windows-latest
 
