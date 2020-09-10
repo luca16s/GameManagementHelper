@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        targetplatform: [x86]
+        targetplatform: [x86, x64]
 
     runs-on: windows-latest
 
@@ -65,9 +65,7 @@ jobs:
 
     - name: Create the app package
       run: |
-        ls
         $currentDirectory = Get-Location
-        ls $env:Wap_Project_Directory
         $certificate = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
         msbuild $env:Solution_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$certificate /p:PackageCertificatePassword=${{ secrets.PFX_KEY }}
       env:
@@ -77,7 +75,10 @@ jobs:
         TargetPlatform: ${{ matrix.targetplatform }}
 
     - name: Remove the pfx
-      run: Remove-Item -path $env:Wap_Project_Directory\$env:Signing_Certificate
+      run: |
+        $currentDirectory = Get-Location
+        $certificate = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
+        Remove-Item -path $env:Wap_Project_Directory\$certificate
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
