@@ -56,7 +56,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\GameSaveManager.DesktopApp\GameSaveManager.DesktopApp.csproj</EntryPointProjectUniqueName>
-    <PackageCertificateThumbprint>C5167D0B38629E2EF757B399B267C506D989B26A</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>8F98EA0DF4848832B2F64B337EE8D7B86C043235</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <DefaultLanguage>pt-BR</DefaultLanguage>
