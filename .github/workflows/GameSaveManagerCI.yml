@@ -78,7 +78,7 @@ jobs:
       run: |
         $currentDirectory = Get-Location
         $certificate = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
-        Remove-Item -path $env:Wap_Project_Directory\$certificate
+        Remove-Item -path $certificate
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
