@@ -65,7 +65,7 @@ jobs:
 
     - name: Create the app package
       run: |
-        $certificate = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
+        $certificate = Join-Path -Path Get-Location -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
         msbuild $env:Solution_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$certificate /p:PackageCertificatePassword=${{ secrets.PFX_KEY }}
       env:
         AppxBundle: Never
