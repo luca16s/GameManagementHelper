@@ -62,6 +62,7 @@ jobs:
         $currentDirectory = Get-Location
         $certificatePath = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
         [IO.File]::WriteAllBytes($certificatePath, $pfx_cert_byte)
+        ls $env:Wap_Project_Directory
 
     - name: Create the app package
       run: msbuild $env:Solution_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:Wap_Project_Directory\$env:SigningCertificate /p:PackageCertificatePassword=${{ secrets.PFX_KEY }}
