@@ -90,23 +90,11 @@ jobs:
         GenerateAppInstallerFile: True
         TargetPlatform: ${{ matrix.targetplatform }}
 
-    - name: Build the Windows Application Packaging Project (wapproj) for ${{ matrix.ChannelName }}
-      run: msbuild $env:Solution_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:GenerateAppInstallerFile=$env:GenerateAppInstallerFile /p:AppxPackageSigningEnabled=$env:AppxPackageSigningEnabled
-      if: matrix.ChannelName == 'Prod_Store'
-      env:
-        AppxBundle: Never
-        AppxPackageSigningEnabled: False
-        BuildMode: StoreUpload
-        Configuration: ${{ matrix.Configuration }}
-        GenerateAppInstallerFile: False
-        TargetPlatform: ${{ matrix.targetplatform }}
-
     - name: Remove the .pfx
       run: |
         $currentDirectory = Get-Location
         $certificate = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
         Remove-Item -path $env:Wap_Project_Directory\$env:SigningCertificate
-        if: matrix.ChannelName != 'Prod_Store'
 
     - name: Create archive
       run: Compress-Archive -Path $env:Wap_Project_Directory\$env:App_Packages_Directory\* -DestinationPath $env:Wap_Project_Directory\$env:App_Packages_Directory\$env:App_Packages_Archive
