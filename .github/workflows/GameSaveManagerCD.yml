@@ -1,4 +1,4 @@
-name:  GameSaveManagerCD
+name:  GameSaveManager-CD
 
 on:
   push:
@@ -10,15 +10,13 @@ jobs:
   build:
 
     strategy:
-
       matrix:
-        channel: Production
+        channel: [Prod_Sideload]
         targetPlatform: [x86]
         include:
-
-          - channel: Production
+          - channel: Prod_Sideload
             Configuration: Release
-            ChannelName: Production
+            ChannelName: Prod_Sideload
             DistributionUrl: https://luca16s.github.io/GameSaveManager/
             MsixPackageId: DeadFishStudio.GameSaveManager.Production
             MsixPublisherId: CN=GameSaveManager
@@ -41,8 +39,8 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Nerdbank.GitVersioning
-      uses: dotnet/nbgv@v0.3.1
+    - name: Use Nerdbank.GitVersioning to set version variables
+      uses: aarnott/nbgv@v0.3.1
       with:
         setAllVars: true
 
@@ -79,7 +77,10 @@ jobs:
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
 
     - name: Build the Windows Application Packaging Project (wapproj) for ${{ matrix.ChannelName }}
-      run: msbuild $env:Solution_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$env:Wap_Project_Directory\$env:SigningCertificate /p:PackageCertificatePassword=${{ secrets.PFX_KEY }}
+      run: |
+        $currentDirectory = Get-Location
+        $certificate = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
+        msbuild $env:Solution_Path /p:Platform=$env:TargetPlatform /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:BuildMode /p:AppxBundle=$env:AppxBundle /p:PackageCertificateKeyFile=$certificate /p:PackageCertificatePassword=${{ secrets.PFX_KEY }}
       if: matrix.ChannelName != 'Prod_Store'
       env:
         AppxBundle: Never
@@ -101,8 +102,11 @@ jobs:
         TargetPlatform: ${{ matrix.targetplatform }}
 
     - name: Remove the .pfx
-      run: Remove-Item -path $env:Wap_Project_Directory\$env:SigningCertificate
-      if: matrix.ChannelName != 'Prod_Store'
+      run: |
+        $currentDirectory = Get-Location
+        $certificate = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
+        Remove-Item -path $env:Wap_Project_Directory\$env:SigningCertificate
+        if: matrix.ChannelName != 'Prod_Store'
 
     - name: Create archive
       run: Compress-Archive -Path $env:Wap_Project_Directory\$env:App_Packages_Directory\* -DestinationPath $env:Wap_Project_Directory\$env:App_Packages_Directory\$env:App_Packages_Archive
