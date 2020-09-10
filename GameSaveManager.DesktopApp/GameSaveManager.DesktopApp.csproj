@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     <UseWPF>true</UseWPF>
     <Authors>Dead Fish Studio</Authors>
     <Product>GameSaveManager</Product>
@@ -24,7 +24,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
     <DefineConstants>DEBUG</DefineConstants>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="gamelist.json" />
