@@ -25,6 +25,6 @@ Adicionar a possibilidade de se nomear os saves.
 <br/>
 
 
-|Code Quality|Azure Pipelines|
-|------------|---------------|
-|[![CodeFactor](https://www.codefactor.io/repository/github/luca16s/gamesavemanager/badge)](https://www.codefactor.io/repository/github/luca16s/gamesavemanager)|[![Build Status](https://dev.azure.com/DeadFishStudio/GameSaveManager/_apis/build/status/GameSaveManager?branchName=%2310)](https://dev.azure.com/DeadFishStudio/GameSaveManager/_build/latest?definitionId=19&branchName=%2310)|
+|Code Quality|Azure Pipelines|Actions|
+|------------|---------------|-------|
+|[![CodeFactor](https://www.codefactor.io/repository/github/luca16s/gamesavemanager/badge)](https://www.codefactor.io/repository/github/luca16s/gamesavemanager)|[![Build Status](https://dev.azure.com/DeadFishStudio/GameSaveManager/_apis/build/status/GameSaveManager?branchName=%2310)](https://dev.azure.com/DeadFishStudio/GameSaveManager/_build/latest?definitionId=19&branchName=%2310)|![GameSaveManager-CI](https://github.com/luca16s/GameSaveManager/workflows/GameSaveManager-CI/badge.svg?branch=main)|
