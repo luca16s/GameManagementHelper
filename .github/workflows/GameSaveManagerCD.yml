@@ -94,7 +94,7 @@ jobs:
       run: |
         $currentDirectory = Get-Location
         $certificate = Join-Path -Path $currentDirectory -ChildPath $env:Wap_Project_Directory -AdditionalChildPath $env:SigningCertificate
-        Remove-Item -path Remove-Item -path $certificate
+        Remove-Item -path $certificate
 
     - name: Create archive
       run: Compress-Archive -Path $env:Wap_Project_Directory\$env:App_Packages_Directory\* -DestinationPath $env:Wap_Project_Directory\$env:App_Packages_Directory\$env:App_Packages_Archive
