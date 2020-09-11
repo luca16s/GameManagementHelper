@@ -2,8 +2,7 @@ name:  GameSaveManager-CD
 
 on:
   push:
-    tags:
-      - '*'
+    branches: [ main ]
 
 jobs:
 
@@ -11,12 +10,12 @@ jobs:
 
     strategy:
       matrix:
-        channel: [Prod_Sideload]
+        channel: [Production]
         targetPlatform: [x86]
         include:
-          - channel: Prod_Sideload
+          - channel: Production
             Configuration: Release
-            ChannelName: Prod_Sideload
+            ChannelName: Production
             DistributionUrl: https://luca16s.github.io/GameSaveManager/
             MsixPackageId: DeadFishStudio.GameSaveManager.Production
             MsixPublisherId: CN=GameSaveManager
@@ -25,7 +24,7 @@ jobs:
     runs-on: windows-latest
 
     env:
-      App_Packages_Archive: AppPackages.zip
+      App_Packages_Archive: GameSaveManagerApplication.zip
       App_Packages_Directory: AppPackages
       SigningCertificate: GameSaveManager.Package_TemporaryKey.pfx
       Solution_Path: GameSaveManager.sln
@@ -105,8 +104,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref}}.${{matrix.ChannelName}}.${{ matrix.targetplatform }}
-        release_name:  ${{ github.ref }}.${{ matrix.ChannelName }}.${{ matrix.targetplatform }}
+        tag_name: ${{ $env:NBGV_SimpleVersion }}.${{ matrix.ChannelName }}.${{ matrix.targetplatform }}
+        release_name:  ${{ $env:NBGV_SimpleVersion }}.${{ matrix.ChannelName }}.${{ matrix.targetplatform }}
         draft: false
         prerelease: false
 
