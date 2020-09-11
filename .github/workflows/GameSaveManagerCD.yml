@@ -104,8 +104,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ $env:NBGV_SimpleVersion }}.${{ matrix.ChannelName }}.${{ matrix.targetplatform }}
-        release_name:  ${{ $env:NBGV_SimpleVersion }}.${{ matrix.ChannelName }}.${{ matrix.targetplatform }}
+        tag_name: ${{ github.ref }}.${{ matrix.ChannelName }}.${{ matrix.targetplatform }}
+        release_name:  ${{ github.ref }}.${{ matrix.ChannelName }}.${{ matrix.targetplatform }}
         draft: false
         prerelease: false
 
