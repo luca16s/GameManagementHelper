@@ -2,7 +2,7 @@
 
 namespace GameSaveManager.Core.Enums
 {
-    public enum BackupSaveType
+    public enum EBackupSaveType
     {
         [Description("bak")]
         BakFile,

@@ -11,9 +11,9 @@ namespace GameSaveManager.DesktopApp.ViewModel
             Application.Current.Properties["BACKUP_TYPE"] = BackupSaveType;
         }
 
-        private DriveServicesEnum _DriveServiceSelected;
+        private EDriveServicesEnum _DriveServiceSelected;
 
-        public DriveServicesEnum DriveServiceSelected
+        public EDriveServicesEnum DriveServiceSelected
         {
             get => _DriveServiceSelected;
             set
@@ -25,9 +25,9 @@ namespace GameSaveManager.DesktopApp.ViewModel
             }
         }
 
-        private BackupSaveType _backupSaveType;
+        private EBackupSaveType _backupSaveType;
 
-        public BackupSaveType BackupSaveType
+        public EBackupSaveType BackupSaveType
         {
             get => _backupSaveType;
             set

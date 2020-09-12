@@ -2,7 +2,7 @@
 
 namespace GameSaveManager.Core.Enums
 {
-    public enum DriveServicesEnum
+    public enum EDriveServicesEnum
     {
         [Description("Dropbox")]
         Dropbox,

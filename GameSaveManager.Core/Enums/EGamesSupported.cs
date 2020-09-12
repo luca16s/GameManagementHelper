@@ -2,7 +2,7 @@
 
 namespace GameSaveManager.Core.Enums
 {
-    public enum GamesSupported
+    public enum EGamesSupported
     {
         [Description("Nenhum")]
         None,

@@ -7,12 +7,12 @@ namespace GameSaveManager.Core.Services
 {
     public class BackupFactory : IFactory<IBackupStrategy>
     {
-        public IBackupStrategy Create(BackupSaveType saveType)
+        public IBackupStrategy Create(EBackupSaveType saveType)
         {
             return saveType switch
             {
-                BackupSaveType.BakFile => new BakBackupStrategy(),
-                BackupSaveType.ZipFile => new ZipBackupStrategy(),
+                EBackupSaveType.BakFile => new BakBackupStrategy(),
+                EBackupSaveType.ZipFile => new ZipBackupStrategy(),
                 _ => throw new InvalidOperationException(Properties.Resources.ErrorSaveNotSupported),
             };
         }

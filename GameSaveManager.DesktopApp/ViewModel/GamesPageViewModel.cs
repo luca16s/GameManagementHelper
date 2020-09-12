@@ -26,8 +26,8 @@ namespace GameSaveManager.DesktopApp.ViewModel
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;
 
-        private bool CanUpload => GamesSupported != GamesSupported.None;
-        private bool CanDownload => GamesSupported != GamesSupported.None;
+        private bool CanUpload => GamesSupported != EGamesSupported.None;
+        private bool CanDownload => GamesSupported != EGamesSupported.None;
 
         public ICommand UploadCommand
             => _UploadCommand
@@ -62,9 +62,9 @@ namespace GameSaveManager.DesktopApp.ViewModel
             }
         }
 
-        private GamesSupported _GamesSupported;
+        private EGamesSupported _GamesSupported;
 
-        public GamesSupported GamesSupported
+        public EGamesSupported GamesSupported
         {
             get => _GamesSupported;
             set
@@ -84,7 +84,7 @@ namespace GameSaveManager.DesktopApp.ViewModel
         {
             using var DriveConnectionClient = (DropboxClient)Application.Current.Properties["CLIENT"];
 
-            var backupType = (BackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
+            var backupType = (EBackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
             BackupStrategy = BackupFactory.Create(backupType);
 
             if (DriveConnectionClient != null) return new DropboxOperations(BackupStrategy, DriveConnectionClient);
