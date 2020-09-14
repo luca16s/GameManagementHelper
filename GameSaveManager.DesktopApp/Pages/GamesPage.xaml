@@ -112,21 +112,39 @@
                Margin="0, 5, 0, 5"
                Stretch="Uniform"
                Source="{Binding Path=ImagePath}" />
-        <Button Grid.Column="0"
-                Grid.Row="2"
+        <Grid Grid.Row="2"
+              Grid.Column="0"
+              Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Text="{Binding Path=SaveName}"
+                     Margin="0, 1, 0, 1"
+                     MaxLength="300" />
+            <Button Grid.Column="0"
+                Grid.Row="1"
                 Margin="0, 0, 2.5, 0"
                 Command="{Binding Path=UploadCommand}"
                 Template="{StaticResource DefaultButton}"
                 Style="{StaticResource ButtonDesign}">
-            <DynamicResource ResourceKey="UploadIcon" />
-        </Button>
-        <Button Grid.Column="1"
-                Grid.Row="2"
+                <DynamicResource ResourceKey="UploadIcon" />
+            </Button>
+            <Button Grid.Column="1"
+                Grid.Row="1"
                 Margin="2.5, 0, 0, 0"
                 Command="{Binding Path=DownloadCommand}"
                 Template="{StaticResource DefaultButton}"
                 Style="{StaticResource ButtonDesign}">
-            <DynamicResource ResourceKey="DownloadIcon" />
-        </Button>
+                <DynamicResource ResourceKey="DownloadIcon" />
+            </Button>
+        </Grid>
     </Grid>
 </Page>
