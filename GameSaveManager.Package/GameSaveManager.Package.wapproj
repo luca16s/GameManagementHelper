@@ -52,11 +52,12 @@
   <PropertyGroup>
     <ProjectGuid>cd79e929-85a0-43c7-8e3c-42b6a12635ac</ProjectGuid>
     <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+    <DefaultLanguage>pt-BR</DefaultLanguage>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <EntryPointProjectUniqueName>..\GameSaveManager.DesktopApp\GameSaveManager.DesktopApp.csproj</EntryPointProjectUniqueName>
     <PackageCertificateThumbprint>8F98EA0DF4848832B2F64B337EE8D7B86C043235</PackageCertificateThumbprint>
+    <EntryPointProjectUniqueName>..\GameSaveManager.DesktopApp\GameSaveManager.DesktopApp.csproj</EntryPointProjectUniqueName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <DefaultLanguage>pt-BR</DefaultLanguage>
