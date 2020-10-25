@@ -80,6 +80,18 @@ namespace GameSaveManager.DesktopApp.ViewModel
             }
         }
 
+        private string _SaveName;
+        public string SaveName
+        {
+            get => _SaveName;
+            set
+            {
+                if (_SaveName == value) return;
+                _SaveName = value;
+                OnPropertyChanged(nameof(SaveName));
+            }
+        }
+
         private ICloudOperations GetConnectionClient()
         {
             using var DriveConnectionClient = (DropboxClient)Application.Current.Properties["CLIENT"];
