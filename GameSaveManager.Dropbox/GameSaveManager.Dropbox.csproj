@@ -1,39 +1,41 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
     <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     <Authors>Dead Fish Studio</Authors>
-    <Product>GameSaveManager</Product>
+    <Company>Dead Fish Studio</Company>
+    <Product>Game Save Manager</Product>
     <AssemblyName>GameSaveManager.Dropbox</AssemblyName>
-    <NeutralLanguage>Portuguese (Brazil)</NeutralLanguage>
+    <NeutralLanguage>pt-BR</NeutralLanguage>
     <Nullable>disable</Nullable>
     <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
     <PackageProjectUrl>https://luca16s.github.io/GameSaveManager/</PackageProjectUrl>
+    <Copyright>Game Save Manager © Dead Fish Studio</Copyright>
+    <Description>Aplicação para gerenciar saves de jogos.</Description>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <StyleCopTreatErrorsAsWarnings>True</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Dropbox.Api" Version="5.0.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
+    <PackageReference Include="Dropbox.Api" Version="5.5.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.2.31">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
   </ItemGroup>
-
 </Project>
