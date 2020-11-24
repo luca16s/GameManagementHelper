@@ -39,10 +39,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    - uses: dotnet/nbgv@master
-      with:
-        stamp: package.json
-
     - name: Install .NET Core
       uses: actions/setup-dotnet@v1
       with:
