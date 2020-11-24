@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         channel: [Production]
-        targetPlatform: [x86]
+        targetPlatform: [x64]
         include:
           - channel: Production
             Configuration: Release
