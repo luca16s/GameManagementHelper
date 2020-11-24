@@ -39,10 +39,8 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Use Nerdbank.GitVersioning to set version variables
-      uses: aarnott/nbgv@v0.3.1
-      with:
-        setAllVars: true
+    - name: Nerdbank.GitVersioning
+      uses: dotnet/nbgv@v0.3.1
 
     - name: Install .NET Core
       uses: actions/setup-dotnet@v1
