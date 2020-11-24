@@ -46,7 +46,7 @@ jobs:
     - name: Restore the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
       env:
-        Configuration: Debug
+        Configuration: Release
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
 
     - name: Decode the pfx
@@ -64,7 +64,7 @@ jobs:
       env:
         AppxBundle: Never
         BuildMode: SideloadOnly
-        Configuration: Debug
+        Configuration: Release
         TargetPlatform: ${{ matrix.targetplatform }}
 
     - name: Remove the pfx
