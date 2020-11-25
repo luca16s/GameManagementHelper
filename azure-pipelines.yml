@@ -26,8 +26,3 @@ steps:
     command: 'build'
     projects: 'GameSaveManager.DesktopApp\GameSaveManager.DesktopApp.csproj'
     configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
