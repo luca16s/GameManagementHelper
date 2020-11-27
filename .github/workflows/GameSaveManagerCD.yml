@@ -45,7 +45,7 @@ jobs:
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v1
       with:
-        vs-version: '[16.4,16.9.0-preview-20529-04+ab5acfbe6)'
+        vs-version: '[16.4,16.9.0)'
 
     - name: Update manifest version
       run: |
