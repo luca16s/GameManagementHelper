@@ -1,19 +1,19 @@
-﻿using Dropbox.Api;
-
-using GameSaveManager.Core.Interfaces;
-using GameSaveManager.Core.Models;
-using GameSaveManager.DesktopApp.Commands;
-using GameSaveManager.DesktopApp.Properties;
-using GameSaveManager.Dropbox;
-
-using Microsoft.Extensions.Options;
-
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-
-namespace GameSaveManager.DesktopApp.ViewModel
+﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
+    using global::Dropbox.Api;
+
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
+    using GameSaveManager.DesktopApp.Commands;
+    using GameSaveManager.DesktopApp.Properties;
+    using GameSaveManager.Dropbox;
+
+    using Microsoft.Extensions.Options;
+
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Input;
+
     public class AccountPageViewModel : ViewModelBase
     {
         private readonly IConnection DropboxConnection;
