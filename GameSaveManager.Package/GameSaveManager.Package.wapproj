@@ -114,7 +114,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DeadFishStudio.pfx" />
+    <None Include="DeadFishStudio.pfx" />
     <Content Include="Images\BadgeLogo.scale-100.png" />
     <Content Include="Images\BadgeLogo.scale-125.png" />
     <Content Include="Images\BadgeLogo.scale-150.png" />
