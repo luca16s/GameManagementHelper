@@ -36,5 +36,9 @@ namespace GameSaveManager.Windows
         {
             MainFrame.Navigate(SettingsPage);
         }
+
+        private void OpenAboutPage(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }
