@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Text;
 using System.Windows;
 
@@ -35,7 +34,7 @@ namespace GameSaveManager.Windows
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("gamelist.json", false, true);
 
-            builder.AddUserSecrets<App>();
+            _ = builder.AddUserSecrets<App>();
 
             Configuration = builder.Build();
 
@@ -52,26 +51,27 @@ namespace GameSaveManager.Windows
 
         private void ConfigureServices(ServiceCollection servicesCollection, bool isFastConnectionEnable)
         {
-            servicesCollection.AddTransient(typeof(GamesPage));
-            servicesCollection.AddTransient(typeof(MainWindow));
-            servicesCollection.AddTransient(typeof(AccountPage));
-            servicesCollection.AddTransient(typeof(SettingsPage));
-            servicesCollection.AddTransient(typeof(GamesPageViewModel));
-            servicesCollection.AddTransient(typeof(AccountPageViewModel));
-            servicesCollection.AddTransient(typeof(SettingsPageViewModel));
-            servicesCollection.AddTransient<IFactory<IBackupStrategy>, BackupFactory>();
+            _ = servicesCollection.AddTransient(typeof(AboutPage));
+            _ = servicesCollection.AddTransient(typeof(GamesPage));
+            _ = servicesCollection.AddTransient(typeof(MainWindow));
+            _ = servicesCollection.AddTransient(typeof(AccountPage));
+            _ = servicesCollection.AddTransient(typeof(SettingsPage));
+            _ = servicesCollection.AddTransient(typeof(GamesPageViewModel));
+            _ = servicesCollection.AddTransient(typeof(AccountPageViewModel));
+            _ = servicesCollection.AddTransient(typeof(SettingsPageViewModel));
+            _ = servicesCollection.AddTransient<IFactory<IBackupStrategy>, BackupFactory>();
 
-            servicesCollection.Configure<Secrets>(secret =>
-            {
-                secret.AppKey = Configuration.GetSection(key: nameof(Secrets.AppKey)).Value;
-                secret.AppSecret = Configuration.GetSection(key: nameof(Secrets.AppSecret)).Value;
-                secret.AppToken = (Debugger.IsAttached && isFastConnectionEnable)
-                           ? Configuration.GetSection(key: nameof(Secrets.AppToken)).Value
-                           : string.Empty;
-            });
+            _ = servicesCollection.Configure<Secrets>(secret =>
+              {
+                  secret.AppKey = Configuration.GetSection(key: nameof(Secrets.AppKey)).Value;
+                  secret.AppSecret = Configuration.GetSection(key: nameof(Secrets.AppSecret)).Value;
+                  secret.AppToken = (Debugger.IsAttached && isFastConnectionEnable)
+                             ? Configuration.GetSection(key: nameof(Secrets.AppToken)).Value
+                             : string.Empty;
+              });
 
-            servicesCollection.Configure<List<GameInformationModel>>(gameInformation => Configuration
-                .GetSection(key: nameof(GameInformationModel)).Bind(gameInformation));
+            _ = servicesCollection.Configure<List<GameInformationModel>>(gameInformation => Configuration
+                  .GetSection(key: nameof(GameInformationModel)).Bind(gameInformation));
         }
     }
 }

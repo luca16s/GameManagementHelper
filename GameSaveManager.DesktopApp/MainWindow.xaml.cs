@@ -12,14 +12,16 @@ namespace GameSaveManager.Windows
         private readonly AccountPage AccountPage;
         private readonly GamesPage GamesPage;
         private readonly SettingsPage SettingsPage;
+        private readonly AboutPage AboutPage;
 
-        public MainWindow(AccountPage accountPage, GamesPage gamesPage, SettingsPage settingsPage)
+        public MainWindow(AccountPage accountPage, GamesPage gamesPage, SettingsPage settingsPage, AboutPage aboutPage)
         {
             InitializeComponent();
 
             AccountPage = accountPage;
             GamesPage = gamesPage;
             SettingsPage = settingsPage;
+            AboutPage = aboutPage;
         }
 
         private void AccountButton_Click(object sender, RoutedEventArgs e)
@@ -39,6 +41,7 @@ namespace GameSaveManager.Windows
 
         private void OpenAboutPage(object sender, RoutedEventArgs e)
         {
+            MainFrame.Navigate(AboutPage);
         }
     }
 }
