@@ -29,16 +29,11 @@ namespace GameSaveManager.Core.Utils
             return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         }
 
-        public static bool CheckFileExistence(string path)
-        {
-            return File.Exists(path);
-        }
-
         public static bool DeleteCreatedFile(string path)
         {
-            if (CheckFileExistence(path)) File.Delete(path);
+            if (File.Exists(path)) File.Delete(path);
 
-            return !CheckFileExistence(path) || DeleteCreatedFile(path);
+            return !File.Exists(path) || DeleteCreatedFile(path);
         }
     }
 }
