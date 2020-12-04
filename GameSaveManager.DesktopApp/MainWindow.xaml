@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Icon="resources/game_icon.png"
         SizeToContent="WidthAndHeight"
-        MinWidth="144"
+        MinWidth="500"
         ResizeMode="CanMinimize"
         Title="Game Save Manager"
         Style="{DynamicResource FundoJanela}">
@@ -178,7 +178,7 @@
             x:Name="MainFrame"
             Grid.Row="3"
             Grid.Column="0"
-            Grid.ColumnSpan="3"
+            Grid.ColumnSpan="4"
             NavigationUIVisibility="Hidden"
             Margin="10, 10, 10, 10" />
     </Grid>

@@ -58,10 +58,9 @@ namespace GameSaveManager.DesktopApp.ViewModel
                 : _ImagePath;
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(ImagePath), "Imagem não pode ser nula.");
+                value ??= string.Empty;
 
-                if (_ImagePath.Equals(value.ToString())) return;
+                if (value.ToString().Equals(_ImagePath)) return;
                 _ImagePath = value.ToString();
                 OnPropertyChanged(nameof(ImagePath));
             }

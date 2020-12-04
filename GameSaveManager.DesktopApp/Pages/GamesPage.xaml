@@ -4,10 +4,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:enumConverter="clr-namespace:GameSaveManager.DesktopApp.Converter"
-      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties" xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:GamesPageViewModel}"
       mc:Ignorable="d"
-      d:DesignHeight="450"
-      d:DesignWidth="800"
       Title="Games"
       Style="{DynamicResource FundoPagina}">
     <Page.Resources>
@@ -88,7 +87,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="215" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -110,7 +109,9 @@
                Grid.Column="0"
                Grid.ColumnSpan="2"
                Margin="0, 5, 0, 5"
-               Stretch="Uniform"
+               Stretch="UniformToFill"
+               Width="460"
+               Height="215"
                Source="{Binding Path=ImagePath}" />
         <Button Grid.Column="0"
                 Grid.Row="2"
