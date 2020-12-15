@@ -7,7 +7,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Dead Fish Studio</Authors>
     <Product>Game Save Manager</Product>
-    <ApplicationIcon>ico.ico</ApplicationIcon>
+    <ApplicationIcon>black.ico</ApplicationIcon>
     <PackageIcon>game_icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
