@@ -74,14 +74,11 @@
     <None Remove="resources\game_black.png" />
     <None Remove="resources\game_white.png" />
     <None Remove="resources\google.png" />
+    <None Remove="resources\ico_black.png" />
+    <None Remove="resources\ico_white.png" />
     <None Remove="resources\settings_applications_black.png" />
     <None Remove="resources\settings_applications_white.png" />
     <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>
-      </PackagePath>
-    </None>
-    <None Include="resources\game_icon.png">
       <Pack>True</Pack>
       <PackagePath>
       </PackagePath>
@@ -139,9 +136,6 @@
     <Content Include="gamelist.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\game_icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
@@ -168,6 +162,8 @@
     <Resource Include="resources\actions\upload_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resources\ico_black.png" />
+    <Resource Include="resources\ico_white.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

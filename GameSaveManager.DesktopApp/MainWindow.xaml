@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
         mc:Ignorable="d"
-        Icon="resources/game_icon.png"
+        Icon="resources/ico_black.png"
         SizeToContent="WidthAndHeight"
         MinWidth="500"
         ResizeMode="CanMinimize"
