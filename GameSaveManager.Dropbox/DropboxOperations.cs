@@ -30,7 +30,7 @@ namespace GameSaveManager.Dropbox
             var fileList = await ListFolderContent(gameInformation.OnlineSaveFolder.TrimEnd('/')).ConfigureAwait(true);
 
             var fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile
-                                                                 && save.Name.Equals(gameInformation.BuildSaveName(), StringComparison.InvariantCultureIgnoreCase));
+            && save.Name.Equals(gameInformation.BuildSaveName(), StringComparison.InvariantCultureIgnoreCase));
 
             if (fileFound is null) return false;
 
@@ -66,8 +66,8 @@ namespace GameSaveManager.Dropbox
             }
             finally
             {
-                if (FileSystemUtils.CheckFileExistence(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName())))
-                    FileSystemUtils.DeleteCreatedFile(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()));
+                if (File.Exists(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName())))
+                    _ = FileSystemUtils.DeleteCreatedFile(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()));
             }
         }
 

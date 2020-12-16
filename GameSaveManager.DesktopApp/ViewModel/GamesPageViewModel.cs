@@ -51,13 +51,17 @@ namespace GameSaveManager.DesktopApp.ViewModel
 
         private string _ImagePath;
 
-        public string ImagePath
+        public object ImagePath
         {
-            get => _ImagePath;
+            get => string.IsNullOrWhiteSpace(_ImagePath)
+                ? DependencyProperty.UnsetValue
+                : _ImagePath;
             set
             {
-                if (_ImagePath == value) return;
-                _ImagePath = value;
+                value ??= string.Empty;
+
+                if (value.ToString().Equals(_ImagePath)) return;
+                _ImagePath = value.ToString();
                 OnPropertyChanged(nameof(ImagePath));
             }
         }

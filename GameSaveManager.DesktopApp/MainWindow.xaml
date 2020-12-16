@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
         mc:Ignorable="d"
-        Icon="resources/game_icon.png"
+        Icon="resources/ico_black.png"
         SizeToContent="WidthAndHeight"
-        MinWidth="144"
+        MinWidth="500"
         ResizeMode="CanMinimize"
         Title="Game Save Manager"
         Style="{DynamicResource FundoJanela}">
@@ -33,23 +33,6 @@
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
                             <Setter Property="Source" Value="resources/actions/account_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-        <Image x:Key="BackupIcon"
-               Height="96"
-               Width="96"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="resources/actions/backup_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="resources/actions/backup_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -84,6 +67,23 @@
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
                             <Setter Property="Source" Value="resources/actions/settings_black.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image x:Key="AboutIcon"
+               Height="96"
+               Width="96"
+               Stretch="UniformToFill"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="resources/actions/info_white.png" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                            <Setter Property="Source" Value="resources/actions/info_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -127,6 +127,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
@@ -137,7 +138,7 @@
             Grid.Column="0"
             Grid.Row="0"
             Name="AccountButton"
-            ToolTip="Botão para realizar Conexão com serviço de Armazenamento Online."
+            ToolTip="Conexão com serviço de Armazenamento Online."
             Click="AccountButton_Click"
             Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
@@ -148,7 +149,7 @@
             Grid.Row="0"
             Name="GamesButton"
             Click="OpenGamesListPage"
-            ToolTip="Abre a lista de Jogos disponíveis."
+            ToolTip="Jogos Disponíveis."
             Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
             <DynamicResource ResourceKey="GamesIcon" />
@@ -158,16 +159,26 @@
             Grid.Row="0"
             Name="SettingsButton"
             Click="OpenSettingsPage"
-            ToolTip="Botão de Configurações."
+            ToolTip="Configurações."
             Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
             <DynamicResource ResourceKey="SettingsIcon" />
+        </Button>
+        <Button
+            Grid.Column="3"
+            Grid.Row="0"
+            Name="AboutButton"
+            Click="OpenAboutPage"
+            ToolTip="Informações."
+            Template="{StaticResource DefaultButton}"
+            Style="{DynamicResource ButtonDesign}">
+            <DynamicResource ResourceKey="AboutIcon" />
         </Button>
         <Frame
             x:Name="MainFrame"
             Grid.Row="3"
             Grid.Column="0"
-            Grid.ColumnSpan="3"
+            Grid.ColumnSpan="4"
             NavigationUIVisibility="Hidden"
             Margin="10, 10, 10, 10" />
     </Grid>

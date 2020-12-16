@@ -7,7 +7,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Dead Fish Studio</Authors>
     <Product>Game Save Manager</Product>
-    <ApplicationIcon>ico.ico</ApplicationIcon>
+    <ApplicationIcon>black.ico</ApplicationIcon>
     <PackageIcon>game_icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -21,7 +21,7 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>DeadFishStudio.pfx</AssemblyOriginatorKeyFile>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <Description>Aplicação para gerenciar saves de jogos.</Description>
     <AnalysisLevel>latest</AnalysisLevel>
     <StyleCopTreatErrorsAsWarnings>True</StyleCopTreatErrorsAsWarnings>
@@ -44,6 +44,9 @@
     <None Remove="resources\actions\clear_all_white.png" />
     <None Remove="resources\actions\download_black.png" />
     <None Remove="resources\actions\download_white.png" />
+    <None Remove="resources\actions\github_black.png" />
+    <None Remove="resources\actions\github_white.png" />
+    <None Remove="resources\actions\in.png" />
     <None Remove="resources\actions\info_black.png" />
     <None Remove="resources\actions\info_white.png" />
     <None Remove="resources\actions\login_black.png" />
@@ -74,14 +77,11 @@
     <None Remove="resources\game_black.png" />
     <None Remove="resources\game_white.png" />
     <None Remove="resources\google.png" />
+    <None Remove="resources\ico_black.png" />
+    <None Remove="resources\ico_white.png" />
     <None Remove="resources\settings_applications_black.png" />
     <None Remove="resources\settings_applications_white.png" />
     <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>
-      </PackagePath>
-    </None>
-    <None Include="resources\game_icon.png">
       <Pack>True</Pack>
       <PackagePath>
       </PackagePath>
@@ -104,6 +104,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\actions\download_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\github_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\github_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\in.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\actions\info_black.png">
@@ -139,13 +148,6 @@
     <Content Include="gamelist.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\game_icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
@@ -172,6 +174,8 @@
     <Resource Include="resources\actions\upload_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resources\ico_black.png" />
+    <Resource Include="resources\ico_white.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
