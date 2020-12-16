@@ -44,6 +44,9 @@
     <None Remove="resources\actions\clear_all_white.png" />
     <None Remove="resources\actions\download_black.png" />
     <None Remove="resources\actions\download_white.png" />
+    <None Remove="resources\actions\github_black.png" />
+    <None Remove="resources\actions\github_white.png" />
+    <None Remove="resources\actions\in.png" />
     <None Remove="resources\actions\info_black.png" />
     <None Remove="resources\actions\info_white.png" />
     <None Remove="resources\actions\login_black.png" />
@@ -101,6 +104,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\actions\download_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\github_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\github_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\actions\in.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\actions\info_black.png">

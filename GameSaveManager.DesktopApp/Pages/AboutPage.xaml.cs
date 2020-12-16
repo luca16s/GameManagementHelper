@@ -1,5 +1,7 @@
 ﻿namespace GameSaveManager.DesktopApp.Pages
 {
+    using GameSaveManager.DesktopApp.ViewModel;
+
     using System.Windows.Controls;
 
     /// <summary>
@@ -10,6 +12,7 @@
         public AboutPage()
         {
             InitializeComponent();
+            DataContext = new AboutViewModel();
         }
     }
 }

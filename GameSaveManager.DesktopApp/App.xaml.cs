@@ -56,6 +56,7 @@ namespace GameSaveManager.Windows
             _ = servicesCollection.AddTransient(typeof(MainWindow));
             _ = servicesCollection.AddTransient(typeof(AccountPage));
             _ = servicesCollection.AddTransient(typeof(SettingsPage));
+            _ = servicesCollection.AddTransient(typeof(AboutViewModel));
             _ = servicesCollection.AddTransient(typeof(GamesPageViewModel));
             _ = servicesCollection.AddTransient(typeof(AccountPageViewModel));
             _ = servicesCollection.AddTransient(typeof(SettingsPageViewModel));
