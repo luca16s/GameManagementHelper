@@ -58,10 +58,10 @@
                HorizontalAlignment="Center">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/github_black.png" />
+                    <Setter Property="Source" Value="../resources/actions/github_white.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/github_white.png" />
+                            <Setter Property="Source" Value="../resources/actions/github_black.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -78,7 +78,7 @@
                     <Setter Property="Source" Value="../resources/actions/in.png" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/github_black.png" />
+                            <Setter Property="Source" Value="../resources/actions/in.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
