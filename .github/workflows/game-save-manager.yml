@@ -11,6 +11,7 @@ jobs:
         configuration: [Debug, Release]
     runs-on: windows-latest
     env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       Solution_Name: GameSaveManager.sln
       Wap_Project_Directory: GameSaveManager.Package
       Wap_Project_Path: GameSaveManager.Package\GameSaveManager.Package.wapproj
