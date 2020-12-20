@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <Authors>Dead Fish Studio</Authors>
     <Product>Game Save Manager</Product>
     <NeutralLanguage>Portuguese (Brazil)</NeutralLanguage>
