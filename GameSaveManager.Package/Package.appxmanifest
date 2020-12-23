@@ -7,13 +7,13 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="d32dbed3-3dea-415c-bae0-2c25fb11fecd"
-    Publisher="CN=Dead Fish Studio"
-    Version="1.0.6.0" />
+    Name="24011DeadFishStudio.GameSaveManager"
+    Publisher="CN=3004DAD2-BE67-4009-A3FC-C134400F1217"
+    Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>GameSaveManager.Package</DisplayName>
-    <PublisherDisplayName>lucag</PublisherDisplayName>
+    <DisplayName>Game Save Manager</DisplayName>
+    <PublisherDisplayName>Dead Fish Studio</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
@@ -31,20 +31,14 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="GameSaveManager"
-        Description="Game Save Manager"
-        BackgroundColor="transparent" Square150x150Logo="Images\Square150x150Logo.png" Square44x44Logo="Images\Square44x44Logo.png">
-        <uap:DefaultTile  ShortName="icon" Square71x71Logo="Images\SmallTile.png" Wide310x150Logo="Images\Wide310x150Logo.png" Square310x310Logo="Images\LargeTile.png">
-          <uap:ShowNameOnTiles>
-            <uap:ShowOn Tile="square150x150Logo"/>
-            <uap:ShowOn Tile="wide310x150Logo"/>
-            <uap:ShowOn Tile="square310x310Logo"/>
-          </uap:ShowNameOnTiles>
-        </uap:DefaultTile >
+        DisplayName="Game Save Manager"
+        BackgroundColor="transparent"
+        Square150x150Logo="Images\Square150x150Logo.png"
+        Square44x44Logo="Images\Square44x44Logo.png" Description="Aplicação para realizar backup de saves na nuvem.">
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png"/>
+        <uap:SplashScreen Image="Images\SplashScreen.png" />
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
-        <uap:LockScreen BadgeLogo="Images\BadgeLogo.png" Notification="badge"/>
-        <uap:SplashScreen Image="Images\SplashScreen.png"/>
       </uap:VisualElements>
     </Application>
   </Applications>
