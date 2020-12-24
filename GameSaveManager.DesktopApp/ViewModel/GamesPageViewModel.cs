@@ -26,16 +26,15 @@ namespace GameSaveManager.DesktopApp.ViewModel
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;
 
-        private bool CanUpload => GamesSupported != GamesSupported.None;
-        private bool CanDownload => GamesSupported != GamesSupported.None;
+        private bool CanExecute => GamesSupported != GamesSupported.None;
 
         public ICommand UploadCommand
             => _UploadCommand
-            ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave().ConfigureAwait(true), _ => CanUpload);
+            ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave().ConfigureAwait(true), _ => CanExecute);
 
         public ICommand DownloadCommand
             => _DownloadCommand
-            ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanDownload);
+            ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanExecute);
 
         private GameInformationModel GameInformation;
         private readonly List<GameInformationModel> GameInformationList;
@@ -78,9 +77,33 @@ namespace GameSaveManager.DesktopApp.ViewModel
                 _GamesSupported = value;
 
                 GameInformation = GameInformationList.Find(game => string.Equals(value.ToString(), game.Name, StringComparison.InvariantCultureIgnoreCase));
+
                 ImagePath = GameInformation?.CoverPath;
 
+                SaveName = string.Empty;
+
                 OnPropertyChanged(nameof(GamesSupported));
+            }
+        }
+
+        private string _SaveName;
+
+        public string SaveName
+        {
+            get
+            {
+                if (CanExecute)
+                    return _SaveName;
+
+                return string.Empty;
+            }
+            set
+            {
+                if (_SaveName == value) return;
+
+                _SaveName = GameInformation?.BuildSaveName(value);
+
+                OnPropertyChanged(nameof(SaveName));
             }
         }
 
