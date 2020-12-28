@@ -7,12 +7,12 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="06672c97-5bc4-4cf6-b88d-c81393abda0a"
-    Publisher="CN=Dead Fish Studio"
-    Version="1.0.16.0" />
+    Name="24011DeadFishStudio.GameSaveManager"
+    Publisher="CN=3004DAD2-BE67-4009-A3FC-C134400F1217"
+    Version="1.0.20.0" />
 
   <Properties>
-    <DisplayName>GameSaveManager</DisplayName>
+    <DisplayName>Game Save Manager</DisplayName>
     <PublisherDisplayName>Dead Fish Studio</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
@@ -47,5 +47,6 @@
 
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
+    <Capability Name="internetClientServer"/>
   </Capabilities>
 </Package>
