@@ -22,12 +22,6 @@ steps:
     version: '5.0.x'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Restaura os pacotes'
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-
-- task: DotNetCoreCLI@2
   displayName: 'Constrói os projetos.'
   inputs:
     command: 'build'
@@ -42,7 +36,6 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
