@@ -22,12 +22,13 @@ steps:
     version: '5.0.x'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Restaura os pacotes'
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: Build
+  displayName: 'Constrói os projetos.'
   inputs:
     command: 'build'
     projects: '**\*.csproj'
@@ -37,7 +38,7 @@ steps:
   displayName: 'Cria o artefato'
   inputs:
     command: publish
-    publishWebProjects: True
+    publishWebProjects: False
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
