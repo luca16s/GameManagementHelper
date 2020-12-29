@@ -32,6 +32,7 @@ steps:
   displayName: 'Cria o artefato'
   inputs:
     command: publish
+    publishWebProjects: False
     arguments: '--configuration $(buildConfiguration) --output $(build.artifactstagingdirectory) --self-contained true --runtime win-x64'
     zipAfterPublish: True
 
