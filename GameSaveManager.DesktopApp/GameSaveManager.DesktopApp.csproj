@@ -10,7 +10,7 @@
     <ApplicationIcon>black.ico</ApplicationIcon>
     <PackageIcon>game_icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <Copyright>Game Save Manager © Dead Fish Studio</Copyright>
     <AssemblyName>GameSaveManager</AssemblyName>
     <StartupObject>GameSaveManager.Windows.App</StartupObject>
@@ -22,18 +22,29 @@
     <AssemblyOriginatorKeyFile>DeadFishStudio.pfx</AssemblyOriginatorKeyFile>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <Description>Aplicação para gerenciar saves de jogos.</Description>
+    <Description>Aplicativo para realizar o upload e download de saves de jogos que não possuam Auto Save na nuvem.</Description>
     <AnalysisLevel>latest</AnalysisLevel>
     <StyleCopTreatErrorsAsWarnings>True</StyleCopTreatErrorsAsWarnings>
+    <Platforms>AnyCPU;x64</Platforms>
+    <PackageId>GameSaveManager.DesktopApp</PackageId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
     <DefineConstants></DefineConstants>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Optimize>false</Optimize>
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>x86</PlatformTarget>
     <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="gamelist.json" />
@@ -81,7 +92,7 @@
     <None Remove="resources\ico_white.png" />
     <None Remove="resources\settings_applications_black.png" />
     <None Remove="resources\settings_applications_white.png" />
-    <None Include="..\LICENSE">
+    <None Include="..\LICENSE.md">
       <Pack>True</Pack>
       <PackagePath>
       </PackagePath>
