@@ -12,6 +12,14 @@
       Title="Sobre">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
+        <Style x:Key="Fonte" TargetType="Label">
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Foreground" Value="#3F3F3F" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
             <Setter Property="Background" Value="#3F3F3F" />
             <Style.Triggers>
@@ -89,14 +97,30 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-       <Button
+        <Label
+            Grid.Row="0"
+            Content="Desenvolvido por Gian Luca da Silva Figueiredo"
+            FontSize="15"
+            Style="{DynamicResource Fonte}" />
+        <Label
             Grid.Row="1"
-            Grid.Column="0"
+            Grid.Column="2"
+            Content="Social"
+            FontSize="14"
+            Style="{DynamicResource Fonte}" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="2"
             x:Name="linkedin"
             Template="{StaticResource DefaultButton}"
             Style="{StaticResource ButtonDesign}"
@@ -104,8 +128,8 @@
             <DynamicResource ResourceKey="linkedin_Icon"/>
         </Button>
         <Button
-            Grid.Row="1"
-            Grid.Column="1"
+            Grid.Row="3"
+            Grid.Column="3"
             x:Name="github"
             Template="{StaticResource DefaultButton}"
             Style="{StaticResource ButtonDesign}"
