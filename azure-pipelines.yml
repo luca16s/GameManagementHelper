@@ -19,14 +19,22 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
+    restoreArguments: '-r win-x64'
     projects: '**/*.csproj'
     feedsToUse: 'select'
     noCache: true
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '-r=win-x64'
 
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
+    msbuildArgs: '-r=win-x64'
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
