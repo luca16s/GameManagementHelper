@@ -11,7 +11,7 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'x64'
+  buildPlatform: 'win-x64'
   buildConfiguration: 'Release'
 
 steps:
@@ -29,13 +29,6 @@ steps:
     command: 'build'
     projects: '**/*.csproj'
     arguments: '-r=win-x64'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    msbuildArgs: '-r=win-x64'
-    configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
   inputs:
