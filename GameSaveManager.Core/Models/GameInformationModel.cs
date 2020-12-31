@@ -1,5 +1,10 @@
 ﻿namespace GameSaveManager.Core.Models
 {
+    using System;
+
+    using GameSaveManager.Core.Enums;
+    using GameSaveManager.Core.Utils;
+
     public class GameInformationModel
     {
         public string CoverPath { get; set; }
@@ -17,18 +22,28 @@
 
         public string BuildSaveName(string saveName)
         {
+            string extension = string.IsNullOrWhiteSpace(SaveBackupExtension)
+                ? string.Empty
+                : $".{SaveBackupExtension}";
+
             return !string.IsNullOrWhiteSpace(value: saveName)
-                ? string.Concat(saveName, SaveBackupExtension)
-                : string.Concat(DefaultSaveName, SaveBackupExtension);
+                ? string.Concat(saveName, extension)
+                : string.Concat(DefaultSaveName, extension);
         }
 
         public string RestoreSaveName() => string.Concat(DefaultSaveName, DefaultSaveExtension);
 
         public void SetSaveBackupExtension(string saveExtension)
         {
-            SaveBackupExtension = !string.IsNullOrWhiteSpace(saveExtension)
-                ? saveExtension
-                : string.Empty;
+            try
+            {
+                if (Enum.IsDefined(typeof(EBackupSaveType), saveExtension.GetEnumValueFromDescription<EBackupSaveType>()))
+                    SaveBackupExtension = saveExtension;
+            }
+            catch (ArgumentException)
+            {
+                throw new NotSupportedException(SystemMessages.ErrorSaveExtensionNotSupported);
+            }
         }
     }
 }

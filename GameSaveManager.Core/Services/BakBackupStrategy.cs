@@ -1,14 +1,15 @@
 ﻿namespace GameSaveManager.Core.Services
 {
+    using System.IO;
+
+    using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.Core.Utils;
 
-    using System.IO;
-
     public class BakBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension() => ".bak";
+        public string GetFileExtension() => EBackupSaveType.BakFile.Description();
 
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {

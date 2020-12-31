@@ -2,6 +2,7 @@
 {
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Utils;
 
     using System;
 
@@ -13,7 +14,7 @@
             {
                 EBackupSaveType.BakFile => new BakBackupStrategy(),
                 EBackupSaveType.ZipFile => new ZipBackupStrategy(),
-                _ => throw new InvalidOperationException(Properties.Resources.ErrorSaveNotSupported),
+                _ => throw new InvalidOperationException(SystemMessages.ErrorFileNotSupported),
             };
         }
     }

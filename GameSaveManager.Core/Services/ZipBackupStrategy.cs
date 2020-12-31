@@ -1,15 +1,16 @@
 ﻿namespace GameSaveManager.Core.Services
 {
+    using System.IO;
+    using System.IO.Compression;
+
+    using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.Core.Utils;
 
-    using System.IO;
-    using System.IO.Compression;
-
     public class ZipBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension() => ".zip";
+        public string GetFileExtension() => EBackupSaveType.ZipFile.Description();
 
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
