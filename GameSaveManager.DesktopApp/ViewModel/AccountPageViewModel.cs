@@ -10,7 +10,7 @@
     using GameSaveManager.DesktopApp.Properties;
     using GameSaveManager.DropboxApi;
 
-    using global::Dropbox.Api;
+    using Dropbox.Api;
 
     using Microsoft.Extensions.Options;
 
@@ -43,12 +43,13 @@
             Application
                 .Current
                 .Properties["CLIENT"] = DropboxClient = (DropboxClient)await DropboxConnection
-                .ConnectAsync(Secrets).ConfigureAwait(true);
+                .ConnectAsync(Secrets)
+                .ConfigureAwait(true);
         }
 
         private async Task SetUserInformation()
         {
-            global::Dropbox.Api.Users.FullAccount user = await DropboxClient
+            Dropbox.Api.Users.FullAccount user = await DropboxClient
                 .Users
                 .GetCurrentAccountAsync()
                 .ConfigureAwait(true);

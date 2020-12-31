@@ -36,7 +36,7 @@
             if (fileFound is null)
                 return false;
 
-            using global::Dropbox.Api.Stone.IDownloadResponse<FileMetadata> result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
+            using Dropbox.Api.Stone.IDownloadResponse<FileMetadata> result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
 
             using (FileStream stream = File.OpenWrite(Path.Combine(FileSystemUtils.GetTempFolder(), fileFound.Name)))
             {

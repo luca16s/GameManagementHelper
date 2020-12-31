@@ -13,7 +13,7 @@
     using GameSaveManager.DesktopApp.Commands;
     using GameSaveManager.DropboxApi;
 
-    using global::Dropbox.Api;
+    using Dropbox.Api;
 
     using Microsoft.Extensions.Options;
 

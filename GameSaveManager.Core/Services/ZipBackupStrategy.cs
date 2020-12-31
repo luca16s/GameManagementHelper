@@ -33,7 +33,7 @@
 
             string folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
-            ZipFile.ExtractToDirectory(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), folder);
+            ZipFile.ExtractToDirectory(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), folder, true);
         }
     }
 }

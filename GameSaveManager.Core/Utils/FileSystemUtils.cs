@@ -16,7 +16,7 @@
                 return Path.Combine(GetDocumentsFolder(), folder);
             }
 
-            return null;
+            return string.Empty;
         }
 
         public static string GetTempFolder() => Path.GetTempPath();
