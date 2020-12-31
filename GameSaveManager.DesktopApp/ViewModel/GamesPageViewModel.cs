@@ -100,7 +100,8 @@
                 if (_SaveName == value)
                     return;
 
-                _SaveName = GameInformation?.BuildSaveName(value);
+                GameInformation.SaveName =
+                    _SaveName = GameInformation?.BuildSaveName(value);
 
                 OnPropertyChanged(nameof(SaveName));
             }

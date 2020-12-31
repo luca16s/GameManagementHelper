@@ -17,6 +17,7 @@
         public string Publisher { get; set; }
         public string SaveBackupExtension { get; private set; }
         public string Title { get; set; }
+        public string SaveName { get; set; }
 
         public string BuildSaveName() => BuildSaveName(string.Empty);
 
@@ -26,9 +27,13 @@
                 ? string.Empty
                 : $".{SaveBackupExtension}";
 
-            return !string.IsNullOrWhiteSpace(value: saveName)
+            string nameToBeUsed = string.IsNullOrWhiteSpace(SaveName)
+                ? DefaultSaveName
+                : SaveName;
+
+            return !string.IsNullOrWhiteSpace(saveName)
                 ? string.Concat(saveName, extension)
-                : string.Concat(DefaultSaveName, extension);
+                : string.Concat(nameToBeUsed, extension);
         }
 
         public string RestoreSaveName() => string.Concat(DefaultSaveName, DefaultSaveExtension);
