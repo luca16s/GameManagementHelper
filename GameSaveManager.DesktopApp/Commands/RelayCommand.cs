@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-
-namespace GameSaveManager.DesktopApp.Commands
+﻿namespace GameSaveManager.DesktopApp.Commands
 {
+    using System;
+    using System.Windows.Input;
+
     public class RelayCommand<T> : ICommand
     {
         private readonly Action<T> _execute;
@@ -36,10 +36,7 @@ namespace GameSaveManager.DesktopApp.Commands
         ///<returns>
         ///true if this command can be executed; otherwise, false.
         ///</returns>
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute((T)parameter);
-        }
+        public bool CanExecute(object parameter) => _canExecute == null || _canExecute((T)parameter);
 
         ///<summary>
         ///Occurs when changes occur that affect whether or not the command should execute.
@@ -54,9 +51,6 @@ namespace GameSaveManager.DesktopApp.Commands
         ///Defines the method to be called when the command is invoked.
         ///</summary>
         ///<param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
-        public void Execute(object parameter)
-        {
-            _execute((T)parameter);
-        }
+        public void Execute(object parameter) => _execute((T)parameter);
     }
 }

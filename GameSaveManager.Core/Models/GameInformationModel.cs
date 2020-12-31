@@ -1,5 +1,10 @@
 ﻿namespace GameSaveManager.Core.Models
 {
+    using System;
+
+    using GameSaveManager.Core.Enums;
+    using GameSaveManager.Core.Utils;
+
     public class GameInformationModel
     {
         public string CoverPath { get; set; }
@@ -7,24 +12,43 @@
         public string DefaultGameSaveFolder { get; set; }
         public string DefaultSaveName { get; set; }
         public string Developer { get; set; }
-        public string GameSaveExtension { get; set; }
         public string Name { get; set; }
         public string OnlineSaveFolder { get; set; }
         public string Publisher { get; set; }
-        public string SaveBackupExtension { get; set; }
-        public string SaveExtension { get; set; }
+        public string SaveBackupExtension { get; private set; }
         public string Title { get; set; }
+        public string SaveName { get; set; }
 
-        public string BuildSaveName(string saveName = null)
+        public string BuildSaveName() => BuildSaveName(string.Empty);
+
+        public string BuildSaveName(string saveName)
         {
-            return !string.IsNullOrWhiteSpace(value: saveName)
-                ? string.Concat(saveName, SaveBackupExtension)
-                : string.Concat(DefaultSaveName, SaveBackupExtension);
+            string extension = string.IsNullOrWhiteSpace(SaveBackupExtension)
+                ? string.Empty
+                : $".{SaveBackupExtension}";
+
+            string nameToBeUsed = string.IsNullOrWhiteSpace(SaveName)
+                ? DefaultSaveName
+                : SaveName;
+
+            return !string.IsNullOrWhiteSpace(saveName)
+                ? string.Concat(saveName, extension)
+                : string.Concat(nameToBeUsed, extension);
         }
 
-        public string RestoreSaveName()
+        public string RestoreSaveName() => string.Concat(DefaultSaveName, $".{DefaultSaveExtension}");
+
+        public void SetSaveBackupExtension(string saveExtension)
         {
-            return string.Concat(DefaultSaveName, DefaultSaveExtension);
+            try
+            {
+                if (Enum.IsDefined(typeof(EBackupSaveType), saveExtension.GetEnumValueFromDescription<EBackupSaveType>()))
+                    SaveBackupExtension = saveExtension;
+            }
+            catch (ArgumentException)
+            {
+                throw new NotSupportedException(SystemMessages.ErrorSaveExtensionNotSupported);
+            }
         }
     }
 }

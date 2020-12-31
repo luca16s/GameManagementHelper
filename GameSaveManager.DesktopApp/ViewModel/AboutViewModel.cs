@@ -1,17 +1,20 @@
-﻿using GameSaveManager.DesktopApp.Commands;
-
-using System.Diagnostics;
-using System.Windows.Input;
-
-namespace GameSaveManager.DesktopApp.ViewModel
+﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
+    using System.Diagnostics;
+    using System.Windows.Input;
+
+    using GameSaveManager.DesktopApp.Commands;
+
     public class AboutViewModel : ViewModelBase
     {
+        private const string UrlLinkedin = @"https:\linkedin.com\in\gianfigueiredo";
+        private const string UrlGithub = @"https:\github.com\luca16s";
+
         private ICommand _GithubCommand;
         private ICommand _LinkedInCommand;
 
-        public ICommand GitHubCommand => _GithubCommand ??= new RelayCommand<object>(_ => OpenWebsite("https://github.com/luca16s"));
-        public ICommand LinkedInCommand => _LinkedInCommand ??= new RelayCommand<object>(_ => OpenWebsite("https://linkedin.com/in/gianfigueiredo"));
+        public ICommand GitHubCommand => _GithubCommand ??= new RelayCommand<object>(_ => OpenWebsite(UrlGithub));
+        public ICommand LinkedInCommand => _LinkedInCommand ??= new RelayCommand<object>(_ => OpenWebsite(UrlLinkedin));
 
         private static void OpenWebsite(string url)
         {
@@ -20,7 +23,8 @@ namespace GameSaveManager.DesktopApp.ViewModel
                 FileName = url,
                 UseShellExecute = true
             };
-            Process.Start(psi);
+
+            _ = Process.Start(psi);
         }
     }
 }

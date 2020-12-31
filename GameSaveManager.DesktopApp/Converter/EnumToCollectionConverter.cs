@@ -1,32 +1,21 @@
-﻿using GameSaveManager.Core.Enums;
-using GameSaveManager.DesktopApp.Helper;
-
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Markup;
-
-namespace GameSaveManager.DesktopApp.Converter
+﻿namespace GameSaveManager.DesktopApp.Converter
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Windows.Data;
+    using System.Windows.Markup;
+
+    using GameSaveManager.Core.Enums;
+    using GameSaveManager.Core.Utils;
+
     [ValueConversion(typeof(Enum), typeof(IEnumerable<ValueDescription>))]
     public class EnumToCollectionConverter : MarkupExtension, IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value == null) return null;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value?.GetType().GetAllValuesAndDescriptions();
 
-            return HelperMethods.GetAllValuesAndDescriptions(value.GetType());
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
-        }
+        public override object ProvideValue(IServiceProvider serviceProvider) => this;
     }
 }

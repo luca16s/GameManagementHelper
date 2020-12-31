@@ -1,26 +1,25 @@
-﻿using GameSaveManager.Core.Interfaces;
-using GameSaveManager.Core.Models;
-using GameSaveManager.Core.Utils;
-
-using System.IO;
-using System.IO.Compression;
-
-namespace GameSaveManager.Core.Services
+﻿namespace GameSaveManager.Core.Services
 {
+    using System.IO;
+    using System.IO.Compression;
+
+    using GameSaveManager.Core.Enums;
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
+    using GameSaveManager.Core.Utils;
+
     public class ZipBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension()
-        {
-            return ".zip";
-        }
+        public string GetFileExtension() => EBackupSaveType.ZipFile.Description();
 
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return null;
+            if (gameInformation == null)
+                return null;
 
-            var folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
+            string folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
-            var saveName = gameInformation.BuildSaveName();
+            string saveName = gameInformation.BuildSaveName();
 
             ZipFile.CreateFromDirectory(folder, Path.Combine(FileSystemUtils.GetTempFolder(), saveName));
 
@@ -29,11 +28,12 @@ namespace GameSaveManager.Core.Services
 
         public void PrepareBackup(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return;
+            if (gameInformation == null)
+                return;
 
-            var folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
+            string folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
-            ZipFile.ExtractToDirectory(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), folder);
+            ZipFile.ExtractToDirectory(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), folder, true);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using GameSaveManager.DesktopApp.Pages;
-
-using System.Windows;
-
-namespace GameSaveManager.Windows
+﻿namespace GameSaveManager.Windows
 {
+    using System.Windows;
+
+    using GameSaveManager.DesktopApp.Pages;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -24,24 +24,12 @@ namespace GameSaveManager.Windows
             AboutPage = aboutPage;
         }
 
-        private void AccountButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(AccountPage);
-        }
+        private void AccountButton_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(AccountPage);
 
-        private void OpenGamesListPage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(GamesPage);
-        }
+        private void OpenGamesListPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(GamesPage);
 
-        private void OpenSettingsPage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(SettingsPage);
-        }
+        private void OpenSettingsPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(SettingsPage);
 
-        private void OpenAboutPage(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(AboutPage);
-        }
+        private void OpenAboutPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(AboutPage);
     }
 }

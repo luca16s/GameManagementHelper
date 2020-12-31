@@ -1,18 +1,18 @@
 ﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
-    using global::Dropbox.Api;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Input;
 
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.DesktopApp.Commands;
     using GameSaveManager.DesktopApp.Properties;
-    using GameSaveManager.Dropbox;
+    using GameSaveManager.DropboxApi;
+
+    using Dropbox.Api;
 
     using Microsoft.Extensions.Options;
-
-    using System.Threading.Tasks;
-    using System.Windows;
-    using System.Windows.Input;
 
     public class AccountPageViewModel : ViewModelBase
     {
@@ -43,12 +43,13 @@
             Application
                 .Current
                 .Properties["CLIENT"] = DropboxClient = (DropboxClient)await DropboxConnection
-                .ConnectAsync(Secrets).ConfigureAwait(true);
+                .ConnectAsync(Secrets)
+                .ConfigureAwait(true);
         }
 
         private async Task SetUserInformation()
         {
-            var user = await DropboxClient
+            Dropbox.Api.Users.FullAccount user = await DropboxClient
                 .Users
                 .GetCurrentAccountAsync()
                 .ConfigureAwait(true);

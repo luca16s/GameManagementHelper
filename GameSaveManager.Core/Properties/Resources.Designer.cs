@@ -59,14 +59,5 @@ namespace GameSaveManager.Core.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &quot;Tipo de arquivo não suportado.&quot;.
-        /// </summary>
-        internal static string ErrorSaveNotSupported {
-            get {
-                return ResourceManager.GetString("ErrorSaveNotSupported", resourceCulture);
-            }
-        }
     }
 }

@@ -1,38 +1,37 @@
-﻿using GameSaveManager.Core.Enums;
-
-using System.Windows;
-
-namespace GameSaveManager.DesktopApp.ViewModel
+﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
+    using System.Windows;
+
+    using GameSaveManager.Core.Enums;
+
     public class SettingsPageViewModel : ViewModelBase
     {
-        public SettingsPageViewModel()
-        {
-            Application.Current.Properties["BACKUP_TYPE"] = BackupSaveType;
-        }
+        public SettingsPageViewModel() => Application.Current.Properties["BACKUP_TYPE"] = BackupSaveType;
 
-        private DriveServicesEnum _DriveServiceSelected;
+        private EDriveServices _DriveServiceSelected;
 
-        public DriveServicesEnum DriveServiceSelected
+        public EDriveServices DriveServiceSelected
         {
             get => _DriveServiceSelected;
             set
             {
-                if (_DriveServiceSelected == value) return;
+                if (_DriveServiceSelected == value)
+                    return;
 
                 _DriveServiceSelected = value;
                 OnPropertyChanged(nameof(DriveServiceSelected));
             }
         }
 
-        private BackupSaveType _backupSaveType;
+        private EBackupSaveType _backupSaveType;
 
-        public BackupSaveType BackupSaveType
+        public EBackupSaveType BackupSaveType
         {
             get => _backupSaveType;
             set
             {
-                if (_backupSaveType == value) return;
+                if (_backupSaveType == value)
+                    return;
 
                 _backupSaveType = value;
                 Application.Current.Properties["BACKUP_TYPE"] = value;
@@ -47,7 +46,8 @@ namespace GameSaveManager.DesktopApp.ViewModel
             get => _Name;
             set
             {
-                if (_Name == value) return;
+                if (_Name == value)
+                    return;
 
                 _Name = value;
                 OnPropertyChanged(nameof(Name));
@@ -61,7 +61,8 @@ namespace GameSaveManager.DesktopApp.ViewModel
             get => _Email;
             set
             {
-                if (_Email == value) return;
+                if (_Email == value)
+                    return;
 
                 _Email = value;
                 OnPropertyChanged(nameof(Email));

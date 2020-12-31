@@ -1,17 +1,17 @@
-﻿using Dropbox.Api;
-using Dropbox.Api.Files;
-
-using GameSaveManager.Core.Interfaces;
-using GameSaveManager.Core.Models;
-using GameSaveManager.Core.Utils;
-
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GameSaveManager.Dropbox
+﻿namespace GameSaveManager.DropboxApi
 {
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Dropbox.Api;
+    using Dropbox.Api.Files;
+
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
+    using GameSaveManager.Core.Utils;
+
     public class DropboxOperations : ICloudOperations
     {
         private readonly DropboxClient Client;
@@ -25,20 +25,22 @@ namespace GameSaveManager.Dropbox
 
         public async Task<bool> DownloadSaveData(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return false;
+            if (gameInformation == null)
+                return false;
 
-            var fileList = await ListFolderContent(gameInformation.OnlineSaveFolder.TrimEnd('/')).ConfigureAwait(true);
+            ListFolderResult fileList = await ListFolderContent(gameInformation.OnlineSaveFolder.TrimEnd('/')).ConfigureAwait(true);
 
-            var fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile
+            Metadata fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile
             && save.Name.Equals(gameInformation.BuildSaveName(), StringComparison.InvariantCultureIgnoreCase));
 
-            if (fileFound is null) return false;
+            if (fileFound is null)
+                return false;
 
-            using var result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
+            using Dropbox.Api.Stone.IDownloadResponse<FileMetadata> result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
 
-            using (var stream = File.OpenWrite(Path.Combine(FileSystemUtils.GetTempFolder(), fileFound.Name)))
+            using (FileStream stream = File.OpenWrite(Path.Combine(FileSystemUtils.GetTempFolder(), fileFound.Name)))
             {
-                var dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
+                byte[] dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
                 stream.Write(dataToWrite, 0, dataToWrite.Length);
             }
 
@@ -49,15 +51,16 @@ namespace GameSaveManager.Dropbox
 
         public async Task<bool> UploadSaveData(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return false;
+            if (gameInformation == null)
+                return false;
 
             try
             {
-                gameInformation.SaveBackupExtension = BackupStrategy.GetFileExtension();
+                gameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 
-                using var fileStream = BackupStrategy.GenerateBackup(gameInformation);
+                using FileStream fileStream = BackupStrategy.GenerateBackup(gameInformation);
 
-                var response = await Client
+                FileMetadata response = await Client
                     .Files
                     .UploadAsync(Path.Combine(gameInformation.OnlineSaveFolder, gameInformation.BuildSaveName()), WriteMode.Add.Instance, body: fileStream)
                     .ConfigureAwait(true);
@@ -76,9 +79,9 @@ namespace GameSaveManager.Dropbox
             if (string.IsNullOrWhiteSpace(folderName))
                 return false;
 
-            var itemsList = await Client.Files.ListFolderAsync("").ConfigureAwait(true);
+            ListFolderResult itemsList = await Client.Files.ListFolderAsync("").ConfigureAwait(true);
 
-            var hasFolder = CheckIfFolderExistsInList(folderName, itemsList);
+            bool hasFolder = CheckIfFolderExistsInList(folderName, itemsList);
 
             if (itemsList.HasMore)
             {
@@ -91,13 +94,13 @@ namespace GameSaveManager.Dropbox
 
         public async Task<bool> CreateFolder(string path)
         {
-            var result = await Client.Files.CreateFolderV2Async(path?.TrimEnd('/')).ConfigureAwait(true);
+            CreateFolderResult result = await Client.Files.CreateFolderV2Async(path?.TrimEnd('/')).ConfigureAwait(true);
             return string.IsNullOrEmpty(result.Metadata.Id);
         }
 
         private static bool CheckIfFolderExistsInList(string folderName, ListFolderResult itemsList)
         {
-            foreach (var item in itemsList.Entries.Where(x => x.IsFolder))
+            foreach (Metadata item in itemsList.Entries.Where(x => x.IsFolder))
             {
                 if (string.Equals(item.Name, folderName?.Trim('/'), StringComparison.InvariantCultureIgnoreCase))
                     return true;
@@ -106,9 +109,6 @@ namespace GameSaveManager.Dropbox
             return false;
         }
 
-        private async Task<ListFolderResult> ListFolderContent(string folderPath)
-        {
-            return await Client.Files.ListFolderAsync(folderPath).ConfigureAwait(true);
-        }
+        private async Task<ListFolderResult> ListFolderContent(string folderPath) => await Client.Files.ListFolderAsync(folderPath).ConfigureAwait(true);
     }
 }

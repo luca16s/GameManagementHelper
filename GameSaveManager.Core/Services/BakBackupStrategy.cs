@@ -1,31 +1,30 @@
-﻿using GameSaveManager.Core.Interfaces;
-using GameSaveManager.Core.Models;
-using GameSaveManager.Core.Utils;
-
-using System.IO;
-
-namespace GameSaveManager.Core.Services
+﻿namespace GameSaveManager.Core.Services
 {
+    using System.IO;
+
+    using GameSaveManager.Core.Enums;
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
+    using GameSaveManager.Core.Utils;
+
     public class BakBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension()
-        {
-            return ".bak";
-        }
+        public string GetFileExtension() => EBackupSaveType.BakFile.Description();
 
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return null;
+            if (gameInformation == null)
+                return null;
 
-            var folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
+            string folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
-            var saveName = gameInformation.BuildSaveName();
+            string saveName = gameInformation.BuildSaveName();
 
-            var filesPathList = Directory.GetFiles(folder, "*", SearchOption.AllDirectories);
+            string[] filesPathList = Directory.GetFiles(folder, "*", SearchOption.AllDirectories);
 
-            for (var i = 0; i < filesPathList.Length; i++)
+            for (int i = 0; i < filesPathList.Length; i++)
             {
-                var path = filesPathList[i];
+                string path = filesPathList[i];
                 File.Copy(path, Path.Combine(FileSystemUtils.GetTempFolder(), saveName));
             }
 
@@ -34,11 +33,12 @@ namespace GameSaveManager.Core.Services
 
         public void PrepareBackup(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return;
+            if (gameInformation == null)
+                return;
 
-            var saveName = Path.Combine(FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder), gameInformation.RestoreSaveName());
+            string saveName = Path.Combine(FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder), gameInformation.RestoreSaveName());
 
-            File.Move(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), saveName);
+            File.Move(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), saveName, true);
         }
     }
 }
