@@ -7,24 +7,28 @@
         public string DefaultGameSaveFolder { get; set; }
         public string DefaultSaveName { get; set; }
         public string Developer { get; set; }
-        public string GameSaveExtension { get; set; }
         public string Name { get; set; }
         public string OnlineSaveFolder { get; set; }
         public string Publisher { get; set; }
-        public string SaveBackupExtension { get; set; }
-        public string SaveExtension { get; set; }
+        public string SaveBackupExtension { get; private set; }
         public string Title { get; set; }
 
-        public string BuildSaveName(string saveName = null)
+        public string BuildSaveName() => BuildSaveName(string.Empty);
+
+        public string BuildSaveName(string saveName)
         {
             return !string.IsNullOrWhiteSpace(value: saveName)
                 ? string.Concat(saveName, SaveBackupExtension)
                 : string.Concat(DefaultSaveName, SaveBackupExtension);
         }
 
-        public string RestoreSaveName()
+        public string RestoreSaveName() => string.Concat(DefaultSaveName, DefaultSaveExtension);
+
+        public void SetSaveBackupExtension(string saveExtension)
         {
-            return string.Concat(DefaultSaveName, DefaultSaveExtension);
+            SaveBackupExtension = !string.IsNullOrWhiteSpace(saveExtension)
+                ? saveExtension
+                : string.Empty;
         }
     }
 }

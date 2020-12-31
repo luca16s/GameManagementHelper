@@ -1,26 +1,23 @@
-﻿using GameSaveManager.Core.Interfaces;
-using GameSaveManager.Core.Models;
-using GameSaveManager.Core.Utils;
-
-using System.IO;
-using System.IO.Compression;
-
-namespace GameSaveManager.Core.Services
+﻿namespace GameSaveManager.Core.Services
 {
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
+    using GameSaveManager.Core.Utils;
+
+    using System.IO;
+    using System.IO.Compression;
+
     public class ZipBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension()
-        {
-            return ".zip";
-        }
+        public string GetFileExtension() => ".zip";
 
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
             if (gameInformation == null) return null;
 
-            var folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
+            string folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
-            var saveName = gameInformation.BuildSaveName();
+            string saveName = gameInformation.BuildSaveName();
 
             ZipFile.CreateFromDirectory(folder, Path.Combine(FileSystemUtils.GetTempFolder(), saveName));
 
@@ -31,7 +28,7 @@ namespace GameSaveManager.Core.Services
         {
             if (gameInformation == null) return;
 
-            var folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
+            string folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
             ZipFile.ExtractToDirectory(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), folder);
         }

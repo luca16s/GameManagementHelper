@@ -18,6 +18,8 @@ Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "GameSaveManager.Package", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.OneDriveApi", "GameSaveManager.OneDriveApi\GameSaveManager.OneDriveApi.csproj", "{E8187961-8230-44DB-B67B-965B0D43E820}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.Core.Tests", "GameSaveManager.Core.Tests\GameSaveManager.Core.Tests.csproj", "{1B3B66D9-51DF-4ED5-A74B-32F19459E066}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,6 +144,26 @@ Global
 		{E8187961-8230-44DB-B67B-965B0D43E820}.Release|x64.Build.0 = Release|x64
 		{E8187961-8230-44DB-B67B-965B0D43E820}.Release|x86.ActiveCfg = Release|Any CPU
 		{E8187961-8230-44DB-B67B-965B0D43E820}.Release|x86.Build.0 = Release|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|ARM.Build.0 = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|x64.Build.0 = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Debug|x86.Build.0 = Debug|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|ARM.ActiveCfg = Release|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|ARM.Build.0 = Release|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|ARM64.Build.0 = Release|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|x64.ActiveCfg = Release|x64
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|x64.Build.0 = Release|x64
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|x86.ActiveCfg = Release|Any CPU
+		{1B3B66D9-51DF-4ED5-A74B-32F19459E066}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

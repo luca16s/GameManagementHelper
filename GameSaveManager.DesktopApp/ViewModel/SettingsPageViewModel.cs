@@ -1,19 +1,16 @@
-﻿using GameSaveManager.Core.Enums;
-
-using System.Windows;
-
-namespace GameSaveManager.DesktopApp.ViewModel
+﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
+    using GameSaveManager.Core.Enums;
+
+    using System.Windows;
+
     public class SettingsPageViewModel : ViewModelBase
     {
-        public SettingsPageViewModel()
-        {
-            Application.Current.Properties["BACKUP_TYPE"] = BackupSaveType;
-        }
+        public SettingsPageViewModel() => Application.Current.Properties["BACKUP_TYPE"] = BackupSaveType;
 
-        private DriveServicesEnum _DriveServiceSelected;
+        private EDriveServices _DriveServiceSelected;
 
-        public DriveServicesEnum DriveServiceSelected
+        public EDriveServices DriveServiceSelected
         {
             get => _DriveServiceSelected;
             set
@@ -25,9 +22,9 @@ namespace GameSaveManager.DesktopApp.ViewModel
             }
         }
 
-        private BackupSaveType _backupSaveType;
+        private EBackupSaveType _backupSaveType;
 
-        public BackupSaveType BackupSaveType
+        public EBackupSaveType BackupSaveType
         {
             get => _backupSaveType;
             set

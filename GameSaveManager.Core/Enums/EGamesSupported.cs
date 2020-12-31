@@ -1,8 +1,8 @@
-﻿using System.ComponentModel;
-
-namespace GameSaveManager.Core.Enums
+﻿namespace GameSaveManager.Core.Enums
 {
-    public enum GamesSupported
+    using System.ComponentModel;
+
+    public enum EGamesSupported
     {
         [Description("Nenhum")]
         None,

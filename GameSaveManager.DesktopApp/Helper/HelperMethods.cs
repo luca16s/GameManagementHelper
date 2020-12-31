@@ -1,14 +1,14 @@
-﻿using GameSaveManager.Core.Enums;
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Windows;
-
-namespace GameSaveManager.DesktopApp.Helper
+﻿namespace GameSaveManager.DesktopApp.Helper
 {
+    using GameSaveManager.Core.Enums;
+
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.Linq;
+    using System.Windows;
+
     public static class HelperMethods
     {
         public static bool IsWindowOpen<T>(string name = "") where T : Window
@@ -23,20 +23,17 @@ namespace GameSaveManager.DesktopApp.Helper
             if (value is null)
                 return null;
 
-            var attributes = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
+            object[] attributes = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
             if (attributes.Length > 0)
                 return (attributes?.First() as DescriptionAttribute)?.Description;
 
-            var ti = CultureInfo.CurrentCulture.TextInfo;
+            TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
             return ti.ToTitleCase(ti.ToLower(str: value.ToString().Replace("_", " ", StringComparison.InvariantCultureIgnoreCase)));
         }
 
         public static IEnumerable<ValueDescription> GetAllValuesAndDescriptions(Type type)
         {
-            if (type is null)
-                return null;
-
-            return type.IsEnum
+            return !(type is null) && type.IsEnum
                 ? Enum.GetValues(type).Cast<Enum>().Select((e)
                 => new ValueDescription()
                 {

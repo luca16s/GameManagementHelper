@@ -1,21 +1,21 @@
-﻿using GameSaveManager.Core.Interfaces;
-using GameSaveManager.Core.Models;
-using GameSaveManager.Core.Services;
-using GameSaveManager.DesktopApp.Pages;
-using GameSaveManager.DesktopApp.ViewModel;
-
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Text;
-using System.Windows;
-
-namespace GameSaveManager.Windows
+﻿namespace GameSaveManager.Windows
 {
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
+    using GameSaveManager.Core.Services;
+    using GameSaveManager.DesktopApp.Pages;
+    using GameSaveManager.DesktopApp.ViewModel;
+
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Text;
+    using System.Windows;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -26,11 +26,11 @@ namespace GameSaveManager.Windows
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var connectionType = Environment.GetEnvironmentVariable("DROPBOX_CONNECTION_TYPE");
-            var isFastConnectionEnable = string.IsNullOrEmpty(connectionType) ||
+            string connectionType = Environment.GetEnvironmentVariable("DROPBOX_CONNECTION_TYPE");
+            bool isFastConnectionEnable = string.IsNullOrEmpty(connectionType) ||
                                 connectionType.ToLower(culture: CultureInfo.CurrentCulture) == "fast";
 
-            var builder = new ConfigurationBuilder()
+            IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("gamelist.json", false, true);
 
@@ -45,7 +45,7 @@ namespace GameSaveManager.Windows
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             ServiceProvider = servicesCollection.BuildServiceProvider();
 
-            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            MainWindow mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }
 
@@ -71,8 +71,10 @@ namespace GameSaveManager.Windows
                              : string.Empty;
               });
 
-            _ = servicesCollection.Configure<List<GameInformationModel>>(gameInformation => Configuration
-                  .GetSection(key: nameof(GameInformationModel)).Bind(gameInformation));
+            _ = servicesCollection
+                .Configure<ObservableCollection<GameInformationModel>>(gameInformation => Configuration
+                .GetSection(key: nameof(GameInformationModel))
+                .Bind(gameInformation));
         }
     }
 }

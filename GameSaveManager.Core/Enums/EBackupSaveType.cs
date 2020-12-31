@@ -1,8 +1,8 @@
-﻿using System.ComponentModel;
-
-namespace GameSaveManager.Core.Enums
+﻿namespace GameSaveManager.Core.Enums
 {
-    public enum BackupSaveType
+    using System.ComponentModel;
+
+    public enum EBackupSaveType
     {
         [Description("bak")]
         BakFile,

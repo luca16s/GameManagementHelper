@@ -1,33 +1,29 @@
-﻿using System;
-using System.IO;
-
-namespace GameSaveManager.Core.Utils
+﻿namespace GameSaveManager.Core.Utils
 {
+    using System;
+    using System.IO;
+
     public static class FileSystemUtils
     {
         public static string FindPath(string folder)
         {
-            return Directory.Exists(Path.Combine(GetGameFolderLocationAppData(), folder))
-                ? Path.Combine(GetGameFolderLocationAppData(), folder)
-                : Directory.Exists(Path.Combine(GetDocumentsFolder(), folder))
-                    ? Path.Combine(GetDocumentsFolder(), folder)
-                    : null;
+            if (Directory.Exists(Path.Combine(GetGameFolderLocationAppData(), folder)))
+            {
+                return Path.Combine(GetGameFolderLocationAppData(), folder);
+            }
+            else if (Directory.Exists(Path.Combine(GetDocumentsFolder(), folder)))
+            {
+                return Path.Combine(GetDocumentsFolder(), folder);
+            }
+
+            return null;
         }
 
-        public static string GetTempFolder()
-        {
-            return Path.GetTempPath();
-        }
+        public static string GetTempFolder() => Path.GetTempPath();
 
-        public static string GetDocumentsFolder()
-        {
-            return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        }
+        public static string GetDocumentsFolder() => Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-        public static string GetGameFolderLocationAppData()
-        {
-            return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        }
+        public static string GetGameFolderLocationAppData() => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         public static bool DeleteCreatedFile(string path)
         {

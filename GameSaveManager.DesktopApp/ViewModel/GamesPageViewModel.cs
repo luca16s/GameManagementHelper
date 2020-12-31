@@ -1,21 +1,22 @@
-﻿using Dropbox.Api;
-
-using GameSaveManager.Core.Enums;
-using GameSaveManager.Core.Interfaces;
-using GameSaveManager.Core.Models;
-using GameSaveManager.DesktopApp.Commands;
-using GameSaveManager.Dropbox;
-
-using Microsoft.Extensions.Options;
-
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-
-namespace GameSaveManager.DesktopApp.ViewModel
+﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Input;
+
+    using GameSaveManager.Core.Enums;
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
+    using GameSaveManager.DesktopApp.Commands;
+    using GameSaveManager.Dropbox;
+
+    using global::Dropbox.Api;
+
+    using Microsoft.Extensions.Options;
+
     public class GamesPageViewModel : ViewModelBase
     {
         private readonly IFactory<IBackupStrategy> BackupFactory;
@@ -26,7 +27,7 @@ namespace GameSaveManager.DesktopApp.ViewModel
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;
 
-        private bool CanExecute => GamesSupported != GamesSupported.None;
+        private bool CanExecute => GamesSupported != EGamesSupported.None;
 
         public ICommand UploadCommand
             => _UploadCommand
@@ -37,9 +38,9 @@ namespace GameSaveManager.DesktopApp.ViewModel
             ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanExecute);
 
         private GameInformationModel GameInformation;
-        private readonly List<GameInformationModel> GameInformationList;
+        private readonly ObservableCollection<GameInformationModel> GameInformationList;
 
-        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy, IOptions<List<GameInformationModel>> options)
+        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
         {
             if (options == null)
                 return;
@@ -65,9 +66,9 @@ namespace GameSaveManager.DesktopApp.ViewModel
             }
         }
 
-        private GamesSupported _GamesSupported;
+        private EGamesSupported _GamesSupported;
 
-        public GamesSupported GamesSupported
+        public EGamesSupported GamesSupported
         {
             get => _GamesSupported;
             set
@@ -76,7 +77,8 @@ namespace GameSaveManager.DesktopApp.ViewModel
 
                 _GamesSupported = value;
 
-                GameInformation = GameInformationList.Find(game => string.Equals(value.ToString(), game.Name, StringComparison.InvariantCultureIgnoreCase));
+                GameInformation = GameInformationList
+                    .FirstOrDefault(game => string.Equals(value.ToString(), game.Name, StringComparison.InvariantCultureIgnoreCase));
 
                 ImagePath = GameInformation?.CoverPath;
 
@@ -90,16 +92,11 @@ namespace GameSaveManager.DesktopApp.ViewModel
 
         public string SaveName
         {
-            get
-            {
-                if (CanExecute)
-                    return _SaveName;
-
-                return string.Empty;
-            }
+            get => CanExecute ? _SaveName : string.Empty;
             set
             {
-                if (_SaveName == value) return;
+                if (_SaveName == value)
+                    return;
 
                 _SaveName = GameInformation?.BuildSaveName(value);
 
@@ -111,23 +108,24 @@ namespace GameSaveManager.DesktopApp.ViewModel
         {
             using var DriveConnectionClient = (DropboxClient)Application.Current.Properties["CLIENT"];
 
-            var backupType = (BackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
+            var backupType = (EBackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
             BackupStrategy = BackupFactory.Create(backupType);
 
-            if (DriveConnectionClient != null) return new DropboxOperations(BackupStrategy, DriveConnectionClient);
-
-            return null;
+            return DriveConnectionClient != null
+                ? new DropboxOperations(BackupStrategy, DriveConnectionClient)
+                : null;
         }
 
         private async Task<bool> UploadSave()
         {
             if (CloudOperations == null) return false;
 
-            GameInformation.SaveBackupExtension = BackupStrategy.GetFileExtension();
+            GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 
-            var exists = await CloudOperations.CheckFolderExistence(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
+            bool exists = await CloudOperations.CheckFolderExistence(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
 
-            if (!exists) await CloudOperations.CreateFolder(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
+            if (!exists)
+                _ = await CloudOperations.CreateFolder(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
 
             return await CloudOperations.UploadSaveData(GameInformation).ConfigureAwait(true);
         }
@@ -136,7 +134,7 @@ namespace GameSaveManager.DesktopApp.ViewModel
         {
             if (CloudOperations == null) return false;
 
-            GameInformation.SaveBackupExtension = BackupStrategy.GetFileExtension();
+            GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 
             return await CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
         }

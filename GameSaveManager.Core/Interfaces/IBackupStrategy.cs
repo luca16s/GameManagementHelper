@@ -1,9 +1,9 @@
-﻿using GameSaveManager.Core.Models;
-
-using System.IO;
-
-namespace GameSaveManager.Core.Interfaces
+﻿namespace GameSaveManager.Core.Interfaces
 {
+    using GameSaveManager.Core.Models;
+
+    using System.IO;
+
     public interface IBackupStrategy
     {
         string GetFileExtension();

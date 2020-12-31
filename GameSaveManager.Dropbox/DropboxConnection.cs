@@ -1,16 +1,16 @@
-﻿using Dropbox.Api;
-
-using GameSaveManager.Core.Interfaces;
-using GameSaveManager.Core.Models;
-
-using System;
-using System.Diagnostics;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace GameSaveManager.Dropbox
+﻿namespace GameSaveManager.Dropbox
 {
+    using global::Dropbox.Api;
+
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
+
+    using System;
+    using System.Diagnostics;
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
     public class DropboxConnection : IConnection
     {
         private const string responseString = "<html><body onload='redirect()'>Por favor retorne para o App.</body></html><script type='text/javascript'> function redirect(){ document.location.href ='/token?url_with_fragment='+encodeURIComponent(document.location.href); close();}</script>";
@@ -25,7 +25,7 @@ namespace GameSaveManager.Dropbox
 
             DropboxCertHelper.InitializeCertPinning();
 
-            var accessToken = string.IsNullOrWhiteSpace(secrets.AppToken)
+            string accessToken = string.IsNullOrWhiteSpace(secrets.AppToken)
                                     ? await GetAccessToken(secrets.AppKey).ConfigureAwait(true)
                                     : secrets.AppToken;
 
@@ -41,8 +41,8 @@ namespace GameSaveManager.Dropbox
 
         private async Task<string> GetAccessToken(string appkey)
         {
-            var state = Guid.NewGuid().ToString("N");
-            var authorizeUri = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Token, appkey, RedirectUri, state: state);
+            string state = Guid.NewGuid().ToString("N");
+            Uri authorizeUri = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Token, appkey, RedirectUri, state: state);
             using var httpListener = new HttpListener();
             httpListener.Prefixes.Add(LoopbackHost);
 
@@ -53,25 +53,26 @@ namespace GameSaveManager.Dropbox
                 FileName = authorizeUri.ToString(),
                 UseShellExecute = true
             };
-            Process.Start(processStartInfo);
+
+            _ = Process.Start(processStartInfo);
 
             await HandleOAuth2Redirect(httpListener).ConfigureAwait(true);
 
-            var result = await HandleJSRedirect(httpListener).ConfigureAwait(true);
+            OAuth2Response result = await HandleJSRedirect(httpListener).ConfigureAwait(true);
 
             return result.State != state ? null : result.AccessToken;
         }
 
         private async Task HandleOAuth2Redirect(HttpListener http)
         {
-            var httpListenerContext = await http.GetContextAsync().ConfigureAwait(true);
+            HttpListenerContext httpListenerContext = await http.GetContextAsync().ConfigureAwait(true);
 
             while (httpListenerContext.Request.Url.AbsolutePath != RedirectUri.AbsolutePath)
             {
                 httpListenerContext = await http.GetContextAsync().ConfigureAwait(true);
             }
 
-            var buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
             httpListenerContext.Response.ContentLength64 = buffer.Length;
 
             await httpListenerContext.Response.OutputStream.WriteAsync(buffer.AsMemory(0, buffer.Length)).ConfigureAwait(true);
@@ -81,7 +82,7 @@ namespace GameSaveManager.Dropbox
 
         private async Task<OAuth2Response> HandleJSRedirect(HttpListener httpListener)
         {
-            var httpListenerContext = await httpListener.GetContextAsync().ConfigureAwait(true);
+            HttpListenerContext httpListenerContext = await httpListener.GetContextAsync().ConfigureAwait(true);
 
             while (httpListenerContext.Request.Url.AbsolutePath != JSRedirectUri.AbsolutePath)
             {

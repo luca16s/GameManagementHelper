@@ -1,9 +1,9 @@
-﻿using GameSaveManager.Core.Models;
-
-using System.Threading.Tasks;
-
-namespace GameSaveManager.Core.Interfaces
+﻿namespace GameSaveManager.Core.Interfaces
 {
+    using GameSaveManager.Core.Models;
+
+    using System.Threading.Tasks;
+
     public interface ICloudOperations
     {
         Task<bool> CreateFolder(string path);
