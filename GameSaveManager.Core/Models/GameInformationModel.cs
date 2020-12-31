@@ -36,7 +36,7 @@
                 : string.Concat(nameToBeUsed, extension);
         }
 
-        public string RestoreSaveName() => string.Concat(DefaultSaveName, DefaultSaveExtension);
+        public string RestoreSaveName() => string.Concat(DefaultSaveName, $".{DefaultSaveExtension}");
 
         public void SetSaveBackupExtension(string saveExtension)
         {
