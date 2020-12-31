@@ -27,7 +27,8 @@
 
         public static bool DeleteCreatedFile(string path)
         {
-            if (File.Exists(path)) File.Delete(path);
+            if (File.Exists(path))
+                File.Delete(path);
 
             return !File.Exists(path) || DeleteCreatedFile(path);
         }

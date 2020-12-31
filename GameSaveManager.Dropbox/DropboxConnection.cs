@@ -1,15 +1,15 @@
-﻿namespace GameSaveManager.Dropbox
+﻿namespace GameSaveManager.DropboxApi
 {
-    using global::Dropbox.Api;
-
-    using GameSaveManager.Core.Interfaces;
-    using GameSaveManager.Core.Models;
-
     using System;
     using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
+
+    using Dropbox.Api;
+
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
 
     public class DropboxConnection : IConnection
     {
@@ -21,7 +21,8 @@
 
         public async Task<object> ConnectAsync(Secrets secrets)
         {
-            if (secrets == null) return default;
+            if (secrets == null)
+                return default;
 
             DropboxCertHelper.InitializeCertPinning();
 

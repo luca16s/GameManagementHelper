@@ -13,7 +13,8 @@
 
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return null;
+            if (gameInformation == null)
+                return null;
 
             string folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
 
@@ -32,7 +33,8 @@
 
         public void PrepareBackup(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return;
+            if (gameInformation == null)
+                return;
 
             string saveName = Path.Combine(FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder), gameInformation.RestoreSaveName());
 

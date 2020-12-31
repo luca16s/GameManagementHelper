@@ -1,8 +1,8 @@
 ﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
-    using GameSaveManager.Core.Enums;
-
     using System.Windows;
+
+    using GameSaveManager.Core.Enums;
 
     public class SettingsPageViewModel : ViewModelBase
     {
@@ -15,7 +15,8 @@
             get => _DriveServiceSelected;
             set
             {
-                if (_DriveServiceSelected == value) return;
+                if (_DriveServiceSelected == value)
+                    return;
 
                 _DriveServiceSelected = value;
                 OnPropertyChanged(nameof(DriveServiceSelected));
@@ -29,7 +30,8 @@
             get => _backupSaveType;
             set
             {
-                if (_backupSaveType == value) return;
+                if (_backupSaveType == value)
+                    return;
 
                 _backupSaveType = value;
                 Application.Current.Properties["BACKUP_TYPE"] = value;
@@ -44,7 +46,8 @@
             get => _Name;
             set
             {
-                if (_Name == value) return;
+                if (_Name == value)
+                    return;
 
                 _Name = value;
                 OnPropertyChanged(nameof(Name));
@@ -58,7 +61,8 @@
             get => _Email;
             set
             {
-                if (_Email == value) return;
+                if (_Email == value)
+                    return;
 
                 _Email = value;
                 OnPropertyChanged(nameof(Email));

@@ -1,8 +1,8 @@
 ﻿namespace GameSaveManager.Windows
 {
-    using GameSaveManager.DesktopApp.Pages;
-
     using System.Windows;
+
+    using GameSaveManager.DesktopApp.Pages;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml

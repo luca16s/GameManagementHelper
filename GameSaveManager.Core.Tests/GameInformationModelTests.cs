@@ -37,7 +37,7 @@ namespace GameSaveManager.Core.Tests
 
             string newSaveName = GameInformation.BuildSaveName(generatedName);
 
-            string saveName = generatedName + "." +  GameInformation.SaveBackupExtension;
+            string saveName = generatedName + "." + GameInformation.SaveBackupExtension;
 
             _ = saveName.Should().Be(newSaveName);
         }

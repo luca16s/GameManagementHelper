@@ -11,7 +11,7 @@
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.DesktopApp.Commands;
-    using GameSaveManager.Dropbox;
+    using GameSaveManager.DropboxApi;
 
     using global::Dropbox.Api;
 
@@ -60,7 +60,8 @@
             {
                 value ??= string.Empty;
 
-                if (value.ToString().Equals(_ImagePath)) return;
+                if (value.ToString().Equals(_ImagePath))
+                    return;
                 _ImagePath = value.ToString();
                 OnPropertyChanged(nameof(ImagePath));
             }
@@ -73,7 +74,8 @@
             get => _GamesSupported;
             set
             {
-                if (_GamesSupported == value) return;
+                if (_GamesSupported == value)
+                    return;
 
                 _GamesSupported = value;
 
@@ -118,7 +120,8 @@
 
         private async Task<bool> UploadSave()
         {
-            if (CloudOperations == null) return false;
+            if (CloudOperations == null)
+                return false;
 
             GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 
@@ -132,7 +135,8 @@
 
         private async Task<bool> DownloadSave()
         {
-            if (CloudOperations == null) return false;
+            if (CloudOperations == null)
+                return false;
 
             GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 

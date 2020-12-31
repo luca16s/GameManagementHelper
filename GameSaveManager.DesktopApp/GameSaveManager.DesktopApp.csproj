@@ -159,7 +159,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
-    <ProjectReference Include="..\GameSaveManager.Dropbox\GameSaveManager.Dropbox.csproj" />
+    <ProjectReference Include="..\GameSaveManager.Dropbox\GameSaveManager.DropboxApi.csproj" />
     <Resource Include="resources\actions\game_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

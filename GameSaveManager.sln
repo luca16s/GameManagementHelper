@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.DesktopApp"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.Core", "GameSaveManager.Core\GameSaveManager.Core.csproj", "{E9827BB3-A371-4859-A704-897CF2C2C19B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.Dropbox", "GameSaveManager.Dropbox\GameSaveManager.Dropbox.csproj", "{C397732E-9D13-412E-B108-A936E2EC386A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.DropboxApi", "GameSaveManager.Dropbox\GameSaveManager.DropboxApi.csproj", "{C397732E-9D13-412E-B108-A936E2EC386A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{43BE6FEE-5A6A-4B8D-91BA-573D6B20CD22}"
 	ProjectSection(SolutionItems) = preProject

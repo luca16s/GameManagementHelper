@@ -1,16 +1,16 @@
-﻿namespace GameSaveManager.Dropbox
+﻿namespace GameSaveManager.DropboxApi
 {
-    using global::Dropbox.Api;
-    using global::Dropbox.Api.Files;
-
-    using GameSaveManager.Core.Interfaces;
-    using GameSaveManager.Core.Models;
-    using GameSaveManager.Core.Utils;
-
     using System;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using Dropbox.Api;
+    using Dropbox.Api.Files;
+
+    using GameSaveManager.Core.Interfaces;
+    using GameSaveManager.Core.Models;
+    using GameSaveManager.Core.Utils;
 
     public class DropboxOperations : ICloudOperations
     {
@@ -25,14 +25,16 @@
 
         public async Task<bool> DownloadSaveData(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return false;
+            if (gameInformation == null)
+                return false;
 
             ListFolderResult fileList = await ListFolderContent(gameInformation.OnlineSaveFolder.TrimEnd('/')).ConfigureAwait(true);
 
             Metadata fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile
             && save.Name.Equals(gameInformation.BuildSaveName(), StringComparison.InvariantCultureIgnoreCase));
 
-            if (fileFound is null) return false;
+            if (fileFound is null)
+                return false;
 
             using global::Dropbox.Api.Stone.IDownloadResponse<FileMetadata> result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
 
@@ -49,7 +51,8 @@
 
         public async Task<bool> UploadSaveData(GameInformationModel gameInformation)
         {
-            if (gameInformation == null) return false;
+            if (gameInformation == null)
+                return false;
 
             try
             {

@@ -1,5 +1,12 @@
 ﻿namespace GameSaveManager.Windows
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Text;
+    using System.Windows;
+
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.Core.Services;
@@ -8,13 +15,6 @@
 
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Text;
-    using System.Windows;
 
     /// <summary>
     /// Interaction logic for App.xaml

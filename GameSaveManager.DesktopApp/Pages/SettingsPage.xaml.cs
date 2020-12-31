@@ -1,8 +1,8 @@
 ﻿namespace GameSaveManager.DesktopApp.Pages
 {
-    using GameSaveManager.DesktopApp.ViewModel;
-
     using System.Windows.Controls;
+
+    using GameSaveManager.DesktopApp.ViewModel;
 
     /// <summary>
     /// Interaction logic for SettingsPage.xaml

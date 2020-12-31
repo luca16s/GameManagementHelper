@@ -1,10 +1,10 @@
 ﻿namespace GameSaveManager.Core.Services
 {
+    using System;
+
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Utils;
-
-    using System;
 
     public class BackupFactory : IFactory<IBackupStrategy>
     {

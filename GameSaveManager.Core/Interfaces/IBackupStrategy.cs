@@ -1,8 +1,8 @@
 ﻿namespace GameSaveManager.Core.Interfaces
 {
-    using GameSaveManager.Core.Models;
-
     using System.IO;
+
+    using GameSaveManager.Core.Models;
 
     public interface IBackupStrategy
     {
