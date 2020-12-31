@@ -58,7 +58,8 @@ jobs:
       Solution_Name: GameSaveManager.sln.
       Test_Project_Path: GameSaveManager.Core.Tests\GameSaveManager.Core.Tests.csproj
       Wap_Project_Directory: GameSaveManager.Package
-      Wap_Project_Path: GameSaveManager.Package\GameSaveManager.Package.wapproj.
+      Wap_Project_Path: GameSaveManager.Package\GameSaveManager.Package.wapproj
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     steps:
     - name: Checkout
