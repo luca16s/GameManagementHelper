@@ -42,9 +42,6 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-    - name: Execute unit tests
-      run: dotnet test -o --runtime=win-x64 --no-restore
-
     - name: Decode the pfx
       run: |
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
