@@ -17,8 +17,7 @@ jobs:
     runs-on: windows-latest
 
     env:
-      Solution_Name: GameSaveManager.sln.
-      Test_Project_Path: GameSaveManager.Core.Tests\GameSaveManager.Core.Tests.csproj
+      Solution_Name: GameSaveManager.sln
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     steps:
