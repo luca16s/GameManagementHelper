@@ -45,7 +45,7 @@ jobs:
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
 
     - name: Execute unit tests
-      run: dotnet test -o --runtime=$env:RuntimeIdentifier
+      run: dotnet test -o --runtime=$env:RuntimeIdentifier --no-restore
       env:
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
 
