@@ -39,7 +39,9 @@ jobs:
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
 
     - name: Execute unit tests
-      run: dotnet test $env:Test_Project_Path
+      run: dotnet test -o --runtime=$env:RuntimeIdentifier
+      env:
+        RuntimeIdentifier: win-${{ matrix.targetplatform }}
 
     - name: Restore the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
