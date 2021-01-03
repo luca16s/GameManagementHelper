@@ -14,7 +14,18 @@
         public string Publisher { get; set; }
         public string DefaultSaveName { get; set; }
         public string OnlineSaveFolder { get; set; }
-        public string UserDefinedSaveName { get; set; }
+
+        private string _UserDefinedSaveName;
+        public string UserDefinedSaveName
+        {
+            get => _UserDefinedSaveName;
+            set
+            {
+                _UserDefinedSaveName = string.IsNullOrWhiteSpace(value)
+                    ? DefaultSaveName
+                    : value;
+            }
+        }
         public string SaveBackupExtension { get; private set; }
         public string DefaultSaveExtension { get; set; }
         public string DefaultGameSaveFolder { get; set; }
@@ -25,12 +36,8 @@
 
         public string BuildSaveName(string saveName)
         {
-            string nameToBeUsed = string.IsNullOrWhiteSpace(UserDefinedSaveName)
-                ? DefaultSaveName
-                : UserDefinedSaveName;
-
             return string.IsNullOrWhiteSpace(saveName)
-                ? string.Concat(nameToBeUsed, SaveBackupExtension)
+                ? string.Concat(_UserDefinedSaveName, SaveBackupExtension)
                 : string.Concat(saveName, SaveBackupExtension);
         }
 

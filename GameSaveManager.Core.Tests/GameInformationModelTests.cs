@@ -45,6 +45,8 @@ namespace GameSaveManager.Core.Tests
         [Test]
         public void ShouldReturnDefaultSaveNameIfNoNewNameIsProvided()
         {
+            GameInformation.UserDefinedSaveName = GameInformation.DefaultSaveName;
+
             string newSaveName = GameInformation.BuildSaveName();
 
             string defaultSaveName = GameInformation.DefaultSaveName + GameInformation.SaveBackupExtension;
@@ -55,6 +57,8 @@ namespace GameSaveManager.Core.Tests
         [Test]
         public void ShouldReturnDefaultSaveNameIfEmptyStringIsProvided()
         {
+            GameInformation.UserDefinedSaveName = GameInformation.DefaultSaveName;
+
             string newSaveName = GameInformation.BuildSaveName(string.Empty);
 
             string defaultSaveName = GameInformation.DefaultSaveName + GameInformation.SaveBackupExtension;
@@ -65,6 +69,8 @@ namespace GameSaveManager.Core.Tests
         [Test]
         public void ShouldReturnDefaultSaveNameIfNullValueIsProvided()
         {
+            GameInformation.UserDefinedSaveName = GameInformation.DefaultSaveName;
+
             string newSaveName = GameInformation.BuildSaveName(null);
 
             string defaultSaveName = GameInformation.DefaultSaveName + GameInformation.SaveBackupExtension;
@@ -75,6 +81,8 @@ namespace GameSaveManager.Core.Tests
         [Test]
         public void ShouldReturnDefaultSaveNameIfWhiteSpaceValueIsProvided()
         {
+            GameInformation.UserDefinedSaveName = GameInformation.DefaultSaveName;
+
             string newSaveName = GameInformation.BuildSaveName("      ");
 
             string defaultSaveName = GameInformation.DefaultSaveName + GameInformation.SaveBackupExtension;
