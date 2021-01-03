@@ -2,10 +2,13 @@
 {
     using System;
 
+    using Flunt.Notifications;
+    using Flunt.Validations;
+
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Utils;
 
-    public class GameInformationModel
+    public class GameInformationModel : Notifiable
     {
         public string Name { get; set; }
         public string Title { get; set; }
@@ -36,9 +39,14 @@
 
         public string BuildSaveName(string saveName)
         {
-            return string.IsNullOrWhiteSpace(saveName)
-                ? string.Concat(_UserDefinedSaveName, SaveBackupExtension)
-                : string.Concat(saveName, SaveBackupExtension);
+            AddNotifications(new Contract()
+                .HasMinLen(saveName, 5, nameof(saveName), SystemMessages.SaveNameMinLengthMessage)
+                .HasMaxLen(saveName, 150, nameof(saveName), SystemMessages.SaveNameMaxLenghtMessage)
+                .IsNotNullOrWhiteSpace(saveName, nameof(saveName), SystemMessages.SaveNameIsNullMessage));
+
+            return Valid
+                ? string.Concat(saveName, SaveBackupExtension)
+                : string.Concat(_UserDefinedSaveName, SaveBackupExtension);
         }
 
         public void SetSaveBackupExtension(string saveExtension)
