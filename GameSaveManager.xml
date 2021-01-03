@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="150" visitedSequencePoints="52" numBranchPoints="56" visitedBranchPoints="22" sequenceCoverage="34.66" branchCoverage="39.28" maxCyclomaticComplexity="82" minCyclomaticComplexity="82" visitedClasses="6" numClasses="10" visitedMethods="12" numMethods="39" />
   <Modules>
-    <Module hash="A8EBFBBE-E887-463F-9BFD-5D92FDE19692">
+    <Module hash="0D7B3CC9-26DD-4DAB-A754-B6EE5D9D14B6">
       <ModulePath>GameSaveManager.Core.dll</ModulePath>
-      <ModuleTime>2021-01-03T03:35:28</ModuleTime>
+      <ModuleTime>2021-01-03T05:37:56</ModuleTime>
       <ModuleName>GameSaveManager.Core</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\lucag\source\repos\luca16s\GameSaveManager\GameSaveManager.Core\Utils\EnumExtensions.cs" />
@@ -29,27 +29,27 @@
               <Name>System.String GameSaveManager.Core.Utils.EnumExtensions::Description(System.Enum)</Name>
               <FileRef uid="1" />
               <SequencePoints>
-                <SequencePoint vc="8" uspid="14" ordinal="0" sl="14" sc="1" el="14" ec="2" bec="0" bev="0" fileid="1" />
-                <SequencePoint vc="8" uspid="15" ordinal="1" sl="15" sc="1" el="15" ec="2" bec="2" bev="1" fileid="1" />
+                <SequencePoint vc="9" uspid="14" ordinal="0" sl="14" sc="1" el="14" ec="2" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="9" uspid="15" ordinal="1" sl="15" sc="1" el="15" ec="2" bec="2" bev="1" fileid="1" />
                 <SequencePoint vc="0" uspid="16" ordinal="2" sl="16" sc="1" el="16" ec="2" bec="0" bev="0" fileid="1" />
-                <SequencePoint vc="8" uspid="18" ordinal="3" sl="18" sc="1" el="18" ec="2" bec="0" bev="0" fileid="1" />
-                <SequencePoint vc="8" uspid="19" ordinal="4" sl="19" sc="1" el="19" ec="2" bec="0" bev="0" fileid="1" />
-                <SequencePoint vc="8" uspid="20" ordinal="5" sl="20" sc="1" el="20" ec="2" bec="0" bev="0" fileid="1" />
-                <SequencePoint vc="8" uspid="21" ordinal="6" sl="21" sc="1" el="21" ec="2" bec="0" bev="0" fileid="1" />
-                <SequencePoint vc="8" uspid="23" ordinal="7" sl="23" sc="1" el="23" ec="2" bec="2" bev="1" fileid="1" />
-                <SequencePoint vc="8" uspid="24" ordinal="8" sl="24" sc="1" el="24" ec="2" bec="4" bev="2" fileid="1" />
+                <SequencePoint vc="9" uspid="18" ordinal="3" sl="18" sc="1" el="18" ec="2" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="9" uspid="19" ordinal="4" sl="19" sc="1" el="19" ec="2" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="9" uspid="20" ordinal="5" sl="20" sc="1" el="20" ec="2" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="9" uspid="21" ordinal="6" sl="21" sc="1" el="21" ec="2" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="9" uspid="23" ordinal="7" sl="23" sc="1" el="23" ec="2" bec="2" bev="1" fileid="1" />
+                <SequencePoint vc="9" uspid="24" ordinal="8" sl="24" sc="1" el="24" ec="2" bec="4" bev="2" fileid="1" />
                 <SequencePoint vc="0" uspid="26" ordinal="9" sl="26" sc="1" el="26" ec="2" bec="0" bev="0" fileid="1" />
                 <SequencePoint vc="0" uspid="28" ordinal="10" sl="28" sc="1" el="28" ec="2" bec="0" bev="0" fileid="1" />
-                <SequencePoint vc="8" uspid="29" ordinal="11" sl="29" sc="1" el="29" ec="2" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="9" uspid="29" ordinal="11" sl="29" sc="1" el="29" ec="2" bec="0" bev="0" fileid="1" />
               </SequencePoints>
               <BranchPoints>
                 <BranchPoint vc="0" uspid="15" ordinal="0" path="0" offset="7" offsetend="9" sl="15" fileid="1" />
-                <BranchPoint vc="8" uspid="15" ordinal="1" path="1" offset="7" offsetend="13" sl="15" fileid="1" />
-                <BranchPoint vc="8" uspid="23" ordinal="2" path="0" offset="56" offsetend="58" sl="23" fileid="1" />
+                <BranchPoint vc="9" uspid="15" ordinal="1" path="1" offset="7" offsetend="13" sl="15" fileid="1" />
+                <BranchPoint vc="9" uspid="23" ordinal="2" path="0" offset="56" offsetend="58" sl="23" fileid="1" />
                 <BranchPoint vc="0" uspid="24" ordinal="4" path="0" offset="59" offsetend="61" sl="24" fileid="1" />
-                <BranchPoint vc="8" uspid="24" ordinal="5" path="1" offset="59" offsetend="64" sl="24" fileid="1" />
+                <BranchPoint vc="9" uspid="24" ordinal="5" path="1" offset="59" offsetend="64" sl="24" fileid="1" />
                 <BranchPoint vc="0" uspid="24" ordinal="6" path="0" offset="76" offsetend="78" sl="24" fileid="1" />
-                <BranchPoint vc="8" uspid="24" ordinal="7" path="1" offset="76" offsetend="82" sl="24" fileid="1" />
+                <BranchPoint vc="9" uspid="24" ordinal="7" path="1" offset="76" offsetend="82" sl="24" fileid="1" />
                 <BranchPoint vc="0" uspid="23" ordinal="3" path="1" offset="56" offsetend="90" sl="23" fileid="1" />
               </BranchPoints>
               <MethodPoint vc="9" uspid="0" p8:type="SequencePoint" ordinal="0" offset="0" sc="0" sl="14" ec="1" el="29" bec="0" bev="0" fileid="1" xmlns:p8="xsi" />
@@ -214,24 +214,24 @@
               <Name>GameSaveManager.Core.Interfaces.IBackupStrategy GameSaveManager.Core.Services.BackupFactory::Create(GameSaveManager.Core.Enums.EBackupSaveType)</Name>
               <FileRef uid="4" />
               <SequencePoints>
-                <SequencePoint vc="7" uspid="12" ordinal="0" sl="12" sc="1" el="12" ec="2" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="8" uspid="12" ordinal="0" sl="12" sc="1" el="12" ec="2" bec="0" bev="0" fileid="4" />
                 <SequencePoint vc="0" uspid="13" ordinal="1" sl="13" sc="1" el="13" ec="2" bec="6" bev="4" fileid="4" />
                 <SequencePoint vc="0" uspid="14" ordinal="2" sl="14" sc="1" el="14" ec="2" bec="0" bev="0" fileid="4" />
                 <SequencePoint vc="0" uspid="15" ordinal="3" sl="15" sc="1" el="15" ec="2" bec="0" bev="0" fileid="4" />
                 <SequencePoint vc="0" uspid="16" ordinal="4" sl="16" sc="1" el="16" ec="2" bec="0" bev="0" fileid="4" />
                 <SequencePoint vc="0" uspid="17" ordinal="5" sl="17" sc="1" el="17" ec="2" bec="2" bev="1" fileid="4" />
                 <SequencePoint vc="0" uspid="18" ordinal="6" sl="18" sc="1" el="18" ec="2" bec="0" bev="0" fileid="4" />
-                <SequencePoint vc="7" uspid="19" ordinal="7" sl="19" sc="1" el="19" ec="2" bec="0" bev="0" fileid="4" />
+                <SequencePoint vc="8" uspid="19" ordinal="7" sl="19" sc="1" el="19" ec="2" bec="0" bev="0" fileid="4" />
               </SequencePoints>
               <BranchPoints>
                 <BranchPoint vc="0" uspid="13" ordinal="0" path="0" offset="2" offsetend="4" sl="13" fileid="4" />
-                <BranchPoint vc="7" uspid="13" ordinal="1" path="1" offset="2" offsetend="5" sl="13" fileid="4" />
-                <BranchPoint vc="3" uspid="13" ordinal="2" path="0" offset="6" offsetend="10" sl="13" fileid="4" />
-                <BranchPoint vc="4" uspid="13" ordinal="3" path="1" offset="6" offsetend="16" sl="13" fileid="4" />
-                <BranchPoint vc="3" uspid="13" ordinal="5" path="1" offset="12" offsetend="24" sl="13" fileid="4" />
+                <BranchPoint vc="8" uspid="13" ordinal="1" path="1" offset="2" offsetend="5" sl="13" fileid="4" />
+                <BranchPoint vc="2" uspid="13" ordinal="2" path="0" offset="6" offsetend="10" sl="13" fileid="4" />
+                <BranchPoint vc="6" uspid="13" ordinal="3" path="1" offset="6" offsetend="16" sl="13" fileid="4" />
+                <BranchPoint vc="2" uspid="13" ordinal="5" path="1" offset="12" offsetend="24" sl="13" fileid="4" />
                 <BranchPoint vc="0" uspid="13" ordinal="4" path="0" offset="12" offsetend="32" sl="13" fileid="4" />
                 <BranchPoint vc="0" uspid="17" ordinal="6" path="0" offset="44" offsetend="46" sl="17" fileid="4" />
-                <BranchPoint vc="7" uspid="17" ordinal="7" path="1" offset="44" offsetend="47" sl="17" fileid="4" />
+                <BranchPoint vc="8" uspid="17" ordinal="7" path="1" offset="44" offsetend="47" sl="17" fileid="4" />
               </BranchPoints>
               <MethodPoint vc="2" uspid="0" p8:type="SequencePoint" ordinal="0" offset="0" sc="0" sl="12" ec="1" el="19" bec="0" bev="0" fileid="4" xmlns:p8="xsi" />
             </Method>
@@ -247,7 +247,7 @@
               <Name>System.String GameSaveManager.Core.Services.BakBackupStrategy::GetFileExtension()</Name>
               <FileRef uid="5" />
               <SequencePoints>
-                <SequencePoint vc="4" uspid="12" ordinal="0" sl="12" sc="1" el="12" ec="2" bec="0" bev="0" fileid="5" />
+                <SequencePoint vc="6" uspid="12" ordinal="0" sl="12" sc="1" el="12" ec="2" bec="0" bev="0" fileid="5" />
               </SequencePoints>
               <BranchPoints />
               <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="0" offset="0" sc="0" sl="12" ec="1" el="12" bec="0" bev="0" fileid="5" xmlns:p8="xsi" />
@@ -311,7 +311,7 @@
               <Name>System.String GameSaveManager.Core.Services.ZipBackupStrategy::GetFileExtension()</Name>
               <FileRef uid="6" />
               <SequencePoints>
-                <SequencePoint vc="3" uspid="13" ordinal="0" sl="13" sc="1" el="13" ec="2" bec="0" bev="0" fileid="6" />
+                <SequencePoint vc="2" uspid="13" ordinal="0" sl="13" sc="1" el="13" ec="2" bec="0" bev="0" fileid="6" />
               </SequencePoints>
               <BranchPoints />
               <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="0" offset="0" sc="0" sl="13" ec="1" el="13" bec="0" bev="0" fileid="6" xmlns:p8="xsi" />
@@ -429,7 +429,7 @@
             <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
               <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
               <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_CoverPath()</Name>
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_Name()</Name>
               <FileRef uid="8" />
               <SequencePoints>
                 <SequencePoint vc="0" uspid="10" ordinal="0" sl="10" sc="1" el="10" ec="2" bec="0" bev="0" fileid="8" />
@@ -437,21 +437,21 @@
               <BranchPoints />
               <MethodPoint vc="0" uspid="0" p8:type="SequencePoint" ordinal="0" offset="0" sc="0" sl="10" ec="1" el="10" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
             </Method>
-            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
-              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
               <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_DefaultSaveExtension()</Name>
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_Title()</Name>
               <FileRef uid="8" />
               <SequencePoints>
-                <SequencePoint vc="9" uspid="11" ordinal="0" sl="11" sc="1" el="11" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="0" uspid="11" ordinal="0" sl="11" sc="1" el="11" ec="2" bec="0" bev="0" fileid="8" />
               </SequencePoints>
               <BranchPoints />
-              <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="1" offset="1" sc="0" sl="11" ec="1" el="11" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
+              <MethodPoint vc="0" uspid="0" p8:type="SequencePoint" ordinal="1" offset="1" sc="0" sl="11" ec="1" el="11" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
             </Method>
             <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
               <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
               <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_DefaultGameSaveFolder()</Name>
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_CoverPath()</Name>
               <FileRef uid="8" />
               <SequencePoints>
                 <SequencePoint vc="0" uspid="12" ordinal="0" sl="12" sc="1" el="12" ec="2" bec="0" bev="0" fileid="8" />
@@ -459,21 +459,21 @@
               <BranchPoints />
               <MethodPoint vc="0" uspid="0" p8:type="SequencePoint" ordinal="2" offset="2" sc="0" sl="12" ec="1" el="12" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
             </Method>
-            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
-              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
-              <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_DefaultSaveName()</Name>
-              <FileRef uid="8" />
-              <SequencePoints>
-                <SequencePoint vc="16" uspid="13" ordinal="0" sl="13" sc="1" el="13" ec="2" bec="0" bev="0" fileid="8" />
-              </SequencePoints>
-              <BranchPoints />
-              <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="3" offset="3" sc="0" sl="13" ec="1" el="13" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
-            </Method>
             <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
               <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
               <MetadataToken />
               <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_Developer()</Name>
+              <FileRef uid="8" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="13" ordinal="0" sl="13" sc="1" el="13" ec="2" bec="0" bev="0" fileid="8" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="0" p8:type="SequencePoint" ordinal="3" offset="3" sc="0" sl="13" ec="1" el="13" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
+            </Method>
+            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken />
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_Publisher()</Name>
               <FileRef uid="8" />
               <SequencePoints>
                 <SequencePoint vc="0" uspid="14" ordinal="0" sl="14" sc="1" el="14" ec="2" bec="0" bev="0" fileid="8" />
@@ -481,16 +481,16 @@
               <BranchPoints />
               <MethodPoint vc="0" uspid="0" p8:type="SequencePoint" ordinal="4" offset="4" sc="0" sl="14" ec="1" el="14" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
             </Method>
-            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
-              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
               <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_Name()</Name>
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_DefaultSaveName()</Name>
               <FileRef uid="8" />
               <SequencePoints>
-                <SequencePoint vc="0" uspid="15" ordinal="0" sl="15" sc="1" el="15" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="19" uspid="15" ordinal="0" sl="15" sc="1" el="15" ec="2" bec="0" bev="0" fileid="8" />
               </SequencePoints>
               <BranchPoints />
-              <MethodPoint vc="0" uspid="0" p8:type="SequencePoint" ordinal="5" offset="5" sc="0" sl="15" ec="1" el="15" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
+              <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="5" offset="5" sc="0" sl="15" ec="1" el="15" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
             </Method>
             <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
               <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
@@ -506,7 +506,7 @@
             <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
               <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
               <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_Publisher()</Name>
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_UserDefinedSaveName()</Name>
               <FileRef uid="8" />
               <SequencePoints>
                 <SequencePoint vc="0" uspid="17" ordinal="0" sl="17" sc="1" el="17" ec="2" bec="0" bev="0" fileid="8" />
@@ -520,26 +520,26 @@
               <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_SaveBackupExtension()</Name>
               <FileRef uid="8" />
               <SequencePoints>
-                <SequencePoint vc="21" uspid="18" ordinal="0" sl="18" sc="1" el="18" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="25" uspid="18" ordinal="0" sl="18" sc="1" el="18" ec="2" bec="0" bev="0" fileid="8" />
               </SequencePoints>
               <BranchPoints />
               <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="8" offset="8" sc="0" sl="18" ec="1" el="18" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
             </Method>
-            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
-              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
               <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_Title()</Name>
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_DefaultSaveExtension()</Name>
               <FileRef uid="8" />
               <SequencePoints>
-                <SequencePoint vc="0" uspid="19" ordinal="0" sl="19" sc="1" el="19" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="10" uspid="19" ordinal="0" sl="19" sc="1" el="19" ec="2" bec="0" bev="0" fileid="8" />
               </SequencePoints>
               <BranchPoints />
-              <MethodPoint vc="0" uspid="0" p8:type="SequencePoint" ordinal="9" offset="9" sc="0" sl="19" ec="1" el="19" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
+              <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="9" offset="9" sc="0" sl="19" ec="1" el="19" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
             </Method>
             <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="100" isConstructor="False" isGetter="True" isSetter="False" isStatic="True">
               <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
               <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_SaveName()</Name>
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::get_DefaultGameSaveFolder()</Name>
               <FileRef uid="8" />
               <SequencePoints>
                 <SequencePoint vc="0" uspid="20" ordinal="0" sl="20" sc="1" el="20" ec="2" bec="0" bev="0" fileid="8" />
@@ -550,7 +550,7 @@
             <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
               <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
               <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::BuildSaveName()</Name>
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::RestoreSaveName()</Name>
               <FileRef uid="8" />
               <SequencePoints>
                 <SequencePoint vc="1" uspid="22" ordinal="0" sl="22" sc="1" el="22" ec="2" bec="0" bev="0" fileid="8" />
@@ -558,44 +558,44 @@
               <BranchPoints />
               <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="11" offset="11" sc="0" sl="22" ec="1" el="22" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
             </Method>
+            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
+              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+              <MetadataToken />
+              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::BuildSaveName()</Name>
+              <FileRef uid="8" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="24" ordinal="0" sl="24" sc="1" el="24" ec="2" bec="0" bev="0" fileid="8" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="12" offset="12" sc="0" sl="24" ec="1" el="24" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
+            </Method>
             <Method cyclomaticComplexity="6" nPathComplexity="0" sequenceCoverage="100" branchCoverage="66.66" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
               <Summary numSequencePoints="11" visitedSequencePoints="11" numBranchPoints="6" visitedBranchPoints="4" sequenceCoverage="100" branchCoverage="66.66" maxCyclomaticComplexity="6" minCyclomaticComplexity="6" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
               <MetadataToken />
               <Name>System.String GameSaveManager.Core.Models.GameInformationModel::BuildSaveName(System.String)</Name>
               <FileRef uid="8" />
               <SequencePoints>
-                <SequencePoint vc="4" uspid="25" ordinal="0" sl="25" sc="1" el="25" ec="2" bec="0" bev="0" fileid="8" />
-                <SequencePoint vc="4" uspid="26" ordinal="1" sl="26" sc="1" el="26" ec="2" bec="2" bev="1" fileid="8" />
-                <SequencePoint vc="4" uspid="27" ordinal="2" sl="27" sc="1" el="27" ec="2" bec="0" bev="0" fileid="8" />
-                <SequencePoint vc="4" uspid="28" ordinal="3" sl="28" sc="1" el="28" ec="2" bec="0" bev="0" fileid="8" />
-                <SequencePoint vc="4" uspid="30" ordinal="4" sl="30" sc="1" el="30" ec="2" bec="2" bev="1" fileid="8" />
-                <SequencePoint vc="4" uspid="31" ordinal="5" sl="31" sc="1" el="31" ec="2" bec="0" bev="0" fileid="8" />
-                <SequencePoint vc="4" uspid="32" ordinal="6" sl="32" sc="1" el="32" ec="2" bec="0" bev="0" fileid="8" />
-                <SequencePoint vc="4" uspid="34" ordinal="7" sl="34" sc="1" el="34" ec="2" bec="2" bev="2" fileid="8" />
-                <SequencePoint vc="4" uspid="35" ordinal="8" sl="35" sc="1" el="35" ec="2" bec="0" bev="0" fileid="8" />
-                <SequencePoint vc="4" uspid="36" ordinal="9" sl="36" sc="1" el="36" ec="2" bec="0" bev="0" fileid="8" />
-                <SequencePoint vc="4" uspid="37" ordinal="10" sl="37" sc="1" el="37" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="5" uspid="27" ordinal="0" sl="27" sc="1" el="27" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="5" uspid="28" ordinal="1" sl="28" sc="1" el="28" ec="2" bec="2" bev="1" fileid="8" />
+                <SequencePoint vc="5" uspid="29" ordinal="2" sl="29" sc="1" el="29" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="5" uspid="30" ordinal="3" sl="30" sc="1" el="30" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="5" uspid="32" ordinal="4" sl="32" sc="1" el="32" ec="2" bec="2" bev="1" fileid="8" />
+                <SequencePoint vc="5" uspid="33" ordinal="5" sl="33" sc="1" el="33" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="5" uspid="34" ordinal="6" sl="34" sc="1" el="34" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="5" uspid="36" ordinal="7" sl="36" sc="1" el="36" ec="2" bec="2" bev="2" fileid="8" />
+                <SequencePoint vc="5" uspid="37" ordinal="8" sl="37" sc="1" el="37" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="5" uspid="38" ordinal="9" sl="38" sc="1" el="38" ec="2" bec="0" bev="0" fileid="8" />
+                <SequencePoint vc="5" uspid="39" ordinal="10" sl="39" sc="1" el="39" ec="2" bec="0" bev="0" fileid="8" />
               </SequencePoints>
               <BranchPoints>
-                <BranchPoint vc="4" uspid="26" ordinal="0" path="0" offset="12" offsetend="14" sl="26" fileid="8" />
-                <BranchPoint vc="0" uspid="26" ordinal="1" path="1" offset="12" offsetend="32" sl="26" fileid="8" />
-                <BranchPoint vc="0" uspid="30" ordinal="2" path="0" offset="49" offsetend="51" sl="30" fileid="8" />
-                <BranchPoint vc="4" uspid="30" ordinal="3" path="1" offset="49" offsetend="59" sl="30" fileid="8" />
-                <BranchPoint vc="3" uspid="34" ordinal="4" path="0" offset="72" offsetend="74" sl="34" fileid="8" />
-                <BranchPoint vc="1" uspid="34" ordinal="5" path="1" offset="72" offsetend="83" sl="34" fileid="8" />
+                <BranchPoint vc="5" uspid="28" ordinal="0" path="0" offset="12" offsetend="14" sl="28" fileid="8" />
+                <BranchPoint vc="0" uspid="28" ordinal="1" path="1" offset="12" offsetend="34" sl="28" fileid="8" />
+                <BranchPoint vc="0" uspid="32" ordinal="2" path="0" offset="51" offsetend="53" sl="32" fileid="8" />
+                <BranchPoint vc="5" uspid="32" ordinal="3" path="1" offset="51" offsetend="61" sl="32" fileid="8" />
+                <BranchPoint vc="1" uspid="36" ordinal="4" path="0" offset="74" offsetend="76" sl="36" fileid="8" />
+                <BranchPoint vc="4" uspid="36" ordinal="5" path="1" offset="74" offsetend="85" sl="36" fileid="8" />
               </BranchPoints>
-              <MethodPoint vc="11" uspid="0" p8:type="SequencePoint" ordinal="12" offset="12" sc="0" sl="25" ec="1" el="37" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
-            </Method>
-            <Method cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
-              <Summary numSequencePoints="1" visitedSequencePoints="1" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
-              <MetadataToken />
-              <Name>System.String GameSaveManager.Core.Models.GameInformationModel::RestoreSaveName()</Name>
-              <FileRef uid="8" />
-              <SequencePoints>
-                <SequencePoint vc="1" uspid="39" ordinal="0" sl="39" sc="1" el="39" ec="2" bec="0" bev="0" fileid="8" />
-              </SequencePoints>
-              <BranchPoints />
-              <MethodPoint vc="1" uspid="0" p8:type="SequencePoint" ordinal="13" offset="13" sc="0" sl="39" ec="1" el="39" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
+              <MethodPoint vc="11" uspid="0" p8:type="SequencePoint" ordinal="13" offset="13" sc="0" sl="27" ec="1" el="39" bec="0" bev="0" fileid="8" xmlns:p8="xsi" />
             </Method>
             <Method cyclomaticComplexity="2" nPathComplexity="0" sequenceCoverage="100" branchCoverage="100" isConstructor="False" isGetter="False" isSetter="False" isStatic="True">
               <Summary numSequencePoints="9" visitedSequencePoints="9" numBranchPoints="2" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />

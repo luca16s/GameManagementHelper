@@ -37,7 +37,7 @@ namespace GameSaveManager.Core.Tests
 
             string newSaveName = GameInformation.BuildSaveName(generatedName);
 
-            string saveName = generatedName + "." + GameInformation.SaveBackupExtension;
+            string saveName = generatedName + GameInformation.SaveBackupExtension;
 
             _ = saveName.Should().Be(newSaveName);
         }
@@ -47,7 +47,7 @@ namespace GameSaveManager.Core.Tests
         {
             string newSaveName = GameInformation.BuildSaveName();
 
-            string defaultSaveName = GameInformation.DefaultSaveName + "." + GameInformation.SaveBackupExtension;
+            string defaultSaveName = GameInformation.DefaultSaveName + GameInformation.SaveBackupExtension;
 
             _ = defaultSaveName.Should().Be(newSaveName);
         }
@@ -57,7 +57,7 @@ namespace GameSaveManager.Core.Tests
         {
             string newSaveName = GameInformation.BuildSaveName(string.Empty);
 
-            string defaultSaveName = GameInformation.DefaultSaveName + "." + GameInformation.SaveBackupExtension;
+            string defaultSaveName = GameInformation.DefaultSaveName + GameInformation.SaveBackupExtension;
 
             _ = defaultSaveName.Should().Be(newSaveName);
         }
@@ -67,7 +67,7 @@ namespace GameSaveManager.Core.Tests
         {
             string newSaveName = GameInformation.BuildSaveName(null);
 
-            string defaultSaveName = GameInformation.DefaultSaveName + "." + GameInformation.SaveBackupExtension;
+            string defaultSaveName = GameInformation.DefaultSaveName + GameInformation.SaveBackupExtension;
 
             _ = defaultSaveName.Should().Be(newSaveName);
         }
@@ -77,7 +77,7 @@ namespace GameSaveManager.Core.Tests
         {
             string newSaveName = GameInformation.BuildSaveName("      ");
 
-            string defaultSaveName = GameInformation.DefaultSaveName + "." + GameInformation.SaveBackupExtension;
+            string defaultSaveName = GameInformation.DefaultSaveName + GameInformation.SaveBackupExtension;
 
             _ = defaultSaveName.Should().Be(newSaveName);
         }
@@ -99,7 +99,7 @@ namespace GameSaveManager.Core.Tests
 
             string defaultSaveName = GameInformation.SaveBackupExtension;
 
-            _ = defaultSaveName.Should().Be(saveExtension);
+            _ = defaultSaveName.Should().Contain(saveExtension);
         }
 
         [Test]

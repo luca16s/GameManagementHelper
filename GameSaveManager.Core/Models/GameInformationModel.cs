@@ -25,17 +25,13 @@
 
         public string BuildSaveName(string saveName)
         {
-            string extension = string.IsNullOrWhiteSpace(SaveBackupExtension)
-                ? string.Empty
-                : string.Concat('.', SaveBackupExtension);
-
             string nameToBeUsed = string.IsNullOrWhiteSpace(UserDefinedSaveName)
                 ? DefaultSaveName
                 : UserDefinedSaveName;
 
             return string.IsNullOrWhiteSpace(saveName)
-                ? string.Concat(nameToBeUsed, extension)
-                : string.Concat(saveName, extension);
+                ? string.Concat(nameToBeUsed, SaveBackupExtension)
+                : string.Concat(saveName, SaveBackupExtension);
         }
 
         public void SetSaveBackupExtension(string saveExtension)
@@ -43,7 +39,7 @@
             try
             {
                 if (Enum.IsDefined(typeof(EBackupSaveType), saveExtension.GetEnumValueFromDescription<EBackupSaveType>()))
-                    SaveBackupExtension = saveExtension;
+                    SaveBackupExtension = string.Concat('.', saveExtension);
             }
             catch (ArgumentException)
             {
