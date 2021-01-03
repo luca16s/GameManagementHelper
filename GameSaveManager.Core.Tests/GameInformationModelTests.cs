@@ -73,6 +73,16 @@ namespace GameSaveManager.Core.Tests
         }
 
         [Test]
+        public void ShouldReturnDefaultSaveNameIfWhiteSpaceValueIsProvided()
+        {
+            string newSaveName = GameInformation.BuildSaveName("      ");
+
+            string defaultSaveName = GameInformation.DefaultSaveName + "." + GameInformation.SaveBackupExtension;
+
+            _ = defaultSaveName.Should().Be(newSaveName);
+        }
+
+        [Test]
         public void ShouldSetDefaultIfSaveExtensionIsNotInBackupSaveTypeEnum()
         {
             const string saveExtension = "rar";
