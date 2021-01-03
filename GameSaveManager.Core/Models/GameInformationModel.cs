@@ -23,17 +23,13 @@
 
         public string BuildSaveName(string saveName)
         {
-            string extension = string.IsNullOrWhiteSpace(SaveBackupExtension)
-                ? string.Empty
-                : $".{SaveBackupExtension}";
-
             string nameToBeUsed = string.IsNullOrWhiteSpace(SaveName)
                 ? DefaultSaveName
                 : SaveName;
 
             return !string.IsNullOrWhiteSpace(saveName)
-                ? string.Concat(saveName, extension)
-                : string.Concat(nameToBeUsed, extension);
+                ? string.Concat(saveName, '.', SaveBackupExtension)
+                : string.Concat(nameToBeUsed, '.', SaveBackupExtension);
         }
 
         public string RestoreSaveName() => string.Concat(DefaultSaveName, $".{DefaultSaveExtension}");
@@ -47,6 +43,7 @@
             }
             catch (ArgumentException)
             {
+                SaveBackupExtension = string.Empty;
                 throw new NotSupportedException(SystemMessages.ErrorSaveExtensionNotSupported);
             }
         }
