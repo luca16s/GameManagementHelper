@@ -91,5 +91,15 @@ namespace GameSaveManager.Core.Tests
 
             _ = defaultSaveName.Should().Be(saveExtension);
         }
+
+        [Test]
+        public void ShouldReturnDefaultSaveName()
+        {
+            string expected = $"{GameInformation.DefaultSaveName}.{GameInformation.DefaultSaveExtension}";
+
+            string saveName = GameInformation.RestoreSaveName();
+
+            _ = saveName.Should().Be(expected);
+        }
     }
 }
