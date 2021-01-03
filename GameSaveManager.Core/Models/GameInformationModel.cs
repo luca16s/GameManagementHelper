@@ -24,11 +24,17 @@
             get => _UserDefinedSaveName;
             set
             {
-                _UserDefinedSaveName = string.IsNullOrWhiteSpace(value)
+                AddNotifications(new Contract()
+                .HasMinLen(value, 5, nameof(value), SystemMessages.SaveNameMinLengthMessage)
+                .HasMaxLen(value, 150, nameof(value), SystemMessages.SaveNameMaxLenghtMessage)
+                .IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
+
+                _UserDefinedSaveName = Valid
                     ? DefaultSaveName
                     : value;
             }
         }
+
         public string SaveBackupExtension { get; private set; }
         public string DefaultSaveExtension { get; set; }
         public string DefaultGameSaveFolder { get; set; }
