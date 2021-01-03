@@ -10,96 +10,13 @@
 
     public class GameInformationModel : Notifiable
     {
-        private string _Name;
-        public string Name
-        {
-            get => _Name;
-            set
-            {
-                AddNotifications(new Contract()
-                    .IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
-
-                _Name = Valid ? value : string.Empty;
-            }
-        }
-
-        private string _Title;
-        public string Title
-        {
-            get => _Title;
-            set
-            {
-                AddNotifications(new Contract()
-                    .IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
-
-                _Title = Valid ? value : string.Empty;
-            }
-        }
-
-        private string _CoverPath;
-        public string CoverPath
-        {
-            get => _CoverPath;
-            set
-            {
-                AddNotifications(new Contract()
-                    .IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
-
-                _CoverPath = Valid ? value : string.Empty;
-            }
-        }
-
-        private string _Developer;
-        public string Developer
-        {
-            get => _Developer;
-            set
-            {
-                AddNotifications(new Contract()
-                    .IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
-
-                _Developer = Valid ? value : string.Empty;
-            }
-        }
-
-        private string _Publisher;
-        public string Publisher
-        {
-            get => _Publisher;
-            set
-            {
-                AddNotifications(new Contract()
-                    .IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
-
-                _Publisher = Valid ? value : string.Empty;
-            }
-        }
-
-        private string _DefaultSaveName;
-        public string DefaultSaveName
-        {
-            get => _DefaultSaveName;
-            set
-            {
-                AddNotifications(new Contract()
-                    .IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
-
-                _DefaultSaveName = Valid ? value : string.Empty;
-            }
-        }
-
-        private string _OnlineSaveFolder;
-        public string OnlineSaveFolder
-        {
-            get => _OnlineSaveFolder;
-            set
-            {
-                AddNotifications(new Contract()
-                    .IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
-
-                _OnlineSaveFolder = Valid ? value : string.Empty;
-            }
-        }
+        public string Name { get; set; }
+        public string Title { get; set; }
+        public string CoverPath { get; set; }
+        public string Developer { get; set; }
+        public string Publisher { get; set; }
+        public string DefaultSaveName { get; set; }
+        public string OnlineSaveFolder { get; set; }
 
         private string _UserDefinedSaveName;
         public string UserDefinedSaveName
