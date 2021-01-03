@@ -7,32 +7,36 @@
 
     public class GameInformationModel
     {
+        public string Name { get; set; }
+        public string Title { get; set; }
         public string CoverPath { get; set; }
+        public string Developer { get; set; }
+        public string Publisher { get; set; }
+        public string DefaultSaveName { get; set; }
+        public string OnlineSaveFolder { get; set; }
+        public string UserDefinedSaveName { get; set; }
+        public string SaveBackupExtension { get; private set; }
         public string DefaultSaveExtension { get; set; }
         public string DefaultGameSaveFolder { get; set; }
-        public string DefaultSaveName { get; set; }
-        public string Developer { get; set; }
-        public string Name { get; set; }
-        public string OnlineSaveFolder { get; set; }
-        public string Publisher { get; set; }
-        public string SaveBackupExtension { get; private set; }
-        public string Title { get; set; }
-        public string SaveName { get; set; }
+
+        public string RestoreSaveName() => string.Concat(DefaultSaveName, '.', DefaultSaveExtension);
 
         public string BuildSaveName() => BuildSaveName(string.Empty);
 
         public string BuildSaveName(string saveName)
         {
-            string nameToBeUsed = string.IsNullOrWhiteSpace(SaveName)
+            string extension = string.IsNullOrWhiteSpace(SaveBackupExtension)
+                ? string.Empty
+                : string.Concat('.', SaveBackupExtension);
+
+            string nameToBeUsed = string.IsNullOrWhiteSpace(UserDefinedSaveName)
                 ? DefaultSaveName
-                : SaveName;
+                : UserDefinedSaveName;
 
-            return !string.IsNullOrWhiteSpace(saveName)
-                ? string.Concat(saveName, '.', SaveBackupExtension)
-                : string.Concat(nameToBeUsed, '.', SaveBackupExtension);
+            return string.IsNullOrWhiteSpace(saveName)
+                ? string.Concat(nameToBeUsed, extension)
+                : string.Concat(saveName, extension);
         }
-
-        public string RestoreSaveName() => string.Concat(DefaultSaveName, $".{DefaultSaveExtension}");
 
         public void SetSaveBackupExtension(string saveExtension)
         {
@@ -43,7 +47,6 @@
             }
             catch (ArgumentException)
             {
-                SaveBackupExtension = string.Empty;
                 throw new NotSupportedException(SystemMessages.ErrorSaveExtensionNotSupported);
             }
         }

@@ -84,26 +84,26 @@
 
                 ImagePath = GameInformation?.CoverPath;
 
-                SaveName = string.Empty;
+                UserDefinedSaveName = string.Empty;
 
                 OnPropertyChanged(nameof(GamesSupported));
             }
         }
 
-        private string _SaveName;
+        private string _UserDefinedSaveName;
 
-        public string SaveName
+        public string UserDefinedSaveName
         {
-            get => CanExecute ? _SaveName : string.Empty;
+            get => CanExecute ? _UserDefinedSaveName : string.Empty;
             set
             {
-                if (_SaveName == value)
+                if (_UserDefinedSaveName == value)
                     return;
 
-                GameInformation.SaveName =
-                    _SaveName = GameInformation?.BuildSaveName(value);
+                GameInformation.UserDefinedSaveName =
+                    _UserDefinedSaveName = GameInformation?.BuildSaveName(value);
 
-                OnPropertyChanged(nameof(SaveName));
+                OnPropertyChanged(nameof(UserDefinedSaveName));
             }
         }
 
