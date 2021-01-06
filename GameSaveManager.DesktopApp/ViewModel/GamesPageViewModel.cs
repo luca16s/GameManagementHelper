@@ -109,8 +109,6 @@
             }
         }
 
-        public ObservableCollection<string> ListSaveNames { get; set; }
-
         private ICloudOperations GetConnectionClient()
         {
             using var DriveConnectionClient = (DropboxClient)Application.Current.Properties["CLIENT"];

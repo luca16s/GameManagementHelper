@@ -69,14 +69,5 @@
                 Command="{Binding Path=DownloadCommand}">
             <actions:DownloadImage />
         </Button>
-        <ListBox Grid.Row="1"
-                 Grid.Column="3"
-                 Grid.ColumnSpan="1"
-                 Grid.RowSpan="3">
-            <ListBoxItem>Gian Luca da Silva Figueiredo</ListBoxItem>
-            <ListBoxItem>Gian Luca da Silva Figueiredo</ListBoxItem>
-            <ListBoxItem>Gian Luca da Silva Figueiredo</ListBoxItem>
-            <ListBoxItem>Gian Luca da Silva Figueiredo</ListBoxItem>
-        </ListBox>
     </Grid>
 </Page>
