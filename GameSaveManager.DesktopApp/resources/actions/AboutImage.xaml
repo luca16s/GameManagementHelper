@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="GameSaveManager.DesktopApp.resources.actions.AboutImage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=properties:Settings}">
+    <UserControl.Resources>
+        <properties:Settings x:Key="Settings" />
+        <Style x:Key="IconColor"
+           TargetType="{x:Type Path}">
+            <Setter Property="Fill" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Fill" Value="Black" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Viewbox Width="96"
+                 Height="96">
+            <Canvas Width="24" Height="24">
+                <Path Style="{StaticResource IconColor}"
+                      Data="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+            </Canvas>
+        </Viewbox>
+    </Grid>
+</UserControl>

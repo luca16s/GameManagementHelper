@@ -43,23 +43,6 @@
     <None Remove="resources\account_black.png" />
     <None Remove="resources\account_box-black-24dp.svg" />
     <None Remove="resources\account_white.png" />
-    <None Remove="resources\actions\clear_all_black.png" />
-    <None Remove="resources\actions\clear_all_white.png" />
-    <None Remove="resources\actions\download_black.png" />
-    <None Remove="resources\actions\download_white.png" />
-    <None Remove="resources\actions\github_black.png" />
-    <None Remove="resources\actions\github_white.png" />
-    <None Remove="resources\actions\in.png" />
-    <None Remove="resources\actions\info_black.png" />
-    <None Remove="resources\actions\info_white.png" />
-    <None Remove="resources\actions\login_black.png" />
-    <None Remove="resources\actions\login_white.png" />
-    <None Remove="resources\actions\save_black.png" />
-    <None Remove="resources\actions\save_white.png" />
-    <None Remove="resources\actions\settings_black.png" />
-    <None Remove="resources\actions\settings_white.png" />
-    <None Remove="resources\actions\upload_black.png" />
-    <None Remove="resources\actions\upload_white.png" />
     <None Remove="resources\backup_black.png" />
     <None Remove="resources\backup_white.png" />
     <None Remove="resources\baseline_account.png" />
@@ -91,51 +74,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\actions\account_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\account_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\clear_all_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\clear_all_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\download_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\download_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\github_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\github_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\in.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\info_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\info_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\login_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\login_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\save_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\save_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="resources\gameCover\DarkSouls.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -145,12 +83,10 @@
     <Resource Include="resources\gameCover\DarkSoulsIII.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\actions\game_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Content Include="gamelist.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
@@ -160,23 +96,8 @@
     </PackageReference>
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
     <ProjectReference Include="..\GameSaveManager.Dropbox\GameSaveManager.DropboxApi.csproj" />
-    <Resource Include="resources\actions\game_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\actions\settings_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\settings_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\upload_black.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\actions\upload_white.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="resources\ico_black.png" />
     <Resource Include="resources\ico_white.png" />
   </ItemGroup>

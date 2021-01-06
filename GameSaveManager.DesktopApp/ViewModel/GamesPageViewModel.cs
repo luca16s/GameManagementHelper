@@ -62,6 +62,7 @@
 
                 if (value.ToString().Equals(_ImagePath))
                     return;
+
                 _ImagePath = value.ToString();
                 OnPropertyChanged(nameof(ImagePath));
             }
@@ -107,6 +108,8 @@
                 OnPropertyChanged(nameof(UserDefinedSaveName));
             }
         }
+
+        public ObservableCollection<string> ListSaveNames { get; set; }
 
         private ICloudOperations GetConnectionClient()
         {

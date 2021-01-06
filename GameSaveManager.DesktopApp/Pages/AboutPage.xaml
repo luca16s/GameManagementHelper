@@ -5,6 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
       xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
+      xmlns:actions="clr-namespace:GameSaveManager.DesktopApp.resources.actions"
       d:DataContext="{d:DesignInstance Type=viewmodel:AboutViewModel}"
       mc:Ignorable="d"
       d:DesignHeight="450"
@@ -28,7 +29,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-       <Style x:Key="ButtonDesign" TargetType="Button">
+        <Style x:Key="ButtonDesign" TargetType="Button">
             <Setter Property="Margin" Value="2, 0, 2, 0" />
         </Style>
         <ControlTemplate x:Key="DefaultButton" TargetType="Button">
@@ -58,40 +59,6 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        <Image x:Key="gitHub_Icon"
-               Height="48"
-               Width="48"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/github_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/github_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-        <Image x:Key="linkedin_Icon"
-               Height="48"
-               Width="48"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/in.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/in.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -125,7 +92,7 @@
             Template="{StaticResource DefaultButton}"
             Style="{StaticResource ButtonDesign}"
            Command="{Binding Path=LinkedInCommand}">
-            <DynamicResource ResourceKey="linkedin_Icon"/>
+            <actions:LinkedInImage />
         </Button>
         <Button
             Grid.Row="3"
@@ -134,7 +101,7 @@
             Template="{StaticResource DefaultButton}"
             Style="{StaticResource ButtonDesign}"
             Command="{Binding Path=GitHubCommand}">
-            <DynamicResource ResourceKey="gitHub_Icon"/>
+            <actions:GitHubImage />
         </Button>
     </Grid>
 </Page>

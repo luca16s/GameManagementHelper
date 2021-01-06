@@ -3,7 +3,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties" xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
+      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+      xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
+      xmlns:actions="clr-namespace:GameSaveManager.DesktopApp.resources.actions"
       d:DataContext="{d:DesignInstance Type=viewmodel:AccountPageViewModel}"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -11,23 +13,6 @@
       Style="{DynamicResource FundoPagina}">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
-        <Image x:Key="LoginIcon"
-               Height="48"
-               Width="48"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/login_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/login_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
         <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
             <Setter Property="Background" Value="#3F3F3F" />
             <Style.Triggers>
@@ -110,7 +95,7 @@
                 Template="{StaticResource DefaultButton}"
                 Style="{DynamicResource ButtonDesign}"
                 Command="{Binding Path=ConnectCommand}">
-            <DynamicResource ResourceKey="LoginIcon" />
+            <actions:LoginImage />
         </Button>
     </Grid>
 </Page>

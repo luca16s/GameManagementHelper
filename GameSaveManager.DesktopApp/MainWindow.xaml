@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+        xmlns:actions="clr-namespace:GameSaveManager.DesktopApp.resources.actions"
         mc:Ignorable="d"
         Icon="resources/ico_black.png"
         SizeToContent="WidthAndHeight"
@@ -142,7 +143,7 @@
             Click="AccountButton_Click"
             Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
-            <DynamicResource ResourceKey="AccountIcon" />
+            <actions:AccountImage />
         </Button>
         <Button
             Grid.Column="1"
@@ -152,7 +153,7 @@
             ToolTip="Jogos Disponíveis."
             Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
-            <DynamicResource ResourceKey="GamesIcon" />
+            <actions:GameImage />
         </Button>
         <Button
             Grid.Column="2"
@@ -162,7 +163,7 @@
             ToolTip="Configurações."
             Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
-            <DynamicResource ResourceKey="SettingsIcon" />
+            <actions:SettingsImage />
         </Button>
         <Button
             Grid.Column="3"
@@ -172,7 +173,7 @@
             ToolTip="Informações."
             Template="{StaticResource DefaultButton}"
             Style="{DynamicResource ButtonDesign}">
-            <DynamicResource ResourceKey="AboutIcon" />
+            <actions:AboutImage />
         </Button>
         <Frame
             x:Name="MainFrame"
