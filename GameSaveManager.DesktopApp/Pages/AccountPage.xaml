@@ -3,9 +3,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:components="clr-namespace:GameSaveManager.DesktopApp.Components"
       xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
       xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
-      xmlns:actions="clr-namespace:GameSaveManager.DesktopApp.resources.actions"
       d:DataContext="{d:DesignInstance Type=viewmodel:AccountPageViewModel}"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -20,37 +20,6 @@
                     <Setter Property="Background" Value="#ffffff" />
                 </DataTrigger>
             </Style.Triggers>
-        </Style>
-        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
-            <Grid>
-                <Rectangle x:Name="buttonBackground"
-                           Fill="{TemplateBinding Background}"
-                           Stroke="{TemplateBinding Foreground}"
-                           StrokeThickness="0"
-                           RadiusX="5"
-                           RadiusY="5" />
-                <ContentPresenter HorizontalAlignment="Center"
-                                  VerticalAlignment="Center" />
-            </Grid>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="lightblue" />
-                    <Setter Property="Opacity"
-                            TargetName="buttonBackground"
-                            Value="0.2" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="false">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="Transparent" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-        <Style x:Key="ButtonDesign" TargetType="Button">
-            <Setter Property="Width" Value="80" />
-            <Setter Property="Margin" Value="0, 0, 4, 0" />
         </Style>
         <Style x:Key="Fonte" TargetType="Label">
             <Setter Property="Foreground" Value="#ffffff" />
@@ -89,13 +58,13 @@
                Grid.Row="1"
                Grid.Column="1"
                Style="{DynamicResource Fonte}" />
-        <Button x:Name="BtnConectar"
-                Grid.Row="2"
-                Grid.Column="4"
-                Template="{StaticResource DefaultButton}"
-                Style="{DynamicResource ButtonDesign}"
-                Command="{Binding Path=ConnectCommand}">
-            <actions:LoginImage />
-        </Button>
+        <components:ButtonBaseComponent
+            Grid.Row="2"
+            Grid.Column="4"
+            ToolTip="LinkedIn"
+            Width="48"
+            Height="48"
+            Click="Connect_Click"
+            Data="{Binding Connect}" />
     </Grid>
 </Page>

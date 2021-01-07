@@ -4,15 +4,26 @@
 
     using GameSaveManager.DesktopApp.ViewModel;
 
-    /// <summary>
-    /// Interaction logic for AboutPage.xaml
-    /// </summary>
     public partial class AboutPage : Page
     {
+        public static AboutViewModel AboutViewModel => new();
+
         public AboutPage()
         {
             InitializeComponent();
-            DataContext = new AboutViewModel();
+            DataContext = AboutViewModel;
+        }
+
+        private void LinkedInClick_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (AboutViewModel.LinkedInCommand.CanExecute(null))
+                AboutViewModel.LinkedInCommand.Execute(null);
+        }
+
+        private void GitHubClick_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (AboutViewModel.GitHubCommand.CanExecute(null))
+                AboutViewModel.GitHubCommand.Execute(null);
         }
     }
 }

@@ -3,8 +3,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:components="clr-namespace:GameSaveManager.DesktopApp.Components"
       xmlns:enumConverter="clr-namespace:GameSaveManager.DesktopApp.Converter"
-      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties" xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel" xmlns:actions="clr-namespace:GameSaveManager.DesktopApp.resources.actions"
+      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+      xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
       d:DataContext="{d:DesignInstance Type=viewmodel:SettingsPageViewModel}"
       mc:Ignorable="d"
       d:DesignHeight="450"
@@ -21,36 +23,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="ButtonDesign" TargetType="Button">
-            <Setter Property="Margin" Value="2, 0, 2, 0" />
-        </Style>
-        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
-            <Grid>
-                <Rectangle x:Name="buttonBackground"
-                           Fill="{TemplateBinding Background}"
-                           Stroke="{TemplateBinding Foreground}"
-                           StrokeThickness="0"
-                           RadiusX="5"
-                           RadiusY="5" />
-                <ContentPresenter HorizontalAlignment="Center"
-                                  VerticalAlignment="Center" />
-            </Grid>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="lightblue" />
-                    <Setter Property="Opacity"
-                            TargetName="buttonBackground"
-                            Value="0.2" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="false">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="Transparent" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
         <Style x:Key="Fonte" TargetType="Label">
             <Setter Property="Foreground" Value="#ffffff" />
             <Style.Triggers>
@@ -135,16 +107,16 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Right">
-            <Button x:Name="buttonClear"
-                    Style="{DynamicResource ButtonDesign}"
-                    Template="{StaticResource DefaultButton}">
-                <actions:ClearImage />
-            </Button>
-            <Button x:Name="buttonSave"
-                    Style="{DynamicResource ButtonDesign}"
-                    Template="{StaticResource DefaultButton}">
-                <actions:SaveImage />
-            </Button>
+            <components:ButtonBaseComponent
+                Width="48"
+                Height="48"
+                ToolTip="Resetar configurações."
+                Data="{Binding Clear}"/>
+            <components:ButtonBaseComponent
+                Width="48"
+                Height="48"
+                ToolTip="Salvar configurações."
+                Data="{Binding Save}"/>
         </StackPanel>
     </Grid>
 </Page>

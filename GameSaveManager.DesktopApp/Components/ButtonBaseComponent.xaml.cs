@@ -1,6 +1,5 @@
 ﻿namespace GameSaveManager.DesktopApp.Components
 {
-    using System;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
@@ -8,8 +7,6 @@
     public partial class ButtonBaseComponent : UserControl
     {
         public ButtonBaseComponent() => InitializeComponent();
-
-        public Action OnClickEvent;
 
         public string Data
         {

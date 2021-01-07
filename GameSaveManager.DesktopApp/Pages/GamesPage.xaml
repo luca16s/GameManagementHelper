@@ -6,7 +6,7 @@
       xmlns:enumConverter="clr-namespace:GameSaveManager.DesktopApp.Converter"
       xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
       xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
-      xmlns:actions="clr-namespace:GameSaveManager.DesktopApp.resources.actions"
+      xmlns:components="clr-namespace:GameSaveManager.DesktopApp.Components"
       d:DataContext="{d:DesignInstance Type=viewmodel:GamesPageViewModel}"
       mc:Ignorable="d"
       Title="Jogos"
@@ -58,17 +58,17 @@
                  Grid.Column="0"
                  Grid.ColumnSpan="2"
                  Text = "{Binding Path=UserDefinedSaveName}" />
-        <Button Grid.Row="3"
-                Grid.Column="0"
-                Margin="0, 0, 2.5, 0"
-                Command="{Binding Path=UploadCommand}">
-            <actions:UploadImage />
-        </Button>
-        <Button Grid.Row="3"
-                Grid.Column="1"
-                Margin="2.5, 0, 0, 0"
-                Command="{Binding Path=DownloadCommand}">
-            <actions:DownloadImage />
-        </Button>
+        <components:ButtonBaseComponent
+            Grid.Row="3"
+            Grid.Column="0"
+            ToolTip="Upload"
+            Click="Upload_Click"
+            Data="{Binding Upload}" />
+        <components:ButtonBaseComponent
+            Grid.Row="3"
+            Grid.Column="1"
+            ToolTip="Download"
+            Click="Download_Click"
+            Data="{Binding Download}" />
     </Grid>
 </Page>

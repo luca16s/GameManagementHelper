@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Icon="resources/ico_black.png"
         SizeToContent="WidthAndHeight"
+        d:DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         MinWidth="500"
         ResizeMode="CanMinimize"
         Title="Game Save Manager"
@@ -79,25 +80,29 @@
             Grid.Column="0"
             Grid.Row="0"
             ToolTip="Conexão com serviço de Armazenamento Online."
+            Margin="4, 4, 4, 0"
             Click="AccountButton_Click"
             Data="{Binding Account}"/>
         <components:ButtonBaseComponent
             Grid.Column="1"
             Grid.Row="0"
             ToolTip="Jogos Disponíveis para backup."
+            Margin="4, 4, 4, 0"
             Click="OpenGamesListPage"
             Data="{Binding Games}"/>
         <components:ButtonBaseComponent
             Grid.Column="2"
             Grid.Row="0"
-            Click="OpenSettingsPage"
+            Margin="4, 4, 4, 0"
             ToolTip="Configurações."
+            Click="OpenSettingsPage"
             Data="{Binding Settings}"/>
         <components:ButtonBaseComponent
             Grid.Column="3"
             Grid.Row="0"
-            Click="OpenAboutPage"
             ToolTip="Informações."
+            Margin="4, 4, 4, 0"
+            Click="OpenAboutPage"
             Data="{Binding About}"/>
         <Frame
             x:Name="MainFrame"

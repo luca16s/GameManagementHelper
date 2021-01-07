@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
              mc:Ignorable="d"
+             d:DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
              x:Name="ButtonComponent">
     <UserControl.Resources>
         <properties:Settings x:Key="Settings" />
@@ -16,12 +17,6 @@
                     <Setter Property="Fill" Value="Black" />
                 </DataTrigger>
             </Style.Triggers>
-        </Style>
-        <Style x:Key="ButtonDesign"
-               TargetType="Button">
-            <Setter Property="Width" Value="96" />
-            <Setter Property="Height" Value="96" />
-            <Setter Property="Margin" Value="4, 4, 4, 0" />
         </Style>
         <ControlTemplate x:Key="ButtonTemplate"
                          TargetType="Button">
@@ -54,13 +49,14 @@
     </UserControl.Resources>
     <Button
         x:Name="Button"
-        ToolTip="{Binding ToolTip, ElementName=ButtonComponent}"
         Width="{Binding Width, ElementName=ButtonComponent}"
         Height="{Binding Height, ElementName=ButtonComponent}"
+        Margin="{Binding Margin, ElementName=ButtonComponent}"
+        ToolTip="{Binding ToolTip, ElementName=ButtonComponent}"
         Template="{StaticResource ButtonTemplate}"
-        Style="{StaticResource ButtonDesign}"
         Command="{Binding ClickCommand}">
-        <Viewbox>
+        <Viewbox Width="{Binding Width, ElementName=ButtonComponent}"
+                 Height="{Binding Height, ElementName=ButtonComponent}">
             <Canvas Width="24"
                     Height="24">
                 <Path Style="{StaticResource IconColor}"

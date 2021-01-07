@@ -3,9 +3,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:components="clr-namespace:GameSaveManager.DesktopApp.Components"
       xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
       xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
-      xmlns:actions="clr-namespace:GameSaveManager.DesktopApp.resources.actions"
       d:DataContext="{d:DesignInstance Type=viewmodel:AboutViewModel}"
       mc:Ignorable="d"
       d:DesignHeight="450"
@@ -29,36 +29,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="ButtonDesign" TargetType="Button">
-            <Setter Property="Margin" Value="2, 0, 2, 0" />
-        </Style>
-        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
-            <Grid>
-                <Rectangle x:Name="buttonBackground"
-                           Fill="{TemplateBinding Background}"
-                           Stroke="{TemplateBinding Foreground}"
-                           StrokeThickness="0"
-                           RadiusX="5"
-                           RadiusY="5" />
-                <ContentPresenter HorizontalAlignment="Center"
-                                  VerticalAlignment="Center" />
-            </Grid>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="lightblue" />
-                    <Setter Property="Opacity"
-                            TargetName="buttonBackground"
-                            Value="0.2" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="false">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="Transparent" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -85,23 +55,21 @@
             Content="Social"
             FontSize="14"
             Style="{DynamicResource Fonte}" />
-        <Button
+        <components:ButtonBaseComponent
             Grid.Row="3"
             Grid.Column="2"
-            x:Name="linkedin"
-            Template="{StaticResource DefaultButton}"
-            Style="{StaticResource ButtonDesign}"
-           Command="{Binding Path=LinkedInCommand}">
-            <actions:LinkedInImage />
-        </Button>
-        <Button
+            ToolTip="LinkedIn"
+            Width="48"
+            Height="48"
+            Click="LinkedInClick_Click"
+            Data="{Binding LinkedIn}"/>
+        <components:ButtonBaseComponent
             Grid.Row="3"
             Grid.Column="3"
-            x:Name="github"
-            Template="{StaticResource DefaultButton}"
-            Style="{StaticResource ButtonDesign}"
-            Command="{Binding Path=GitHubCommand}">
-            <actions:GitHubImage />
-        </Button>
+            ToolTip="GitHub"
+            Width="48"
+            Height="48"
+            Click="GitHubClick_Click"
+            Data="{Binding GitHub}"/>
     </Grid>
 </Page>
