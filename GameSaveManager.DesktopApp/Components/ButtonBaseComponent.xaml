@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="GameSaveManager.DesktopApp.Components.ButtonBaseComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+             mc:Ignorable="d"
+             x:Name="ButtonComponent">
+    <UserControl.Resources>
+        <properties:Settings x:Key="Settings" />
+        <Style x:Key="IconColor"
+           TargetType="{x:Type Path}">
+            <Setter Property="Fill" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Fill" Value="Black" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonDesign"
+               TargetType="Button">
+            <Setter Property="Width" Value="96" />
+            <Setter Property="Height" Value="96" />
+            <Setter Property="Margin" Value="4, 4, 4, 0" />
+        </Style>
+        <ControlTemplate x:Key="ButtonTemplate"
+                         TargetType="Button">
+            <Grid>
+                <Rectangle x:Name="buttonBackground"
+                           Fill="{TemplateBinding Background}"
+                           Stroke="{TemplateBinding Foreground}"
+                           StrokeThickness="0"
+                           RadiusX="5"
+                           RadiusY="5" />
+                <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="lightblue" />
+                    <Setter Property="Opacity"
+                            TargetName="buttonBackground"
+                            Value="0.2" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="false">
+                    <Setter Property="Fill"
+                            TargetName="buttonBackground"
+                            Value="Transparent" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Button
+        x:Name="Button"
+        ToolTip="{Binding ToolTip, ElementName=ButtonComponent}"
+        Width="{Binding Width, ElementName=ButtonComponent}"
+        Height="{Binding Height, ElementName=ButtonComponent}"
+        Template="{StaticResource ButtonTemplate}"
+        Style="{StaticResource ButtonDesign}"
+        Command="{Binding ClickCommand}">
+        <Viewbox>
+            <Canvas Width="24"
+                    Height="24">
+                <Path Style="{StaticResource IconColor}"
+                      Data="{Binding Path=Data, ElementName=ButtonComponent}" />
+            </Canvas>
+        </Viewbox>
+    </Button>
+</UserControl>
