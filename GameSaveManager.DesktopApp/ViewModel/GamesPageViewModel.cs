@@ -104,9 +104,11 @@
                 if (_UserDefinedSaveName == value)
                     return;
 
-                GameInformation.UserDefinedSaveName = GameInformation?.BuildSaveName(value);
-
-                _UserDefinedSaveName = GameInformation.UserDefinedSaveName;
+                if (GameInformation != null)
+                {
+                    GameInformation.UserDefinedSaveName = GameInformation?.BuildSaveName(value);
+                    _UserDefinedSaveName = GameInformation.UserDefinedSaveName;
+                }
 
                 OnPropertyChanged(nameof(UserDefinedSaveName));
             }

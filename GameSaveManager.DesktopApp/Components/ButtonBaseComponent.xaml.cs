@@ -15,7 +15,9 @@
             {
                 string data = (string)GetValue(DataProperty);
 
-                return string.IsNullOrWhiteSpace(data) ? DependencyProperty.UnsetValue : data;
+                return string.IsNullOrWhiteSpace(data)
+                    ? DependencyProperty.UnsetValue
+                    : data;
             }
 
             set => SetValue(DataProperty, value);
