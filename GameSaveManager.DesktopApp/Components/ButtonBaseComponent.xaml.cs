@@ -3,19 +3,41 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
+    using System.Windows.Input;
 
     public partial class ButtonBaseComponent : UserControl
     {
         public ButtonBaseComponent() => InitializeComponent();
 
-        public string Data
+        public object Data
         {
-            get => (string)GetValue(DataProperty);
+            get
+            {
+                string data = (string)GetValue(DataProperty);
+
+                return string.IsNullOrWhiteSpace(data) ? DependencyProperty.UnsetValue : data;
+            }
+
             set => SetValue(DataProperty, value);
         }
 
-        public static DependencyProperty DataProperty =
-           DependencyProperty.Register(nameof(Data), typeof(string), typeof(ButtonBaseComponent));
+        private static readonly DependencyProperty DataProperty =
+           DependencyProperty.Register(
+               nameof(Data),
+               typeof(object),
+               typeof(ButtonBaseComponent));
+
+        public ICommand ImageButtonCommand
+        {
+            get => (ICommand)GetValue(Command);
+            set => SetValue(Command, value);
+        }
+
+        private static readonly DependencyProperty Command =
+            DependencyProperty.Register(
+                nameof(ImageButtonCommand),
+                typeof(ICommand),
+                typeof(ButtonBaseComponent));
 
         public event RoutedEventHandler Click
         {

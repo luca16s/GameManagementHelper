@@ -20,11 +20,5 @@
             AccountPageViewModel = new AccountPageViewModel(options);
             DataContext = AccountPageViewModel;
         }
-
-        private void Connect_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (AccountPageViewModel.ConnectCommand.CanExecute(null))
-                AccountPageViewModel.ConnectCommand.Execute(null);
-        }
     }
 }

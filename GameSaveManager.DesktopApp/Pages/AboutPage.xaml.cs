@@ -13,17 +13,5 @@
             InitializeComponent();
             DataContext = AboutViewModel;
         }
-
-        private void LinkedInClick_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (AboutViewModel.LinkedInCommand.CanExecute(null))
-                AboutViewModel.LinkedInCommand.Execute(null);
-        }
-
-        private void GitHubClick_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (AboutViewModel.GitHubCommand.CanExecute(null))
-                AboutViewModel.GitHubCommand.Execute(null);
-        }
     }
 }

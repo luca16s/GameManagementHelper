@@ -93,8 +93,8 @@
         <components:ButtonBaseComponent
             Grid.Column="2"
             Grid.Row="0"
-            Margin="4, 4, 4, 0"
             ToolTip="Configurações."
+            Margin="4, 4, 4, 0"
             Click="OpenSettingsPage"
             Data="{Binding Settings}"/>
         <components:ButtonBaseComponent

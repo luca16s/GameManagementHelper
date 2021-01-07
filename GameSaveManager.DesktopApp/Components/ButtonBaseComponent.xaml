@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
              mc:Ignorable="d"
-             d:DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
              x:Name="ButtonComponent">
     <UserControl.Resources>
         <properties:Settings x:Key="Settings" />
@@ -54,13 +53,13 @@
         Margin="{Binding Margin, ElementName=ButtonComponent}"
         ToolTip="{Binding ToolTip, ElementName=ButtonComponent}"
         Template="{StaticResource ButtonTemplate}"
-        Command="{Binding ClickCommand}">
+        Command="{Binding ImageButtonCommand, ElementName=ButtonComponent}">
         <Viewbox Width="{Binding Width, ElementName=ButtonComponent}"
                  Height="{Binding Height, ElementName=ButtonComponent}">
             <Canvas Width="24"
                     Height="24">
                 <Path Style="{StaticResource IconColor}"
-                      Data="{Binding Path=Data, ElementName=ButtonComponent}" />
+                      Data="{Binding Data, ElementName=ButtonComponent}" />
             </Canvas>
         </Viewbox>
     </Button>

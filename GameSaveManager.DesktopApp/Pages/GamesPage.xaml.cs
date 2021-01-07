@@ -21,17 +21,5 @@
             GamesPageViewModel = new GamesPageViewModel(backupStrategy, options);
             DataContext = GamesPageViewModel;
         }
-
-        private void Upload_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (GamesPageViewModel.UploadCommand.CanExecute(null))
-                GamesPageViewModel.UploadCommand.Execute(null);
-        }
-
-        private void Download_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (GamesPageViewModel.DownloadCommand.CanExecute(null))
-                GamesPageViewModel.DownloadCommand.Execute(null);
-        }
     }
 }

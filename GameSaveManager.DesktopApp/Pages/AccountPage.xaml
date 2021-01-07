@@ -64,7 +64,7 @@
             ToolTip="LinkedIn"
             Width="48"
             Height="48"
-            Click="Connect_Click"
+            ImageButtonCommand="{Binding ConnectCommand}"
             Data="{Binding Connect}" />
     </Grid>
 </Page>

@@ -61,7 +61,7 @@
             ToolTip="LinkedIn"
             Width="48"
             Height="48"
-            Click="LinkedInClick_Click"
+            ImageButtonCommand="{Binding LinkedInCommand}"
             Data="{Binding LinkedIn}"/>
         <components:ButtonBaseComponent
             Grid.Row="3"
@@ -69,7 +69,7 @@
             ToolTip="GitHub"
             Width="48"
             Height="48"
-            Click="GitHubClick_Click"
+            ImageButtonCommand="{Binding GitHubCommand}"
             Data="{Binding GitHub}"/>
     </Grid>
 </Page>

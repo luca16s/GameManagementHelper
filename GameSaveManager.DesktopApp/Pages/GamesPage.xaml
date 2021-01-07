@@ -62,13 +62,13 @@
             Grid.Row="3"
             Grid.Column="0"
             ToolTip="Upload"
-            Click="Upload_Click"
+            ImageButtonCommand="{Binding UploadCommand}"
             Data="{Binding Upload}" />
         <components:ButtonBaseComponent
             Grid.Row="3"
             Grid.Column="1"
             ToolTip="Download"
-            Click="Download_Click"
+            ImageButtonCommand="{Binding DownloadCommand}"
             Data="{Binding Download}" />
     </Grid>
 </Page>
