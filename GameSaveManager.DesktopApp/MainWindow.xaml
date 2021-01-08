@@ -3,96 +3,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:components="clr-namespace:GameSaveManager.DesktopApp.Components"
         xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
         mc:Ignorable="d"
         Icon="resources/ico_black.png"
         SizeToContent="WidthAndHeight"
+        d:DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         MinWidth="500"
         ResizeMode="CanMinimize"
         Title="Game Save Manager"
         Style="{DynamicResource FundoJanela}">
     <Window.Resources>
         <properties:Settings x:Key="Settings" />
-        <Style x:Key="FundoJanela" TargetType="{x:Type Window}">
-            <Setter Property="Background" Value="#3F3F3F" />
+        <Style x:Key="FundoJanela"
+               TargetType="{x:Type Window}">
+            <Setter Property="Background"
+                    Value="#3F3F3F" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                    <Setter Property="Background" Value="#ffffff" />
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}"
+                             Value="false">
+                    <Setter Property="Background"
+                            Value="#ffffff" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Image x:Key="AccountIcon"
-               Height="96"
-               Width="96"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="resources/actions/account_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="resources/actions/account_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-        <Image x:Key="GamesIcon"
-               Height="96"
-               Width="96"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="resources/actions/game_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="resources/actions/game_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-        <Image x:Key="SettingsIcon"
-               Height="96"
-               Width="96"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="resources/actions/settings_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="resources/actions/settings_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-        <Image x:Key="AboutIcon"
-               Height="96"
-               Width="96"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="resources/actions/info_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="resources/actions/info_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-        <Style x:Key="ButtonDesign" TargetType="Button">
-            <Setter Property="Width" Value="96" />
-            <Setter Property="Height" Value="96" />
-            <Setter Property="Margin" Value="4, 4, 4, 0" />
+        <Style x:Key="ButtonDesign"
+               TargetType="Button">
+            <Setter Property="Width"
+                    Value="96" />
+            <Setter Property="Height"
+                    Value="96" />
+            <Setter Property="Margin"
+                    Value="4, 4, 4, 0" />
         </Style>
         <ControlTemplate x:Key="DefaultButton" TargetType="Button">
             <Grid>
@@ -134,46 +76,34 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button
+        <components:ButtonBaseComponent
             Grid.Column="0"
             Grid.Row="0"
-            Name="AccountButton"
             ToolTip="Conexão com serviço de Armazenamento Online."
+            Margin="4, 4, 4, 0"
             Click="AccountButton_Click"
-            Template="{StaticResource DefaultButton}"
-            Style="{DynamicResource ButtonDesign}">
-            <DynamicResource ResourceKey="AccountIcon" />
-        </Button>
-        <Button
+            Data="{Binding Account}"/>
+        <components:ButtonBaseComponent
             Grid.Column="1"
             Grid.Row="0"
-            Name="GamesButton"
+            ToolTip="Jogos Disponíveis para backup."
+            Margin="4, 4, 4, 0"
             Click="OpenGamesListPage"
-            ToolTip="Jogos Disponíveis."
-            Template="{StaticResource DefaultButton}"
-            Style="{DynamicResource ButtonDesign}">
-            <DynamicResource ResourceKey="GamesIcon" />
-        </Button>
-        <Button
+            Data="{Binding Games}"/>
+        <components:ButtonBaseComponent
             Grid.Column="2"
             Grid.Row="0"
-            Name="SettingsButton"
-            Click="OpenSettingsPage"
             ToolTip="Configurações."
-            Template="{StaticResource DefaultButton}"
-            Style="{DynamicResource ButtonDesign}">
-            <DynamicResource ResourceKey="SettingsIcon" />
-        </Button>
-        <Button
+            Margin="4, 4, 4, 0"
+            Click="OpenSettingsPage"
+            Data="{Binding Settings}"/>
+        <components:ButtonBaseComponent
             Grid.Column="3"
             Grid.Row="0"
-            Name="AboutButton"
-            Click="OpenAboutPage"
             ToolTip="Informações."
-            Template="{StaticResource DefaultButton}"
-            Style="{DynamicResource ButtonDesign}">
-            <DynamicResource ResourceKey="AboutIcon" />
-        </Button>
+            Margin="4, 4, 4, 0"
+            Click="OpenAboutPage"
+            Data="{Binding About}"/>
         <Frame
             x:Name="MainFrame"
             Grid.Row="3"

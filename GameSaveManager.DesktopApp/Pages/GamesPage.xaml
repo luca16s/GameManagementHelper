@@ -4,14 +4,17 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:enumConverter="clr-namespace:GameSaveManager.DesktopApp.Converter"
-      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties" xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
+      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+      xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
+      xmlns:components="clr-namespace:GameSaveManager.DesktopApp.Components"
       d:DataContext="{d:DesignInstance Type=viewmodel:GamesPageViewModel}"
       mc:Ignorable="d"
       Title="Jogos"
       Style="{DynamicResource FundoPagina}">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
-        <Style x:Key="FundoPagina" TargetType="{x:Type Page}">
+        <Style x:Key="FundoPagina"
+               TargetType="{x:Type Page}">
             <Setter Property="Background" Value="#3F3F3F" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
@@ -19,70 +22,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Image x:Key="DownloadIcon"
-               Height="48"
-               Width="48"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/download_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/download_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-        <Image x:Key="UploadIcon"
-               Height="48"
-               Width="48"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/upload_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/upload_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-        <Style x:Key="ButtonDesign" TargetType="Button">
-            <Setter Property="Margin" Value="2, 0, 2, 0" />
-        </Style>
-        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
-            <Grid>
-                <Rectangle x:Name="buttonBackground"
-                           Fill="{TemplateBinding Background}"
-                           Stroke="{TemplateBinding Foreground}"
-                           StrokeThickness="0"
-                           RadiusX="5"
-                           RadiusY="5" />
-                <ContentPresenter HorizontalAlignment="Center"
-                                  VerticalAlignment="Center" />
-            </Grid>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="lightblue" />
-                    <Setter Property="Opacity"
-                            TargetName="buttonBackground"
-                            Value="0.2" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="false">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="Transparent" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -92,6 +31,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -118,21 +58,17 @@
                  Grid.Column="0"
                  Grid.ColumnSpan="2"
                  Text = "{Binding Path=UserDefinedSaveName}" />
-        <Button Grid.Column="0"
-                Grid.Row="3"
-                Margin="0, 0, 2.5, 0"
-                Command="{Binding Path=UploadCommand}"
-                Template="{StaticResource DefaultButton}"
-                Style="{StaticResource ButtonDesign}">
-            <DynamicResource ResourceKey="UploadIcon" />
-        </Button>
-        <Button Grid.Column="1"
-                Grid.Row="3"
-                Margin="2.5, 0, 0, 0"
-                Command="{Binding Path=DownloadCommand}"
-                Template="{StaticResource DefaultButton}"
-                Style="{StaticResource ButtonDesign}">
-            <DynamicResource ResourceKey="DownloadIcon" />
-        </Button>
+        <components:ButtonBaseComponent
+            Grid.Row="3"
+            Grid.Column="0"
+            ToolTip="Upload"
+            ImageButtonCommand="{Binding UploadCommand}"
+            Data="{Binding Upload}" />
+        <components:ButtonBaseComponent
+            Grid.Row="3"
+            Grid.Column="1"
+            ToolTip="Download"
+            ImageButtonCommand="{Binding DownloadCommand}"
+            Data="{Binding Download}" />
     </Grid>
 </Page>

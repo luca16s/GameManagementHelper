@@ -2,6 +2,11 @@ namespace GameSaveManager.Core.Tests
 {
     using System;
 
+    using Xunit;
+
+    using AutoFixture;
+    using AutoFixture.Xunit2;
+
     using Bogus;
 
     using FluentAssertions;
@@ -11,14 +16,11 @@ namespace GameSaveManager.Core.Tests
     using GameSaveManager.Core.Services;
     using GameSaveManager.Core.Utils;
 
-    using NUnit.Framework;
-
     public class GameInformationModelTests
     {
-        private GameInformationModel GameInformation;
+        private readonly GameInformationModel GameInformation;
 
-        [SetUp]
-        public void Setup()
+        public GameInformationModelTests()
         {
             BackupFactory fac = new Faker<BackupFactory>()
                 .Generate();
@@ -30,7 +32,7 @@ namespace GameSaveManager.Core.Tests
                 .Generate();
         }
 
-        [Test]
+        [Fact]
         public void ShouldReturnNewSaveNameIfDefaultIsOverridden()
         {
             const string generatedName = "DarkSouls-FatBoySlin";
@@ -42,7 +44,7 @@ namespace GameSaveManager.Core.Tests
             _ = saveName.Should().Be(newSaveName);
         }
 
-        [Test]
+        [Fact]
         public void ShouldReturnDefaultSaveNameIfNoNewNameIsProvided()
         {
             GameInformation.UserDefinedSaveName = GameInformation.DefaultSaveName;
@@ -54,7 +56,7 @@ namespace GameSaveManager.Core.Tests
             _ = defaultSaveName.Should().Be(newSaveName);
         }
 
-        [Test]
+        [Fact]
         public void ShouldReturnDefaultSaveNameIfEmptyStringIsProvided()
         {
             GameInformation.UserDefinedSaveName = GameInformation.DefaultSaveName;
@@ -66,7 +68,7 @@ namespace GameSaveManager.Core.Tests
             _ = defaultSaveName.Should().Be(newSaveName);
         }
 
-        [Test]
+        [Fact]
         public void ShouldReturnDefaultSaveNameIfNullValueIsProvided()
         {
             GameInformation.UserDefinedSaveName = GameInformation.DefaultSaveName;
@@ -78,7 +80,7 @@ namespace GameSaveManager.Core.Tests
             _ = defaultSaveName.Should().Be(newSaveName);
         }
 
-        [Test]
+        [Fact]
         public void ShouldReturnDefaultSaveNameIfWhiteSpaceValueIsProvided()
         {
             GameInformation.UserDefinedSaveName = GameInformation.DefaultSaveName;
@@ -90,7 +92,7 @@ namespace GameSaveManager.Core.Tests
             _ = defaultSaveName.Should().Be(newSaveName);
         }
 
-        [Test]
+        [Fact]
         public void ShouldSetDefaultIfSaveExtensionIsNotInBackupSaveTypeEnum()
         {
             const string saveExtension = "rar";
@@ -98,7 +100,7 @@ namespace GameSaveManager.Core.Tests
             _ = GameInformation.Invoking(g => g.SetSaveBackupExtension(saveExtension)).Should().Throw<NotSupportedException>().WithMessage("Extensão de arquivo não suportada.");
         }
 
-        [Test]
+        [Fact]
         public void ShouldSetSaveExtensionIfValidExtensionIsPrivided()
         {
             string saveExtension = new Faker().Make(1, () => new Faker().PickRandom<EBackupSaveType>().Description())[0];
@@ -110,7 +112,7 @@ namespace GameSaveManager.Core.Tests
             _ = defaultSaveName.Should().Contain(saveExtension);
         }
 
-        [Test]
+        [Fact]
         public void ShouldReturnDefaultSaveName()
         {
             string expected = $"{GameInformation.DefaultSaveName}.{GameInformation.DefaultSaveExtension}";
@@ -118,6 +120,70 @@ namespace GameSaveManager.Core.Tests
             string saveName = GameInformation.RestoreSaveName();
 
             _ = saveName.Should().Be(expected);
+        }
+
+        [Theory, AutoData]
+        public void PropertieUserDefinedSaveNameShouldReturnSettedText(string expected, GameInformationModel game)
+        {
+            game.DefaultGameSaveFolder = expected;
+
+            _ = game.DefaultGameSaveFolder.Should().Be(expected);
+        }
+
+        [Theory, AutoData]
+        public void PropertieNameShouldReturnSettedText(string expected, GameInformationModel game)
+        {
+            game.Name = expected;
+
+            _ = game.Name.Should().Be(expected);
+        }
+
+        [Theory, AutoData]
+        public void PropertieTitleShouldReturnSettedText(string expected, GameInformationModel game)
+        {
+            game.Title = expected;
+
+            _ = game.Title.Should().Be(expected);
+        }
+
+        [Theory, AutoData]
+        public void PropertieDeveloperShouldReturnSettedText(string expected, GameInformationModel game)
+        {
+            game.Developer = expected;
+
+            _ = game.Developer.Should().Be(expected);
+        }
+
+        [Theory, AutoData]
+        public void PropertiePublisherShouldReturnSettedText(string expected, GameInformationModel game)
+        {
+            game.Publisher = expected;
+
+            _ = game.Publisher.Should().Be(expected);
+        }
+
+        [Theory, AutoData]
+        public void PropertieOnlineSaveFolderShouldReturnSettedText(string expected, GameInformationModel game)
+        {
+            game.OnlineSaveFolder = expected;
+
+            _ = game.OnlineSaveFolder.Should().Be(expected);
+        }
+
+        [Theory, AutoData]
+        public void PropertieDefaultGameSaveFolderShouldReturnSettedText(string expected, GameInformationModel game)
+        {
+            game.DefaultGameSaveFolder = expected;
+
+            _ = game.DefaultGameSaveFolder.Should().Be(expected);
+        }
+
+        [Theory, AutoData]
+        public void PropertieCoverPathShouldReturnSettedText(string expected, GameInformationModel game)
+        {
+            game.CoverPath = expected;
+
+            _ = game.CoverPath.Should().Be(expected);
         }
     }
 }

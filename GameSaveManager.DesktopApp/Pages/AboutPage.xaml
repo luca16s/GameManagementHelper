@@ -3,6 +3,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:components="clr-namespace:GameSaveManager.DesktopApp.Components"
       xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
       xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
       d:DataContext="{d:DesignInstance Type=viewmodel:AboutViewModel}"
@@ -28,70 +29,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-       <Style x:Key="ButtonDesign" TargetType="Button">
-            <Setter Property="Margin" Value="2, 0, 2, 0" />
-        </Style>
-        <ControlTemplate x:Key="DefaultButton" TargetType="Button">
-            <Grid>
-                <Rectangle x:Name="buttonBackground"
-                           Fill="{TemplateBinding Background}"
-                           Stroke="{TemplateBinding Foreground}"
-                           StrokeThickness="0"
-                           RadiusX="5"
-                           RadiusY="5" />
-                <ContentPresenter HorizontalAlignment="Center"
-                                  VerticalAlignment="Center" />
-            </Grid>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="lightblue" />
-                    <Setter Property="Opacity"
-                            TargetName="buttonBackground"
-                            Value="0.2" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="false">
-                    <Setter Property="Fill"
-                            TargetName="buttonBackground"
-                            Value="Transparent" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-        <Image x:Key="gitHub_Icon"
-               Height="48"
-               Width="48"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/github_white.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/github_black.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
-        <Image x:Key="linkedin_Icon"
-               Height="48"
-               Width="48"
-               Stretch="UniformToFill"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../resources/actions/in.png" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                            <Setter Property="Source" Value="../resources/actions/in.png" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Image.Style>
-        </Image>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -118,23 +55,21 @@
             Content="Social"
             FontSize="14"
             Style="{DynamicResource Fonte}" />
-        <Button
+        <components:ButtonBaseComponent
             Grid.Row="3"
             Grid.Column="2"
-            x:Name="linkedin"
-            Template="{StaticResource DefaultButton}"
-            Style="{StaticResource ButtonDesign}"
-           Command="{Binding Path=LinkedInCommand}">
-            <DynamicResource ResourceKey="linkedin_Icon"/>
-        </Button>
-        <Button
+            ToolTip="LinkedIn"
+            Width="48"
+            Height="48"
+            ImageButtonCommand="{Binding LinkedInCommand}"
+            Data="{Binding LinkedIn}"/>
+        <components:ButtonBaseComponent
             Grid.Row="3"
             Grid.Column="3"
-            x:Name="github"
-            Template="{StaticResource DefaultButton}"
-            Style="{StaticResource ButtonDesign}"
-            Command="{Binding Path=GitHubCommand}">
-            <DynamicResource ResourceKey="gitHub_Icon"/>
-        </Button>
+            ToolTip="GitHub"
+            Width="48"
+            Height="48"
+            ImageButtonCommand="{Binding GitHubCommand}"
+            Data="{Binding GitHub}"/>
     </Grid>
 </Page>

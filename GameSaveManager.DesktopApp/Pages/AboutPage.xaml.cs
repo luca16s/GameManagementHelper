@@ -4,15 +4,14 @@
 
     using GameSaveManager.DesktopApp.ViewModel;
 
-    /// <summary>
-    /// Interaction logic for AboutPage.xaml
-    /// </summary>
     public partial class AboutPage : Page
     {
+        public static AboutViewModel AboutViewModel => new();
+
         public AboutPage()
         {
             InitializeComponent();
-            DataContext = new AboutViewModel();
+            DataContext = AboutViewModel;
         }
     }
 }

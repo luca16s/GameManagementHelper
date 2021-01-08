@@ -12,10 +12,13 @@
     /// </summary>
     public partial class AccountPage : Page
     {
+        private readonly AccountPageViewModel AccountPageViewModel;
+
         public AccountPage(IOptions<Secrets> options)
         {
             InitializeComponent();
-            DataContext = new AccountPageViewModel(options);
+            AccountPageViewModel = new AccountPageViewModel(options);
+            DataContext = AccountPageViewModel;
         }
     }
 }
