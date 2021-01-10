@@ -1,6 +1,5 @@
 ﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,6 +12,7 @@
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.DesktopApp.Commands;
+    using GameSaveManager.DesktopApp.Helper;
     using GameSaveManager.DropboxApi;
 
     using Microsoft.Extensions.Options;
@@ -30,7 +30,7 @@
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;
 
-        private bool CanExecute => GamesSupported != EGamesSupported.None;
+        private bool CanExecute => SelectedGame != null;
 
         public ICommand UploadCommand
             => _UploadCommand
@@ -52,6 +52,35 @@
             GameInformationList = options.Value;
         }
 
+        public ObservableCollection<GamesComboboxEntry> GamesSupported => new(GameInformationList
+            .Select(game => new GamesComboboxEntry
+            {
+                Title = game.Title,
+                Game = game
+            }).ToList());
+
+        private GamesComboboxEntry _SelectedGame;
+
+        public GamesComboboxEntry SelectedGame
+        {
+            get => _SelectedGame;
+            set
+            {
+                if (_SelectedGame == value)
+                    return;
+
+                _SelectedGame = value;
+
+                GameInformation = _SelectedGame.Game;
+
+                ImagePath = GameInformation?.CoverPath;
+
+                UserDefinedSaveName = string.Empty;
+
+                OnPropertyChanged();
+            }
+        }
+
         private string _ImagePath;
 
         public object ImagePath
@@ -68,29 +97,6 @@
 
                 _ImagePath = value.ToString();
                 OnPropertyChanged(nameof(ImagePath));
-            }
-        }
-
-        private EGamesSupported _GamesSupported;
-
-        public EGamesSupported GamesSupported
-        {
-            get => _GamesSupported;
-            set
-            {
-                if (_GamesSupported == value)
-                    return;
-
-                _GamesSupported = value;
-
-                GameInformation = GameInformationList
-                    .FirstOrDefault(game => string.Equals(value.ToString(), game.Name, StringComparison.InvariantCultureIgnoreCase));
-
-                ImagePath = GameInformation?.CoverPath;
-
-                UserDefinedSaveName = string.Empty;
-
-                OnPropertyChanged(nameof(GamesSupported));
             }
         }
 

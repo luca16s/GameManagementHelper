@@ -60,6 +60,9 @@
     <None Remove="resources\gameCover\DarkSouls.jpg" />
     <None Remove="resources\gameCover\DarkSoulsII.jpg" />
     <None Remove="resources\gameCover\DarkSoulsIII.jpg" />
+    <None Remove="resources\gameCover\DarkSoulsIISOFS.jpg" />
+    <None Remove="resources\gameCover\DarkSoulsRemastered.jpg" />
+    <None Remove="resources\gameCover\SekiroShadowsDieTwice.jpg" />
     <None Remove="resources\game_black.png" />
     <None Remove="resources\game_white.png" />
     <None Remove="resources\google.png" />
@@ -74,16 +77,25 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\gameCover\DarkSouls.jpg">
+    <Content Include="resources\gameCover\DarkSouls.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\gameCover\DarkSoulsII.jpg">
+    </Content>
+    <Content Include="resources\gameCover\DarkSoulsII.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\gameCover\DarkSoulsIII.jpg">
+    </Content>
+    <Content Include="resources\gameCover\DarkSoulsIII.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <Content Include="gamelist.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\gameCover\DarkSoulsIISOFS.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\gameCover\DarkSoulsRemastered.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\gameCover\SekiroShadowsDieTwice.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
