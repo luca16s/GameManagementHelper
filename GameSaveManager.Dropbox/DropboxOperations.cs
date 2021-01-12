@@ -49,7 +49,7 @@
             return true;
         }
 
-        public async Task<bool> UploadSaveData(GameInformationModel gameInformation)
+        public async Task<bool> UploadSaveData(GameInformationModel gameInformation, bool overwriteSave)
         {
             if (gameInformation == null)
                 return false;
@@ -60,9 +60,11 @@
 
                 using FileStream fileStream = BackupStrategy.GenerateBackup(gameInformation);
 
+                WriteMode writeMode = overwriteSave ? WriteMode.Overwrite.Instance : WriteMode.Add.Instance;
+
                 FileMetadata response = await Client
                     .Files
-                    .UploadAsync(Path.Combine(gameInformation.OnlineSaveFolder, gameInformation.BuildSaveName()), WriteMode.Add.Instance, body: fileStream)
+                    .UploadAsync(Path.Combine(gameInformation.OnlineSaveFolder, gameInformation.BuildSaveName()), writeMode, body: fileStream)
                     .ConfigureAwait(true);
 
                 return string.IsNullOrEmpty(response.ContentHash);

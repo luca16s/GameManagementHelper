@@ -10,7 +10,7 @@
 
         Task<bool> CheckFolderExistence(string folderName);
 
-        Task<bool> UploadSaveData(GameInformationModel gameInformation);
+        Task<bool> UploadSaveData(GameInformationModel gameInformation, bool overwriteSave);
 
         Task<bool> DownloadSaveData(GameInformationModel gameInformation);
     }

@@ -34,7 +34,7 @@
 
         public ICommand UploadCommand
             => _UploadCommand
-            ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave().ConfigureAwait(true), _ => CanExecute);
+            ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave(MessageBox.Show("Deseja sobrescrever o arquivo salvo?", "Game Save Manager", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)).ConfigureAwait(true), _ => CanExecute);
 
         public ICommand DownloadCommand
             => _DownloadCommand
@@ -132,7 +132,7 @@
                 : null;
         }
 
-        private async Task<bool> UploadSave()
+        private async Task<bool> UploadSave(MessageBoxResult messageBoxResult)
         {
             if (CloudOperations == null)
                 return false;
@@ -144,7 +144,7 @@
             if (!exists)
                 _ = await CloudOperations.CreateFolder(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
 
-            return await CloudOperations.UploadSaveData(GameInformation).ConfigureAwait(true);
+            return await CloudOperations.UploadSaveData(GameInformation, messageBoxResult == MessageBoxResult.Yes).ConfigureAwait(true);
         }
 
         private async Task<bool> DownloadSave()

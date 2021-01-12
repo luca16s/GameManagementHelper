@@ -1,6 +1,8 @@
 ﻿namespace GameSaveManager.Core.Services
 {
+    using System;
     using System.IO;
+    using System.Linq;
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
@@ -22,9 +24,9 @@
 
             string[] filesPathList = Directory.GetFiles(folder, "*", SearchOption.AllDirectories);
 
-            for (int i = 0; i < filesPathList.Length; i++)
+            string path = Array.Find(filesPathList, p => p.Contains(gameInformation.DefaultSaveName));
+            if (!string.IsNullOrWhiteSpace(path))
             {
-                string path = filesPathList[i];
                 File.Copy(path, Path.Combine(FileSystemUtils.GetTempFolder(), saveName));
             }
 

@@ -14,12 +14,10 @@
     /// </summary>
     public partial class GamesPage : Page
     {
-        private readonly GamesPageViewModel GamesPageViewModel;
         public GamesPage(IFactory<IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
         {
             InitializeComponent();
-            GamesPageViewModel = new GamesPageViewModel(backupStrategy, options);
-            DataContext = GamesPageViewModel;
+            DataContext = new GamesPageViewModel(backupStrategy, options);
         }
     }
 }
