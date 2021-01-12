@@ -1,6 +1,7 @@
 ﻿namespace GameSaveManager.DropboxApi
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -23,9 +24,51 @@
             Client = dropboxClient;
         }
 
+        private async Task<ListFolderResult> ListFolderContent(string folderPath) => await Client.Files.ListFolderAsync(folderPath).ConfigureAwait(true);
+
+        private static bool CheckIfFolderExistsInList(string folderName, ListFolderResult itemsList)
+        {
+            foreach (Metadata item in itemsList.Entries.Where(x => x.IsFolder))
+            {
+                if (string.Equals(item.Name, folderName?.Trim('/'), StringComparison.InvariantCultureIgnoreCase))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public async Task<IEnumerable<(string name, string path)>> GetSavesList(GameInformationModel gameInformation)
+        {
+            string folderName = gameInformation.OnlineSaveFolder.TrimEnd('/');
+
+            if (!await CheckFolderExistence(folderName))
+                return Enumerable.Empty<(string name, string path)>();
+
+            ListFolderResult fileList = await ListFolderContent(folderName).ConfigureAwait(true);
+
+            var listaSaves = new List<(string name, string path)>();
+
+            string fileExtension = BackupStrategy.GetFileExtension();
+
+            foreach (var item in fileList.Entries
+                                         .Where(entrie => entrie.IsFile
+                                                       && entrie.Name.Contains(fileExtension))
+                                         .Select(save => new
+                                         {
+                                             name = save.Name.Replace("." + fileExtension, string.Empty),
+                                             path = save.PathLower
+                                         }))
+            {
+                listaSaves.Add((item.name, item.path));
+            }
+
+            return listaSaves;
+        }
+
         public async Task<bool> DownloadSaveData(GameInformationModel gameInformation)
         {
-            if (gameInformation == null)
+            if (gameInformation == null
+                || !await CheckFolderExistence(gameInformation.OnlineSaveFolder))
                 return false;
 
             ListFolderResult fileList = await ListFolderContent(gameInformation.OnlineSaveFolder.TrimEnd('/')).ConfigureAwait(true);
@@ -100,17 +143,21 @@
             return string.IsNullOrEmpty(result.Metadata.Id);
         }
 
-        private static bool CheckIfFolderExistsInList(string folderName, ListFolderResult itemsList)
+        public async Task<bool> DeleteSave(string path)
         {
-            foreach (Metadata item in itemsList.Entries.Where(x => x.IsFolder))
+            if (string.IsNullOrWhiteSpace(path))
+                return false;
+
+            try
             {
-                if (string.Equals(item.Name, folderName?.Trim('/'), StringComparison.InvariantCultureIgnoreCase))
-                    return true;
+                DeleteResult result = await Client.Files.DeleteV2Async(path).ConfigureAwait(true);
+            }
+            catch (ApiException<DeleteError> ex)
+            {
+                throw new ApplicationException(ex.Message);
             }
 
-            return false;
+            return true;
         }
-
-        private async Task<ListFolderResult> ListFolderContent(string folderPath) => await Client.Files.ListFolderAsync(folderPath).ConfigureAwait(true);
     }
 }

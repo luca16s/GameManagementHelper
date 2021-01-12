@@ -1,5 +1,6 @@
 ﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
@@ -17,15 +18,11 @@
 
     using Microsoft.Extensions.Options;
 
-    public class GamesPageViewModel : ViewModelBase
+    public class GamesPageViewModel : BaseViewModel
     {
-        private readonly IFactory<IBackupStrategy> BackupFactory;
         private IBackupStrategy BackupStrategy;
-
-        public static string Download => "M17,13L12,18L7,13H10V9H14V13M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z";
-        public static string Upload => "M14,13V17H10V13H7L12,8L17,13M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z";
-
         private ICloudOperations CloudOperations => GetConnectionClient();
+        private readonly IFactory<IBackupStrategy> BackupFactory;
 
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;
@@ -45,7 +42,8 @@
 
         public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
         {
-            if (options == null)
+            if (backupStrategy == null
+                || options == null)
                 return;
 
             BackupFactory = backupStrategy;
@@ -72,6 +70,8 @@
                 _SelectedGame = value;
 
                 GameInformation = _SelectedGame.Game;
+
+                _ = GetSavesList(GameInformation);
 
                 ImagePath = GameInformation?.CoverPath;
 
@@ -116,20 +116,65 @@
                     _UserDefinedSaveName = GameInformation.UserDefinedSaveName;
                 }
 
-                OnPropertyChanged(nameof(UserDefinedSaveName));
+                OnPropertyChanged();
+            }
+        }
+
+        private GamesListViewModel gamesListVM;
+        public GamesListViewModel GamesListVM
+        {
+            get => gamesListVM;
+            set
+            {
+                if (gamesListVM == value)
+                    return;
+
+                gamesListVM = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> saveList;
+        public ObservableCollection<string> SaveList
+        {
+            get => saveList;
+            set
+            {
+                if (saveList == value)
+                    return;
+
+                saveList = value;
+
+                OnPropertyChanged();
             }
         }
 
         private ICloudOperations GetConnectionClient()
         {
-            using var DriveConnectionClient = (DropboxClient)Application.Current.Properties["CLIENT"];
+            using var client = (DropboxClient)Application.Current.Properties["CLIENT"];
+            var backupSaveType = (EBackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
+            BackupStrategy = BackupFactory.Create(backupSaveType);
 
-            var backupType = (EBackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
-            BackupStrategy = BackupFactory.Create(backupType);
+            return client == null
+                ? null
+                : new DropboxOperations(BackupStrategy, client);
+        }
 
-            return DriveConnectionClient != null
-                ? new DropboxOperations(BackupStrategy, DriveConnectionClient)
-                : null;
+        private async Task GetSavesList(GameInformationModel gameInformation)
+        {
+            if (CloudOperations == null)
+            {
+                GamesListVM = new();
+                return;
+            }
+
+            IEnumerable<(string name, string path)> listaSavesOnline = await CloudOperations.GetSavesList(gameInformation)
+                .ConfigureAwait(true);
+
+            GamesListVM = new(listaSavesOnline, CloudOperations, listaSavesOnline.Any());
+
+            return;
         }
 
         private async Task<bool> UploadSave(MessageBoxResult messageBoxResult)
@@ -151,6 +196,9 @@
         {
             if (CloudOperations == null)
                 return false;
+
+            if (!string.IsNullOrWhiteSpace(GamesListVM.SelectedSave?.SaveName))
+                GameInformation.UserDefinedSaveName = GamesListVM.SelectedSave?.SaveName;
 
             GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 

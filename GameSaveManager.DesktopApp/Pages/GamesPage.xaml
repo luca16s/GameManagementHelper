@@ -1,73 +1,88 @@
-﻿<Page x:Class="GameSaveManager.DesktopApp.Pages.GamesPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:components="clr-namespace:GameSaveManager.DesktopApp.Components"
-      xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
-      xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
-      d:DataContext="{d:DesignInstance Type=viewmodel:GamesPageViewModel}"
-      mc:Ignorable="d"
-      Title="Jogos"
-      Style="{DynamicResource FundoPagina}">
+﻿<Page
+    x:Class="GameSaveManager.DesktopApp.Pages.GamesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:components="clr-namespace:GameSaveManager.DesktopApp.Components"
+    xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+    xmlns:viewmodel="clr-namespace:GameSaveManager.DesktopApp.ViewModel"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    FontFamily="{materialDesign:MaterialDesignFont}"
+    d:DataContext="{d:DesignInstance Type=viewmodel:GamesPageViewModel}"
+    mc:Ignorable="d"
+    Title="Jogos">
     <Page.Resources>
         <properties:Settings x:Key="Settings" />
-        <Style x:Key="FundoPagina"
-               TargetType="{x:Type Page}">
-            <Setter Property="Background" Value="#3F3F3F" />
+        <Style
+            x:Key="Color"
+            TargetType="{x:Type ContentControl}">
+            <Setter Property="Foreground" Value="#ffffff" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
-                    <Setter Property="Background" Value="#ffffff" />
+                    <Setter Property="Foreground" Value="Black" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="215" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <ComboBox Grid.Row="0"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="2"
-                  Height="30"
-                  SelectedIndex="0"
-                  ItemsSource="{Binding Path=GamesSupported}"
-                  DisplayMemberPath="Title"
-                  SelectedValuePath="Game"
-                  SelectedItem="{Binding Path=SelectedGame, Mode=TwoWay}"
-                  IsSynchronizedWithCurrentItem="True"
-                  VerticalContentAlignment="Center" />
-        <Image Grid.Row="1"
-               Grid.Column="0"
-               Grid.ColumnSpan="2"
-               Margin="0, 5, 0, 5"
-               Stretch="UniformToFill"
-               Width="460"
-               Height="215"
-               Source="{Binding Path=ImagePath}" />
-        <TextBox Grid.Row="2"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="2"
-                 Text = "{Binding Path=UserDefinedSaveName}" />
-        <components:ButtonBaseComponent
+        <ComboBox
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Height="30"
+            SelectedIndex="0"
+            ItemsSource="{Binding Path=GamesSupported}"
+            DisplayMemberPath="Title"
+            SelectedValuePath="Game"
+            SelectedItem="{Binding Path=SelectedGame, Mode=TwoWay}"
+            IsSynchronizedWithCurrentItem="True"
+            VerticalContentAlignment="Center" />
+        <Image
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0, 5, 0, 5"
+            Stretch="UniformToFill"
+            Width="460"
+            Height="215"
+            Source="{Binding Path=ImagePath}" />
+        <components:SavesListComponent
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0, 10, 0, 10"
+            DataContext="{Binding Path=GamesListVM}" />
+        <TextBox
             Grid.Row="3"
             Grid.Column="0"
-            ToolTip="Upload"
-            ImageButtonCommand="{Binding UploadCommand}"
-            Data="{Binding Upload}" />
+            Grid.ColumnSpan="2"
+            Text="{Binding Path=UserDefinedSaveName}" />
         <components:ButtonBaseComponent
-            Grid.Row="3"
+            Grid.Row="4"
+            Grid.Column="0"
+            ToolTip="Upload"
+            Height="64"
+            ButtonCommand="{Binding UploadCommand}"
+            Image="M14,13V17H10V13H7L12,8L17,13M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z" />
+        <components:ButtonBaseComponent
+            Grid.Row="4"
             Grid.Column="1"
             ToolTip="Download"
-            ImageButtonCommand="{Binding DownloadCommand}"
-            Data="{Binding Download}" />
+            Height="64"
+            ButtonCommand="{Binding DownloadCommand}"
+            Image="M17,13L12,18L7,13H10V9H14V13M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z" />
     </Grid>
 </Page>
