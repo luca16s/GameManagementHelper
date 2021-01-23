@@ -1,5 +1,6 @@
 ﻿namespace GameSaveManager.Core.Interfaces
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using GameSaveManager.Core.Models;
@@ -10,8 +11,12 @@
 
         Task<bool> CheckFolderExistence(string folderName);
 
-        Task<bool> UploadSaveData(GameInformationModel gameInformation, bool overwriteSave);
-
         Task<bool> DownloadSaveData(GameInformationModel gameInformation);
+
+        Task<IEnumerable<(string name, string path)>> GetSavesList(GameInformationModel gameInformation);
+
+        Task<bool> DeleteSave(string path);
+
+        Task<bool> UploadSaveData(GameInformationModel gameInformation, bool overwriteSave);
     }
 }

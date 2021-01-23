@@ -9,9 +9,6 @@
 
     using Microsoft.Extensions.Options;
 
-    /// <summary>
-    /// Interaction logic for GamesPage.xaml
-    /// </summary>
     public partial class GamesPage : Page
     {
         public GamesPage(IFactory<IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)

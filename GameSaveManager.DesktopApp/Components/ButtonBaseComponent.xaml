@@ -1,15 +1,17 @@
-﻿<UserControl x:Class="GameSaveManager.DesktopApp.Components.ButtonBaseComponent"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
-             mc:Ignorable="d"
-             x:Name="ButtonComponent">
+﻿<UserControl
+    x:Class="GameSaveManager.DesktopApp.Components.ButtonBaseComponent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:GameSaveManager.DesktopApp.Properties"
+    mc:Ignorable="d"
+    x:Name="ButtonComponent">
     <UserControl.Resources>
         <properties:Settings x:Key="Settings" />
-        <Style x:Key="IconColor"
-           TargetType="{x:Type Path}">
+        <Style
+            x:Key="Color"
+            TargetType="{x:Type Path}">
             <Setter Property="Fill" Value="#ffffff" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
@@ -17,8 +19,9 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <ControlTemplate x:Key="ButtonTemplate"
-                         TargetType="Button">
+        <ControlTemplate
+            x:Key="ButtonTemplate"
+            TargetType="Button">
             <Grid>
                 <Rectangle x:Name="buttonBackground"
                            Fill="{TemplateBinding Background}"
@@ -48,18 +51,22 @@
     </UserControl.Resources>
     <Button
         x:Name="Button"
+        Template="{StaticResource ButtonTemplate}"
         Width="{Binding Width, ElementName=ButtonComponent}"
         Height="{Binding Height, ElementName=ButtonComponent}"
         Margin="{Binding Margin, ElementName=ButtonComponent}"
         ToolTip="{Binding ToolTip, ElementName=ButtonComponent}"
-        Template="{StaticResource ButtonTemplate}"
-        Command="{Binding ImageButtonCommand, ElementName=ButtonComponent}">
-        <Viewbox Width="{Binding Width, ElementName=ButtonComponent}"
-                 Height="{Binding Height, ElementName=ButtonComponent}">
-            <Canvas Width="24"
-                    Height="24">
-                <Path Style="{StaticResource IconColor}"
-                      Data="{Binding Data, ElementName=ButtonComponent}" />
+        Command="{Binding ButtonCommand, ElementName=ButtonComponent}"
+        CommandParameter="{Binding ButtonCommandParameters, ElementName=ButtonComponent}">
+        <Viewbox
+            Width="{Binding Width, ElementName=ButtonComponent}"
+            Height="{Binding Height, ElementName=ButtonComponent}">
+            <Canvas
+                Width="24"
+                Height="24">
+                <Path
+                    Style="{StaticResource Color}"
+                    Data="{Binding Image, ElementName=ButtonComponent}" />
             </Canvas>
         </Viewbox>
     </Button>

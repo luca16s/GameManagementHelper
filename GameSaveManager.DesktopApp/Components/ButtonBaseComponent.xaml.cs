@@ -2,34 +2,33 @@
 {
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Controls.Primitives;
     using System.Windows.Input;
 
     public partial class ButtonBaseComponent : UserControl
     {
         public ButtonBaseComponent() => InitializeComponent();
 
-        public object Data
+        public object Image
         {
             get
             {
-                string data = (string)GetValue(DataProperty);
+                string data = GetValue(ImageProperty).ToString();
 
                 return string.IsNullOrWhiteSpace(data)
                     ? DependencyProperty.UnsetValue
                     : data;
             }
 
-            set => SetValue(DataProperty, value);
+            set => SetValue(ImageProperty, value);
         }
 
-        private static readonly DependencyProperty DataProperty =
+        private static readonly DependencyProperty ImageProperty =
            DependencyProperty.Register(
-               nameof(Data),
+               nameof(Image),
                typeof(object),
                typeof(ButtonBaseComponent));
 
-        public ICommand ImageButtonCommand
+        public ICommand ButtonCommand
         {
             get => (ICommand)GetValue(Command);
             set => SetValue(Command, value);
@@ -37,14 +36,26 @@
 
         private static readonly DependencyProperty Command =
             DependencyProperty.Register(
-                nameof(ImageButtonCommand),
+                nameof(ButtonCommand),
                 typeof(ICommand),
+                typeof(ButtonBaseComponent));
+
+        public object ButtonCommandParameters
+        {
+            get => (object)GetValue(CommandParameters);
+            set => SetValue(CommandParameters, value);
+        }
+
+        private static readonly DependencyProperty CommandParameters =
+            DependencyProperty.Register(
+                nameof(ButtonCommandParameters),
+                typeof(object),
                 typeof(ButtonBaseComponent));
 
         public event RoutedEventHandler Click
         {
-            add { Button.AddHandler(ButtonBase.ClickEvent, value); }
-            remove { Button.RemoveHandler(ButtonBase.ClickEvent, value); }
+            add { Button.Click += value; }
+            remove { Button.Click += value; }
         }
     }
 }

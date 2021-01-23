@@ -2,9 +2,6 @@ namespace GameSaveManager.Core.Tests
 {
     using System;
 
-    using Xunit;
-
-    using AutoFixture;
     using AutoFixture.Xunit2;
 
     using Bogus;
@@ -15,6 +12,8 @@ namespace GameSaveManager.Core.Tests
     using GameSaveManager.Core.Models;
     using GameSaveManager.Core.Services;
     using GameSaveManager.Core.Utils;
+
+    using Xunit;
 
     public class GameInformationModelTests
     {

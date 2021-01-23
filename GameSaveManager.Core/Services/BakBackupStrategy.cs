@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Linq;
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
