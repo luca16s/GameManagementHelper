@@ -1,22 +1,21 @@
 ﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
     using System.Threading.Tasks;
-    using System.Windows;
     using System.Windows.Input;
 
-    using Dropbox.Api;
-
+    using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.DesktopApp.Commands;
     using GameSaveManager.DesktopApp.Properties;
     using GameSaveManager.DropboxApi;
+    using GameSaveManager.Windows;
 
     using Microsoft.Extensions.Options;
 
     public class AccountPageViewModel : BaseViewModel
     {
-        private readonly IConnection DropboxConnection;
+        private readonly IFactory<EDriveServices, IConnection> Connection;
         private readonly Secrets Secrets;
 
         private ICommand _ConnectCommand;
@@ -27,29 +26,24 @@
                                                             await SetUserInformation().ConfigureAwait(true);
                                                         });
 
-        private DropboxClient DropboxClient { get; set; }
-
-        public AccountPageViewModel(IOptions<Secrets> options)
+        public AccountPageViewModel(IFactory<EDriveServices, IConnection> connection, IOptions<Secrets> options)
         {
             if (options == null)
                 return;
 
-            DropboxConnection = new DropboxConnection();
+            Connection = connection;
             Secrets = options.Value;
         }
 
         private async Task ConnectAsync()
-        {
-            Application
-                .Current
-                .Properties["CLIENT"] = DropboxClient = (DropboxClient)await DropboxConnection
-                .ConnectAsync(Secrets)
-                .ConfigureAwait(true);
-        }
+            => App.Client = await Connection
+            .Create(App.DriveService)
+            .ConnectAsync(Secrets)
+            .ConfigureAwait(true);
 
-        private async Task SetUserInformation()
+        private static async Task SetUserInformation()
         {
-            Dropbox.Api.Users.FullAccount user = await DropboxClient
+            Dropbox.Api.Users.FullAccount user = await App.Client
                 .Users
                 .GetCurrentAccountAsync()
                 .ConfigureAwait(true);

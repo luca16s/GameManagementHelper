@@ -6,6 +6,6 @@
 
     public interface IConnection
     {
-        Task<object> ConnectAsync(Secrets secrets);
+        Task<dynamic> ConnectAsync(Secrets secrets);
     }
 }

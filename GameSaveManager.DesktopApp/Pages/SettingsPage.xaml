@@ -62,7 +62,7 @@
                 <ComboBox
                     x:Name="comboListaNuvem"
                     ItemsSource="{Binding Path=DriveServiceSelected, Converter={enumConverter:EnumToCollectionConverter}, Mode=OneTime}"
-                    IsEnabled="False"
+                    IsEnabled="True"
                     SelectedValuePath="Value"
                     DisplayMemberPath="Description"
                     SelectedValue="{Binding Path=DriveServiceSelected}"

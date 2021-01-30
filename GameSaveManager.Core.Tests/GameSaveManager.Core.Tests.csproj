@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
+    <ProjectReference Include="..\GameSaveManager.Services\GameSaveManager.Services.csproj" />
   </ItemGroup>
 
 </Project>

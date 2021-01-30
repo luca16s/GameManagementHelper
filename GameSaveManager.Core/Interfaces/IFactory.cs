@@ -1,9 +1,7 @@
 ﻿namespace GameSaveManager.Core.Interfaces
 {
-    using GameSaveManager.Core.Enums;
-
-    public interface IFactory<out T>
+    public interface IFactory<T, out TReturn>
     {
-        T Create(EBackupSaveType saveType);
+        TReturn Create(T saveType);
     }
 }

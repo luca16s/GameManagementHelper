@@ -19,7 +19,7 @@
         private readonly Uri JSRedirectUri = new("http://127.0.0.1:52475/token");
         private readonly Uri RedirectUri = new("http://127.0.0.1:52475/authorize");
 
-        public async Task<object> ConnectAsync(Secrets secrets)
+        public async Task<dynamic> ConnectAsync(Secrets secrets)
         {
             if (secrets == null)
                 return default;

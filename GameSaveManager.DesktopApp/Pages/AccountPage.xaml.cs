@@ -2,6 +2,8 @@
 {
     using System.Windows.Controls;
 
+    using GameSaveManager.Core.Enums;
+    using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.DesktopApp.ViewModel;
 
@@ -9,13 +11,12 @@
 
     public partial class AccountPage : Page
     {
-        private readonly AccountPageViewModel AccountPageViewModel;
-
-        public AccountPage(IOptions<Secrets> options)
+        public AccountPage(IFactory<EDriveServices,
+            IConnection> connection,
+            IOptions<Secrets> options)
         {
             InitializeComponent();
-            AccountPageViewModel = new AccountPageViewModel(options);
-            DataContext = AccountPageViewModel;
+            DataContext = new AccountPageViewModel(connection, options);
         }
     }
 }

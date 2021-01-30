@@ -7,14 +7,13 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Dropbox.Api;
-
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.DesktopApp.Commands;
     using GameSaveManager.DesktopApp.Helper;
     using GameSaveManager.DropboxApi;
+    using GameSaveManager.Windows;
 
     using Microsoft.Extensions.Options;
 
@@ -22,7 +21,7 @@
     {
         private IBackupStrategy BackupStrategy;
         private ICloudOperations CloudOperations => GetConnectionClient();
-        private readonly IFactory<IBackupStrategy> BackupFactory;
+        private readonly IFactory<EBackupSaveType, IBackupStrategy> BackupFactory;
 
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;
@@ -40,7 +39,7 @@
         private GameInformationModel GameInformation;
         private readonly ObservableCollection<GameInformationModel> GameInformationList;
 
-        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
+        public GamesPageViewModel(IFactory<EBackupSaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
         {
             if (backupStrategy == null
                 || options == null)
@@ -152,9 +151,8 @@
 
         private ICloudOperations GetConnectionClient()
         {
-            using var client = (DropboxClient)Application.Current.Properties["CLIENT"];
-            var backupSaveType = (EBackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
-            BackupStrategy = BackupFactory.Create(backupSaveType);
+            using dynamic client = App.Client;
+            BackupStrategy = BackupFactory.Create(App.BackupType);
 
             return client == null
                 ? null
