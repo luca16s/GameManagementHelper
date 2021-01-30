@@ -1,7 +1,5 @@
 ﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
-    using System;
-
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Windows;
 

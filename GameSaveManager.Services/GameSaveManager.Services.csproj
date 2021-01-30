@@ -5,18 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Backup\**" />
     <Compile Remove="Drive\**" />
-    <EmbeddedResource Remove="Backup\**" />
     <EmbeddedResource Remove="Drive\**" />
-    <None Remove="Backup\**" />
     <None Remove="Drive\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Backup\BackupFactory.cs" />
-    <Compile Include="Backup\BakBackupStrategy.cs" />
-    <Compile Include="Backup\ZipBackupStrategy.cs" />
     <Compile Include="Drive\ConnectionFactory.cs" />
   </ItemGroup>
 
@@ -24,6 +18,10 @@
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
     <ProjectReference Include="..\GameSaveManager.Dropbox\GameSaveManager.DropboxApi.csproj" />
     <ProjectReference Include="..\GameSaveManager.OneDriveApi\GameSaveManager.OneDriveApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Backup\" />
   </ItemGroup>
 
 </Project>

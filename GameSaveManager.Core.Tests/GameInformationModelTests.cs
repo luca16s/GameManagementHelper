@@ -10,8 +10,8 @@ namespace GameSaveManager.Core.Tests
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Models;
+    using GameSaveManager.Core.Services;
     using GameSaveManager.Core.Utils;
-    using GameSaveManager.Services.Backup;
 
     using Xunit;
 

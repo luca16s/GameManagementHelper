@@ -8,7 +8,6 @@
     using GameSaveManager.Core.Models;
     using GameSaveManager.DesktopApp.Commands;
     using GameSaveManager.DesktopApp.Properties;
-    using GameSaveManager.DropboxApi;
     using GameSaveManager.Windows;
 
     using Microsoft.Extensions.Options;
