@@ -11,8 +11,7 @@
 
     public partial class AccountPage : Page
     {
-        public AccountPage(IFactory<EDriveServices,
-            IConnection> connection,
+        public AccountPage(IFactory<EDriveServices, IConnection> connection,
             IOptions<Secrets> options)
         {
             InitializeComponent();

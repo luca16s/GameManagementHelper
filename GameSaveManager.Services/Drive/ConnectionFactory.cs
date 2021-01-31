@@ -10,9 +10,9 @@
 
     public class ConnectionFactory : IFactory<EDriveServices, IConnection>
     {
-        public IConnection Create(EDriveServices driveSelected)
+        public IConnection Create(EDriveServices type)
         {
-            return driveSelected switch
+            return type switch
             {
                 EDriveServices.Dropbox => new DropboxConnection(),
                 EDriveServices.OneDrive => new OneDriveConnection(),

@@ -14,7 +14,6 @@
 
     public class AccountPageViewModel : BaseViewModel
     {
-        private readonly IFactory<EDriveServices, IConnection> Connection;
         private readonly Secrets Secrets;
 
         private ICommand _ConnectCommand;
@@ -25,30 +24,27 @@
                                                             await SetUserInformation().ConfigureAwait(true);
                                                         });
 
-        public AccountPageViewModel(IFactory<EDriveServices, IConnection> connection, IOptions<Secrets> options)
+        public AccountPageViewModel(IFactory<EDriveServices, IConnection> connection,
+            IOptions<Secrets> options)
         {
             if (options == null)
                 return;
 
-            Connection = connection;
+            App.Client = connection.Create(App.DriveService);
             Secrets = options.Value;
         }
 
         private async Task ConnectAsync()
-            => App.Client = await Connection
-            .Create(App.DriveService)
+            => await App.Client
             .ConnectAsync(Secrets)
             .ConfigureAwait(true);
 
         private static async Task SetUserInformation()
         {
-            Dropbox.Api.Users.FullAccount user = await App.Client
-                .Users
-                .GetCurrentAccountAsync()
-                .ConfigureAwait(true);
+            var userInformation = await App.Client.GetUserInformation();
 
-            Settings.Default.Name = user.Name.DisplayName;
-            Settings.Default.Email = user.Email;
+            Settings.Default.Name = userInformation.UserName;
+            Settings.Default.Email = userInformation.Email;
         }
     }
 }

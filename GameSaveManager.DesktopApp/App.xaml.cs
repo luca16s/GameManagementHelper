@@ -20,7 +20,7 @@
 
     public partial class App : Application
     {
-        public static dynamic Client { get; set; }
+        public static IConnection Client { get; set; }
         public static EDriveServices DriveService { get; set; }
         public static EBackupSaveType BackupType { get; set; }
 
@@ -63,8 +63,8 @@
             _ = servicesCollection.AddTransient(typeof(GamesPageViewModel));
             _ = servicesCollection.AddTransient(typeof(AccountPageViewModel));
             _ = servicesCollection.AddTransient(typeof(SettingsPageViewModel));
-            _ = servicesCollection.AddTransient<IFactory<EBackupSaveType, IBackupStrategy>, BackupFactory>();
             _ = servicesCollection.AddTransient<IFactory<EDriveServices, IConnection>, ConnectionFactory>();
+            _ = servicesCollection.AddTransient<IFactory<EBackupSaveType, IBackupStrategy>, BackupFactory>();
 
             _ = servicesCollection.Configure<Secrets>(secret =>
               {

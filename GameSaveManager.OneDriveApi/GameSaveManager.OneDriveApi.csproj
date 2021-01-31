@@ -13,6 +13,7 @@
     <PackageProjectUrl>https://luca16s.github.io/GameSaveManager/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
     <NeutralLanguage>pt-BR</NeutralLanguage>
+    <UserSecretsId>20b15d91-0c9d-481d-be6a-10c03b62b0d2</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,14 +27,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.0" />
     <PackageReference Include="Microsoft.Graph" Version="3.23.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.25.0" />
-    <PackageReference Include="Microsoft.OneDriveSDK" Version="2.0.7" />
-    <PackageReference Include="Microsoft.OneDriveSDK.Authentication" Version="1.0.10" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

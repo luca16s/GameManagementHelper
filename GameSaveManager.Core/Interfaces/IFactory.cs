@@ -2,6 +2,6 @@
 {
     public interface IFactory<T, out TReturn>
     {
-        TReturn Create(T saveType);
+        TReturn Create(T type);
     }
 }
