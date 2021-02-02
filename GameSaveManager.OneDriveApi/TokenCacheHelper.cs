@@ -25,7 +25,6 @@
 //
 //------------------------------------------------------------------------------
 
-
 namespace GameSaveManager.OneDriveApi
 {
     using System.IO;
