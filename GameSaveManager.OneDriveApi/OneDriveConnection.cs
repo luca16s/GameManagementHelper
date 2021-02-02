@@ -38,20 +38,27 @@
             }
         }
 
-        public dynamic PublicClientApp { get; private set; }
+        private static dynamic publicClientApp;
+        public static dynamic PublicClientApp
+        {
+            get
+            {
+                if (publicClientApp == null)
+                {
+                    publicClientApp = PublicClientApplicationBuilder
+                        .Create(ClientId)
+                        .WithAuthority(Authority)
+                        .WithClientName("Game Save Manager")
+                        .WithDefaultRedirectUri()
+                        .Build();
+                }
+
+                return publicClientApp;
+            }
+        }
 
         public async Task ConnectAsync(Secrets secrets)
         {
-            if (PublicClientApp == null)
-            {
-                PublicClientApp = PublicClientApplicationBuilder
-                    .Create(ClientId)
-                    .WithAuthority(Authority)
-                    .WithClientName("Game Save Manager")
-                    .WithDefaultRedirectUri()
-                    .Build();
-            }
-
             IEnumerable<IAccount> accounts = await PublicClientApp.GetAccountsAsync();
             IAccount firstAccount = accounts.FirstOrDefault();
 
@@ -79,11 +86,6 @@
                 throw new ApplicationException(ex.Message);
             }
 
-            if (authResult != null)
-            {
-
-            }
-
             return;
         }
 
@@ -94,9 +96,7 @@
 
             AuthenticationResult authResult = await PublicClientApp.AcquireTokenSilent(scopes, firstAccount).ExecuteAsync();
 
-            string clientInformation = await GetHttpContentWithToken(graphAPIEndpoint, authResult.AccessToken);
-
-            return JsonSerializer.Deserialize<UserModel>(clientInformation);
+            return JsonSerializer.Deserialize<UserModel>(await GetHttpContentWithToken(graphAPIEndpoint, authResult.AccessToken));
         }
     }
 }

@@ -1,9 +1,14 @@
-﻿namespace GameSaveManager.Core.Models
+﻿using System.Text.Json.Serialization;
+
+namespace GameSaveManager.Core.Models
 {
     public class UserModel
     {
-        public string UserName { get; }
-        public string Email { get; }
+        [JsonPropertyName("givenName")]
+        public string UserName { get; set; }
+
+        [JsonPropertyName("userPrincipalName")]
+        public string Email { get; set; }
 
         public UserModel(string userName, string email)
         {
