@@ -8,13 +8,9 @@
         public static string FindPath(string folder)
         {
             if (Directory.Exists(Path.Combine(GetGameFolderLocationAppData(), folder)))
-            {
                 return Path.Combine(GetGameFolderLocationAppData(), folder);
-            }
             else if (Directory.Exists(Path.Combine(GetDocumentsFolder(), folder)))
-            {
                 return Path.Combine(GetDocumentsFolder(), folder);
-            }
 
             return string.Empty;
         }

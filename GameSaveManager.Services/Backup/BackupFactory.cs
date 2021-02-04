@@ -1,4 +1,4 @@
-﻿namespace GameSaveManager.Core.Services
+﻿namespace GameSaveManager.Services.Backup
 {
     using System;
 
@@ -6,7 +6,7 @@
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Utils;
 
-    public class BackupFactory : IFactory<IBackupStrategy>
+    public class BackupFactory : IFactory<EBackupSaveType, IBackupStrategy>
     {
         public IBackupStrategy Create(EBackupSaveType saveType)
         {

@@ -13,32 +13,21 @@
 
     public class DropboxConnection : IConnection
     {
-        private const string responseString = "<html><body onload='redirect()'>Por favor retorne para o App.</body></html><script type='text/javascript'> function redirect(){ document.location.href ='/token?url_with_fragment='+encodeURIComponent(document.location.href); close();}</script>";
+        private const string responseString = @"
+                <html>
+                <body onload='redirect()'>Por favor retorne para o App.
+                </body>
+                </html>
+                <script type='text/javascript'>
+                        function redirect()
+                        {
+                            document.location.href ='/token?url_with_fragment='+encodeURIComponent(document.location.href); close();
+                        }
+                </script>";
 
         private readonly string LoopbackHost = "http://127.0.0.1:52475/";
         private readonly Uri JSRedirectUri = new("http://127.0.0.1:52475/token");
         private readonly Uri RedirectUri = new("http://127.0.0.1:52475/authorize");
-
-        public async Task<object> ConnectAsync(Secrets secrets)
-        {
-            if (secrets == null)
-                return default;
-
-            DropboxCertHelper.InitializeCertPinning();
-
-            string accessToken = string.IsNullOrWhiteSpace(secrets.AppToken)
-                                    ? await GetAccessToken(secrets.AppKey).ConfigureAwait(true)
-                                    : secrets.AppToken;
-
-            var httpClient = new HttpClient { Timeout = TimeSpan.FromMinutes(20) };
-
-            var config = new DropboxClientConfig("GameSaveManager")
-            {
-                HttpClient = httpClient,
-            };
-
-            return new DropboxClient(accessToken, "", secrets.AppKey, secrets.AppSecret, config);
-        }
 
         private async Task<string> GetAccessToken(string appkey)
         {
@@ -95,6 +84,42 @@
             httpListener.Stop();
 
             return DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
+        }
+
+        public dynamic PublicClientApp { get; private set; }
+
+        public async Task ConnectAsync(Secrets secrets)
+        {
+            if (secrets == null)
+                return;
+
+            if (PublicClientApp == null)
+            {
+                DropboxCertHelper.InitializeCertPinning();
+
+                string accessToken = string.IsNullOrWhiteSpace(secrets.AppToken)
+                                        ? await GetAccessToken(secrets.AppKey).ConfigureAwait(true)
+                                        : secrets.AppToken;
+
+                var httpClient = new HttpClient { Timeout = TimeSpan.FromMinutes(20) };
+
+                var config = new DropboxClientConfig("Game Save Manager")
+                {
+                    HttpClient = httpClient,
+                };
+
+                PublicClientApp = new DropboxClient(accessToken, "", secrets.AppKey, secrets.AppSecret, config);
+            }
+        }
+
+        public async Task<UserModel> GetUserInformation()
+        {
+            Dropbox.Api.Users.FullAccount user = await PublicClientApp
+                .Users
+                .GetCurrentAccountAsync()
+                .ConfigureAwait(true);
+
+            return new(user.Name.GivenName, user.Email);
         }
     }
 }

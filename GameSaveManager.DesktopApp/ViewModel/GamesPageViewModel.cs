@@ -7,22 +7,21 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using Dropbox.Api;
-
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
     using GameSaveManager.DesktopApp.Commands;
     using GameSaveManager.DesktopApp.Helper;
-    using GameSaveManager.DropboxApi;
+    using GameSaveManager.Services.Drive;
+    using GameSaveManager.Windows;
 
     using Microsoft.Extensions.Options;
 
     public class GamesPageViewModel : BaseViewModel
     {
         private IBackupStrategy BackupStrategy;
-        private ICloudOperations CloudOperations => GetConnectionClient();
-        private readonly IFactory<IBackupStrategy> BackupFactory;
+        private ICloudOperations CloudOperations => GetClientOperations();
+        private readonly IFactory<EBackupSaveType, IBackupStrategy> BackupFactory;
 
         private RelayCommand<GamesPageViewModel> _UploadCommand;
         private RelayCommand<GamesPageViewModel> _DownloadCommand;
@@ -40,7 +39,7 @@
         private GameInformationModel GameInformation;
         private readonly ObservableCollection<GameInformationModel> GameInformationList;
 
-        public GamesPageViewModel(IFactory<IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
+        public GamesPageViewModel(IFactory<EBackupSaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
         {
             if (backupStrategy == null
                 || options == null)
@@ -121,6 +120,7 @@
         }
 
         private GamesListViewModel gamesListVM;
+
         public GamesListViewModel GamesListVM
         {
             get => gamesListVM;
@@ -136,6 +136,7 @@
         }
 
         private ObservableCollection<string> saveList;
+
         public ObservableCollection<string> SaveList
         {
             get => saveList;
@@ -150,15 +151,14 @@
             }
         }
 
-        private ICloudOperations GetConnectionClient()
+        private ICloudOperations GetClientOperations()
         {
-            using var client = (DropboxClient)Application.Current.Properties["CLIENT"];
-            var backupSaveType = (EBackupSaveType)Application.Current.Properties["BACKUP_TYPE"];
-            BackupStrategy = BackupFactory.Create(backupSaveType);
+            using dynamic client = App.Client.PublicClientApp;
+            BackupStrategy = BackupFactory.Create(App.BackupType);
 
             return client == null
                 ? null
-                : new DropboxOperations(BackupStrategy, client);
+                : new OperationFactory(BackupStrategy, client).Create(App.DriveService);
         }
 
         private async Task GetSavesList(GameInformationModel gameInformation)

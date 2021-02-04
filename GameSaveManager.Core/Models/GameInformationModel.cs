@@ -19,6 +19,7 @@
         public string OnlineSaveFolder { get; set; }
 
         private string _UserDefinedSaveName;
+
         public string UserDefinedSaveName
         {
             get => _UserDefinedSaveName;

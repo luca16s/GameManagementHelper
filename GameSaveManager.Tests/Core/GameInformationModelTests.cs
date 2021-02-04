@@ -1,4 +1,4 @@
-namespace GameSaveManager.Core.Tests
+namespace GameSaveManager.Core.Tests.Core
 {
     using System;
 
@@ -10,8 +10,8 @@ namespace GameSaveManager.Core.Tests
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Models;
-    using GameSaveManager.Core.Services;
     using GameSaveManager.Core.Utils;
+    using GameSaveManager.Services.Backup;
 
     using Xunit;
 
@@ -21,12 +21,12 @@ namespace GameSaveManager.Core.Tests
 
         public GameInformationModelTests()
         {
-            BackupFactory fac = new Faker<BackupFactory>()
+            BackupFactory factory = new Faker<BackupFactory>()
                 .Generate();
 
             GameInformation = new Faker<GameInformationModel>()
                 .RuleFor(g => g.DefaultSaveName, f => f.Lorem.Word())
-                .RuleFor(g => g.SaveBackupExtension, f => fac.Create(f.PickRandom<EBackupSaveType>()).GetFileExtension())
+                .RuleFor(g => g.SaveBackupExtension, f => factory.Create(f.PickRandom<EBackupSaveType>()).GetFileExtension())
                 .RuleFor(g => g.DefaultSaveExtension, f => f.Lorem.Word())
                 .Generate();
         }

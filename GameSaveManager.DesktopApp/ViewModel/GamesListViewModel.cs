@@ -13,6 +13,7 @@
     public class GamesListViewModel : BaseViewModel
     {
         private ObservableCollection<GamesListEntry> savesList;
+
         public ObservableCollection<GamesListEntry> SavesList
         {
             get => savesList;
@@ -27,6 +28,7 @@
         }
 
         private GamesListEntry selectedSave;
+
         public GamesListEntry SelectedSave
         {
             get => selectedSave;
@@ -49,6 +51,7 @@
             ??= new RelayCommand<GamesListEntry>(async save => await DeleteSave(save).ConfigureAwait(true), _ => true);
 
         private Visibility showList;
+
         public Visibility ShowList
         {
             get => showList;

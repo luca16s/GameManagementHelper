@@ -7,10 +7,7 @@
         [Description("Dropbox")]
         Dropbox = 0,
 
-        [Description("Google Drive")]
-        GoogleDrive = 1,
-
         [Description("OneDrive")]
-        OneDrive = 2
+        OneDrive = 1
     }
 }

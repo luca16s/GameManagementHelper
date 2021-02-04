@@ -3,7 +3,7 @@
     "GameSaveManager.DesktopApp": {
       "commandName": "Project",
       "environmentVariables": {
-        "DROPBOX_CONNECTION_TYPE": "fast"
+        "CONNECTION_TYPE": "fast"
       }
     }
   }

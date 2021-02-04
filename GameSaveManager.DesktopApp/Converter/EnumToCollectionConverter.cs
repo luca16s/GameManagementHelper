@@ -6,10 +6,10 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    using GameSaveManager.Core.Enums;
+    using GameSaveManager.Core.Models;
     using GameSaveManager.Core.Utils;
 
-    [ValueConversion(typeof(Enum), typeof(IEnumerable<ValueDescription>))]
+    [ValueConversion(typeof(Enum), typeof(IEnumerable<EnumModel>))]
     public class EnumToCollectionConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value?.GetType().GetAllValuesAndDescriptions();
