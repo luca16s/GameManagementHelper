@@ -352,3 +352,5 @@ MigrationBackup/
 .vscode/tasks.json
 /GameSaveManager.View/.vscode
 /GameSaveManager.DesktopApp/.vscode
+/coveragereport
+/GameSaveManager.Tests/coverage.cobertura.xml
