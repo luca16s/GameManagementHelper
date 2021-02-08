@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Label
             Grid.Row="0"
-            Content="Saves Disponíveis para Download"/>
+            Content="Saves Disponíveis para Download" />
         <ScrollViewer
             Grid.Row="1"
             MaxHeight="100"

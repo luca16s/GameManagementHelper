@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
+    <ProjectReference Include="..\GameSaveManager.Dropbox\GameSaveManager.DropboxApi.csproj" />
+    <ProjectReference Include="..\GameSaveManager.OneDriveApi\GameSaveManager.OneDriveApi.csproj" />
+  </ItemGroup>
+
+</Project>

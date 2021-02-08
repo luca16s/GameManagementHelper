@@ -16,7 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.OneDriveApi", "GameSaveManager.OneDriveApi\GameSaveManager.OneDriveApi.csproj", "{E8187961-8230-44DB-B67B-965B0D43E820}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.Core.Tests", "GameSaveManager.Core.Tests\GameSaveManager.Core.Tests.csproj", "{C93088E6-5BC4-4967-BDDF-8704A2341A35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.Tests", "GameSaveManager.Tests\GameSaveManager.Tests.csproj", "{C93088E6-5BC4-4967-BDDF-8704A2341A35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSaveManager.Services", "GameSaveManager.Services\GameSaveManager.Services.csproj", "{81468A12-D005-40AD-AAD8-B66A5888CF9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -132,6 +134,26 @@ Global
 		{C93088E6-5BC4-4967-BDDF-8704A2341A35}.Release|x64.Build.0 = Release|x64
 		{C93088E6-5BC4-4967-BDDF-8704A2341A35}.Release|x86.ActiveCfg = Release|Any CPU
 		{C93088E6-5BC4-4967-BDDF-8704A2341A35}.Release|x86.Build.0 = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|x64.ActiveCfg = Debug|x64
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|x64.Build.0 = Debug|x64
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Debug|x86.Build.0 = Debug|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|ARM.Build.0 = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|ARM64.Build.0 = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|x64.ActiveCfg = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|x64.Build.0 = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|x86.ActiveCfg = Release|Any CPU
+		{81468A12-D005-40AD-AAD8-B66A5888CF9F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

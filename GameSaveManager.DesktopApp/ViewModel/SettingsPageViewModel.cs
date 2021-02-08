@@ -1,12 +1,15 @@
 ﻿namespace GameSaveManager.DesktopApp.ViewModel
 {
-    using System.Windows;
-
     using GameSaveManager.Core.Enums;
+    using GameSaveManager.Windows;
 
     public class SettingsPageViewModel : BaseViewModel
     {
-        public SettingsPageViewModel() => Application.Current.Properties["BACKUP_TYPE"] = BackupSaveType;
+        public SettingsPageViewModel()
+        {
+            App.BackupType = BackupSaveType;
+            App.DriveService = DriveServiceSelected;
+        }
 
         private EDriveServices _DriveServiceSelected;
 
@@ -18,8 +21,10 @@
                 if (_DriveServiceSelected == value)
                     return;
 
-                _DriveServiceSelected = value;
-                OnPropertyChanged(nameof(DriveServiceSelected));
+                _DriveServiceSelected =
+                    App.DriveService = value;
+
+                OnPropertyChanged();
             }
         }
 
@@ -33,9 +38,10 @@
                 if (_backupSaveType == value)
                     return;
 
-                _backupSaveType = value;
-                Application.Current.Properties["BACKUP_TYPE"] = value;
-                OnPropertyChanged(nameof(BackupSaveType));
+                _backupSaveType =
+                    App.BackupType = value;
+
+                OnPropertyChanged();
             }
         }
 
@@ -50,7 +56,8 @@
                     return;
 
                 _Name = value;
-                OnPropertyChanged(nameof(Name));
+
+                OnPropertyChanged();
             }
         }
 
@@ -65,7 +72,8 @@
                     return;
 
                 _Email = value;
-                OnPropertyChanged(nameof(Email));
+
+                OnPropertyChanged();
             }
         }
     }

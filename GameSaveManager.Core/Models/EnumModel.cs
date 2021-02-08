@@ -1,6 +1,6 @@
-﻿namespace GameSaveManager.Core.Enums
+﻿namespace GameSaveManager.Core.Models
 {
-    public class ValueDescription
+    public class EnumModel
     {
         public object Value { get; set; }
         public string Description { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace GameSaveManager.Core.Services
+﻿namespace GameSaveManager.Services.Backup
 {
     using System;
     using System.IO;

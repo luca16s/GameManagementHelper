@@ -7,23 +7,29 @@
     using System.Text;
     using System.Windows;
 
+    using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
-    using GameSaveManager.Core.Services;
     using GameSaveManager.DesktopApp.Pages;
     using GameSaveManager.DesktopApp.ViewModel;
+    using GameSaveManager.Services.Backup;
+    using GameSaveManager.Services.Drive;
 
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
     public partial class App : Application
     {
+        public static IConnection Client { get; set; }
+        public static EDriveServices DriveService { get; set; }
+        public static EBackupSaveType BackupType { get; set; }
+
         public IConfigurationRoot Configuration { get; set; }
         public IServiceProvider ServiceProvider { get; set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            string connectionType = Environment.GetEnvironmentVariable("DROPBOX_CONNECTION_TYPE");
+            string connectionType = Environment.GetEnvironmentVariable("CONNECTION_TYPE");
             bool isFastConnectionEnable = string.IsNullOrEmpty(connectionType) ||
                                 connectionType.ToLower(culture: CultureInfo.CurrentCulture) == "fast";
 
@@ -57,16 +63,17 @@
             _ = servicesCollection.AddTransient(typeof(GamesPageViewModel));
             _ = servicesCollection.AddTransient(typeof(AccountPageViewModel));
             _ = servicesCollection.AddTransient(typeof(SettingsPageViewModel));
-            _ = servicesCollection.AddTransient<IFactory<IBackupStrategy>, BackupFactory>();
+            _ = servicesCollection.AddTransient<IFactory<EDriveServices, IConnection>, ConnectionFactory>();
+            _ = servicesCollection.AddTransient<IFactory<EBackupSaveType, IBackupStrategy>, BackupFactory>();
 
             _ = servicesCollection.Configure<Secrets>(secret =>
-              {
-                  secret.AppKey = Configuration.GetSection(key: nameof(Secrets.AppKey)).Value;
-                  secret.AppSecret = Configuration.GetSection(key: nameof(Secrets.AppSecret)).Value;
-                  secret.AppToken = (Debugger.IsAttached && isFastConnectionEnable)
-                             ? Configuration.GetSection(key: nameof(Secrets.AppToken)).Value
-                             : string.Empty;
-              });
+            {
+                secret.AppKey = Configuration.GetSection(key: nameof(Secrets.AppKey)).Value;
+                secret.AppSecret = Configuration.GetSection(key: nameof(Secrets.AppSecret)).Value;
+                secret.AppToken = (Debugger.IsAttached && isFastConnectionEnable)
+                           ? Configuration.GetSection(key: nameof(Secrets.AppToken)).Value
+                           : string.Empty;
+            });
 
             _ = servicesCollection
                 .Configure<ObservableCollection<GameInformationModel>>(gameInformation => Configuration

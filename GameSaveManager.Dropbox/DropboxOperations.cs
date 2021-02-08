@@ -18,10 +18,10 @@
         private readonly DropboxClient Client;
         private readonly IBackupStrategy BackupStrategy;
 
-        public DropboxOperations(IBackupStrategy backupStrategy, DropboxClient dropboxClient)
+        public DropboxOperations(IBackupStrategy backupStrategy, DropboxClient client)
         {
             BackupStrategy = backupStrategy;
-            Client = dropboxClient;
+            Client = client;
         }
 
         private async Task<ListFolderResult> ListFolderContent(string folderPath) => await Client.Files.ListFolderAsync(folderPath).ConfigureAwait(true);
@@ -55,7 +55,7 @@
                                                        && entrie.Name.Contains(fileExtension))
                                          .Select(save => new
                                          {
-                                             name = save.Name.Replace("." + fileExtension, string.Empty),
+                                             name = save.Name.Replace("." + fileExtension, string.Empty, StringComparison.InvariantCultureIgnoreCase),
                                              path = save.PathLower
                                          }))
             {

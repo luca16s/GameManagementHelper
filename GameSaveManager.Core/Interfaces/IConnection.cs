@@ -6,6 +6,10 @@
 
     public interface IConnection
     {
-        Task<object> ConnectAsync(Secrets secrets);
+        public dynamic PublicClientApp { get; }
+
+        Task ConnectAsync(Secrets secrets);
+
+        Task<UserModel> GetUserInformation();
     }
 }

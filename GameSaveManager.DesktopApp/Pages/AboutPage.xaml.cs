@@ -6,12 +6,10 @@
 
     public partial class AboutPage : Page
     {
-        public static AboutViewModel AboutViewModel => new();
-
         public AboutPage()
         {
             InitializeComponent();
-            DataContext = AboutViewModel;
+            DataContext = new AboutViewModel();
         }
     }
 }
