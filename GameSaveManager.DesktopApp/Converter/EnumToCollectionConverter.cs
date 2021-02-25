@@ -6,13 +6,14 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
+    using DeadFishStudio.CoreLibrary.Extensions;
+
     using GameSaveManager.Core.Models;
-    using GameSaveManager.Core.Utils;
 
     [ValueConversion(typeof(Enum), typeof(IEnumerable<EnumModel>))]
     public class EnumToCollectionConverter : MarkupExtension, IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value?.GetType().GetAllValuesAndDescriptions();
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value is Enum enumerador ? enumerador.GetAllValuesAndDescriptions() : null;
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
 

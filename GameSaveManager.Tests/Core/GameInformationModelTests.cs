@@ -6,6 +6,8 @@ namespace GameSaveManager.Core.Tests.Core
 
     using Bogus;
 
+    using DeadFishStudio.CoreLibrary.Extensions;
+
     using FluentAssertions;
 
     using GameSaveManager.Core.Enums;

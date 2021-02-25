@@ -2,13 +2,12 @@
 {
     using System;
 
-    using Flunt.Notifications;
-    using Flunt.Validations;
+    using DeadFishStudio.CoreLibrary.Utils.Extensions;
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Utils;
 
-    public class GameInformationModel : Notifiable
+    public class GameInformationModel
     {
         public string Name { get; set; }
         public string Title { get; set; }
@@ -25,14 +24,12 @@
             get => _UserDefinedSaveName;
             set
             {
-                Clear();
+                //AddNotifications(new Contract()
+                //.HasMinLen(value, 5, nameof(value), SystemMessages.SaveNameMinLengthMessage)
+                //.HasMaxLen(value, 150, nameof(value), SystemMessages.SaveNameMaxLenghtMessage)
+                //.IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
 
-                AddNotifications(new Contract()
-                .HasMinLen(value, 5, nameof(value), SystemMessages.SaveNameMinLengthMessage)
-                .HasMaxLen(value, 150, nameof(value), SystemMessages.SaveNameMaxLenghtMessage)
-                .IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
-
-                _UserDefinedSaveName = Valid
+                _UserDefinedSaveName = true//Valid
                     ? value
                     : DefaultSaveName;
             }
@@ -48,14 +45,12 @@
 
         public string BuildSaveName(string saveName)
         {
-            Clear();
+            //AddNotifications(new Contract()
+            //    .HasMinLen(saveName, 5, nameof(saveName), SystemMessages.SaveNameMinLengthMessage)
+            //    .HasMaxLen(saveName, 150, nameof(saveName), SystemMessages.SaveNameMaxLenghtMessage)
+            //    .IsNotNullOrWhiteSpace(saveName, nameof(saveName), SystemMessages.SaveNameIsNullMessage));
 
-            AddNotifications(new Contract()
-                .HasMinLen(saveName, 5, nameof(saveName), SystemMessages.SaveNameMinLengthMessage)
-                .HasMaxLen(saveName, 150, nameof(saveName), SystemMessages.SaveNameMaxLenghtMessage)
-                .IsNotNullOrWhiteSpace(saveName, nameof(saveName), SystemMessages.SaveNameIsNullMessage));
-
-            return Valid
+            return true//Valid
                 ? string.Concat(saveName, SaveBackupExtension)
                 : string.Concat(_UserDefinedSaveName, SaveBackupExtension);
         }
