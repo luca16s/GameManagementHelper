@@ -6,9 +6,12 @@
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Utils;
+    using GameSaveManager.Core.Validations;
 
     public class GameInformationModel
     {
+        private GameInformationModelValidatons ValidationRules = new GameInformationModelValidatons();
+
         public string Name { get; set; }
         public string Title { get; set; }
         public string CoverPath { get; set; }
@@ -24,12 +27,7 @@
             get => _UserDefinedSaveName;
             set
             {
-                //AddNotifications(new Contract()
-                //.HasMinLen(value, 5, nameof(value), SystemMessages.SaveNameMinLengthMessage)
-                //.HasMaxLen(value, 150, nameof(value), SystemMessages.SaveNameMaxLenghtMessage)
-                //.IsNotNullOrWhiteSpace(value, nameof(value), SystemMessages.SaveNameIsNullMessage));
-
-                _UserDefinedSaveName = true//Valid
+                _UserDefinedSaveName = ValidationRules.Validate(this).IsValid
                     ? value
                     : DefaultSaveName;
             }
@@ -45,12 +43,7 @@
 
         public string BuildSaveName(string saveName)
         {
-            //AddNotifications(new Contract()
-            //    .HasMinLen(saveName, 5, nameof(saveName), SystemMessages.SaveNameMinLengthMessage)
-            //    .HasMaxLen(saveName, 150, nameof(saveName), SystemMessages.SaveNameMaxLenghtMessage)
-            //    .IsNotNullOrWhiteSpace(saveName, nameof(saveName), SystemMessages.SaveNameIsNullMessage));
-
-            return true//Valid
+            return !string.IsNullOrWhiteSpace(saveName)
                 ? string.Concat(saveName, SaveBackupExtension)
                 : string.Concat(_UserDefinedSaveName, SaveBackupExtension);
         }
