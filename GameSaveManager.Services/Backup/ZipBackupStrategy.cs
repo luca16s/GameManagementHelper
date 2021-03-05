@@ -3,10 +3,12 @@
     using System.IO;
     using System.IO.Compression;
 
+    using DeadFishStudio.CoreLibrary.Extensions;
+    using DeadFishStudio.CoreLibrary.Utils;
+
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
-    using GameSaveManager.Core.Utils;
 
     public class ZipBackupStrategy : IBackupStrategy
     {
@@ -17,13 +19,13 @@
             if (gameInformation == null)
                 return null;
 
-            string folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
+            string folder = FileSystemUtils.FindFolderPath(gameInformation.DefaultGameSaveFolder);
 
             string saveName = gameInformation.BuildSaveName();
 
-            ZipFile.CreateFromDirectory(folder, Path.Combine(FileSystemUtils.GetTempFolder(), saveName));
+            ZipFile.CreateFromDirectory(folder, Path.Combine(Path.GetTempPath(), saveName));
 
-            return new FileStream(Path.Combine(FileSystemUtils.GetTempFolder(), saveName), FileMode.Open, FileAccess.Read);
+            return new FileStream(Path.Combine(Path.GetTempPath(), saveName), FileMode.Open, FileAccess.Read);
         }
 
         public void PrepareBackup(GameInformationModel gameInformation)
@@ -31,9 +33,9 @@
             if (gameInformation == null)
                 return;
 
-            string folder = FileSystemUtils.FindPath(gameInformation.DefaultGameSaveFolder);
+            string folder = FileSystemUtils.FindFolderPath(gameInformation.DefaultGameSaveFolder);
 
-            ZipFile.ExtractToDirectory(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()), folder, true);
+            ZipFile.ExtractToDirectory(Path.Combine(Path.GetTempPath(), gameInformation.BuildSaveName()), folder, true);
         }
     }
 }

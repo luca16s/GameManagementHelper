@@ -6,11 +6,13 @@ namespace GameSaveManager.Core.Tests.Core
 
     using Bogus;
 
+    using DeadFishStudio.CoreLibrary.Exceptions;
+    using DeadFishStudio.CoreLibrary.Extensions;
+
     using FluentAssertions;
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Models;
-    using GameSaveManager.Core.Utils;
     using GameSaveManager.Services.Backup;
 
     using Xunit;
@@ -96,7 +98,7 @@ namespace GameSaveManager.Core.Tests.Core
         {
             const string saveExtension = "rar";
 
-            _ = GameInformation.Invoking(g => g.SetSaveBackupExtension(saveExtension)).Should().Throw<NotSupportedException>().WithMessage("Extensão de arquivo não suportada.");
+            _ = GameInformation.Invoking(g => g.SetSaveBackupExtension(saveExtension)).Should().Throw<EnumItemNotFoundException>().WithMessage(@"Item não encontrado no enumerador. - rar");
         }
 
         [Fact]
