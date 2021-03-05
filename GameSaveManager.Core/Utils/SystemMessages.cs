@@ -7,7 +7,7 @@
         public const string ErrorConnectionNotSupported = "Conexão não suportada.";
         public const string ErrorSaveExtensionNotSupported = "Extensão de arquivo não suportada.";
 
-        public const string SaveNameIsNullMessage = "Nome do save não informado, utilizando nome padrão.";
+        public const string UserDefinedSaveNameErrorMessage = "Nome do save informado está incorreto.";
         public const string SaveNameMinLengthMessage = "Nome do save não pode ter menos do que 5 caracteres.";
         public const string SaveNameMaxLenghtMessage = "Nome do save não pode ter mais do que 150 caracteres.";
 

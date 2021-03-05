@@ -6,12 +6,13 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DeadFishStudio.CoreLibrary.Utils;
+
     using Dropbox.Api;
     using Dropbox.Api.Files;
 
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
-    using GameSaveManager.Core.Utils;
 
     public class DropboxOperations : ICloudOperations
     {
@@ -81,7 +82,7 @@
 
             using Dropbox.Api.Stone.IDownloadResponse<FileMetadata> result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
 
-            using (FileStream stream = File.OpenWrite(Path.Combine(FileSystemUtils.GetTempFolder(), fileFound.Name)))
+            using (FileStream stream = File.OpenWrite(Path.Combine(Path.GetTempPath(), fileFound.Name)))
             {
                 byte[] dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
                 stream.Write(dataToWrite, 0, dataToWrite.Length);
@@ -114,8 +115,8 @@
             }
             finally
             {
-                if (File.Exists(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName())))
-                    _ = FileSystemUtils.DeleteCreatedFile(Path.Combine(FileSystemUtils.GetTempFolder(), gameInformation.BuildSaveName()));
+                if (File.Exists(Path.Combine(Path.GetTempPath(), gameInformation.BuildSaveName())))
+                    _ = FileSystemUtils.DeleteFile(Path.Combine(Path.GetTempPath(), gameInformation.BuildSaveName()));
             }
         }
 
