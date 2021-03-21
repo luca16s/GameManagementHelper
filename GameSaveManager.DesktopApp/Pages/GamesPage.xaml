@@ -28,7 +28,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="215" />
+            <RowDefinition MaxHeight="215" Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -57,7 +57,7 @@
             Margin="0, 5, 0, 5"
             Stretch="UniformToFill"
             Width="460"
-            Height="215"
+            MaxHeight="215"
             Source="{Binding Path=ImagePath}" />
         <components:SavesListComponent
             Grid.Row="2"
