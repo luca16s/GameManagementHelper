@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Graph" Version="3.27.0" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.27.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.28.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
