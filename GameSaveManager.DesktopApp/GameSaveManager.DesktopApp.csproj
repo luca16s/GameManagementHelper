@@ -5,13 +5,13 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     <UseWPF>true</UseWPF>
-    <Authors>Dead Fish Studio</Authors>
+    <Authors>Îakaré Software'oka</Authors>
     <Product>Game Save Manager</Product>
     <ApplicationIcon>black.ico</ApplicationIcon>
     <PackageIcon>game_icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <Copyright>Game Save Manager © Dead Fish Studio</Copyright>
+    <Copyright>Game Save Manager © Îakaré Software'oka</Copyright>
     <AssemblyName>GameSaveManager</AssemblyName>
     <StartupObject>GameSaveManager.Windows.App</StartupObject>
     <UserSecretsId>f87442c4-b5be-4f35-ab54-cb01b6e866b1</UserSecretsId>
@@ -25,7 +25,7 @@
     <Description>Aplicativo para realizar o upload e download de saves de jogos que não possuam Auto Save na nuvem.</Description>
     <AnalysisLevel>latest</AnalysisLevel>
     <StyleCopTreatErrorsAsWarnings>True</StyleCopTreatErrorsAsWarnings>
-    <Platforms>x64</Platforms>
+    <Platforms>x64;x86</Platforms>
     <PackageId>GameSaveManager.DesktopApp</PackageId>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -34,8 +34,17 @@
     <DefineConstants />
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <Optimize>false</Optimize>
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>

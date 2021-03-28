@@ -6,10 +6,28 @@
     <IsPackable>false</IsPackable>
 
     <Platforms>AnyCPU;x64</Platforms>
+
+    <Company>Îakaré Software'oka</Company>
+
+    <Product>Game Save Manager</Product>
+
+    <Copyright>Game Save Manager © Îakaré Software'oka</Copyright>
+
+    <Authors>Îakaré Software'oka</Authors>
+
+    <Description>Aplicativo para realizar o upload e download de saves de jogos que não possuam Auto Save na nuvem.</Description>
+
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+
+    <PackageProjectUrl>https://luca16s.github.io/GameSaveManager/</PackageProjectUrl>
+
+    <RepositoryUrl>https://luca16s.github.io/GameSaveManager/</RepositoryUrl>
+
+    <NeutralLanguage>pt-BR</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -41,6 +59,13 @@
   <ItemGroup>
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
     <ProjectReference Include="..\GameSaveManager.Services\GameSaveManager.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

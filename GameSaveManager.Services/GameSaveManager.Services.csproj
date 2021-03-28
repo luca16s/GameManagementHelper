@@ -3,12 +3,35 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
+    <Authors>Îakaré Software'oka</Authors>
+    <Product>Game Save Manager</Product>
+    <Description>Aplicativo para realizar o upload e download de saves de jogos que não possuam Auto Save na nuvem.</Description>
+    <Copyright>Game Save Manager © Îakaré Software'oka</Copyright>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageProjectUrl>https://luca16s.github.io/GameSaveManager/</PackageProjectUrl>
+    <RepositoryUrl>https://luca16s.github.io/GameSaveManager/</RepositoryUrl>
+    <NeutralLanguage>pt-BR</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
     <ProjectReference Include="..\GameSaveManager.Dropbox\GameSaveManager.DropboxApi.csproj" />
     <ProjectReference Include="..\GameSaveManager.OneDriveApi\GameSaveManager.OneDriveApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
