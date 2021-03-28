@@ -3,15 +3,15 @@
     <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
-    <Authors>Dead Fish Studio</Authors>
-    <Company>Dead Fish Studio</Company>
+    <Authors>Îakaré Software'oka</Authors>
+    <Company>Îakaré Software'oka</Company>
     <Product>Game Save Manager</Product>
     <AssemblyName>GameSaveManager.Dropbox</AssemblyName>
     <NeutralLanguage>pt-BR</NeutralLanguage>
     <Nullable>disable</Nullable>
     <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
     <PackageProjectUrl>https://luca16s.github.io/GameSaveManager/</PackageProjectUrl>
-    <Copyright>Game Save Manager © Dead Fish Studio</Copyright>
+    <Copyright>Game Save Manager © Îakaré Software'oka</Copyright>
     <Description>Aplicativo para realizar o upload e download de saves de jogos que não possuam Auto Save na nuvem.</Description>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -21,13 +21,13 @@
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PlatformTarget>AnyCPU</PlatformTarget>
