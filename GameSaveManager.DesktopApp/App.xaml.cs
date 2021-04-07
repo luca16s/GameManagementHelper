@@ -29,10 +29,6 @@
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            string connectionType = Environment.GetEnvironmentVariable("CONNECTION_TYPE");
-            bool isFastConnectionEnable = string.IsNullOrEmpty(connectionType) ||
-                                connectionType.ToLower(culture: CultureInfo.CurrentCulture) == "fast";
-
             IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("gamelist.json", false, true);
@@ -43,7 +39,7 @@
 
             var servicesCollection = new ServiceCollection();
 
-            ConfigureServices(servicesCollection, isFastConnectionEnable);
+            ConfigureServices(servicesCollection);
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             ServiceProvider = servicesCollection.BuildServiceProvider();
@@ -52,7 +48,7 @@
             mainWindow.Show();
         }
 
-        private void ConfigureServices(ServiceCollection servicesCollection, bool isFastConnectionEnable)
+        private void ConfigureServices(ServiceCollection servicesCollection)
         {
             _ = servicesCollection.AddTransient(typeof(AboutPage));
             _ = servicesCollection.AddTransient(typeof(GamesPage));
@@ -70,9 +66,9 @@
             {
                 secret.AppKey = Configuration.GetSection(key: nameof(Secrets.AppKey)).Value;
                 secret.AppSecret = Configuration.GetSection(key: nameof(Secrets.AppSecret)).Value;
-                secret.AppToken = (Debugger.IsAttached && isFastConnectionEnable)
-                           ? Configuration.GetSection(key: nameof(Secrets.AppToken)).Value
-                           : string.Empty;
+                secret.AppToken = Debugger.IsAttached
+                ? Configuration.GetSection(key: nameof(Secrets.AppToken)).Value
+                : string.Empty;
             });
 
             _ = servicesCollection

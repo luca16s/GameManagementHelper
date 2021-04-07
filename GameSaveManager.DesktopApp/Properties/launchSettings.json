@@ -1,10 +1,7 @@
 {
   "profiles": {
     "GameSaveManager.DesktopApp": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "CONNECTION_TYPE": "fast"
-      }
+      "commandName": "Project"
     }
   }
 }
