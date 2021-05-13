@@ -16,28 +16,9 @@
     public class OneDriveConnection : IConnection
     {
         private static readonly string Authority = "https://login.microsoftonline.com/consumers";
-        private static readonly string[] scopes = new string[] { "user.read" };
-        private static readonly string graphAPIEndpoint = "https://graph.microsoft.com/v1.0/me";
         private static readonly string ClientId = "";
-
-        private static async Task<string> GetHttpContentWithToken(string url, string token)
-        {
-            var httpClient = new HttpClient();
-            HttpResponseMessage response;
-            try
-            {
-                var request = new HttpRequestMessage(HttpMethod.Get, url);
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                response = await httpClient.SendAsync(request);
-                string content = await response.Content.ReadAsStringAsync();
-                return content;
-            }
-            catch (Exception ex)
-            {
-                return ex.ToString();
-            }
-        }
-
+        private static readonly string graphAPIEndpoint = "https://graph.microsoft.com/v1.0/me";
+        private static readonly string[] scopes = new string[] { "user.read" };
         private dynamic publicClientApp;
 
         public dynamic PublicClientApp
@@ -98,6 +79,24 @@
             AuthenticationResult authResult = await PublicClientApp.AcquireTokenSilent(scopes, firstAccount).ExecuteAsync();
 
             return JsonSerializer.Deserialize<UserModel>(await GetHttpContentWithToken(graphAPIEndpoint, authResult.AccessToken));
+        }
+
+        private static async Task<string> GetHttpContentWithToken(string url, string token)
+        {
+            var httpClient = new HttpClient();
+            HttpResponseMessage response;
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                response = await httpClient.SendAsync(request);
+                string content = await response.Content.ReadAsStringAsync();
+                return content;
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
         }
     }
 }

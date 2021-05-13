@@ -3,8 +3,8 @@
     using System.IO;
     using System.IO.Compression;
 
-    using DeadFishStudio.CoreLibrary.Extensions;
-    using DeadFishStudio.CoreLibrary.Utils;
+    using CoreLibrary.Utils;
+    using CoreLibrary.Utils.Extensions;
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
@@ -12,8 +12,6 @@
 
     public class ZipBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension() => EBackupSaveType.ZipFile.Description();
-
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
             if (gameInformation == null)
@@ -27,6 +25,8 @@
 
             return new FileStream(Path.Combine(Path.GetTempPath(), saveName), FileMode.Open, FileAccess.Read);
         }
+
+        public string GetFileExtension() => EBackupSaveType.ZipFile.Description();
 
         public void PrepareBackup(GameInformationModel gameInformation)
         {

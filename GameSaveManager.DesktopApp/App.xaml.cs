@@ -3,7 +3,6 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.Globalization;
     using System.Text;
     using System.Windows;
 
@@ -20,10 +19,9 @@
 
     public partial class App : Application
     {
+        public static EBackupSaveType BackupType { get; set; }
         public static IConnection Client { get; set; }
         public static EDriveServices DriveService { get; set; }
-        public static EBackupSaveType BackupType { get; set; }
-
         public IConfigurationRoot Configuration { get; set; }
         public IServiceProvider ServiceProvider { get; set; }
 

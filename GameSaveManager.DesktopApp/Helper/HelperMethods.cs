@@ -10,7 +10,7 @@
         {
             return string.IsNullOrEmpty(name)
                ? Application.Current.Windows.OfType<T>().Any()
-               : Application.Current.Windows.OfType<T>().Any(w => string.Equals(w?.Name, name, StringComparison.InvariantCultureIgnoreCase));
+               : Application.Current.Windows.OfType<T>().Any(w => string.Equals(w?.Name, name, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

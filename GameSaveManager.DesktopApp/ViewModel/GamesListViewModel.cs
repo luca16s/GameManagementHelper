@@ -12,58 +12,13 @@
 
     public class GamesListViewModel : BaseViewModel
     {
+        private readonly ICloudOperations Operations;
+        private RelayCommand<GamesListEntry> deleteSaveCommand;
         private ObservableCollection<GamesListEntry> savesList;
-
-        public ObservableCollection<GamesListEntry> SavesList
-        {
-            get => savesList;
-            set
-            {
-                if (savesList == value)
-                    return;
-
-                savesList = value;
-                OnPropertyChanged();
-            }
-        }
 
         private GamesListEntry selectedSave;
 
-        public GamesListEntry SelectedSave
-        {
-            get => selectedSave;
-            set
-            {
-                if (selectedSave == value)
-                    return;
-
-                selectedSave = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private readonly ICloudOperations Operations;
-
-        private RelayCommand<GamesListEntry> deleteSaveCommand;
-
-        public ICommand DeleteSaveCommand
-            => deleteSaveCommand
-            ??= new RelayCommand<GamesListEntry>(async save => await DeleteSave(save).ConfigureAwait(true), _ => true);
-
         private Visibility showList;
-
-        public Visibility ShowList
-        {
-            get => showList;
-            set
-            {
-                if (showList == value)
-                    return;
-
-                showList = value;
-                OnPropertyChanged();
-            }
-        }
 
         public GamesListViewModel()
             : this(null, null, false)
@@ -79,10 +34,47 @@
             Operations = operations;
         }
 
-        private async Task DeleteSave(GamesListEntry gameEntry)
+        public ICommand DeleteSaveCommand
+            => deleteSaveCommand
+            ??= new RelayCommand<GamesListEntry>(async save => await DeleteSave(save).ConfigureAwait(true), _ => true);
+
+        public ObservableCollection<GamesListEntry> SavesList
         {
-            if (await Operations.DeleteSave(gameEntry.PathToFile))
-                _ = SavesList.Remove(gameEntry);
+            get => savesList;
+            set
+            {
+                if (savesList == value)
+                    return;
+
+                savesList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public GamesListEntry SelectedSave
+        {
+            get => selectedSave;
+            set
+            {
+                if (selectedSave == value)
+                    return;
+
+                selectedSave = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility ShowList
+        {
+            get => showList;
+            set
+            {
+                if (showList == value)
+                    return;
+
+                showList = value;
+                OnPropertyChanged();
+            }
         }
 
         private static ObservableCollection<GamesListEntry> Converter(IEnumerable<(string saveName, string path)> saveList)
@@ -98,6 +90,12 @@
             }
 
             return list;
+        }
+
+        private async Task DeleteSave(GamesListEntry gameEntry)
+        {
+            if (await Operations.DeleteSave(gameEntry.PathToFile))
+                _ = SavesList.Remove(gameEntry);
         }
     }
 }

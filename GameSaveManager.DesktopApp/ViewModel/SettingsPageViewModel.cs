@@ -5,30 +5,19 @@
 
     public class SettingsPageViewModel : BaseViewModel
     {
+        private EBackupSaveType _backupSaveType;
+
+        private EDriveServices _DriveServiceSelected;
+
+        private string _Email;
+
+        private string _Name;
+
         public SettingsPageViewModel()
         {
             App.BackupType = BackupSaveType;
             App.DriveService = DriveServiceSelected;
         }
-
-        private EDriveServices _DriveServiceSelected;
-
-        public EDriveServices DriveServiceSelected
-        {
-            get => _DriveServiceSelected;
-            set
-            {
-                if (_DriveServiceSelected == value)
-                    return;
-
-                _DriveServiceSelected =
-                    App.DriveService = value;
-
-                OnPropertyChanged();
-            }
-        }
-
-        private EBackupSaveType _backupSaveType;
 
         public EBackupSaveType BackupSaveType
         {
@@ -45,23 +34,20 @@
             }
         }
 
-        private string _Name;
-
-        public string Name
+        public EDriveServices DriveServiceSelected
         {
-            get => _Name;
+            get => _DriveServiceSelected;
             set
             {
-                if (_Name == value)
+                if (_DriveServiceSelected == value)
                     return;
 
-                _Name = value;
+                _DriveServiceSelected =
+                    App.DriveService = value;
 
                 OnPropertyChanged();
             }
         }
-
-        private string _Email;
 
         public string Email
         {
@@ -72,6 +58,20 @@
                     return;
 
                 _Email = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        public string Name
+        {
+            get => _Name;
+            set
+            {
+                if (_Name == value)
+                    return;
+
+                _Name = value;
 
                 OnPropertyChanged();
             }

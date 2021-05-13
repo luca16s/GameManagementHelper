@@ -10,8 +10,8 @@
 
     public class OneDriveOperations : ICloudOperations
     {
-        private readonly IPublicClientApplication Client;
         private readonly IBackupStrategy BackupStrategy;
+        private readonly IPublicClientApplication Client;
 
         public OneDriveOperations(IBackupStrategy backupStrategy, IPublicClientApplication client)
         {

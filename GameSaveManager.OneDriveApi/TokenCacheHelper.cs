@@ -8,25 +8,10 @@
 
     public class TokenCacheHelper
     {
-        /// <summary>
-        /// Path to the token cache
-        /// </summary>
+        /// <summary>Path to the token cache</summary>
         public static readonly string CacheFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location + ".msalcache.bin3";
 
         private static readonly object FileLock = new();
-
-        public static void BeforeAccessNotification(TokenCacheNotificationArgs args)
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                lock (FileLock)
-                {
-                    args.TokenCache.DeserializeMsalV3(File.Exists(CacheFilePath)
-                        ? ProtectedData.Unprotect(File.ReadAllBytes(CacheFilePath), null, DataProtectionScope.CurrentUser)
-                        : null);
-                }
-            }
-        }
 
         public static void AfterAccessNotification(TokenCacheNotificationArgs args)
         {
@@ -38,6 +23,19 @@
                 {
                     // reflect changesgs in the persistent store
                     File.WriteAllBytes(CacheFilePath, ProtectedData.Protect(args.TokenCache.SerializeMsalV3(), null, DataProtectionScope.CurrentUser));
+                }
+            }
+        }
+
+        public static void BeforeAccessNotification(TokenCacheNotificationArgs args)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                lock (FileLock)
+                {
+                    args.TokenCache.DeserializeMsalV3(File.Exists(CacheFilePath)
+                        ? ProtectedData.Unprotect(File.ReadAllBytes(CacheFilePath), null, DataProtectionScope.CurrentUser)
+                        : null);
                 }
             }
         }

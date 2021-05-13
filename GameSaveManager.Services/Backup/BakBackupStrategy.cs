@@ -3,8 +3,8 @@
     using System;
     using System.IO;
 
-    using DeadFishStudio.CoreLibrary.Extensions;
-    using DeadFishStudio.CoreLibrary.Utils;
+    using CoreLibrary.Utils;
+    using CoreLibrary.Utils.Extensions;
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
@@ -12,8 +12,6 @@
 
     public class BakBackupStrategy : IBackupStrategy
     {
-        public string GetFileExtension() => EBackupSaveType.BakFile.Description();
-
         public FileStream GenerateBackup(GameInformationModel gameInformation)
         {
             if (gameInformation == null)
@@ -33,6 +31,8 @@
 
             return new FileStream(Path.Combine(Path.GetTempPath(), saveName), FileMode.Open, FileAccess.Read);
         }
+
+        public string GetFileExtension() => EBackupSaveType.BakFile.Description();
 
         public void PrepareBackup(GameInformationModel gameInformation)
         {

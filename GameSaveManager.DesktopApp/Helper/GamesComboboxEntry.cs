@@ -4,7 +4,7 @@
 
     public class GamesComboboxEntry
     {
-        public string Title { get; set; }
         public GameInformationModel Game { get; set; }
+        public string Title { get; set; }
     }
 }

@@ -7,15 +7,15 @@
 
     public interface ICloudOperations
     {
+        Task<bool> CheckFolderExistence(string folderName);
+
         Task<bool> CreateFolder(string path);
 
-        Task<bool> CheckFolderExistence(string folderName);
+        Task<bool> DeleteSave(string path);
 
         Task<bool> DownloadSaveData(GameInformationModel gameInformation);
 
         Task<IEnumerable<(string name, string path)>> GetSavesList(GameInformationModel gameInformation);
-
-        Task<bool> DeleteSave(string path);
 
         Task<bool> UploadSaveData(GameInformationModel gameInformation, bool overwriteSave);
     }

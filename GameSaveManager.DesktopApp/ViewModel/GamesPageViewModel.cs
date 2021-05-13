@@ -19,25 +19,17 @@
 
     public class GamesPageViewModel : BaseViewModel
     {
-        private IBackupStrategy BackupStrategy;
-        private ICloudOperations CloudOperations => GetClientOperations();
         private readonly IFactory<EBackupSaveType, IBackupStrategy> BackupFactory;
-
-        private RelayCommand<GamesPageViewModel> _UploadCommand;
-        private RelayCommand<GamesPageViewModel> _DownloadCommand;
-
-        private bool CanExecute => SelectedGame != null;
-
-        public ICommand UploadCommand
-            => _UploadCommand
-            ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave(MessageBox.Show("Deseja sobrescrever o arquivo salvo?", "Game Save Manager", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)).ConfigureAwait(true), _ => CanExecute);
-
-        public ICommand DownloadCommand
-            => _DownloadCommand
-            ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanExecute);
-
-        private GameInformationModel GameInformation;
         private readonly ObservableCollection<GameInformationModel> GameInformationList;
+        private RelayCommand<GamesPageViewModel> _DownloadCommand;
+        private string _ImagePath;
+        private GamesComboboxEntry _SelectedGame;
+        private RelayCommand<GamesPageViewModel> _UploadCommand;
+        private string _UserDefinedSaveName;
+        private IBackupStrategy BackupStrategy;
+        private GameInformationModel GameInformation;
+        private GamesListViewModel gamesListVM;
+        private ObservableCollection<string> saveList;
 
         public GamesPageViewModel(IFactory<EBackupSaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
         {
@@ -49,6 +41,24 @@
             GameInformationList = options.Value;
         }
 
+        public ICommand DownloadCommand
+            => _DownloadCommand
+            ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanExecute);
+
+        public GamesListViewModel GamesListVM
+        {
+            get => gamesListVM;
+            set
+            {
+                if (gamesListVM == value)
+                    return;
+
+                gamesListVM = value;
+
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<GamesComboboxEntry> GamesSupported => new(GameInformationList
             .Select(game => new GamesComboboxEntry
             {
@@ -56,7 +66,36 @@
                 Game = game
             }).ToList());
 
-        private GamesComboboxEntry _SelectedGame;
+        public object ImagePath
+        {
+            get => string.IsNullOrWhiteSpace(_ImagePath)
+                ? DependencyProperty.UnsetValue
+                : _ImagePath;
+            set
+            {
+                value ??= string.Empty;
+
+                if (value.ToString().Equals(_ImagePath, System.StringComparison.Ordinal))
+                    return;
+
+                _ImagePath = value.ToString();
+                OnPropertyChanged(nameof(ImagePath));
+            }
+        }
+
+        public ObservableCollection<string> SaveList
+        {
+            get => saveList;
+            set
+            {
+                if (saveList == value)
+                    return;
+
+                saveList = value;
+
+                OnPropertyChanged();
+            }
+        }
 
         public GamesComboboxEntry SelectedGame
         {
@@ -80,26 +119,9 @@
             }
         }
 
-        private string _ImagePath;
-
-        public object ImagePath
-        {
-            get => string.IsNullOrWhiteSpace(_ImagePath)
-                ? DependencyProperty.UnsetValue
-                : _ImagePath;
-            set
-            {
-                value ??= string.Empty;
-
-                if (value.ToString().Equals(_ImagePath))
-                    return;
-
-                _ImagePath = value.ToString();
-                OnPropertyChanged(nameof(ImagePath));
-            }
-        }
-
-        private string _UserDefinedSaveName;
+        public ICommand UploadCommand
+            => _UploadCommand
+            ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave(MessageBox.Show("Deseja sobrescrever o arquivo salvo?", "Game Save Manager", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)).ConfigureAwait(true), _ => CanExecute);
 
         public string UserDefinedSaveName
         {
@@ -119,36 +141,20 @@
             }
         }
 
-        private GamesListViewModel gamesListVM;
+        private bool CanExecute => SelectedGame != null;
+        private ICloudOperations CloudOperations => GetClientOperations();
 
-        public GamesListViewModel GamesListVM
+        private async Task<bool> DownloadSave()
         {
-            get => gamesListVM;
-            set
-            {
-                if (gamesListVM == value)
-                    return;
+            if (CloudOperations == null)
+                return false;
 
-                gamesListVM = value;
+            if (!string.IsNullOrWhiteSpace(GamesListVM.SelectedSave?.SaveName))
+                GameInformation.UserDefinedSaveName = GamesListVM.SelectedSave?.SaveName;
 
-                OnPropertyChanged();
-            }
-        }
+            GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 
-        private ObservableCollection<string> saveList;
-
-        public ObservableCollection<string> SaveList
-        {
-            get => saveList;
-            set
-            {
-                if (saveList == value)
-                    return;
-
-                saveList = value;
-
-                OnPropertyChanged();
-            }
+            return await CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
         }
 
         private ICloudOperations GetClientOperations()
@@ -190,19 +196,6 @@
                 _ = await CloudOperations.CreateFolder(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
 
             return await CloudOperations.UploadSaveData(GameInformation, messageBoxResult == MessageBoxResult.Yes).ConfigureAwait(true);
-        }
-
-        private async Task<bool> DownloadSave()
-        {
-            if (CloudOperations == null)
-                return false;
-
-            if (!string.IsNullOrWhiteSpace(GamesListVM.SelectedSave?.SaveName))
-                GameInformation.UserDefinedSaveName = GamesListVM.SelectedSave?.SaveName;
-
-            GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
-
-            return await CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
         }
     }
 }

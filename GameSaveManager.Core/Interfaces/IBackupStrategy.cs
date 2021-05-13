@@ -6,9 +6,9 @@
 
     public interface IBackupStrategy
     {
-        string GetFileExtension();
-
         FileStream GenerateBackup(GameInformationModel gameInformation);
+
+        string GetFileExtension();
 
         void PrepareBackup(GameInformationModel gameInformation);
     }

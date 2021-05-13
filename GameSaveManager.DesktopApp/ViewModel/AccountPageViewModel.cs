@@ -14,16 +14,9 @@
 
     public class AccountPageViewModel : BaseViewModel
     {
-        private readonly Secrets Secrets;
         private readonly IFactory<EDriveServices, IConnection> Connection;
-
+        private readonly Secrets Secrets;
         private ICommand _ConnectCommand;
-
-        public ICommand ConnectCommand => _ConnectCommand ??= new RelayCommand<object>(async _ =>
-        {
-            await ConnectAsync().ConfigureAwait(true);
-            await SetUserInformation().ConfigureAwait(true);
-        });
 
         public AccountPageViewModel(IFactory<EDriveServices, IConnection> connection,
             IOptions<Secrets> options)
@@ -35,6 +28,20 @@
             Secrets = options.Value;
         }
 
+        public ICommand ConnectCommand => _ConnectCommand ??= new RelayCommand<object>(async _ =>
+                {
+                    await ConnectAsync().ConfigureAwait(true);
+                    await SetUserInformation().ConfigureAwait(true);
+                });
+
+        private static async Task SetUserInformation()
+        {
+            UserModel userInformation = await App.Client.GetUserInformation();
+
+            Settings.Default.Name = userInformation.UserName;
+            Settings.Default.Email = userInformation.Email;
+        }
+
         private async Task ConnectAsync()
         {
             App.Client = Connection.Create(App.DriveService);
@@ -43,14 +50,6 @@
                 await App.Client
                     .ConnectAsync(Secrets)
                     .ConfigureAwait(true);
-        }
-
-        private static async Task SetUserInformation()
-        {
-            UserModel userInformation = await App.Client.GetUserInformation();
-
-            Settings.Default.Name = userInformation.UserName;
-            Settings.Default.Email = userInformation.Email;
         }
     }
 }

@@ -7,9 +7,8 @@
 
     public class AboutViewModel : BaseViewModel
     {
-        private const string UrlLinkedin = @"https:\linkedin.com\in\gianfigueiredo";
         private const string UrlGithub = @"https:\github.com\luca16s";
-
+        private const string UrlLinkedin = @"https:\linkedin.com\in\gianfigueiredo";
         private ICommand _GithubCommand;
         private ICommand _LinkedInCommand;
 

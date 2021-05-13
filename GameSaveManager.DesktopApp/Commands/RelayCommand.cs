@@ -5,28 +5,36 @@
 
     public class RelayCommand<T> : ICommand
     {
-        private readonly Action<T> _execute;
         private readonly Predicate<T> _canExecute;
+        private readonly Action<T> _execute;
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="DelegateCommand{T}"/>.
-        /// </summary>
-        /// <param name="execute">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
-        /// <remarks><seealso cref="CanExecute"/> will always return true.</remarks>
+        /// <summary>Initializes a new instance of <see cref="DelegateCommand{T}" />.</summary>
+        /// <param name="execute">
+        /// Delegate to execute when Execute is called on the command. This can be null to just hook
+        /// up a CanExecute delegate.
+        /// </param>
+        /// <remarks><seealso cref="CanExecute" /> will always return true.</remarks>
         public RelayCommand(Action<T> execute)
             : this(execute, null)
         {
         }
 
-        /// <summary>
-        /// Creates a new command.
-        /// </summary>
+        /// <summary>Creates a new command.</summary>
         /// <param name="execute">The execution logic.</param>
         /// <param name="canExecute">The execution status logic.</param>
         public RelayCommand(Action<T> execute, Predicate<T> canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
+        }
+
+        ///<summary>
+        ///Occurs when changes occur that affect whether or not the command should execute.
+        ///</summary>
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
 
         ///<summary>
@@ -37,15 +45,6 @@
         ///true if this command can be executed; otherwise, false.
         ///</returns>
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute((T)parameter);
-
-        ///<summary>
-        ///Occurs when changes occur that affect whether or not the command should execute.
-        ///</summary>
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
 
         ///<summary>
         ///Defines the method to be called when the command is invoked.
