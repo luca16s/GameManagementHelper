@@ -153,6 +153,9 @@
 
         private ICloudOperations GetClientOperations()
         {
+            if (App.Client == null)
+                return default;
+
             using dynamic client = App.Client.PublicClientApp;
             BackupStrategy = BackupFactory.Create(App.BackupType);
 
