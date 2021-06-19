@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
     <Copyright>Game Save Manager © Îakaré Software'oka</Copyright>
     <Authors>Îakaré Software'oka</Authors>
@@ -30,7 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Graph" Version="3.29.0" />
+    <PackageReference Include="Microsoft.Graph" Version="3.35.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.29.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37">
       <PrivateAssets>all</PrivateAssets>
