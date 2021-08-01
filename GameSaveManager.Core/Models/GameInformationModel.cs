@@ -2,7 +2,7 @@
 {
     using System;
 
-    using DeadFishStudio.CoreLibrary.Utils.Extensions;
+    using CoreLibrary.Utils.Extensions;
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Utils;

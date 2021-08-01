@@ -6,7 +6,7 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    using DeadFishStudio.CoreLibrary.Extensions;
+    using CoreLibrary.Utils;
 
     using GameSaveManager.Core.Models;
 

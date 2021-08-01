@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net5.0-windows10.0.20348.0</TargetFramework>
     <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     <UseWPF>true</UseWPF>
     <Authors>Îakaré Software'oka</Authors>
@@ -11,7 +11,7 @@
     <PackageIcon>game_icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/luca16s/GameSaveManager</RepositoryUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <Copyright>Game Save Manager © Îakaré Software'oka</Copyright>
+    <Copyright>$(Product) © $(Authors)</Copyright>
     <AssemblyName>GameSaveManager</AssemblyName>
     <StartupObject>GameSaveManager.Windows.App</StartupObject>
     <UserSecretsId>f87442c4-b5be-4f35-ab54-cb01b6e866b1</UserSecretsId>
@@ -28,6 +28,8 @@
     <Platforms>x64;x86</Platforms>
     <PackageId>GameSaveManager.DesktopApp</PackageId>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <MinimumPlatformVersion>7.0</MinimumPlatformVersion>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Optimize>false</Optimize>
@@ -85,16 +87,12 @@
     </Content>
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="ShowMeTheXAML.MSBuild" Version="2.0.0" />
-    <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
-    <ProjectReference Include="..\GameSaveManager.Dropbox\GameSaveManager.DropboxApi.csproj" />
-    <ProjectReference Include="..\GameSaveManager.Services\GameSaveManager.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\ico_black.png" />
@@ -126,5 +124,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="resources\gameCover\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
+    <ProjectReference Include="..\GameSaveManager.DropboxService\GameSaveManager.DropboxService.csproj" />
+    <ProjectReference Include="..\GameSaveManager.OneDriveService\GameSaveManager.OneDriveService.csproj" />
+    <ProjectReference Include="..\GameSaveManager.Services\GameSaveManager.Services.csproj" />
   </ItemGroup>
 </Project>

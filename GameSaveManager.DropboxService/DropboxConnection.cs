@@ -1,4 +1,4 @@
-﻿namespace GameSaveManager.DropboxApi
+﻿namespace GameSaveManager.DropboxService
 {
     using System;
     using System.Diagnostics;
@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using Dropbox.Api;
+    using Dropbox.Api.Sharing;
 
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
@@ -114,12 +115,12 @@
 
         public async Task<UserModel> GetUserInformation()
         {
-            Dropbox.Api.Users.FullAccount user = await PublicClientApp
+            UserInfo user = await PublicClientApp
                 .Users
                 .GetCurrentAccountAsync()
                 .ConfigureAwait(true);
 
-            return new(user.Name.GivenName, user.Email);
+            return new(user.DisplayName, user.Email);
         }
     }
 }

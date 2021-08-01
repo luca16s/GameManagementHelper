@@ -1,4 +1,4 @@
-﻿namespace GameSaveManager.DropboxApi
+﻿namespace GameSaveManager.DropboxService
 {
     using System;
     using System.Collections.Generic;
@@ -6,10 +6,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DeadFishStudio.CoreLibrary.Utils;
+    using CoreLibrary.Utils;
 
     using Dropbox.Api;
     using Dropbox.Api.Files;
+    using Dropbox.Api.Stone;
 
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
@@ -80,7 +81,7 @@
             if (fileFound is null)
                 return false;
 
-            using Dropbox.Api.Stone.IDownloadResponse<FileMetadata> result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
+            using IDownloadResponse<FileMetadata> result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
 
             using (FileStream stream = File.OpenWrite(Path.Combine(Path.GetTempPath(), fileFound.Name)))
             {

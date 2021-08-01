@@ -4,8 +4,8 @@
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
-    using GameSaveManager.DropboxApi;
-    using GameSaveManager.OneDriveApi;
+    using GameSaveManager.DropboxService;
+    using GameSaveManager.OneDriveService;
 
     public class OperationFactory : IFactory<EDriveServices, ICloudOperations>
     {

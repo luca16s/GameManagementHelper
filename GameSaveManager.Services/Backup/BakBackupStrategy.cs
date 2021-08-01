@@ -3,8 +3,7 @@
     using System;
     using System.IO;
 
-    using DeadFishStudio.CoreLibrary.Extensions;
-    using DeadFishStudio.CoreLibrary.Utils;
+    using CoreLibrary.Utils;
 
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;

@@ -1,4 +1,4 @@
-﻿namespace GameSaveManager.OneDriveApi
+﻿namespace GameSaveManager.OneDriveService
 {
     using System;
     using System.Collections.Generic;
