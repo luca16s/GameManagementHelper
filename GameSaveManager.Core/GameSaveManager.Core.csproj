@@ -42,7 +42,7 @@
   <ItemGroup>
     <PackageReference Include="CoreLibrary" Version="1.0.0-ge9fd967f6f" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.240">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
