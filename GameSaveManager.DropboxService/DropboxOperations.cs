@@ -6,14 +6,14 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using CoreLibrary.Utils;
-
     using Dropbox.Api;
     using Dropbox.Api.Files;
     using Dropbox.Api.Stone;
 
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
+
+    using KapiCoreLib.Desktop.Utils;
 
     public class DropboxOperations : ICloudOperations
     {

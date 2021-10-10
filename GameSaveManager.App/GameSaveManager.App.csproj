@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows10.0.20348.0</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.20348.0</TargetFramework>
     <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     <UseWPF>true</UseWPF>
     <Authors>Îakaré Software'oka</Authors>
@@ -85,10 +85,10 @@
     <Content Include="gamelist.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.240">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -130,5 +130,10 @@
     <ProjectReference Include="..\GameSaveManager.DropboxService\GameSaveManager.DropboxService.csproj" />
     <ProjectReference Include="..\GameSaveManager.OneDriveService\GameSaveManager.OneDriveService.csproj" />
     <ProjectReference Include="..\GameSaveManager.Services\GameSaveManager.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="KapiCoreLib">
+      <HintPath>..\resources\KapiCoreLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

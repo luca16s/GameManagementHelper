@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
     <Authors>Îakaré Software'oka</Authors>
     <Product>Game Save Manager</Product>
@@ -34,10 +34,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.240">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="KapiCoreLib">
+      <HintPath>..\resources\KapiCoreLib.dll</HintPath>
+    </Reference>
+    <Reference Include="KapiCoreLib.Desktop">
+      <HintPath>..\resources\KapiCoreLib.Desktop.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -2,11 +2,11 @@
 {
     using System;
 
-    using CoreLibrary.Utils.Extensions;
-
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Utils;
     using GameSaveManager.Core.Validations;
+
+    using KapiCoreLib.Extensions;
 
     public class GameInformationModel
     {
