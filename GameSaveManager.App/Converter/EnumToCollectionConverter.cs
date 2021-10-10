@@ -6,9 +6,9 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    using CoreLibrary.Utils;
-
     using GameSaveManager.Core.Models;
+
+    using KapiCoreLib.Extensions;
 
     [ValueConversion(typeof(Enum), typeof(IEnumerable<EnumModel>))]
     public class EnumToCollectionConverter : MarkupExtension, IValueConverter

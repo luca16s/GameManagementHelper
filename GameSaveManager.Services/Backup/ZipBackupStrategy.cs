@@ -3,11 +3,12 @@
     using System.IO;
     using System.IO.Compression;
 
-    using CoreLibrary.Utils;
-
     using GameSaveManager.Core.Enums;
     using GameSaveManager.Core.Interfaces;
     using GameSaveManager.Core.Models;
+
+    using KapiCoreLib.Desktop.Utils;
+    using KapiCoreLib.Extensions;
 
     public class ZipBackupStrategy : IBackupStrategy
     {

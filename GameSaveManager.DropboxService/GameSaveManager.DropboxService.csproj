@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     <Authors>Îakaré Software'oka</Authors>
     <Company>$(Authors)</Company>
@@ -32,13 +32,18 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Dropbox.Api" Version="6.11.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231">
+    <PackageReference Include="Dropbox.Api" Version="6.17.0" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.240">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameSaveManager.Core\GameSaveManager.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="KapiCoreLib.Desktop">
+      <HintPath>..\resources\KapiCoreLib.Desktop.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
