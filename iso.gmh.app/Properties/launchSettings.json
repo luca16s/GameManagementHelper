@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "iso.gmh": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "CONNECTION_TYPE": "fast"
+      }
+    }
+  }
+}
