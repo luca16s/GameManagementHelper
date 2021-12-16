@@ -12,22 +12,23 @@
     Title="Game Management Helper"
     TextElement.FontSize="14"
     Icon="resources/ico_black.png"
-    SizeToContent="WidthAndHeight"
+    SizeToContent="Height"
     TextElement.FontWeight="Medium"
     FontFamily="{materialDesign:MaterialDesignFont}"
     Background="{DynamicResource MaterialDesignPaper}"
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
         <components:ButtonBaseComponent
             Grid.Column="0"
@@ -37,38 +38,38 @@
             Click="AccountButton_Click"
             Image="M6,17C6,15 10,13.9 12,13.9C14,13.9 18,15 18,17V18H6M15,9A3,3 0 0,1 12,12A3,3 0 0,1 9,9A3,3 0 0,1 12,6A3,3 0 0,1 15,9M3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3H5C3.89,3 3,3.9 3,5Z" />
         <components:ButtonBaseComponent
-            Grid.Column="1"
-            Grid.Row="0"
+            Grid.Column="0"
+            Grid.Row="1"
             ToolTip="Jogos Disponíveis para backup."
             Margin="4, 4, 4, 0"
-            Click="OpenGamesListPage"
+            Click="GamesButton_Click"
             Image="M7,6H17A6,6 0 0,1 23,12A6,6 0 0,1 17,18C15.22,18 13.63,17.23 12.53,16H11.47C10.37,17.23 8.78,18 7,18A6,6 0 0,1 1,12A6,6 0 0,1 7,6M6,9V11H4V13H6V15H8V13H10V11H8V9H6M15.5,12A1.5,1.5 0 0,0 14,13.5A1.5,1.5 0 0,0 15.5,15A1.5,1.5 0 0,0 17,13.5A1.5,1.5 0 0,0 15.5,12M18.5,9A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 18.5,12A1.5,1.5 0 0,0 20,10.5A1.5,1.5 0 0,0 18.5,9Z" />
         <components:ButtonBaseComponent
-            Grid.Column="2"
-            Grid.Row="0"
+            Grid.Column="0"
+            Grid.Row="2"
             ToolTip="Steam"
             Margin="4, 4, 4, 0"
-            Click="OpenSteamPage"
+            Click="SteamButton_Click"
             Image="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C7.4,22 3.55,18.92 2.36,14.73L6.19,16.31C6.45,17.6 7.6,18.58 8.97,18.58C10.53,18.58 11.8,17.31 11.8,15.75V15.62L15.2,13.19H15.28C17.36,13.19 19.05,11.5 19.05,9.42C19.05,7.34 17.36,5.65 15.28,5.65C13.2,5.65 11.5,7.34 11.5,9.42V9.47L9.13,12.93L8.97,12.92C8.38,12.92 7.83,13.1 7.38,13.41L2,11.2C2.43,6.05 6.73,2 12,2M8.28,17.17C9.08,17.5 10,17.13 10.33,16.33C10.66,15.53 10.28,14.62 9.5,14.29L8.22,13.76C8.71,13.58 9.26,13.57 9.78,13.79C10.31,14 10.72,14.41 10.93,14.94C11.15,15.46 11.15,16.04 10.93,16.56C10.5,17.64 9.23,18.16 8.15,17.71C7.65,17.5 7.27,17.12 7.06,16.67L8.28,17.17M17.8,9.42C17.8,10.81 16.67,11.94 15.28,11.94C13.9,11.94 12.77,10.81 12.77,9.42A2.5,2.5 0 0,1 15.28,6.91C16.67,6.91 17.8,8.04 17.8,9.42M13.4,9.42C13.4,10.46 14.24,11.31 15.29,11.31C16.33,11.31 17.17,10.46 17.17,9.42C17.17,8.38 16.33,7.53 15.29,7.53C14.24,7.53 13.4,8.38 13.4,9.42Z" />
         <components:ButtonBaseComponent
-            Grid.Column="3"
-            Grid.Row="0"
+            Grid.Column="0"
+            Grid.Row="3"
             ToolTip="Configurações."
             Margin="4, 4, 4, 0"
-            Click="OpenSettingsPage"
+            Click="SettingsButton_Click"
             Image="M17.25,12C17.25,12.23 17.23,12.46 17.2,12.68L18.68,13.84C18.81,13.95 18.85,14.13 18.76,14.29L17.36,16.71C17.27,16.86 17.09,16.92 16.93,16.86L15.19,16.16C14.83,16.44 14.43,16.67 14,16.85L13.75,18.7C13.72,18.87 13.57,19 13.4,19H10.6C10.43,19 10.28,18.87 10.25,18.7L10,16.85C9.56,16.67 9.17,16.44 8.81,16.16L7.07,16.86C6.91,16.92 6.73,16.86 6.64,16.71L5.24,14.29C5.15,14.13 5.19,13.95 5.32,13.84L6.8,12.68C6.77,12.46 6.75,12.23 6.75,12C6.75,11.77 6.77,11.54 6.8,11.32L5.32,10.16C5.19,10.05 5.15,9.86 5.24,9.71L6.64,7.29C6.73,7.13 6.91,7.07 7.07,7.13L8.81,7.84C9.17,7.56 9.56,7.32 10,7.15L10.25,5.29C10.28,5.13 10.43,5 10.6,5H13.4C13.57,5 13.72,5.13 13.75,5.29L14,7.15C14.43,7.32 14.83,7.56 15.19,7.84L16.93,7.13C17.09,7.07 17.27,7.13 17.36,7.29L18.76,9.71C18.85,9.86 18.81,10.05 18.68,10.16L17.2,11.32C17.23,11.54 17.25,11.77 17.25,12M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M12,10C10.89,10 10,10.89 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12C14,10.89 13.1,10 12,10Z" />
         <components:ButtonBaseComponent
-            Grid.Column="4"
-            Grid.Row="0"
+            Grid.Column="0"
+            Grid.Row="4"
             ToolTip="Informações."
-            Margin="4, 4, 4, 0"
-            Click="OpenAboutPage"
+            Margin="4, 4, 4, 4"
+            Click="AboutButton_Click"
             Image="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
         <Frame
             x:Name="MainFrame"
-            Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="5"
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.RowSpan="5"
             NavigationUIVisibility="Hidden"
             Margin="10, 10, 10, 10" />
     </Grid>

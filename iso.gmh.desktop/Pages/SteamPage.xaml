@@ -3,10 +3,39 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:properties="clr-namespace:iso.gmh.desktop.Properties"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Steam">
+    <Page.Resources>
+        <properties:Settings x:Key="Settings" />
+        <Style
+            x:Key="Color"
+            TargetType="{x:Type ContentControl}">
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource Settings}, Path=Default.DarkMode}" Value="false">
+                    <Setter Property="Foreground" Value="Black" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition MaxHeight="215" Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <CheckBox
+            Grid.Row="0"
+            IsEnabled="False"
+            Content="Steam está ativa"
+            Style="{StaticResource Color}" />
 
     </Grid>
 </Page>

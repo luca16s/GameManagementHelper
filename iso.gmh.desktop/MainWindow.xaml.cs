@@ -13,31 +13,31 @@
         private readonly SettingsPage SettingsPage;
 
         public MainWindow(
-            AccountPage accountPage,
             GamesPage gamesPage,
             SteamPage steamPage,
-            SettingsPage settingsPage,
-            AboutPage aboutPage
+            AboutPage aboutPage,
+            AccountPage accountPage,
+            SettingsPage settingsPage
         )
         {
             InitializeComponent();
             DataContext = this;
 
-            AccountPage = accountPage;
             GamesPage = gamesPage;
-            SettingsPage = settingsPage;
-            AboutPage = aboutPage;
             SteamPage = steamPage;
+            AboutPage = aboutPage;
+            AccountPage = accountPage;
+            SettingsPage = settingsPage;
         }
+
+        private void GamesButton_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(GamesPage);
+
+        private void SteamButton_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(SteamPage);
+
+        private void AboutButton_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(AboutPage);
 
         private void AccountButton_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(AccountPage);
 
-        private void OpenGamesListPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(GamesPage);
-
-        private void OpenSteamPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(SteamPage);
-
-        private void OpenSettingsPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(SettingsPage);
-
-        private void OpenAboutPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(AboutPage);
+        private void SettingsButton_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(SettingsPage);
     }
 }
