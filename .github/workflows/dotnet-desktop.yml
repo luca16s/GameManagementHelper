@@ -1,4 +1,4 @@
-name: GameSaveManager
+name: GameManagementHelper_CI
 
 on:
   push:
@@ -7,36 +7,27 @@ on:
     branches: [ main ]
 
 jobs:
-
   build:
-
     strategy:
       matrix:
         configuration: [Release]
-
     runs-on: windows-latest
-
     env:
       Solution_Name: GameSaveManager.sln
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-
     - name: Install .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
-
+        dotnet-version: 6.0.x
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
-
     - name: Execute unit tests
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='../GameSaveManager.xml'
-
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
@@ -45,7 +36,6 @@ jobs:
         name: codecov-umbrella
         fail_ci_if_error: true
         verbose: true
-
     - name: Restore and build the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=win-x64
       env:

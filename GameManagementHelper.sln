@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31410.414
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iso.gmh.desktop", "iso.gmh.app\iso.gmh.desktop.csproj", "{424334CE-AC67-4787-9F57-10AAC281C3FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iso.gmh.desktop", "iso.gmh.desktop\iso.gmh.desktop.csproj", "{424334CE-AC67-4787-9F57-10AAC281C3FC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iso.gmh.core", "iso.gmh.core\iso.gmh.core.csproj", "{E9827BB3-A371-4859-A704-897CF2C2C19B}"
 EndProject
@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{43BE6FEE-5A6A-4B8D-91BA-573D6B20CD22}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iso.gmh.oneDriveService", "iso.gmh.oneDriveService\iso.gmh.oneDriveService.csproj", "{E8187961-8230-44DB-B67B-965B0D43E820}"

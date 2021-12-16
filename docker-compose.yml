@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  gamesJsonServer:
+    image: clue/json-server
+    ports:
+      - 80:80
+    volumes:
+      - ./gamelist.json:/data/db.json
+    restart: always

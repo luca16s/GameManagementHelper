@@ -1,0 +1,37 @@
+{
+  "gamesList": [
+    {
+      "coverPath": "../resources/gameCover/DarkSouls.jpg",
+      "defaultGameSaveFolder": "NBGI\\DarkSouls",
+      "defaultSaveExtension": "sl2",
+      "defaultSaveName": "draks0005",
+      "developer": "FROM SOFTWARE",
+      "name": "DarkSouls",
+      "onlineSaveFolder": "/DarkSouls/",
+      "publisher": "BANDAI NAMCO",
+      "title": "Dark Souls: Prepare to Die Edition"
+    },
+    {
+      "coverPath": "../resources/gameCover/DarkSoulsII.jpg",
+      "defaultGameSaveFolder": "DarkSoulsII\\0110000106640ba7",
+      "defaultSaveExtension": "sl2",
+      "defaultSaveName": "DARKSII0000",
+      "developer": "FROM SOFTWARE",
+      "name": "DarkSoulsII",
+      "onlineSaveFolder": "/DarkSoulsII/",
+      "publisher": "BANDAI NAMCO",
+      "title": "Dark Souls II"
+    },
+    {
+      "coverPath": "../resources/gameCover/DarkSoulsIII.jpg",
+      "defaultGameSaveFolder": "DarkSoulsIII\\0110000106640ba7",
+      "defaultSaveExtension": "sl2",
+      "defaultSaveName": "DS30000",
+      "developer": "FROM SOFTWARE",
+      "name": "DarkSoulsIII",
+      "onlineSaveFolder": "/DarkSoulsIII/",
+      "publisher": "BANDAI NAMCO",
+      "title": "Dark Souls III"
+    }
+  ]
+}

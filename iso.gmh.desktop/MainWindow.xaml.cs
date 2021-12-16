@@ -6,12 +6,19 @@
 
     public partial class MainWindow : Window
     {
-        private readonly AccountPage AccountPage;
         private readonly GamesPage GamesPage;
-        private readonly SettingsPage SettingsPage;
+        private readonly SteamPage SteamPage;
         private readonly AboutPage AboutPage;
+        private readonly AccountPage AccountPage;
+        private readonly SettingsPage SettingsPage;
 
-        public MainWindow(AccountPage accountPage, GamesPage gamesPage, SettingsPage settingsPage, AboutPage aboutPage)
+        public MainWindow(
+            AccountPage accountPage,
+            GamesPage gamesPage,
+            SteamPage steamPage,
+            SettingsPage settingsPage,
+            AboutPage aboutPage
+        )
         {
             InitializeComponent();
             DataContext = this;
@@ -20,11 +27,14 @@
             GamesPage = gamesPage;
             SettingsPage = settingsPage;
             AboutPage = aboutPage;
+            SteamPage = steamPage;
         }
 
         private void AccountButton_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(AccountPage);
 
         private void OpenGamesListPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(GamesPage);
+
+        private void OpenSteamPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(SteamPage);
 
         private void OpenSettingsPage(object sender, RoutedEventArgs e) => MainFrame.Navigate(SettingsPage);
 

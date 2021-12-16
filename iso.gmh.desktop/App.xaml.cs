@@ -15,8 +15,8 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using iso.gmh.desktop.ViewModel;
-    using iso.gmh.services.Drive;
-    using iso.gmh.services.Backup;
+    using iso.gmh.services.BackupServices;
+    using iso.gmh.services.DriveServices;
 
     public partial class App : Application
     {
@@ -56,6 +56,7 @@
         {
             _ = servicesCollection.AddTransient(typeof(AboutPage));
             _ = servicesCollection.AddTransient(typeof(GamesPage));
+            _ = servicesCollection.AddTransient(typeof(SteamPage));
             _ = servicesCollection.AddTransient(typeof(MainWindow));
             _ = servicesCollection.AddTransient(typeof(AccountPage));
             _ = servicesCollection.AddTransient(typeof(SettingsPage));

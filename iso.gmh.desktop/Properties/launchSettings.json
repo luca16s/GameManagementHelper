@@ -3,7 +3,8 @@
     "iso.gmh": {
       "commandName": "Project",
       "environmentVariables": {
-        "CONNECTION_TYPE": "fast"
+        "CONNECTION_TYPE": "fast",
+        "STEAM_PROFILE": "http://steamcommunity.com/profiles/"
       }
     }
   }

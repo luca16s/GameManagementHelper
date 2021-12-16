@@ -13,7 +13,7 @@
     using iso.gmh.desktop;
     using iso.gmh.desktop.Commands;
     using iso.gmh.desktop.Helper;
-    using iso.gmh.services.Drive;
+    using iso.gmh.services.DriveServices;
 
     using Microsoft.Extensions.Options;
 
