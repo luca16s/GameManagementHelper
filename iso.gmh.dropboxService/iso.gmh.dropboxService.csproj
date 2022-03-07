@@ -32,7 +32,7 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Dropbox.Api" Version="6.22.0" />
+    <PackageReference Include="Dropbox.Api" Version="6.25.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
