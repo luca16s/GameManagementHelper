@@ -1,31 +1,30 @@
-﻿namespace iso.gmh.services.DriveServices
+﻿namespace iso.gmh.services.DriveServices;
+
+using System;
+
+using iso.gmh.Core.Enums;
+using iso.gmh.Core.Interfaces;
+using iso.gmh.dropboxService;
+using iso.gmh.oneDriveService;
+
+public class OperationFactory : IFactory<EDriveServices, ICloudOperations>
 {
-    using System;
+    private readonly IBackupStrategy BackupStrategy;
+    private readonly dynamic Client;
 
-    using iso.gmh.Core.Enums;
-    using iso.gmh.Core.Interfaces;
-    using iso.gmh.dropboxService;
-    using iso.gmh.oneDriveService;
-
-    public class OperationFactory : IFactory<EDriveServices, ICloudOperations>
+    public OperationFactory(IBackupStrategy backupStrategy, dynamic client)
     {
-        private readonly IBackupStrategy BackupStrategy;
-        private readonly dynamic Client;
+        BackupStrategy = backupStrategy;
+        Client = client;
+    }
 
-        public OperationFactory(IBackupStrategy backupStrategy, dynamic client)
+    public ICloudOperations Create(EDriveServices type)
+    {
+        return type switch
         {
-            BackupStrategy = backupStrategy;
-            Client = client;
-        }
-
-        public ICloudOperations Create(EDriveServices type)
-        {
-            return type switch
-            {
-                EDriveServices.Dropbox => new DropboxOperations(BackupStrategy, Client),
-                EDriveServices.OneDrive => new OneDriveOperations(BackupStrategy, Client),
-                _ => throw new NotImplementedException(),
-            };
-        }
+            EDriveServices.Dropbox => new DropboxOperations(BackupStrategy, Client),
+            EDriveServices.OneDrive => new OneDriveOperations(BackupStrategy, Client),
+            _ => throw new NotImplementedException(),
+        };
     }
 }

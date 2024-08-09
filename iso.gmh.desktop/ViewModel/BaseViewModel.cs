@@ -1,12 +1,11 @@
-﻿namespace iso.gmh.desktop.ViewModel
+﻿namespace iso.gmh.desktop.ViewModel;
+
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+public class BaseViewModel : INotifyPropertyChanged
 {
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
+    public event PropertyChangedEventHandler PropertyChanged;
 
-    public class BaseViewModel : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

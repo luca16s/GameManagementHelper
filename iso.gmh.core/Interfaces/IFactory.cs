@@ -1,7 +1,6 @@
-﻿namespace iso.gmh.Core.Interfaces
+﻿namespace iso.gmh.Core.Interfaces;
+
+public interface IFactory<T, out TReturn>
 {
-    public interface IFactory<T, out TReturn>
-    {
-        TReturn Create(T type);
-    }
+    TReturn Create(T type);
 }

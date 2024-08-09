@@ -1,81 +1,80 @@
-﻿namespace iso.gmh.desktop.ViewModel
+﻿namespace iso.gmh.desktop.ViewModel;
+
+using iso.gmh.desktop;
+
+using iso.gmh.Core.Enums;
+
+public class SettingsPageViewModel : BaseViewModel
 {
-    using iso.gmh.desktop;
-
-    using iso.gmh.Core.Enums;
-
-    public class SettingsPageViewModel : BaseViewModel
+    public SettingsPageViewModel()
     {
-        public SettingsPageViewModel()
+        App.BackupType = BackupSaveType;
+        App.DriveService = DriveServiceSelected;
+    }
+
+    private EDriveServices _DriveServiceSelected;
+
+    public EDriveServices DriveServiceSelected
+    {
+        get => _DriveServiceSelected;
+        set
         {
-            App.BackupType = BackupSaveType;
-            App.DriveService = DriveServiceSelected;
+            if (_DriveServiceSelected == value)
+                return;
+
+            _DriveServiceSelected =
+                App.DriveService = value;
+
+            OnPropertyChanged();
         }
+    }
 
-        private EDriveServices _DriveServiceSelected;
+    private EBackupSaveType _backupSaveType;
 
-        public EDriveServices DriveServiceSelected
+    public EBackupSaveType BackupSaveType
+    {
+        get => _backupSaveType;
+        set
         {
-            get => _DriveServiceSelected;
-            set
-            {
-                if (_DriveServiceSelected == value)
-                    return;
+            if (_backupSaveType == value)
+                return;
 
-                _DriveServiceSelected =
-                    App.DriveService = value;
+            _backupSaveType =
+                App.BackupType = value;
 
-                OnPropertyChanged();
-            }
+            OnPropertyChanged();
         }
+    }
 
-        private EBackupSaveType _backupSaveType;
+    private string _Name;
 
-        public EBackupSaveType BackupSaveType
+    public string Name
+    {
+        get => _Name;
+        set
         {
-            get => _backupSaveType;
-            set
-            {
-                if (_backupSaveType == value)
-                    return;
+            if (_Name == value)
+                return;
 
-                _backupSaveType =
-                    App.BackupType = value;
+            _Name = value;
 
-                OnPropertyChanged();
-            }
+            OnPropertyChanged();
         }
+    }
 
-        private string _Name;
+    private string _Email;
 
-        public string Name
+    public string Email
+    {
+        get => _Email;
+        set
         {
-            get => _Name;
-            set
-            {
-                if (_Name == value)
-                    return;
+            if (_Email == value)
+                return;
 
-                _Name = value;
+            _Email = value;
 
-                OnPropertyChanged();
-            }
-        }
-
-        private string _Email;
-
-        public string Email
-        {
-            get => _Email;
-            set
-            {
-                if (_Email == value)
-                    return;
-
-                _Email = value;
-
-                OnPropertyChanged();
-            }
+            OnPropertyChanged();
         }
     }
 }

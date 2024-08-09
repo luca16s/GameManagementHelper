@@ -1,15 +1,14 @@
-﻿namespace iso.gmh.Core.Interfaces
+﻿namespace iso.gmh.Core.Interfaces;
+
+using System.IO;
+
+using iso.gmh.Core.Models;
+
+public interface IBackupStrategy
 {
-    using System.IO;
+    string GetFileExtension();
 
-    using iso.gmh.Core.Models;
+    FileStream GenerateBackup(GameInformationModel gameInformation);
 
-    public interface IBackupStrategy
-    {
-        string GetFileExtension();
-
-        FileStream GenerateBackup(GameInformationModel gameInformation);
-
-        void PrepareBackup(GameInformationModel gameInformation);
-    }
+    void PrepareBackup(GameInformationModel gameInformation);
 }

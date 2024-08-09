@@ -1,11 +1,10 @@
-﻿namespace iso.gmh.core.Interfaces
+﻿namespace iso.gmh.core.Interfaces;
+
+public interface ISteamService
 {
-    public interface ISteamService
-    {
-        string GetSteamId();
+    string GetSteamId();
 
-        string GetSteamUrl();
+    string GetSteamUrl();
 
-        string GetSignedAs();
-    }
+    string GetSignedAs();
 }

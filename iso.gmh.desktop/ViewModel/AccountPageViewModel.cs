@@ -1,55 +1,54 @@
-﻿namespace iso.gmh.desktop.ViewModel
+﻿namespace iso.gmh.desktop.ViewModel;
+
+using System.Threading.Tasks;
+using System.Windows.Input;
+
+using iso.gmh.Core.Enums;
+using iso.gmh.Core.Interfaces;
+using iso.gmh.Core.Models;
+using iso.gmh.desktop.Commands;
+using iso.gmh.desktop.Properties;
+
+using Microsoft.Extensions.Options;
+
+public class AccountPageViewModel : BaseViewModel
 {
-    using System.Threading.Tasks;
-    using System.Windows.Input;
+    private readonly Secrets Secrets;
+    private readonly IFactory<EDriveServices, IConnection> Connection;
 
-    using iso.gmh.Core.Enums;
-    using iso.gmh.Core.Interfaces;
-    using iso.gmh.Core.Models;
-    using iso.gmh.desktop.Commands;
-    using iso.gmh.desktop.Properties;
+    private ICommand _ConnectCommand;
 
-    using Microsoft.Extensions.Options;
-
-    public class AccountPageViewModel : BaseViewModel
+    public ICommand ConnectCommand => _ConnectCommand ??= new RelayCommand<object>(async _ =>
     {
-        private readonly Secrets Secrets;
-        private readonly IFactory<EDriveServices, IConnection> Connection;
+        await ConnectAsync().ConfigureAwait(true);
+        await SetUserInformation().ConfigureAwait(true);
+    });
 
-        private ICommand _ConnectCommand;
+    public AccountPageViewModel(IFactory<EDriveServices, IConnection> connection,
+        IOptions<Secrets> options)
+    {
+        if (options == null)
+            return;
 
-        public ICommand ConnectCommand => _ConnectCommand ??= new RelayCommand<object>(async _ =>
-        {
-            await ConnectAsync().ConfigureAwait(true);
-            await SetUserInformation().ConfigureAwait(true);
-        });
+        Connection = connection;
+        Secrets = options.Value;
+    }
 
-        public AccountPageViewModel(IFactory<EDriveServices, IConnection> connection,
-            IOptions<Secrets> options)
-        {
-            if (options == null)
-                return;
+    private async Task ConnectAsync()
+    {
+        App.Client = Connection.Create(App.DriveService);
 
-            Connection = connection;
-            Secrets = options.Value;
-        }
+        if (App.Client != null)
+            await App.Client
+                .ConnectAsync(Secrets)
+                .ConfigureAwait(true);
+    }
 
-        private async Task ConnectAsync()
-        {
-            App.Client = Connection.Create(App.DriveService);
+    private static async Task SetUserInformation()
+    {
+        UserModel userInformation = await App.Client.GetUserInformation();
 
-            if (App.Client != null)
-                await App.Client
-                    .ConnectAsync(Secrets)
-                    .ConfigureAwait(true);
-        }
-
-        private static async Task SetUserInformation()
-        {
-            UserModel userInformation = await App.Client.GetUserInformation();
-
-            Settings.Default.Name = userInformation.UserName;
-            Settings.Default.Email = userInformation.Email;
-        }
+        Settings.Default.Name = userInformation.UserName;
+        Settings.Default.Email = userInformation.Email;
     }
 }

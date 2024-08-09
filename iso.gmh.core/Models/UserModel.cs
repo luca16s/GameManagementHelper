@@ -1,19 +1,18 @@
-﻿namespace iso.gmh.Core.Models
+﻿namespace iso.gmh.Core.Models;
+
+using System.Text.Json.Serialization;
+
+public class UserModel
 {
-    using System.Text.Json.Serialization;
+    [JsonPropertyName("givenName")]
+    public string UserName { get; set; }
 
-    public class UserModel
+    [JsonPropertyName("userPrincipalName")]
+    public string Email { get; set; }
+
+    public UserModel(string userName, string email)
     {
-        [JsonPropertyName("givenName")]
-        public string UserName { get; set; }
-
-        [JsonPropertyName("userPrincipalName")]
-        public string Email { get; set; }
-
-        public UserModel(string userName, string email)
-        {
-            UserName = userName;
-            Email = email;
-        }
+        UserName = userName;
+        Email = email;
     }
 }

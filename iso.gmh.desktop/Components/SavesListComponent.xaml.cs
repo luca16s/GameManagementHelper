@@ -1,9 +1,8 @@
-﻿namespace iso.gmh.desktop.Components
-{
-    using System.Windows.Controls;
+﻿namespace iso.gmh.desktop.Components;
 
-    public partial class SavesListComponent : UserControl
-    {
-        public SavesListComponent() => InitializeComponent();
-    }
+using System.Windows.Controls;
+
+public partial class SavesListComponent : UserControl
+{
+    public SavesListComponent() => InitializeComponent();
 }

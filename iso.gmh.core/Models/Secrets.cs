@@ -1,9 +1,8 @@
-﻿namespace iso.gmh.Core.Models
+﻿namespace iso.gmh.Core.Models;
+
+public class Secrets
 {
-    public class Secrets
-    {
-        public string AppKey { get; set; }
-        public string AppToken { get; set; }
-        public string AppSecret { get; set; }
-    }
+    public string AppKey { get; set; }
+    public string AppToken { get; set; }
+    public string AppSecret { get; set; }
 }

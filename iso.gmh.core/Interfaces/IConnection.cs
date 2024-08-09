@@ -1,15 +1,14 @@
-﻿namespace iso.gmh.Core.Interfaces
+﻿namespace iso.gmh.Core.Interfaces;
+
+using System.Threading.Tasks;
+
+using iso.gmh.Core.Models;
+
+public interface IConnection
 {
-    using System.Threading.Tasks;
+    public dynamic PublicClientApp { get; }
 
-    using iso.gmh.Core.Models;
+    Task ConnectAsync(Secrets secrets);
 
-    public interface IConnection
-    {
-        public dynamic PublicClientApp { get; }
-
-        Task ConnectAsync(Secrets secrets);
-
-        Task<UserModel> GetUserInformation();
-    }
+    Task<UserModel> GetUserInformation();
 }

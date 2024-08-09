@@ -1,13 +1,12 @@
-﻿namespace iso.gmh.Core.Enums
+﻿namespace iso.gmh.Core.Enums;
+
+using System.ComponentModel;
+
+public enum EDriveServices
 {
-    using System.ComponentModel;
+    [Description("Dropbox")]
+    Dropbox = 0,
 
-    public enum EDriveServices
-    {
-        [Description("Dropbox")]
-        Dropbox = 0,
-
-        [Description("OneDrive")]
-        OneDrive = 1
-    }
+    [Description("OneDrive")]
+    OneDrive = 1
 }

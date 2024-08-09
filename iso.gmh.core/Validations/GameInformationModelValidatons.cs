@@ -1,23 +1,22 @@
-﻿namespace iso.gmh.Core.Validations
+﻿namespace iso.gmh.Core.Validations;
+
+using FluentValidation;
+
+using iso.gmh.Core.Models;
+using iso.gmh.Core.Utils;
+
+public class GameInformationModelValidatons : AbstractValidator<GameInformationModel>
 {
-    using FluentValidation;
-
-    using iso.gmh.Core.Models;
-    using iso.gmh.Core.Utils;
-
-    public class GameInformationModelValidatons : AbstractValidator<GameInformationModel>
+    public GameInformationModelValidatons()
     {
-        public GameInformationModelValidatons()
+        RuleSet("Saves", () =>
         {
-            RuleSet("Saves", () =>
-            {
-                _ = RuleFor(gameModel => gameModel.UserDefinedSaveName)
-                .MinimumLength(5)
-                .MaximumLength(150)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage(SystemMessages.UserDefinedSaveNameErrorMessage);
-            });
-        }
+            _ = RuleFor(gameModel => gameModel.UserDefinedSaveName)
+            .MinimumLength(5)
+            .MaximumLength(150)
+            .NotNull()
+            .NotEmpty()
+            .WithMessage(SystemMessages.UserDefinedSaveNameErrorMessage);
+        });
     }
 }

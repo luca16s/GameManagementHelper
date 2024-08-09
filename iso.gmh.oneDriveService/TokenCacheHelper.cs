@@ -1,43 +1,42 @@
-﻿namespace iso.gmh.oneDriveService
+﻿namespace iso.gmh.oneDriveService;
+
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+
+using Microsoft.Identity.Client;
+
+public class TokenCacheHelper
 {
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Security.Cryptography;
+    /// <summary>
+    /// Path to the token cache
+    /// </summary>
+    public static readonly string CacheFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location + ".msalcache.bin3";
 
-    using Microsoft.Identity.Client;
+    private static readonly object FileLock = new();
 
-    public class TokenCacheHelper
+    public static void BeforeAccessNotification(TokenCacheNotificationArgs args)
     {
-        /// <summary>
-        /// Path to the token cache
-        /// </summary>
-        public static readonly string CacheFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location + ".msalcache.bin3";
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            lock (FileLock)
+                args.TokenCache.DeserializeMsalV3(File.Exists(CacheFilePath)
+                    ? ProtectedData.Unprotect(File.ReadAllBytes(CacheFilePath), null, DataProtectionScope.CurrentUser)
+                    : null);
+    }
 
-        private static readonly object FileLock = new();
+    public static void AfterAccessNotification(TokenCacheNotificationArgs args)
+    {
+        // if the access operation resulted in a cache update
+        if (args.HasStateChanged
+            || RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            lock (FileLock)
+                // reflect changesgs in the persistent store
+                File.WriteAllBytes(CacheFilePath, ProtectedData.Protect(args.TokenCache.SerializeMsalV3(), null, DataProtectionScope.CurrentUser));
+    }
 
-        public static void BeforeAccessNotification(TokenCacheNotificationArgs args)
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                lock (FileLock)
-                    args.TokenCache.DeserializeMsalV3(File.Exists(CacheFilePath)
-                        ? ProtectedData.Unprotect(File.ReadAllBytes(CacheFilePath), null, DataProtectionScope.CurrentUser)
-                        : null);
-        }
-
-        public static void AfterAccessNotification(TokenCacheNotificationArgs args)
-        {
-            // if the access operation resulted in a cache update
-            if (args.HasStateChanged
-                || RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                lock (FileLock)
-                    // reflect changesgs in the persistent store
-                    File.WriteAllBytes(CacheFilePath, ProtectedData.Protect(args.TokenCache.SerializeMsalV3(), null, DataProtectionScope.CurrentUser));
-        }
-
-        internal static void EnableSerialization(ITokenCache tokenCache)
-        {
-            tokenCache.SetBeforeAccess(BeforeAccessNotification);
-            tokenCache.SetAfterAccess(AfterAccessNotification);
-        }
+    internal static void EnableSerialization(ITokenCache tokenCache)
+    {
+        tokenCache.SetBeforeAccess(BeforeAccessNotification);
+        tokenCache.SetAfterAccess(AfterAccessNotification);
     }
 }

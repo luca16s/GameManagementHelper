@@ -1,13 +1,12 @@
-﻿namespace iso.gmh.Core.Enums
+﻿namespace iso.gmh.Core.Enums;
+
+using System.ComponentModel;
+
+public enum EBackupSaveType
 {
-    using System.ComponentModel;
+    [Description("bak")]
+    BakFile,
 
-    public enum EBackupSaveType
-    {
-        [Description("bak")]
-        BakFile,
-
-        [Description("zip")]
-        ZipFile,
-    }
+    [Description("zip")]
+    ZipFile,
 }
