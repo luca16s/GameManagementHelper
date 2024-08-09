@@ -10,7 +10,10 @@ public class UserModel
     [JsonPropertyName("userPrincipalName")]
     public string Email { get; set; }
 
-    public UserModel(string userName, string email)
+    public UserModel(
+        string userName,
+        string email
+    )
     {
         UserName = userName;
         Email = email;

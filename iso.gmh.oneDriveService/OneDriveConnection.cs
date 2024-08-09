@@ -40,7 +40,7 @@ public class OneDriveConnection : IConnection
 
     private dynamic publicClientApp;
 
-    public dynamic PublicClientApp
+    public dynamic Client
     {
         get
         {
@@ -58,19 +58,19 @@ public class OneDriveConnection : IConnection
 
     public async Task ConnectAsync(Secrets secrets)
     {
-        IEnumerable<IAccount> accounts = await PublicClientApp.GetAccountsAsync();
+        IEnumerable<IAccount> accounts = await Client.GetAccountsAsync();
         IAccount firstAccount = accounts.FirstOrDefault();
 
         AuthenticationResult authResult;
         try
         {
-            authResult = await PublicClientApp.AcquireTokenSilent(scopes, firstAccount).ExecuteAsync();
+            authResult = await Client.AcquireTokenSilent(scopes, firstAccount).ExecuteAsync();
         }
         catch (MsalUiRequiredException)
         {
             try
             {
-                authResult = await PublicClientApp.AcquireTokenInteractive(scopes)
+                authResult = await Client.AcquireTokenInteractive(scopes)
                     .WithAccount(firstAccount)
                     .WithPrompt(Prompt.SelectAccount)
                     .ExecuteAsync();
@@ -90,10 +90,10 @@ public class OneDriveConnection : IConnection
 
     public async Task<UserModel> GetUserInformation()
     {
-        IEnumerable<IAccount> accounts = await PublicClientApp.GetAccountsAsync();
+        IEnumerable<IAccount> accounts = await Client.GetAccountsAsync();
         IAccount firstAccount = accounts.FirstOrDefault();
 
-        AuthenticationResult authResult = await PublicClientApp.AcquireTokenSilent(scopes, firstAccount).ExecuteAsync();
+        AuthenticationResult authResult = await Client.AcquireTokenSilent(scopes, firstAccount).ExecuteAsync();
 
         return JsonSerializer.Deserialize<UserModel>(await GetHttpContentWithToken(graphAPIEndpoint, authResult.AccessToken));
     }

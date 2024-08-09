@@ -15,7 +15,6 @@ using iso.gmh.Core.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using iso.gmh.desktop.ViewModel;
-using iso.gmh.services.BackupServices;
 using iso.gmh.services.DriveServices;
 
 public partial class App : Application
@@ -31,7 +30,7 @@ public partial class App : Application
     {
         string connectionType = Environment.GetEnvironmentVariable("CONNECTION_TYPE");
         bool isFastConnectionEnable = string.IsNullOrEmpty(connectionType) ||
-                            connectionType.ToLower(culture: CultureInfo.CurrentCulture) == "fast";
+                            connectionType.Equals("fast", StringComparison.CurrentCultureIgnoreCase);
 
         IConfigurationBuilder builder = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -65,7 +64,7 @@ public partial class App : Application
         _ = servicesCollection.AddTransient(typeof(AccountPageViewModel));
         _ = servicesCollection.AddTransient(typeof(SettingsPageViewModel));
         _ = servicesCollection.AddTransient<IFactory<EDriveServices, IConnection>, ConnectionFactory>();
-        _ = servicesCollection.AddTransient<IFactory<EBackupSaveType, IBackupStrategy>, BackupFactory>();
+        //_ = servicesCollection.AddTransient<IFactory<EBackupSaveType, IBackupStrategy>, BackupFactory>();
 
         _ = servicesCollection.Configure<Secrets>(secret =>
         {

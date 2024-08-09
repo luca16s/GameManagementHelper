@@ -83,16 +83,16 @@ public class DropboxConnection : IConnection
         return DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
     }
 
-    public dynamic PublicClientApp { get; private set; }
+    public dynamic Client { get; private set; }
 
     public async Task ConnectAsync(Secrets secrets)
     {
         if (secrets == null)
             return;
 
-        if (PublicClientApp == null)
+        if (Client == null)
         {
-            DropboxCertHelper.InitializeCertPinning();
+            //DropboxCertHelper.InitializeCertPinning();
 
             string accessToken = string.IsNullOrWhiteSpace(secrets.AppToken)
                                     ? await GetAccessToken(secrets.AppKey).ConfigureAwait(true)
@@ -105,13 +105,13 @@ public class DropboxConnection : IConnection
                 HttpClient = httpClient,
             };
 
-            PublicClientApp = new DropboxClient(accessToken, "", secrets.AppKey, secrets.AppSecret, config);
+            Client = new DropboxClient(accessToken, "", secrets.AppKey, secrets.AppSecret, config);
         }
     }
 
     public async Task<UserModel> GetUserInformation()
     {
-        UserInfo user = await PublicClientApp
+        UserInfo user = await Client
             .Users
             .GetCurrentAccountAsync()
             .ConfigureAwait(true);

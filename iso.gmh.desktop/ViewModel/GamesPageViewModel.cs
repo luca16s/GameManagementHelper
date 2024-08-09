@@ -156,7 +156,7 @@ public class GamesPageViewModel : BaseViewModel
         if (App.Client == null)
             return default;
 
-        using dynamic client = App.Client.PublicClientApp;
+        using dynamic client = App.Client.Client;
         BackupStrategy = BackupFactory.Create(App.BackupType);
 
         return client == null

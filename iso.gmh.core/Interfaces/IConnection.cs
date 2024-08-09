@@ -6,7 +6,7 @@ using iso.gmh.Core.Models;
 
 public interface IConnection
 {
-    public dynamic PublicClientApp { get; }
+    public dynamic Client { get; }
 
     Task ConnectAsync(Secrets secrets);
 

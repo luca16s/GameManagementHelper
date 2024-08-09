@@ -6,7 +6,6 @@ public enum EBackupSaveType
 {
     [Description("bak")]
     BakFile,
-
     [Description("zip")]
     ZipFile,
 }
