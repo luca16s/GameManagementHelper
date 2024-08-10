@@ -1,4 +1,4 @@
-﻿namespace iso.gmh.dropboxService;
+﻿namespace iso.gmh.dropbox;
 
 using System;
 using System.Collections.Generic;
@@ -21,10 +21,13 @@ public class DropboxOperations : ICloudOperations
     private readonly DropboxClient Client;
     private readonly IBackupStrategy BackupStrategy;
 
-    public DropboxOperations(IBackupStrategy backupStrategy, DropboxClient client)
+    public DropboxOperations(
+        DropboxClient client,
+        IBackupStrategy backupStrategy
+    )
     {
-        BackupStrategy = backupStrategy;
         Client = client;
+        BackupStrategy = backupStrategy;
     }
 
     private async Task<ListFolderResult> ListFolderContent(string folderPath) => await Client.Files.ListFolderAsync(folderPath).ConfigureAwait(true);

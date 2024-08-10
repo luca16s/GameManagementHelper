@@ -13,7 +13,7 @@ using iso.gmh.Core.Models;
 using iso.gmh.desktop;
 using iso.gmh.desktop.Commands;
 using iso.gmh.desktop.Helper;
-using iso.gmh.services.DriveServices;
+using iso.gmh.dropbox;
 
 using Microsoft.Extensions.Options;
 
@@ -159,9 +159,11 @@ public class GamesPageViewModel : BaseViewModel
         using dynamic client = App.Client.Client;
         BackupStrategy = BackupFactory.Create(App.BackupType);
 
-        return client == null
-            ? null
-            : new OperationFactory(BackupStrategy, client).Create(App.DriveService);
+        return //client == null
+               //? null
+               //: 
+               //new OperationFactory(BackupStrategy, client).Create(App.DriveService)
+            new DropboxOperations(client, BackupStrategy);
     }
 
     private async Task GetSavesList(GameInformationModel gameInformation)

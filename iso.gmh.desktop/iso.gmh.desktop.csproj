@@ -128,9 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\iso.gmh.core\iso.gmh.core.csproj" />
-    <ProjectReference Include="..\iso.gmh.dropboxService\iso.gmh.dropboxService.csproj" />
-    <ProjectReference Include="..\iso.gmh.oneDriveService\iso.gmh.oneDriveService.csproj" />
-    <ProjectReference Include="..\iso.gmh.services\iso.gmh.services.csproj" />
+    <ProjectReference Include="..\iso.gmh.dropbox\iso.gmh.dropbox.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="KapiCoreLib">

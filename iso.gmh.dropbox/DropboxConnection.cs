@@ -1,4 +1,4 @@
-﻿namespace iso.gmh.dropboxService;
+﻿namespace iso.gmh.dropbox;
 
 using System;
 using System.Diagnostics;
@@ -7,12 +7,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 using Dropbox.Api;
-using Dropbox.Api.Sharing;
+using Dropbox.Api.Users;
 
 using iso.gmh.Core.Interfaces;
 using iso.gmh.Core.Models;
 
-public class DropboxConnection : IConnection
+public class DropboxConnection : IConnection<DropboxClient>
 {
     private const string responseString = @"
                 <html>
@@ -83,7 +83,7 @@ public class DropboxConnection : IConnection
         return DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
     }
 
-    public dynamic Client { get; private set; }
+    public DropboxClient Client { get; private set; }
 
     public async Task ConnectAsync(Secrets secrets)
     {
@@ -111,11 +111,8 @@ public class DropboxConnection : IConnection
 
     public async Task<UserModel> GetUserInformation()
     {
-        UserInfo user = await Client
-            .Users
-            .GetCurrentAccountAsync()
-            .ConfigureAwait(true);
+        FullAccount user = await Client.Users.GetCurrentAccountAsync();
 
-        return new(user.DisplayName, user.Email);
+        return new(user.Name.DisplayName, user.Email);
     }
 }

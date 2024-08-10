@@ -3,7 +3,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.Text;
 using System.Windows;
 
@@ -15,11 +14,13 @@ using iso.gmh.Core.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using iso.gmh.desktop.ViewModel;
-using iso.gmh.services.DriveServices;
+using Dropbox.Api;
+using iso.gmh.core.Services;
+using iso.gmh.dropbox;
 
 public partial class App : Application
 {
-    public static IConnection Client { get; set; }
+    public static IConnection<DropboxClient> Client { get; set; }
     public static EDriveServices DriveService { get; set; }
     public static EBackupSaveType BackupType { get; set; }
 
@@ -63,8 +64,9 @@ public partial class App : Application
         _ = servicesCollection.AddTransient(typeof(GamesPageViewModel));
         _ = servicesCollection.AddTransient(typeof(AccountPageViewModel));
         _ = servicesCollection.AddTransient(typeof(SettingsPageViewModel));
-        _ = servicesCollection.AddTransient<IFactory<EDriveServices, IConnection>, ConnectionFactory>();
-        //_ = servicesCollection.AddTransient<IFactory<EBackupSaveType, IBackupStrategy>, BackupFactory>();
+        _ = servicesCollection.AddTransient<DropboxClient>();
+        _ = servicesCollection.AddTransient<IConnection<DropboxClient>, DropboxConnection>();
+        _ = servicesCollection.AddTransient<IFactory<EBackupSaveType, IBackupStrategy>, BackupFactory>();
 
         _ = servicesCollection.Configure<Secrets>(secret =>
         {
@@ -76,8 +78,7 @@ public partial class App : Application
         });
 
         _ = servicesCollection
-            .Configure<ObservableCollection<GameInformationModel>>(gameInformation => Configuration
-            .GetSection(key: nameof(GameInformationModel))
-            .Bind(gameInformation));
+            .Configure<ObservableCollection<GameInformationModel>>(
+                gameInformation => Configuration.GetSection(key: nameof(GameInformationModel)).Bind(gameInformation));
     }
 }

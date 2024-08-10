@@ -2,17 +2,20 @@
 
 using System.Windows.Controls;
 
-using iso.gmh.desktop.ViewModel;
-using iso.gmh.Core.Enums;
+using Dropbox.Api;
+
 using iso.gmh.Core.Interfaces;
 using iso.gmh.Core.Models;
+using iso.gmh.desktop.ViewModel;
 
 using Microsoft.Extensions.Options;
 
 public partial class AccountPage : Page
 {
-    public AccountPage(IFactory<EDriveServices, IConnection> connection,
-        IOptions<Secrets> options)
+    public AccountPage(
+        IConnection<DropboxClient> connection,
+        IOptions<Secrets> options
+    )
     {
         InitializeComponent();
         DataContext = new AccountPageViewModel(connection, options);

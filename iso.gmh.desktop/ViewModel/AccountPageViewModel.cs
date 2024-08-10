@@ -3,7 +3,8 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-using iso.gmh.Core.Enums;
+using Dropbox.Api;
+
 using iso.gmh.Core.Interfaces;
 using iso.gmh.Core.Models;
 using iso.gmh.desktop.Commands;
@@ -14,7 +15,7 @@ using Microsoft.Extensions.Options;
 public class AccountPageViewModel : BaseViewModel
 {
     private readonly Secrets Secrets;
-    private readonly IFactory<EDriveServices, IConnection> Connection;
+    private readonly IConnection<DropboxClient> Connection;
 
     private ICommand _ConnectCommand;
 
@@ -24,8 +25,10 @@ public class AccountPageViewModel : BaseViewModel
         await SetUserInformation().ConfigureAwait(true);
     });
 
-    public AccountPageViewModel(IFactory<EDriveServices, IConnection> connection,
-        IOptions<Secrets> options)
+    public AccountPageViewModel(
+        IConnection<DropboxClient> connection,
+        IOptions<Secrets> options
+    )
     {
         if (options == null)
             return;
@@ -36,7 +39,7 @@ public class AccountPageViewModel : BaseViewModel
 
     private async Task ConnectAsync()
     {
-        App.Client = Connection.Create(App.DriveService);
+        App.Client = Connection;
 
         if (App.Client != null)
             await App.Client

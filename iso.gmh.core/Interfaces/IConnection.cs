@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 using iso.gmh.Core.Models;
 
-public interface IConnection
+public interface IConnection<TClient> where TClient : class
 {
-    public dynamic Client { get; }
+    public TClient Client { get; }
 
     Task ConnectAsync(Secrets secrets);
 
