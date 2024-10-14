@@ -4,7 +4,7 @@ using iso.gmh.desktop;
 
 using iso.gmh.Core.Enums;
 
-public class SettingsPageViewModel : BaseViewModel
+public partial class SettingsPageViewModel : BaseViewModel
 {
     public SettingsPageViewModel()
     {

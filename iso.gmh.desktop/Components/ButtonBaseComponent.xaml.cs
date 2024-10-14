@@ -54,7 +54,7 @@ public partial class ButtonBaseComponent : UserControl
 
     public event RoutedEventHandler Click
     {
-        add { Button.Click += value; }
-        remove { Button.Click += value; }
+        add => Button.Click += value;
+        remove => Button.Click += value;
     }
 }

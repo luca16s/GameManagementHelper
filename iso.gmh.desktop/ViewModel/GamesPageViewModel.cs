@@ -17,7 +17,7 @@ using iso.gmh.dropbox;
 
 using Microsoft.Extensions.Options;
 
-public class GamesPageViewModel : BaseViewModel
+public partial class GamesPageViewModel : BaseViewModel
 {
     private IBackupStrategy BackupStrategy;
     private ICloudOperations CloudOperations => GetClientOperations();

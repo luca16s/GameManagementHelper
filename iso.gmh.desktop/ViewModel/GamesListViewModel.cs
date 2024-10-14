@@ -9,7 +9,7 @@ using iso.gmh.Core.Interfaces;
 using iso.gmh.desktop.Helper;
 using iso.gmh.desktop.Commands;
 
-public class GamesListViewModel : BaseViewModel
+public partial class GamesListViewModel : BaseViewModel
 {
     private ObservableCollection<GamesListEntry> savesList;
 

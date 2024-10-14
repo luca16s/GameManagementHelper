@@ -3,7 +3,7 @@
 using System;
 using System.Windows.Input;
 
-public class RelayCommand<T> : ICommand
+public partial class RelayCommand<T> : ICommand
 {
     private readonly Action<T> _execute;
     private readonly Predicate<T> _canExecute;
@@ -15,8 +15,7 @@ public class RelayCommand<T> : ICommand
     /// <remarks><seealso cref="CanExecute"/> will always return true.</remarks>
     public RelayCommand(Action<T> execute)
         : this(execute, null)
-    {
-    }
+    { }
 
     /// <summary>
     /// Creates a new command.
@@ -43,8 +42,8 @@ public class RelayCommand<T> : ICommand
     ///</summary>
     public event EventHandler CanExecuteChanged
     {
-        add { CommandManager.RequerySuggested += value; }
-        remove { CommandManager.RequerySuggested -= value; }
+        add => CommandManager.RequerySuggested += value;
+        remove => CommandManager.RequerySuggested -= value;
     }
 
     ///<summary>

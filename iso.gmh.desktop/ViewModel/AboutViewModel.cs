@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 using iso.gmh.desktop.Commands;
 
-public class AboutViewModel : BaseViewModel
+public partial class AboutViewModel : BaseViewModel
 {
     private const string UrlLinkedin = @"https:\linkedin.com\in\gianfigueiredo";
     private const string UrlGithub = @"https:\github.com\luca16s";

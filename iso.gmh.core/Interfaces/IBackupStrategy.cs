@@ -8,7 +8,11 @@ public interface IBackupStrategy
 {
     string GetFileExtension();
 
-    void PrepareBackup(GameInformationModel gameInformation);
+    void PrepareBackup(
+        GameInformationModel gameInformation
+    );
 
-    FileStream GenerateBackup(GameInformationModel gameInformation);
+    FileStream GenerateBackup(
+        GameInformationModel gameInformation
+    );
 }

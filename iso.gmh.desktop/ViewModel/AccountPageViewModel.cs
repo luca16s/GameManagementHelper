@@ -12,7 +12,7 @@ using iso.gmh.desktop.Properties;
 
 using Microsoft.Extensions.Options;
 
-public class AccountPageViewModel : BaseViewModel
+public partial class AccountPageViewModel : BaseViewModel
 {
     private readonly Secrets Secrets;
     private readonly IConnection<DropboxClient> Connection;
