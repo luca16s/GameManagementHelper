@@ -4,9 +4,9 @@ using iso.gmh.desktop;
 
 using iso.gmh.Core.Enums;
 
-public partial class SettingsPageViewModel : BaseViewModel
+public partial class SettingsViewModel : BaseViewModel
 {
-    public SettingsPageViewModel()
+    public SettingsViewModel()
     {
         App.BackupType = BackupSaveType;
         App.DriveService = DriveServiceSelected;

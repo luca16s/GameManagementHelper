@@ -31,9 +31,9 @@ public partial class App : Application
             .AddTransient<SettingsPage>()
             .AddTransient<DropboxClient>()
             .AddTransient<AboutViewModel>()
-            .AddTransient<GamesPageViewModel>()
-            .AddTransient<AccountPageViewModel>()
-            .AddTransient<SettingsPageViewModel>()
+            .AddTransient<GameViewModel>()
+            .AddTransient<AccountViewModel>()
+            .AddTransient<SettingsViewModel>()
             .Configure<Secrets>(secret => {
                 secret.AppToken = string.Empty;
                 secret.AppKey = configuration.GetSection(key: nameof(Secrets.AppKey)).Value;

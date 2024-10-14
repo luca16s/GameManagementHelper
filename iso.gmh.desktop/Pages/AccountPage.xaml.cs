@@ -18,6 +18,6 @@ public partial class AccountPage : Page
     )
     {
         InitializeComponent();
-        DataContext = new AccountPageViewModel(connection, options);
+        DataContext = new AccountViewModel(connection, options);
     }
 }

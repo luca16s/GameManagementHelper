@@ -3,10 +3,15 @@
 using System;
 using System.Windows.Input;
 
-public partial class RelayCommand<T> : ICommand
+/// <summary>
+/// Creates a new command.
+/// </summary>
+/// <param name="execute">The execution logic.</param>
+/// <param name="canExecute">The execution status logic.</param>
+public partial class RelayCommand<T>(Action<T> execute, Predicate<T> canExecute) : ICommand
 {
-    private readonly Action<T> _execute;
-    private readonly Predicate<T> _canExecute;
+    private readonly Action<T> _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+    private readonly Predicate<T> _canExecute = canExecute;
 
     /// <summary>
     /// Initializes a new instance of <see cref="DelegateCommand{T}"/>.
@@ -16,17 +21,6 @@ public partial class RelayCommand<T> : ICommand
     public RelayCommand(Action<T> execute)
         : this(execute, null)
     { }
-
-    /// <summary>
-    /// Creates a new command.
-    /// </summary>
-    /// <param name="execute">The execution logic.</param>
-    /// <param name="canExecute">The execution status logic.</param>
-    public RelayCommand(Action<T> execute, Predicate<T> canExecute)
-    {
-        _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-        _canExecute = canExecute;
-    }
 
     ///<summary>
     ///Defines the method that determines whether the command can execute in its current state.

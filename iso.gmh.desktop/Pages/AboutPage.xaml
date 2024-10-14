@@ -43,7 +43,7 @@
         </Grid.RowDefinitions>
         <Label
             Grid.Row="0"
-            Content="Desenvolvido por Îakaré Software'oka"
+            Content="{Binding Desenvolvedor}"
             FontSize="15"
             Style="{StaticResource Color}" />
         <Label

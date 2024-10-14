@@ -10,7 +10,7 @@
     xmlns:properties="clr-namespace:iso.gmh.desktop.Properties"
     xmlns:viewmodel="clr-namespace:iso.gmh.desktop.ViewModel"
     FontFamily="{materialDesign:MaterialDesignFont}"
-    d:DataContext="{d:DesignInstance Type=viewmodel:SettingsPageViewModel}"
+    d:DataContext="{d:DesignInstance Type=viewmodel:SettingsViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"

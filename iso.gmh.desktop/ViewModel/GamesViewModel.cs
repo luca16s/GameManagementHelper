@@ -17,29 +17,29 @@ using iso.gmh.dropbox;
 
 using Microsoft.Extensions.Options;
 
-public partial class GamesPageViewModel : BaseViewModel
+public partial class GameViewModel : BaseViewModel
 {
     private IBackupStrategy BackupStrategy;
     private ICloudOperations CloudOperations => GetClientOperations();
     private readonly IFactory<ESaveType, IBackupStrategy> BackupFactory;
 
-    private RelayCommand<GamesPageViewModel> _UploadCommand;
-    private RelayCommand<GamesPageViewModel> _DownloadCommand;
+    private RelayCommand<GameViewModel> _UploadCommand;
+    private RelayCommand<GameViewModel> _DownloadCommand;
 
     private bool CanExecute => SelectedGame != null;
 
     public ICommand UploadCommand
         => _UploadCommand
-        ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave(MessageBox.Show("Deseja sobrescrever o arquivo salvo?", "Game Save Manager", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)), _ => CanExecute);
+        ??= new RelayCommand<GameViewModel>(async _ => await UploadSave(MessageBox.Show("Deseja sobrescrever o arquivo salvo?", "Game Save Manager", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)), _ => CanExecute);
 
     public ICommand DownloadCommand
         => _DownloadCommand
-        ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave(), _ => CanExecute);
+        ??= new RelayCommand<GameViewModel>(async _ => await DownloadSave(), _ => CanExecute);
 
     private Game GameInformation;
     private readonly ObservableCollection<Game> GameInformationList;
 
-    public GamesPageViewModel(IFactory<ESaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<Game>> options)
+    public GameViewModel(IFactory<ESaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<Game>> options)
     {
         if (backupStrategy == null
             || options == null)

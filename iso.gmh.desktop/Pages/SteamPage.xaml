@@ -31,11 +31,5 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <CheckBox
-            Grid.Row="0"
-            IsEnabled="False"
-            Content="Steam está ativa"
-            Style="{StaticResource Color}" />
-
     </Grid>
 </Page>

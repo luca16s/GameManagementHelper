@@ -10,7 +10,7 @@ public partial class SettingsPage : Page
     public SettingsPage()
     {
         InitializeComponent();
-        DataContext = new SettingsPageViewModel();
+        DataContext = new SettingsViewModel();
     }
 
     private void ChangeTheme_Click(object sender, RoutedEventArgs e)

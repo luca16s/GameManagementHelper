@@ -9,7 +9,7 @@
     xmlns:properties="clr-namespace:iso.gmh.desktop.Properties"
     xmlns:viewmodel="clr-namespace:iso.gmh.desktop.ViewModel"
     FontFamily="{materialDesign:MaterialDesignFont}"
-    d:DataContext="{d:DesignInstance Type=viewmodel:GamesPageViewModel}"
+    d:DataContext="{d:DesignInstance Type=viewmodel:GameViewModel}"
     mc:Ignorable="d"
     Title="Jogos">
     <Page.Resources>

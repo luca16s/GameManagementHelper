@@ -18,6 +18,6 @@ public partial class GamesPage : Page
     )
     {
         InitializeComponent();
-        DataContext = new GamesPageViewModel(backupStrategy, options);
+        DataContext = new GameViewModel(backupStrategy, options);
     }
 }

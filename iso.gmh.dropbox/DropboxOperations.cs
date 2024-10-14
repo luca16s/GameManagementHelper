@@ -16,19 +16,13 @@ using iso.gmh.Core.Models;
 
 using KapiCoreLib.Desktop.Utils;
 
-public class DropboxOperations : ICloudOperations
+public class DropboxOperations(
+    DropboxClient client,
+    IBackupStrategy backupStrategy
+    ) : ICloudOperations
 {
-    private readonly DropboxClient Client;
-    private readonly IBackupStrategy BackupStrategy;
-
-    public DropboxOperations(
-        DropboxClient client,
-        IBackupStrategy backupStrategy
-    )
-    {
-        Client = client;
-        BackupStrategy = backupStrategy;
-    }
+    private readonly DropboxClient Client = client;
+    private readonly IBackupStrategy BackupStrategy = backupStrategy;
 
     private async Task<ListFolderResult> ListFolderContent(string folderPath) => await Client.Files.ListFolderAsync(folderPath);
 
