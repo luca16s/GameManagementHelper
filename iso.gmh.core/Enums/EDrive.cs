@@ -2,10 +2,10 @@
 
 using System.ComponentModel;
 
-public enum EDriveServices
+public enum EDrive
 {
     [Description("Dropbox")]
-    Dropbox = 0,
+    DROPBOX = 0,
     [Description("OneDrive")]
-    OneDrive = 1
+    ONEDRIVE = 1
 }

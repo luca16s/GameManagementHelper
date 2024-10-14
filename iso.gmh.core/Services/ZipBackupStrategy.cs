@@ -11,7 +11,7 @@ using KapiCoreLib.Extensions;
 
 public class ZipBackupStrategy : IBackupStrategy
 {
-    public string GetFileExtension() => EBackupSaveType.ZipFile.Description();
+    public string GetFileExtension() => ESaveType.ZIP.Description();
 
     public FileStream GenerateBackup(GameInformationModel gameInformation)
     {

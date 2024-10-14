@@ -12,9 +12,9 @@ public class SettingsPageViewModel : BaseViewModel
         App.DriveService = DriveServiceSelected;
     }
 
-    private EDriveServices _DriveServiceSelected;
+    private EDrive _DriveServiceSelected;
 
-    public EDriveServices DriveServiceSelected
+    public EDrive DriveServiceSelected
     {
         get => _DriveServiceSelected;
         set
@@ -29,9 +29,9 @@ public class SettingsPageViewModel : BaseViewModel
         }
     }
 
-    private EBackupSaveType _backupSaveType;
+    private ESaveType _backupSaveType;
 
-    public EBackupSaveType BackupSaveType
+    public ESaveType BackupSaveType
     {
         get => _backupSaveType;
         set

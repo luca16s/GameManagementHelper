@@ -13,7 +13,7 @@ using iso.gmh.Core.Interfaces;
 public partial class GamesPage : Page
 {
     public GamesPage(
-        IFactory<EBackupSaveType, IBackupStrategy> backupStrategy,
+        IFactory<ESaveType, IBackupStrategy> backupStrategy,
         IOptions<ObservableCollection<GameInformationModel>> options
     )
     {

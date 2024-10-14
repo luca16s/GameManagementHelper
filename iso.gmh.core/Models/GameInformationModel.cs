@@ -52,7 +52,7 @@ public class GameInformationModel
     {
         try
         {
-            if (Enum.IsDefined(typeof(EBackupSaveType), saveExtension.GetEnumValueFromDescription<EBackupSaveType>()))
+            if (Enum.IsDefined(typeof(ESaveType), saveExtension.GetEnumValueFromDescription<ESaveType>()))
                 SaveBackupExtension = string.Concat('.', saveExtension);
         }
         catch (ArgumentException)

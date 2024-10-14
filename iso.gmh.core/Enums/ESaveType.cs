@@ -2,10 +2,10 @@
 
 using System.ComponentModel;
 
-public enum EBackupSaveType
+public enum ESaveType
 {
     [Description("bak")]
-    BakFile,
+    BAK = 0,
     [Description("zip")]
-    ZipFile,
+    ZIP = 1,
 }

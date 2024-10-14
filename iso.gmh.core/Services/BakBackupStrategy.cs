@@ -11,7 +11,7 @@ using KapiCoreLib.Extensions;
 
 public class BakBackupStrategy : IBackupStrategy
 {
-    public string GetFileExtension() => EBackupSaveType.BakFile.Description();
+    public string GetFileExtension() => ESaveType.BAK.Description();
 
     public FileStream GenerateBackup(GameInformationModel gameInformation)
     {

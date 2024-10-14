@@ -21,7 +21,7 @@ public class GamesPageViewModel : BaseViewModel
 {
     private IBackupStrategy BackupStrategy;
     private ICloudOperations CloudOperations => GetClientOperations();
-    private readonly IFactory<EBackupSaveType, IBackupStrategy> BackupFactory;
+    private readonly IFactory<ESaveType, IBackupStrategy> BackupFactory;
 
     private RelayCommand<GamesPageViewModel> _UploadCommand;
     private RelayCommand<GamesPageViewModel> _DownloadCommand;
@@ -39,7 +39,7 @@ public class GamesPageViewModel : BaseViewModel
     private GameInformationModel GameInformation;
     private readonly ObservableCollection<GameInformationModel> GameInformationList;
 
-    public GamesPageViewModel(IFactory<EBackupSaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
+    public GamesPageViewModel(IFactory<ESaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
     {
         if (backupStrategy == null
             || options == null)

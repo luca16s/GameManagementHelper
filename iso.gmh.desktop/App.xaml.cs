@@ -21,8 +21,8 @@ using iso.gmh.dropbox;
 public partial class App : Application
 {
     public static IConnection<DropboxClient> Client { get; set; }
-    public static EDriveServices DriveService { get; set; }
-    public static EBackupSaveType BackupType { get; set; }
+    public static EDrive DriveService { get; set; }
+    public static ESaveType BackupType { get; set; }
 
     public IConfigurationRoot Configuration { get; set; }
     public IServiceProvider ServiceProvider { get; set; }
@@ -66,7 +66,7 @@ public partial class App : Application
         _ = servicesCollection.AddTransient(typeof(SettingsPageViewModel));
         _ = servicesCollection.AddTransient<DropboxClient>();
         _ = servicesCollection.AddTransient<IConnection<DropboxClient>, DropboxConnection>();
-        _ = servicesCollection.AddTransient<IFactory<EBackupSaveType, IBackupStrategy>, BackupFactory>();
+        _ = servicesCollection.AddTransient<IFactory<ESaveType, IBackupStrategy>, BackupFactory>();
 
         _ = servicesCollection.Configure<Secrets>(secret =>
         {
