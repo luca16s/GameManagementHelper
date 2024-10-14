@@ -30,7 +30,7 @@ public class DropboxOperations : ICloudOperations
         BackupStrategy = backupStrategy;
     }
 
-    private async Task<ListFolderResult> ListFolderContent(string folderPath) => await Client.Files.ListFolderAsync(folderPath).ConfigureAwait(true);
+    private async Task<ListFolderResult> ListFolderContent(string folderPath) => await Client.Files.ListFolderAsync(folderPath);
 
     private static bool CheckIfFolderExistsInList(string folderName, ListFolderResult itemsList)
     {
@@ -41,14 +41,14 @@ public class DropboxOperations : ICloudOperations
         return false;
     }
 
-    public async Task<IEnumerable<(string name, string path)>> GetSavesList(GameInformationModel gameInformation)
+    public async Task<IEnumerable<(string name, string path)>> GetSavesList(Game gameInformation)
     {
         string folderName = gameInformation.OnlineSaveFolder.TrimEnd('/');
 
         if (!await CheckFolderExistence(folderName))
             return Enumerable.Empty<(string name, string path)>();
 
-        ListFolderResult fileList = await ListFolderContent(folderName).ConfigureAwait(true);
+        ListFolderResult fileList = await ListFolderContent(folderName);
 
         var listaSaves = new List<(string name, string path)>();
 
@@ -67,13 +67,13 @@ public class DropboxOperations : ICloudOperations
         return listaSaves;
     }
 
-    public async Task<bool> DownloadSaveData(GameInformationModel gameInformation)
+    public async Task<bool> DownloadSaveData(Game gameInformation)
     {
         if (gameInformation == null
             || !await CheckFolderExistence(gameInformation.OnlineSaveFolder))
             return false;
 
-        ListFolderResult fileList = await ListFolderContent(gameInformation.OnlineSaveFolder.TrimEnd('/')).ConfigureAwait(true);
+        ListFolderResult fileList = await ListFolderContent(gameInformation.OnlineSaveFolder.TrimEnd('/'));
 
         Metadata fileFound = fileList.Entries.FirstOrDefault(save => save.IsFile
         && save.Name.Equals(gameInformation.BuildSaveName(), StringComparison.InvariantCultureIgnoreCase));
@@ -81,11 +81,11 @@ public class DropboxOperations : ICloudOperations
         if (fileFound is null)
             return false;
 
-        using IDownloadResponse<FileMetadata> result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name)).ConfigureAwait(true);
+        using IDownloadResponse<FileMetadata> result = await Client.Files.DownloadAsync(Path.Combine(gameInformation.OnlineSaveFolder, fileFound.Name));
 
         using (FileStream stream = File.OpenWrite(Path.Combine(Path.GetTempPath(), fileFound.Name)))
         {
-            byte[] dataToWrite = await result.GetContentAsByteArrayAsync().ConfigureAwait(true);
+            byte[] dataToWrite = await result.GetContentAsByteArrayAsync();
             stream.Write(dataToWrite, 0, dataToWrite.Length);
         }
 
@@ -94,7 +94,7 @@ public class DropboxOperations : ICloudOperations
         return true;
     }
 
-    public async Task<bool> UploadSaveData(GameInformationModel gameInformation, bool overwriteSave)
+    public async Task<bool> UploadSaveData(Game gameInformation, bool overwriteSave)
     {
         if (gameInformation == null)
             return false;
@@ -110,7 +110,7 @@ public class DropboxOperations : ICloudOperations
             FileMetadata response = await Client
                 .Files
                 .UploadAsync(Path.Combine(gameInformation.OnlineSaveFolder, gameInformation.BuildSaveName()), writeMode, body: fileStream)
-                .ConfigureAwait(true);
+                ;
 
             return string.IsNullOrEmpty(response.ContentHash);
         }
@@ -129,13 +129,13 @@ public class DropboxOperations : ICloudOperations
         if (string.IsNullOrWhiteSpace(folderName))
             return false;
 
-        ListFolderResult itemsList = await Client.Files.ListFolderAsync("").ConfigureAwait(true);
+        ListFolderResult itemsList = await Client.Files.ListFolderAsync("");
 
         bool hasFolder = CheckIfFolderExistsInList(folderName, itemsList);
 
         if (itemsList.HasMore)
         {
-            itemsList = await Client.Files.ListFolderContinueAsync(folderName).ConfigureAwait(true);
+            itemsList = await Client.Files.ListFolderContinueAsync(folderName);
             hasFolder = CheckIfFolderExistsInList(folderName, itemsList);
         }
 
@@ -144,7 +144,7 @@ public class DropboxOperations : ICloudOperations
 
     public async Task<bool> CreateFolder(string path)
     {
-        CreateFolderResult result = await Client.Files.CreateFolderV2Async(path?.TrimEnd('/')).ConfigureAwait(true);
+        CreateFolderResult result = await Client.Files.CreateFolderV2Async(path?.TrimEnd('/'));
         return string.IsNullOrEmpty(result.Metadata.Id);
     }
 
@@ -155,7 +155,7 @@ public class DropboxOperations : ICloudOperations
 
         try
         {
-            DeleteResult result = await Client.Files.DeleteV2Async(path).ConfigureAwait(true);
+            DeleteResult result = await Client.Files.DeleteV2Async(path);
         }
         catch (ApiException<DeleteError> ex)
         {

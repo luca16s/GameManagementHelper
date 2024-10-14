@@ -7,15 +7,83 @@ using iso.gmh.Core.Models;
 
 public interface ICloudOperations
 {
-    Task<bool> DeleteSave(string path);
+    /// <summary>
+    /// Apaga arquivo do serviço de armazenamento na nuvem.
+    /// </summary>
+    /// <param name="path">
+    /// Local do arquivo a ser apagado.
+    /// </param>
+    /// <returns>
+    /// True caso tenha apagado e Falso caso não tenha sido apagado.
+    /// </returns>
+    Task<bool> DeleteSave(
+        string path
+    );
 
-    Task<bool> CreateFolder(string path);
+    /// <summary>
+    /// Cria uma pasta no serviço de armazenamento na nuvem.
+    /// </summary>
+    /// <param name="path">
+    /// </param>
+    /// <returns>
+    /// </returns>
+    Task<bool> CreateFolder(
+        string path
+    );
 
-    Task<bool> CheckFolderExistence(string folderName);
+    /// <summary>
+    /// Valida se no serviço de armazenamento na nuvem já existe uma pasta com mesmo nome.
+    /// </summary>
+    /// <param name="folderName">
+    /// Nome da pasta.
+    /// </param>
+    /// <returns>
+    /// True se existente e Falso se não existe.
+    /// </returns>
+    Task<bool> CheckFolderExistence(
+        string folderName
+    );
 
-    Task<bool> DownloadSaveData(GameInformationModel gameInformation);
+    /// <summary>
+    /// Realiza o download do save no serviço da nuvem.
+    /// </summary>
+    /// <param name="game">
+    /// Jogo selecionado.
+    /// </param>
+    /// <returns>
+    /// True se o save pode ser recuperado e Falso caso não tenha sido recuperado.
+    /// </returns>
+    Task<bool> DownloadSaveData(
+        Game game
+    );
 
-    Task<bool> UploadSaveData(GameInformationModel gameInformation, bool overwriteSave);
+    /// <summary>
+    /// Realiza o upload do save para o serviço de armazenamento na nuvem.
+    /// </summary>
+    /// <param name="game">
+    /// Jogo selecionado.
+    /// </param>
+    /// <param name="overwrite">
+    /// Indica se save pode ser sobrescrito.
+    /// </param>
+    /// <returns>
+    /// True caso tenha sido salvo e Falso caso não tenha sido salvo.
+    /// </returns>
+    Task<bool> UploadSaveData(
+        Game game,
+        bool overwrite = false
+    );
 
-    Task<IEnumerable<(string name, string path)>> GetSavesList(GameInformationModel gameInformation);
+    /// <summary>
+    /// Busca a lista de saves armazenados no serviço da nuvem.
+    /// </summary>
+    /// <param name="game">
+    /// Jogo selecionado.
+    /// </param>
+    /// <returns>
+    /// Lista de arquivos salvos.
+    /// </returns>
+    Task<IEnumerable<(string name, string path)>> GetSavesList(
+        Game game
+    );
 }

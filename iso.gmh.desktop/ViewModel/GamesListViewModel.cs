@@ -47,7 +47,7 @@ public partial class GamesListViewModel : BaseViewModel
 
     public ICommand DeleteSaveCommand
         => deleteSaveCommand
-        ??= new RelayCommand<GamesListEntry>(async save => await DeleteSave(save).ConfigureAwait(true), _ => true);
+        ??= new RelayCommand<GamesListEntry>(async save => await DeleteSave(save), _ => true);
 
     private Visibility showList;
 

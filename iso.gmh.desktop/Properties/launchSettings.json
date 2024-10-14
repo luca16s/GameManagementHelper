@@ -3,7 +3,6 @@
     "GMH": {
       "commandName": "Project",
       "environmentVariables": {
-        "CONNECTION_TYPE": "fast",
         "STEAM_PROFILE": "http://steamcommunity.com/profiles/"
       }
     }

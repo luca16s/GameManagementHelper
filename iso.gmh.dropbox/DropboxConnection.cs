@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,102 +15,104 @@ using iso.gmh.Core.Models;
 
 public class DropboxConnection : IConnection<DropboxClient>
 {
-    private const string responseString = @"
-                <html>
-                <body onload='redirect()'>Por favor retorne para o App.
-                </body>
-                </html>
-                <script type='text/javascript'>
-                        function redirect()
-                        {
-                            document.location.href ='/token?url_with_fragment='+encodeURIComponent(document.location.href); close();
-                        }
-                </script>";
+    private const string LoopbackHostPrefix = "http://127.0.0.1:52475/";
+    private readonly Uri JSRedirectUri = new(LoopbackHostPrefix + "token");
+    private readonly Uri RedirectUri = new(LoopbackHostPrefix + "authorize");
 
-    private readonly string LoopbackHost = "http://127.0.0.1:52475/";
-    private readonly Uri JSRedirectUri = new("http://127.0.0.1:52475/token");
-    private readonly Uri RedirectUri = new("http://127.0.0.1:52475/authorize");
-
-    private async Task<string> GetAccessToken(string appkey)
+    private async Task<OAuth2Response> GetAccessToken(
+        string appKey
+    )
     {
+        var OAuthFlow = new PKCEOAuthFlow();
         string state = Guid.NewGuid().ToString("N");
-        Uri authorizeUri = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Token, appkey, RedirectUri, state: state);
-        using var httpListener = new HttpListener();
-        httpListener.Prefixes.Add(LoopbackHost);
 
-        httpListener.Start();
+        Uri authorizeUri = OAuthFlow.GetAuthorizeUri(
+            OAuthResponseType.Code,
+            appKey,
+            state: state,
+            scopeList: null,
+            redirectUri: RedirectUri.ToString(),
+            tokenAccessType: TokenAccessType.Offline,
+            includeGrantedScopes: IncludeGrantedScopes.User
+        );
 
-        var processStartInfo = new ProcessStartInfo
+        using var listener = new HttpListener();
+        listener.Prefixes.Add(LoopbackHostPrefix);
+
+        listener.Start();
+
+        _ = Process.Start(new ProcessStartInfo
         {
+            UseShellExecute = true,
             FileName = authorizeUri.ToString(),
-            UseShellExecute = true
-        };
+        });
 
-        _ = Process.Start(processStartInfo);
+        await HandleOAuth2Redirect(listener);
 
-        await HandleOAuth2Redirect(httpListener).ConfigureAwait(true);
-
-        OAuth2Response result = await HandleJSRedirect(httpListener).ConfigureAwait(true);
-
-        return result.State != state ? null : result.AccessToken;
+        return await OAuthFlow.ProcessCodeFlowAsync(
+            await HandleJSRedirect(listener),
+            appKey,
+            RedirectUri.ToString(),
+            state
+        );
     }
 
-    private async Task HandleOAuth2Redirect(HttpListener http)
+    private async Task HandleOAuth2Redirect(
+        HttpListener http
+    )
     {
-        HttpListenerContext httpListenerContext = await http.GetContextAsync().ConfigureAwait(true);
+        HttpListenerContext context = await http.GetContextAsync();
 
-        while (httpListenerContext.Request.Url.AbsolutePath != RedirectUri.AbsolutePath)
-            httpListenerContext = await http.GetContextAsync().ConfigureAwait(true);
+        while (context.Request.Url.AbsolutePath != RedirectUri.AbsolutePath)
+            context = await http.GetContextAsync();
 
-        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
-        httpListenerContext.Response.ContentLength64 = buffer.Length;
+        context.Response.ContentType = "text/html";
 
-        await httpListenerContext.Response.OutputStream.WriteAsync(buffer.AsMemory(0, buffer.Length)).ConfigureAwait(true);
+        using (FileStream file = File.OpenRead("index.html"))
+            file.CopyTo(context.Response.OutputStream);
 
-        httpListenerContext.Response.OutputStream.Close();
+        context.Response.OutputStream.Close();
     }
 
-    private async Task<OAuth2Response> HandleJSRedirect(HttpListener httpListener)
+    private async Task<Uri> HandleJSRedirect(
+        HttpListener httpListener
+    )
     {
-        HttpListenerContext httpListenerContext = await httpListener.GetContextAsync().ConfigureAwait(true);
+        HttpListenerContext context = await httpListener.GetContextAsync();
 
-        while (httpListenerContext.Request.Url.AbsolutePath != JSRedirectUri.AbsolutePath)
-            httpListenerContext = await httpListener.GetContextAsync().ConfigureAwait(true);
+        while (context.Request.Url.AbsolutePath != JSRedirectUri.AbsolutePath)
+            context = await httpListener.GetContextAsync();
 
-        var redirectUri = new Uri(httpListenerContext.Request.QueryString["url_with_fragment"]);
-
-        httpListener.Stop();
-
-        return DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
+        return new Uri(context.Request.QueryString["url_with_fragment"]);
     }
 
-    public DropboxClient Client { get; private set; }
+    public DropboxClient Client { get; set; }
 
-    public async Task ConnectAsync(Secrets secrets)
+    public async Task<DropboxClient> ConnectAsync(
+        Secrets secrets
+    )
     {
-        if (secrets == null)
-            return;
+        if (secrets is null)
+            return null;
 
-        if (Client == null)
-        {
-            //DropboxCertHelper.InitializeCertPinning();
+        OAuth2Response response = await GetAccessToken(
+            secrets.AppKey
+        );
 
-            string accessToken = string.IsNullOrWhiteSpace(secrets.AppToken)
-                                    ? await GetAccessToken(secrets.AppKey).ConfigureAwait(true)
-                                    : secrets.AppToken;
-
-            var httpClient = new HttpClient { Timeout = TimeSpan.FromMinutes(20) };
-
-            var config = new DropboxClientConfig("Game Save Manager")
-            {
-                HttpClient = httpClient,
-            };
-
-            Client = new DropboxClient(accessToken, "", secrets.AppKey, secrets.AppSecret, config);
-        }
+        return new DropboxClient(
+            response?.RefreshToken,
+            secrets.AppKey,
+            secrets.AppSecret,
+            new DropboxClientConfig(
+                "Game Management Helper",
+                5
+            )
+            { HttpClient = new HttpClient { Timeout = TimeSpan.FromMinutes(20) } }
+        );
     }
 
-    public async Task<UserModel> GetUserInformation()
+    public async Task<User> GetUserInformation(
+    )
     {
         FullAccount user = await Client.Users.GetCurrentAccountAsync();
 

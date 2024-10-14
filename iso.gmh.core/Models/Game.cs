@@ -8,7 +8,7 @@ using iso.gmh.Core.Validations;
 
 using KapiCoreLib.Extensions;
 
-public class GameInformationModel
+public class Game
 {
     private readonly GameInformationModelValidatons ValidationRules = new();
 

@@ -14,7 +14,7 @@ public partial class GamesPage : Page
 {
     public GamesPage(
         IFactory<ESaveType, IBackupStrategy> backupStrategy,
-        IOptions<ObservableCollection<GameInformationModel>> options
+        IOptions<ObservableCollection<Game>> options
     )
     {
         InitializeComponent();

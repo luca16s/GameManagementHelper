@@ -5,7 +5,7 @@ using FluentValidation;
 using iso.gmh.Core.Models;
 using iso.gmh.Core.Utils;
 
-public class GameInformationModelValidatons : AbstractValidator<GameInformationModel>
+public class GameInformationModelValidatons : AbstractValidator<Game>
 {
     public GameInformationModelValidatons()
     {

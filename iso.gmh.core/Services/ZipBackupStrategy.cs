@@ -13,7 +13,7 @@ public class ZipBackupStrategy : IBackupStrategy
 {
     public string GetFileExtension() => ESaveType.ZIP.Description();
 
-    public FileStream GenerateBackup(GameInformationModel gameInformation)
+    public FileStream GenerateBackup(Game gameInformation)
     {
         if (gameInformation == null)
             return null;
@@ -28,7 +28,7 @@ public class ZipBackupStrategy : IBackupStrategy
         return new FileStream(Path.Combine(Path.GetTempPath(), saveName), FileMode.Open, FileAccess.Read);
     }
 
-    public void PrepareBackup(GameInformationModel gameInformation)
+    public void PrepareBackup(Game gameInformation)
     {
         if (gameInformation == null)
             return;

@@ -13,7 +13,7 @@ public class BakBackupStrategy : IBackupStrategy
 {
     public string GetFileExtension() => ESaveType.BAK.Description();
 
-    public FileStream GenerateBackup(GameInformationModel gameInformation)
+    public FileStream GenerateBackup(Game gameInformation)
     {
         if (gameInformation == null)
             return null;
@@ -32,7 +32,7 @@ public class BakBackupStrategy : IBackupStrategy
         return new FileStream(Path.Combine(Path.GetTempPath(), saveName), FileMode.Open, FileAccess.Read);
     }
 
-    public void PrepareBackup(GameInformationModel gameInformation)
+    public void PrepareBackup(Game gameInformation)
     {
         if (gameInformation == null)
             return;

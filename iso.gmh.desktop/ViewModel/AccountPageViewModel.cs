@@ -21,8 +21,8 @@ public partial class AccountPageViewModel : BaseViewModel
 
     public ICommand ConnectCommand => _ConnectCommand ??= new RelayCommand<object>(async _ =>
     {
-        await ConnectAsync().ConfigureAwait(true);
-        await SetUserInformation().ConfigureAwait(true);
+        await ConnectAsync();
+        await SetUserInformation();
     });
 
     public AccountPageViewModel(
@@ -30,8 +30,7 @@ public partial class AccountPageViewModel : BaseViewModel
         IOptions<Secrets> options
     )
     {
-        if (options == null)
-            return;
+        if (options is null) return;
 
         Connection = connection;
         Secrets = options.Value;
@@ -39,17 +38,15 @@ public partial class AccountPageViewModel : BaseViewModel
 
     private async Task ConnectAsync()
     {
-        App.Client = Connection;
+        App.Connection = Connection;
 
-        if (App.Client != null)
-            await App.Client
-                .ConnectAsync(Secrets)
-                .ConfigureAwait(true);
+        if (App.Connection is not null)
+            App.Connection.Client = await App.Connection.ConnectAsync(Secrets);
     }
 
     private static async Task SetUserInformation()
     {
-        UserModel userInformation = await App.Client.GetUserInformation();
+        User userInformation = await App.Connection.GetUserInformation();
 
         Settings.Default.Name = userInformation.UserName;
         Settings.Default.Email = userInformation.Email;

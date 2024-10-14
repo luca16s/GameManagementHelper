@@ -2,5 +2,7 @@
 
 public interface IFactory<T, out TReturn>
 {
-    TReturn Create(T type);
+    TReturn Create(
+        T type
+    );
 }

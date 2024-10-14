@@ -30,16 +30,16 @@ public partial class GamesPageViewModel : BaseViewModel
 
     public ICommand UploadCommand
         => _UploadCommand
-        ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave(MessageBox.Show("Deseja sobrescrever o arquivo salvo?", "Game Save Manager", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)).ConfigureAwait(true), _ => CanExecute);
+        ??= new RelayCommand<GamesPageViewModel>(async _ => await UploadSave(MessageBox.Show("Deseja sobrescrever o arquivo salvo?", "Game Save Manager", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)), _ => CanExecute);
 
     public ICommand DownloadCommand
         => _DownloadCommand
-        ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave().ConfigureAwait(true), _ => CanExecute);
+        ??= new RelayCommand<GamesPageViewModel>(async _ => await DownloadSave(), _ => CanExecute);
 
-    private GameInformationModel GameInformation;
-    private readonly ObservableCollection<GameInformationModel> GameInformationList;
+    private Game GameInformation;
+    private readonly ObservableCollection<Game> GameInformationList;
 
-    public GamesPageViewModel(IFactory<ESaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<GameInformationModel>> options)
+    public GamesPageViewModel(IFactory<ESaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<Game>> options)
     {
         if (backupStrategy == null
             || options == null)
@@ -151,22 +151,21 @@ public partial class GamesPageViewModel : BaseViewModel
         }
     }
 
-    private ICloudOperations GetClientOperations()
+    private DropboxOperations GetClientOperations()
     {
-        if (App.Client == null)
+        if (App.Connection is null)
             return default;
 
-        using dynamic client = App.Client.Client;
         BackupStrategy = BackupFactory.Create(App.BackupType);
 
         return //client == null
                //? null
                //: 
                //new OperationFactory(BackupStrategy, client).Create(App.DriveService)
-            new DropboxOperations(client, BackupStrategy);
+            new DropboxOperations(App.Connection.Client, BackupStrategy);
     }
 
-    private async Task GetSavesList(GameInformationModel gameInformation)
+    private async Task GetSavesList(Game gameInformation)
     {
         if (CloudOperations == null)
         {
@@ -175,7 +174,7 @@ public partial class GamesPageViewModel : BaseViewModel
         }
 
         IEnumerable<(string name, string path)> listaSavesOnline = await CloudOperations.GetSavesList(gameInformation)
-            .ConfigureAwait(true);
+            ;
 
         GamesListVM = new(listaSavesOnline, CloudOperations, listaSavesOnline.Any());
 
@@ -189,12 +188,12 @@ public partial class GamesPageViewModel : BaseViewModel
 
         GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 
-        bool exists = await CloudOperations.CheckFolderExistence(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
+        bool exists = await CloudOperations.CheckFolderExistence(GameInformation.OnlineSaveFolder);
 
         if (!exists)
-            _ = await CloudOperations.CreateFolder(GameInformation.OnlineSaveFolder).ConfigureAwait(true);
+            _ = await CloudOperations.CreateFolder(GameInformation.OnlineSaveFolder);
 
-        return await CloudOperations.UploadSaveData(GameInformation, messageBoxResult == MessageBoxResult.Yes).ConfigureAwait(true);
+        return await CloudOperations.UploadSaveData(GameInformation, messageBoxResult == MessageBoxResult.Yes);
     }
 
     private async Task<bool> DownloadSave()
@@ -207,6 +206,6 @@ public partial class GamesPageViewModel : BaseViewModel
 
         GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 
-        return await CloudOperations.DownloadSaveData(GameInformation).ConfigureAwait(true);
+        return await CloudOperations.DownloadSaveData(GameInformation);
     }
 }
