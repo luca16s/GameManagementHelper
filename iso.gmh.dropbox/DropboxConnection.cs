@@ -12,19 +12,20 @@ using Dropbox.Api.Users;
 
 using iso.gmh.Core.Interfaces;
 using iso.gmh.Core.Models;
+using iso.gmh.dropbox.Properties;
 
 public class DropboxConnection : IConnection<DropboxClient>
 {
-    private const string LoopbackHostPrefix = "http://127.0.0.1:52475/";
-    private readonly Uri JSRedirectUri = new(LoopbackHostPrefix + "token");
-    private readonly Uri RedirectUri = new(LoopbackHostPrefix + "authorize");
+    private const string Format = "N";
+    private readonly Uri JSRedirectUri = new(Resources.LOOPBACK_HOST + Resources.TOKEN);
+    private readonly Uri RedirectUri = new(Resources.LOOPBACK_HOST + Resources.AUTHORIZE);
 
     private async Task<OAuth2Response> GetAccessToken(
         string appKey
     )
     {
         var OAuthFlow = new PKCEOAuthFlow();
-        string state = Guid.NewGuid().ToString("N");
+        string state = Guid.NewGuid().ToString(Format);
 
         Uri authorizeUri = OAuthFlow.GetAuthorizeUri(
             OAuthResponseType.Code,
@@ -37,7 +38,7 @@ public class DropboxConnection : IConnection<DropboxClient>
         );
 
         using var listener = new HttpListener();
-        listener.Prefixes.Add(LoopbackHostPrefix);
+        listener.Prefixes.Add(Resources.LOOPBACK_HOST);
 
         listener.Start();
 
@@ -104,7 +105,7 @@ public class DropboxConnection : IConnection<DropboxClient>
             secrets.AppKey,
             secrets.AppSecret,
             new DropboxClientConfig(
-                "Game Management Helper",
+                Resources.APP_NAME,
                 5
             )
             { HttpClient = new HttpClient { Timeout = TimeSpan.FromMinutes(20) } }

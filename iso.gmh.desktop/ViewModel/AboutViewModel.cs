@@ -9,17 +9,14 @@ using iso.gmh.desktop.Properties;
 public partial class AboutViewModel : BaseViewModel
 {
     public string Desenvolvedor { get; } = Resources.EMPRESA;
-    public ICommand GitHubCommand { get; set; } = new RelayCommand<string>(_ => OpenWebsite(Resources.GITHUB));
-    public ICommand LinkedInCommand { get; set; } = new RelayCommand<string>(_ => OpenWebsite(Resources.LINKEDIN));
+    public ICommand GitHubCommand { get; } = new RelayCommand<string>(static _ => OpenWebsite(Resources.GITHUB));
+    public ICommand LinkedInCommand { get; } = new RelayCommand<string>(static _ => OpenWebsite(Resources.LINKEDIN));
 
     private static void OpenWebsite(
         string url
-    )
+    ) => Process.Start(new ProcessStartInfo
     {
-        _ = Process.Start(new ProcessStartInfo
-        {
-            FileName = url,
-            UseShellExecute = true
-        });
-    }
+        FileName = url,
+        UseShellExecute = true
+    });
 }
