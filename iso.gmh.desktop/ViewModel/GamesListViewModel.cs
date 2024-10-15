@@ -41,7 +41,7 @@ public partial class GamesListViewModel : BaseViewModel
         }
     }
 
-    private readonly ICloudOperations Operations;
+    private readonly IOperations Operations;
 
     private RelayCommand<GamesListEntry> deleteSaveCommand;
 
@@ -68,7 +68,7 @@ public partial class GamesListViewModel : BaseViewModel
         : this(null, null, false)
     { }
 
-    public GamesListViewModel(IEnumerable<(string saveName, string path)> saveList, ICloudOperations operations, bool visible)
+    public GamesListViewModel(IEnumerable<(string saveName, string path)> saveList, IOperations operations, bool visible)
     {
         SavesList = Converter(saveList);
         ShowList = visible
@@ -80,7 +80,7 @@ public partial class GamesListViewModel : BaseViewModel
 
     private async Task DeleteSave(GamesListEntry gameEntry)
     {
-        if (await Operations.DeleteSave(gameEntry.PathToFile))
+        if (await Operations.Delete(gameEntry.PathToFile))
             _ = SavesList.Remove(gameEntry);
     }
 

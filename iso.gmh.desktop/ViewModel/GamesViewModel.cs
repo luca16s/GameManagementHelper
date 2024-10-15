@@ -26,7 +26,7 @@ public partial class GameViewModel(
 ) : BaseViewModel
 {
     private IBackupStrategy BackupStrategy;
-    private ICloudOperations CloudOperations => GetClientOperations();
+    private IOperations CloudOperations => GetClientOperations();
 
     private RelayCommand<GameViewModel> _UploadCommand;
     private RelayCommand<GameViewModel> _DownloadCommand;
@@ -187,7 +187,7 @@ public partial class GameViewModel(
         if (!exists)
             _ = await CloudOperations.CreateFolder(GameInformation.OnlineSaveFolder);
 
-        return await CloudOperations.UploadSaveData(GameInformation, messageBoxResult == MessageBoxResult.Yes);
+        return await CloudOperations.Upload(GameInformation, messageBoxResult == MessageBoxResult.Yes);
     }
 
     private async Task<bool> DownloadSave()
@@ -200,6 +200,6 @@ public partial class GameViewModel(
 
         GameInformation.SetSaveBackupExtension(BackupStrategy.GetFileExtension());
 
-        return await CloudOperations.DownloadSaveData(GameInformation);
+        return await CloudOperations.Download(GameInformation);
     }
 }

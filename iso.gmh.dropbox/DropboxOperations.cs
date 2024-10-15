@@ -19,7 +19,7 @@ using KapiCoreLib.Desktop.Utils;
 public class DropboxOperations(
     DropboxClient client,
     IBackupStrategy backupStrategy
-    ) : ICloudOperations
+    ) : IOperations
 {
     private readonly DropboxClient Client = client;
     private readonly IBackupStrategy BackupStrategy = backupStrategy;
@@ -61,7 +61,7 @@ public class DropboxOperations(
         return listaSaves;
     }
 
-    public async Task<bool> DownloadSaveData(Game gameInformation)
+    public async Task<bool> Download(Game gameInformation)
     {
         if (gameInformation == null
             || !await CheckFolderExistence(gameInformation.OnlineSaveFolder))
@@ -88,7 +88,7 @@ public class DropboxOperations(
         return true;
     }
 
-    public async Task<bool> UploadSaveData(Game gameInformation, bool overwriteSave)
+    public async Task<bool> Upload(Game gameInformation, bool overwriteSave)
     {
         if (gameInformation == null)
             return false;
@@ -142,7 +142,7 @@ public class DropboxOperations(
         return string.IsNullOrEmpty(result.Metadata.Id);
     }
 
-    public async Task<bool> DeleteSave(string path)
+    public async Task<bool> Delete(string path)
     {
         if (string.IsNullOrWhiteSpace(path))
             return false;

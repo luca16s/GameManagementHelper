@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using iso.gmh.Core.Models;
 
-public interface ICloudOperations
+public interface IOperations
 {
     /// <summary>
     /// Apaga arquivo do serviço de armazenamento na nuvem.
@@ -16,7 +16,7 @@ public interface ICloudOperations
     /// <returns>
     /// True caso tenha apagado e Falso caso não tenha sido apagado.
     /// </returns>
-    Task<bool> DeleteSave(
+    Task<bool> Delete(
         string path
     );
 
@@ -53,7 +53,7 @@ public interface ICloudOperations
     /// <returns>
     /// True se o save pode ser recuperado e Falso caso não tenha sido recuperado.
     /// </returns>
-    Task<bool> DownloadSaveData(
+    Task<bool> Download(
         Game game
     );
 
@@ -69,7 +69,7 @@ public interface ICloudOperations
     /// <returns>
     /// True caso tenha sido salvo e Falso caso não tenha sido salvo.
     /// </returns>
-    Task<bool> UploadSaveData(
+    Task<bool> Upload(
         Game game,
         bool overwrite = false
     );
