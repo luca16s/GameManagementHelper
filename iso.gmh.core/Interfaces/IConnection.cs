@@ -6,7 +6,10 @@ using iso.gmh.Core.Models;
 
 public interface IConnection<TClient> where TClient : class
 {
-    public TClient Client { get; set; }
+    /// <summary>
+    /// Cliente do serviço da nuvem.
+    /// </summary>
+    public TClient Client { get; }
 
     /// <summary>
     /// Realiza a conexão do o serviço de nuvem.
@@ -17,7 +20,7 @@ public interface IConnection<TClient> where TClient : class
     /// <returns>
     /// O client conectado.
     /// </returns>
-    Task<TClient> ConnectAsync(
+    Task ConnectAsync(
         Secrets secrets
     );
 
@@ -27,5 +30,5 @@ public interface IConnection<TClient> where TClient : class
     /// <returns>
     /// Informações do Usuário.
     /// </returns>
-    Task<User> GetUserInformation();
+    Task<User> GetUserInformationAsync();
 }

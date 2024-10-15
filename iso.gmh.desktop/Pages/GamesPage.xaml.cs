@@ -9,15 +9,17 @@ using iso.gmh.Core.Models;
 using Microsoft.Extensions.Options;
 using iso.gmh.Core.Enums;
 using iso.gmh.Core.Interfaces;
+using Dropbox.Api;
 
 public partial class GamesPage : Page
 {
     public GamesPage(
-        IFactory<ESaveType, IBackupStrategy> backupStrategy,
-        IOptions<ObservableCollection<Game>> options
+        IConnection<DropboxClient> connection,
+        IOptions<ObservableCollection<Game>> options,
+        IFactory<ESaveType, IBackupStrategy> backupStrategy
     )
     {
         InitializeComponent();
-        DataContext = new GameViewModel(backupStrategy, options);
+        DataContext = new GameViewModel(connection, options, backupStrategy);
     }
 }

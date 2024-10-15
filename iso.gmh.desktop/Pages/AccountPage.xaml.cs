@@ -13,11 +13,15 @@ using Microsoft.Extensions.Options;
 public partial class AccountPage : Page
 {
     public AccountPage(
-        IConnection<DropboxClient> connection,
-        IOptions<Secrets> options
+        IOptions<Secrets> options,
+        IConnection<DropboxClient> connection
     )
     {
         InitializeComponent();
-        DataContext = new AccountViewModel(connection, options);
+
+        DataContext = new AccountViewModel(
+            options,
+            connection
+        );
     }
 }

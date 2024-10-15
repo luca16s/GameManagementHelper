@@ -20,7 +20,9 @@ public class DropboxConnection : IConnection<DropboxClient>
     private readonly Uri JSRedirectUri = new(Resources.LOOPBACK_HOST + Resources.TOKEN);
     private readonly Uri RedirectUri = new(Resources.LOOPBACK_HOST + Resources.AUTHORIZE);
 
-    private async Task<OAuth2Response> GetAccessToken(
+    #region Privados
+
+    private async Task<OAuth2Response> GetAccessTokenAsync(
         string appKey
     )
     {
@@ -48,17 +50,17 @@ public class DropboxConnection : IConnection<DropboxClient>
             FileName = authorizeUri.ToString(),
         });
 
-        await HandleOAuth2Redirect(listener);
+        await HandleOAuth2RedirectAsync(listener);
 
         return await OAuthFlow.ProcessCodeFlowAsync(
-            await HandleJSRedirect(listener),
+            await HandleJSRedirectAsync(listener),
             appKey,
             RedirectUri.ToString(),
             state
         );
     }
 
-    private async Task HandleOAuth2Redirect(
+    private async Task HandleOAuth2RedirectAsync(
         HttpListener http
     )
     {
@@ -75,7 +77,7 @@ public class DropboxConnection : IConnection<DropboxClient>
         context.Response.OutputStream.Close();
     }
 
-    private async Task<Uri> HandleJSRedirect(
+    private async Task<Uri> HandleJSRedirectAsync(
         HttpListener httpListener
     )
     {
@@ -87,20 +89,22 @@ public class DropboxConnection : IConnection<DropboxClient>
         return new Uri(context.Request.QueryString["url_with_fragment"]);
     }
 
-    public DropboxClient Client { get; set; }
+    #endregion
 
-    public async Task<DropboxClient> ConnectAsync(
+    public DropboxClient Client { get; private set; }
+
+    public async Task ConnectAsync(
         Secrets secrets
     )
     {
         if (secrets is null)
-            return null;
+            return;
 
-        OAuth2Response response = await GetAccessToken(
+        OAuth2Response response = await GetAccessTokenAsync(
             secrets.AppKey
         );
 
-        return new DropboxClient(
+        Client = new DropboxClient(
             response?.RefreshToken,
             secrets.AppKey,
             secrets.AppSecret,
@@ -112,8 +116,7 @@ public class DropboxConnection : IConnection<DropboxClient>
         );
     }
 
-    public async Task<User> GetUserInformation(
-    )
+    public async Task<User> GetUserInformationAsync()
     {
         FullAccount user = await Client.Users.GetCurrentAccountAsync();
 

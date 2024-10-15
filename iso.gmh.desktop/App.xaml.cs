@@ -48,7 +48,6 @@ public partial class App : Application
 
     public static EDrive DriveService { get; set; }
     public static ESaveType BackupType { get; set; }
-    public static IConnection<DropboxClient> Connection { get; set; }
 
     protected override void OnStartup(
         StartupEventArgs e

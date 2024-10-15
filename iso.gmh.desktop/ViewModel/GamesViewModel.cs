@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
+using Dropbox.Api;
+
 using iso.gmh.Core.Enums;
 using iso.gmh.Core.Interfaces;
 using iso.gmh.Core.Models;
@@ -17,11 +19,14 @@ using iso.gmh.dropbox;
 
 using Microsoft.Extensions.Options;
 
-public partial class GameViewModel : BaseViewModel
+public partial class GameViewModel(
+    IConnection<DropboxClient> Connection,
+    IOptions<ObservableCollection<Game>> Options,
+    IFactory<ESaveType, IBackupStrategy> BackupStrategy
+) : BaseViewModel
 {
     private IBackupStrategy BackupStrategy;
     private ICloudOperations CloudOperations => GetClientOperations();
-    private readonly IFactory<ESaveType, IBackupStrategy> BackupFactory;
 
     private RelayCommand<GameViewModel> _UploadCommand;
     private RelayCommand<GameViewModel> _DownloadCommand;
@@ -37,19 +42,8 @@ public partial class GameViewModel : BaseViewModel
         ??= new RelayCommand<GameViewModel>(async _ => await DownloadSave(), _ => CanExecute);
 
     private Game GameInformation;
-    private readonly ObservableCollection<Game> GameInformationList;
 
-    public GameViewModel(IFactory<ESaveType, IBackupStrategy> backupStrategy, IOptions<ObservableCollection<Game>> options)
-    {
-        if (backupStrategy == null
-            || options == null)
-            return;
-
-        BackupFactory = backupStrategy;
-        GameInformationList = options.Value;
-    }
-
-    public ObservableCollection<GamesComboboxEntry> GamesSupported => new(GameInformationList
+    public ObservableCollection<GamesComboboxEntry> GamesSupported => new(Options.Value
         .Select(game => new GamesComboboxEntry
         {
             Title = game.Title,
@@ -153,16 +147,16 @@ public partial class GameViewModel : BaseViewModel
 
     private DropboxOperations GetClientOperations()
     {
-        if (App.Connection is null)
+        if (Connection is null)
             return default;
 
-        BackupStrategy = BackupFactory.Create(App.BackupType);
+        //BackupStrategy = BackupFactory.Create(App.BackupType);
 
         return //client == null
                //? null
                //: 
                //new OperationFactory(BackupStrategy, client).Create(App.DriveService)
-            new DropboxOperations(App.Connection.Client, BackupStrategy);
+            new DropboxOperations(Connection.Client, BackupStrategy);
     }
 
     private async Task GetSavesList(Game gameInformation)
