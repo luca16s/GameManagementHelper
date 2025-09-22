@@ -1,34 +1,21 @@
-# Game Save Manager
+# GameSaveManager - Desktop Backup Utility
 
-Aplicação para gerenciar saves de jogos.
+Developed a standalone desktop application using WPF and .NET 5 to solve a common problem for PC gamers: managing and protecting save files for games that lack native cloud backup support.
 
+GameSaveManager provides a clean and user-friendly interface to manually back up and restore game saves, ensuring that player progress is never lost due to hardware failure or when migrating to a new computer.
 
-## Funcionalidade Planejadas
+Key Features:
 
-Modo escuro
+Intuitive UI: A straightforward interface built with WPF for easy management of multiple game profiles.
 
-Jogos suportados:
+One-Click Backup & Restore: Simplifies the process of creating and restoring save file archives.
 
-- Dark Souls
-- Dark Souls II
-- Dark Souls III
+Local Save Management: Allows users to keep their game progress safe and organized locally.
 
-Conexão Suportada:
+Technologies Used:
+C#, WPF (Windows Presentation Foundation), .NET 5, Visual Studio 2019
 
-- Dropbox
-
-Conectar com os seguintes serviços:
-
-- Google Drive
-- One Drive
-
-Adicionar a possibilidade de se nomear os saves.
-
-|Code Quality|GitHub Actions|Cobertura de Código|
+|Code Quality|GitHub Actions|Code Coverage|
 |------------|--------------|-------------------|
 |[![CodeFactor](https://www.codefactor.io/repository/github/luca16s/gamesavemanager/badge)](https://www.codefactor.io/repository/github/luca16s/gamesavemanager)|![GameSaveManager](https://github.com/luca16s/GameSaveManager/workflows/GameSaveManager/badge.svg?branch=main)|[![codecov](https://codecov.io/gh/luca16s/GameSaveManager/branch/main/graph/badge.svg?token=JJZ0NA89BJ)](https://codecov.io/gh/luca16s/GameSaveManager)|
 
----
-
-- dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
-- reportgenerator "-reports:GameSaveManager.Tests/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
